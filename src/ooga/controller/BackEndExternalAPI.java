@@ -33,4 +33,29 @@ public interface BackEndExternalAPI {
    * @param language The language
    */
   public void setLanguage(String language);
+
+  /**
+   * Sets a player that is playing the game
+   * @param playerPosition A number associated with the player
+   * @param playerFileName The string associated with the player name
+   */
+  public void setPlayer(int playerPosition, String playerFileName);
+
+  /**
+   * Sets the initial state of the board
+   * @param boardFileName The file name that contains the board
+   */
+  public void setBoardState(String boardFileName);
+
+  /**
+   * Saves the current state of the game in a file
+   * @param fileName The name of the file to store the game information
+   */
+  public void saveCurrentBoardState(String fileName);
+
+  /**
+   * Saves the current rules of the game in a file
+   * @param fileName The name of the file to save the rules in
+   */
+  public void saveCurrentRules(String fileName);
 }

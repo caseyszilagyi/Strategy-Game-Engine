@@ -2,6 +2,10 @@ package ooga.controller;
 
 public class ViewController implements FrontEndExternalAPI{
 
+  public ViewController(){
+
+  }
+
   @Override
   public void setModelController(BackEndExternalAPI modelController) {
 
