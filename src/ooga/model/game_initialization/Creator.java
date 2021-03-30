@@ -1,5 +1,7 @@
 package ooga.model.game_initialization;
 
+import ooga.model.game_engine.Engine;
+
 /**
  * This interface will be used to initialize all types of games. This means choosing the game
  * type, setting the board configuration, settting the rules, and setting the players
@@ -31,4 +33,9 @@ public interface Creator {
    */
   public void setPlayer(int playerPosition, String playerFileName);
 
+  /**
+   * Gets the engine that is being used to run the back end
+   * @return The engine
+   */
+  public Engine getEngine();
 }

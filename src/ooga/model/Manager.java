@@ -1,5 +1,6 @@
 package ooga.model;
 
+import ooga.model.game_engine.Engine;
 import ooga.model.game_initialization.Creator;
 import ooga.model.game_initialization.GameCreator;
 
@@ -33,6 +34,5 @@ public interface Manager {
    * @param playerFileName The string associated with the player name
    */
   public void setPlayer(int playerPosition, String playerFileName);
-
 
 }
