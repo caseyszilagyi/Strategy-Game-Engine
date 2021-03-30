@@ -4,7 +4,7 @@ public class ViewController implements FrontEndExternalAPI{
 
   @Override
   public void setModelController(BackEndExternalAPI modelController) {
-    
+
   }
 
   @Override
