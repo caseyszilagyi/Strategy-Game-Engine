@@ -1,21 +1,37 @@
 package ooga;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
+import ooga.controller.BackEndExternalAPI;
+import ooga.controller.FrontEndExternalAPI;
+import ooga.controller.ModelController;
+import ooga.controller.ViewController;
 
 /**
- * Feel free to completely change this code or delete it entirely.
+ * This is the class that is run to instantiate the front and back end, and link them together
+ *
+ * @author Casey Szilagyi
  */
-public class Main {
-  /**
-   * A method to test (and a joke :).
-   */
-  public double getVersion () {
-    return 0.001;
+
+public class Main extends Application {
+  
+  public static void main(String[] args) {
+    launch(args);
   }
 
   /**
-   * Start of the program.
+   * The start method is called after the init method has returned, and after the system is ready
+   * for the application to begin running.
+   *
+   * @param primaryStage The primary stage for this application where the scene is set.
+   * @throws Exception if something goes wrong
    */
-  public static void main (String[] args) {
-    System.out.println("Hello world");
+  @Override
+  public void start(Stage primaryStage) throws Exception {
+    FrontEndExternalAPI viewController = new ViewController();
+    BackEndExternalAPI modelController = new ModelController();
+    viewController.setModelController(modelController);
+    modelController.setViewController(viewController);
   }
+
 }
