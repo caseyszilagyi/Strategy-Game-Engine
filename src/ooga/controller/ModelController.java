@@ -5,8 +5,8 @@ import ooga.model.Manager;
 
 public class ModelController implements BackEndExternalAPI {
 
-  Manager manager;
-  FrontEndExternalAPI viewController;
+  private Manager manager;
+  private FrontEndExternalAPI viewController;
 
   public ModelController(){
     manager = new GameManager();
@@ -15,6 +15,7 @@ public class ModelController implements BackEndExternalAPI {
   @Override
   public void setViewController(FrontEndExternalAPI newViewController) {
     viewController=newViewController;
+    manager.setViewController(viewController);
   }
 
   @Override

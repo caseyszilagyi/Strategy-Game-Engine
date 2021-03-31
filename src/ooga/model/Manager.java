@@ -1,5 +1,6 @@
 package ooga.model;
 
+import ooga.controller.FrontEndExternalAPI;
 import ooga.model.game_engine.Engine;
 import ooga.model.game_initialization.Creator;
 import ooga.model.game_initialization.GameCreator;
@@ -9,6 +10,13 @@ import ooga.model.game_initialization.GameCreator;
  * Meant to be implemented by the model controller as the way to interface with the back end.
  */
 public interface Manager {
+
+  /**
+   * Sets the view controller that the back end will use to make method calls to alter
+   * the front end
+   * @param viewController The view controller
+   */
+  public void setViewController(FrontEndExternalAPI viewController);
 
   /**
    * Creates an instance of the specific game type

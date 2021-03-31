@@ -1,8 +1,12 @@
 package ooga.controller;
 
+import ooga.view.Display;
+
 public class ViewController implements FrontEndExternalAPI{
 
+  private Display display;
   private BackEndExternalAPI modelController;
+
   public ViewController(){
 
   }
@@ -10,6 +14,7 @@ public class ViewController implements FrontEndExternalAPI{
   @Override
   public void setModelController(BackEndExternalAPI newModelController) {
     modelController = newModelController;
+    display.setModelController(modelController);
   }
 
   @Override
