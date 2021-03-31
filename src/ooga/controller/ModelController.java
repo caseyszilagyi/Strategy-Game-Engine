@@ -15,6 +15,7 @@ public class ModelController implements BackEndExternalAPI {
   @Override
   public void setViewController(FrontEndExternalAPI newViewController) {
     viewController=newViewController;
+
   }
 
   @Override
