@@ -9,7 +9,7 @@ import ooga.model.game_engine.Engine;
 public interface Creator {
 
   /**
-   * Creates an instance of the specific game type
+   * Initializes the default rules of the game
    * @param gameName The name of the game
    */
   public void initializeGame(String gameName);

@@ -1,6 +1,8 @@
 package ooga.model.game_initialization;
 
+import ooga.controller.FrontEndExternalAPI;
 import ooga.model.game_engine.Engine;
+import ooga.model.game_engine.GameEngine;
 
 /**
  * each method here will pass the file name to the file parser, then the relevant
@@ -8,18 +10,24 @@ import ooga.model.game_engine.Engine;
  */
 public class GameCreator implements Creator{
 
+  public FrontEndExternalAPI viewController;
+
   public Engine gameEngine;
   public FileParser fileParser = new GameFileParser();
   public ClassLoader classLoader = new GameClassLoader();
 
+
+  public GameCreator(FrontEndExternalAPI newViewController){
+    viewController = newViewController;
+    gameEngine = new GameEngine(viewController);
+  }
   /**
    * Initializes the default details of the game
    * @param gameName The name of the game
    */
   @Override
   public void initializeGame(String gameName) {
-    String data = fileParser.initializeGame(gameName);
-    gameEngine = classLoader.makeEngine(gameName, data);
+    classLoader.makeRules(gameName);
   }
 
   @Override

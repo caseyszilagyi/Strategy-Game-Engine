@@ -2,6 +2,7 @@ package ooga.model.game_initialization;
 
 import ooga.model.game_components.GameBoard;
 import ooga.model.game_components.GamePiece;
+import ooga.model.game_components.GameRules;
 import ooga.model.game_components.Player;
 import ooga.model.game_engine.Engine;
 
@@ -11,7 +12,7 @@ import ooga.model.game_engine.Engine;
 public class GameClassLoader implements ClassLoader{
 
   @Override
-  public Engine makeEngine(String gameType, String gameData) { return null; };
+  public GameRules makeRules(String gameType) { return null; }
 
   @Override
   public Player makePlayer(String playerFileName) {

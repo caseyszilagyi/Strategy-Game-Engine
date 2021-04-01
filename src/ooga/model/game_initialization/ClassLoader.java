@@ -2,18 +2,18 @@ package ooga.model.game_initialization;
 
 import ooga.model.game_components.GameBoard;
 import ooga.model.game_components.GamePiece;
+import ooga.model.game_components.GameRules;
 import ooga.model.game_components.Player;
 import ooga.model.game_engine.Engine;
 
 public interface ClassLoader {
 
   /**
-   * Makes an engine that runs the given game type
+   * Makes the rules that define the game
    * @param gameType The name of the game
-   * @param gameData The data of the game
-   * @return The engine
+   * @return The rules
    */
-  public Engine makeEngine(String gameType, String gameData);
+  public GameRules makeRules(String gameType);
 
   /**
    * Makes a player from the given file

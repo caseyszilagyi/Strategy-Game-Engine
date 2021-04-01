@@ -11,12 +11,12 @@ public class ModelController implements BackEndExternalAPI {
   private FrontEndExternalAPI viewController;
 
   public ModelController(){
-    creator = new GameCreator();
   }
 
   @Override
   public void setViewController(FrontEndExternalAPI newViewController) {
     viewController=newViewController;
+    creator = new GameCreator(viewController);
   }
 
   @Override

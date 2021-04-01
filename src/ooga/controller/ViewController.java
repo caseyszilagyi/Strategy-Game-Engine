@@ -1,6 +1,7 @@
 package ooga.controller;
 
 import ooga.view.Display;
+import ooga.view.GameDisplay;
 
 public class ViewController implements FrontEndExternalAPI{
 
@@ -13,6 +14,7 @@ public class ViewController implements FrontEndExternalAPI{
 
   @Override
   public void setModelController(BackEndExternalAPI newModelController) {
+    display = new GameDisplay();
     modelController = newModelController;
     display.setModelController(modelController);
   }
