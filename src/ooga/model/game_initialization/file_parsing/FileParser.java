@@ -1,4 +1,4 @@
-package ooga.model.game_initialization;
+package ooga.model.game_initialization.file_parsing;
 
 import ooga.model.game_engine.Engine;
 

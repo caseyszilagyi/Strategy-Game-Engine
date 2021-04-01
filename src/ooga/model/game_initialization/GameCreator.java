@@ -3,6 +3,8 @@ package ooga.model.game_initialization;
 import ooga.controller.FrontEndExternalAPI;
 import ooga.model.game_engine.Engine;
 import ooga.model.game_engine.GameEngine;
+import ooga.model.game_initialization.file_parsing.FileParser;
+import ooga.model.game_initialization.file_parsing.GameFileParser;
 
 /**
  * each method here will pass the file name to the file parser, then the relevant

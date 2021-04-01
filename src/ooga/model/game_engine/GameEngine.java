@@ -27,7 +27,17 @@ public class GameEngine implements Engine {
   }
 
   @Override
-  public void changeTurns() {
+  public void checkForNextTurn() {
+
+  }
+
+  @Override
+  public void startPlayerTimer(Player player) {
+
+  }
+
+  @Override
+  public void stopPlayerTimer(Player player) {
 
   }
 

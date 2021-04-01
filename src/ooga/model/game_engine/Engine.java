@@ -28,7 +28,22 @@ public interface Engine {
   public void addActiveUser(Player player);
 
   /**
-   * Moves to the next player's turn
+   * Checks the rules to see if it's the players next turn, and moves it along
+   * if it is
    */
-  public void changeTurns();
+  public void checkForNextTurn();
+
+  /**
+   * Starts a player's timer
+   * @param player The player
+   */
+  public void startPlayerTimer(Player player);
+
+  /**
+   * Stops a player's timer
+   * @param player The player
+   */
+  public void stopPlayerTimer(Player player);
+
+
 }
