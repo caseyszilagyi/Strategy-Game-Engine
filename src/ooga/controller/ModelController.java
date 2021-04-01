@@ -54,4 +54,9 @@ public class ModelController implements BackEndExternalAPI {
 
   }
 
+  @Override
+  public void getAllPossibleMoves(int row, int col) {
+
+  }
+
 }

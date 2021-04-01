@@ -1,6 +1,8 @@
 package ooga.model.game_engine;
 
 import ooga.controller.FrontEndExternalAPI;
+import ooga.model.game_components.GameBoard;
+import ooga.model.game_components.GameRules;
 import ooga.model.game_components.Player;
 
 public class GameEngine implements Engine {
@@ -38,6 +40,16 @@ public class GameEngine implements Engine {
 
   @Override
   public void stopPlayerTimer(Player player) {
+
+  }
+
+  @Override
+  public void setRules(GameRules rules) {
+
+  }
+
+  @Override
+  public void setBoard(GameBoard board) {
 
   }
 

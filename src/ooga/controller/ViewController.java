@@ -1,5 +1,6 @@
 package ooga.controller;
 
+import javafx.util.Pair;
 import ooga.view.Display;
 import ooga.view.GameDisplay;
 
@@ -42,5 +43,10 @@ public class ViewController implements FrontEndExternalAPI{
   @Override
   public void setPlayer(int playerNumber, String playerName) {
 
+  }
+
+  @Override
+  public Iterable<Pair<Integer, Integer>> giveAllPossibleMoves() {
+    return null;
   }
 }

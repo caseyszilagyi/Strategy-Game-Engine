@@ -1,5 +1,7 @@
 package ooga.controller;
 
+import javafx.util.Pair;
+
 /**
  * Classes that implement this interface are meant to be passed around the front end in
  * order to call the appropriate methods on the back end
@@ -57,4 +59,14 @@ public interface BackEndExternalAPI {
    * @param fileName The name of the file to save the rules in
    */
   public void saveCurrentRules(String fileName);
+
+  /**
+   * Calls a request to get the possible moves
+   * @param row The row of the piece
+   * @param col The column of the piece
+   */
+  public void getAllPossibleMoves(int row, int col);
+
+
+
 }
