@@ -1,0 +1,7 @@
+ooga
+ooga.controller
+ooga.model
+ooga.model.game_components
+ooga.model.game_engine
+ooga.model.game_initialization
+ooga.view
