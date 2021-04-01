@@ -1,5 +1,7 @@
 package ooga.model.game_engine;
 
+import ooga.model.game_components.GameBoard;
+import ooga.model.game_components.GameRules;
 import ooga.model.game_components.Player;
 
 /**
@@ -44,6 +46,10 @@ public interface Engine {
    * @param player The player
    */
   public void stopPlayerTimer(Player player);
+
+  public void setRules(GameRules rules);
+
+  public void setBoard(GameBoard board);
 
 
 }

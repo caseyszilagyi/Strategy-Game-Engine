@@ -1,5 +1,7 @@
 package ooga.controller;
 
+import javafx.util.Pair;
+
 /**
  * Classes that implement this interface are meant to be passed around the back end in
  * order to call the appropriate methods on the front end
@@ -47,4 +49,10 @@ public interface FrontEndExternalAPI {
    * @param playerName The name of the player
    */
   public void setPlayer(int playerNumber, String playerName);
+
+  /**
+   * Gives all of the possible moves that were requested
+   * @return An iterable of pairs that represent the possible moves
+   */
+  public Iterable<Pair<Integer, Integer>> giveAllPossibleMoves();
 }
