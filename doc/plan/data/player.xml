@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+  <name>Person</name>
+  <GameType type = "Chess">
+    <GameRecord Wins = "3" Ties = "0" Losses = "2" ></GameRecord>
+    <Game>GameFile</Game>
+    <Game>GameFile</Game>
+  </GameType>
+
+  <GameType type = "Checkers">
+    <GameRecord Wins = "2" Ties = "1" Losses = "2"></GameRecord>
+    <Game>GameFile</Game>
+    <Game>GameFile</Game>
+  </GameType>
+</root>

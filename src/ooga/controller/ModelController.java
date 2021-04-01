@@ -1,31 +1,32 @@
 package ooga.controller;
 
-import ooga.model.GameManager;
-import ooga.model.Manager;
+import ooga.model.game_engine.Engine;
+import ooga.model.game_initialization.Creator;
+import ooga.model.game_initialization.GameCreator;
 
 public class ModelController implements BackEndExternalAPI {
 
-  private Manager manager;
+  private Engine gameEngine;
+  private Creator creator;
   private FrontEndExternalAPI viewController;
 
   public ModelController(){
-    manager = new GameManager();
   }
 
   @Override
   public void setViewController(FrontEndExternalAPI newViewController) {
     viewController=newViewController;
-    manager.setViewController(viewController);
+    creator = new GameCreator(viewController);
   }
 
   @Override
   public void setGameType(String gameName) {
-    manager.initializeGame(gameName);
+    creator.initializeGame(gameName);
   }
 
   @Override
   public void setGameRules(String rulesFileName) {
-    manager.setGameRules(rulesFileName);
+    creator.setGameRules(rulesFileName);
   }
 
   @Override
@@ -34,13 +35,13 @@ public class ModelController implements BackEndExternalAPI {
   }
 
   @Override
-  public void setPlayer(int playerPosition, String playerFileName) {
-    manager.setPlayer(playerPosition, playerFileName);
+  public void setPlayer(String playerFileName) {
+    creator.setPlayer(playerFileName);
   }
 
   @Override
   public void setBoardState(String boardFileName) {
-    manager.setBoardState(boardFileName);
+    creator.setBoardState(boardFileName);
   }
 
   @Override
