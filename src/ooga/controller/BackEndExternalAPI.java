@@ -36,10 +36,9 @@ public interface BackEndExternalAPI {
 
   /**
    * Sets a player that is playing the game
-   * @param playerPosition A number associated with the player
    * @param playerFileName The string associated with the player name
    */
-  public void setPlayer(int playerPosition, String playerFileName);
+  public void setPlayer(String playerFileName);
 
   /**
    * Sets the initial state of the board

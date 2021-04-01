@@ -28,10 +28,9 @@ public interface Creator {
 
   /**
    * Sets a player that is playing the game
-   * @param playerPosition A number associated with the player
    * @param playerFileName The string associated with the player name
    */
-  public void setPlayer(int playerPosition, String playerFileName);
+  public void setPlayer(String playerFileName);
 
   /**
    * Gets the engine that is being used to run the back end

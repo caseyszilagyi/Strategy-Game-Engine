@@ -33,7 +33,7 @@ public class GameCreator implements Creator{
   }
 
   @Override
-  public void setPlayer(int playerPosition, String playerFileName) {
+  public void setPlayer(String playerFileName) {
 
   }
 
