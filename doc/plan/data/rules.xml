@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+  <CanWrap>False</CanWrap>
+  <CanCastle>True</CanCastle>
+  <GameTime>10</GameTime>
+  <MoveTime>5</MoveTime>
+</root>
+

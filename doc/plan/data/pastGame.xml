@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+  <GameType>Chess</GameType>
+  <Player1>Player1</Player1>
+  <Player2>Player2</Player2>
+  <InitialBoard></InitialBoard>
+  <Move>
+    <Piece moveType = "move" pieceType="knight" end = "endPos" start = "startPos"> </Piece>
+    <Piece moveType = "remove" pieceType = "pawn" end = "endPos" start = "startPos"> </Piece>
+  </Move>
+<Move>
+
+</Move>
+</root>
