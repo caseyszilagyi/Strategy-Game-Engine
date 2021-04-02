@@ -55,4 +55,10 @@ public interface FrontEndExternalAPI {
    * @return An iterable of pairs that represent the possible moves
    */
   public Iterable<Pair<Integer, Integer>> giveAllPossibleMoves();
+
+  /**
+   * Gives the pieces that a selected piece can be changed to
+   * @return The pieces it can be changed to
+   */
+  public Iterable<String> givePieceChangeOptions();
 }

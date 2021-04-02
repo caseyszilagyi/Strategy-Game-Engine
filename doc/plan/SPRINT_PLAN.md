@@ -6,6 +6,8 @@ Yi Chen (yc311)
 Cole Spector (cgs26)
 Casey Szilagyi (crs79)
 
+## First Sprint
+
 - Overall plan of the first sprint is to get a visual display of the board up with chess pieces that can move and take
 - We are not expecting all of the rules to be fully implemented, player profiles to be working fully, or rules to be fully editable
 - View priorities
@@ -43,3 +45,12 @@ Casey Szilagyi (crs79)
         - Player
             - The information that the player will be stored
             - Methods to modify a players information
+    
+## Second Sprint
+
+- Ideally, the second sprint will have a functional working version of the game of chess.
+- There will be no moves that are illegal that the player will be able to make
+- At this point player files, board storage, and rule changing should be almost completed
+or in effect
+  
+- There should be a relatively clear path to implementing checkers at this point
