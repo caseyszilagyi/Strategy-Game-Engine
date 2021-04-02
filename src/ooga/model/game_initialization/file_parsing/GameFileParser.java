@@ -23,17 +23,17 @@ public class GameFileParser implements FileParser {
   }
 
   @Override
-  public void setBoardState(String boardFileName) {
-
+  public String parseBoard(String boardFileName) {
+    return null;
   }
 
   @Override
-  public void setGameRules(String rulesFileName) {
-
+  public String parseGameRules(String rulesFileName) {
+    return null;
   }
 
   @Override
-  public void setPlayer(int playerPosition, String playerFileName) {
-
+  public String parsePlayerInfo(String playerFileName) {
+    return null;
   }
 }

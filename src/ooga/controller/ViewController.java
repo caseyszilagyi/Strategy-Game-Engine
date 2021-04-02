@@ -49,4 +49,9 @@ public class ViewController implements FrontEndExternalAPI{
   public Iterable<Pair<Integer, Integer>> giveAllPossibleMoves() {
     return null;
   }
+
+  @Override
+  public Iterable<String> givePieceChangeOptions() {
+    return null;
+  }
 }

@@ -16,7 +16,7 @@ public class GameCreator implements Creator{
 
   public Engine gameEngine;
   public FileParser fileParser = new GameFileParser();
-  public ClassLoader classLoader = new GameClassLoader();
+  public Loader classLoader = new GameClassLoader();
 
 
   public GameCreator(FrontEndExternalAPI newViewController){

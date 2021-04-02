@@ -6,7 +6,7 @@ import ooga.model.game_components.GameRules;
 import ooga.model.game_components.Player;
 import ooga.model.game_engine.Engine;
 
-public interface ClassLoader {
+public interface Loader {
 
   /**
    * Makes the rules that define the game
@@ -17,22 +17,22 @@ public interface ClassLoader {
 
   /**
    * Makes a player from the given file
-   * @param playerFileName The file name that has the player information
+   * @param playerDetails The details of the player
    * @return The player object representing the player
    */
-  public Player makePlayer(String playerFileName);
+  public Player makePlayer(String playerDetails);
 
   /**
    * Makes a board from the given file
-   * @param boardFileName The file name that has the board information
-   * @return The board object representing the player
+   * @param boardDetails The details of the board
+   * @return The board object
    */
-  public GameBoard makeBoard(String boardFileName);
+  public GameBoard makeBoard(String boardDetails);
 
   /**
    * Makes a piece from the given file
-   * @param pieceFileName The file name that has the board information
-   * @return The piece object representing the player
+   * @param pieceDetails The details of the piece
+   * @return The piece object
    */
-  public GamePiece makePiece(String pieceFileName);
+  public GamePiece makePiece(String pieceDetails);
 }
