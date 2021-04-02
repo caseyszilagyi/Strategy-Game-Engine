@@ -1,9 +1,13 @@
 #Sprint Plan
 ## Names and NetIDs
 Kenneth Moore III (km460)
+
 Shaw Phillips (sp422)
+
 Yi Chen (yc311)
+
 Cole Spector (cgs26)
+
 Casey Szilagyi (crs79)
 
 ## First Sprint
