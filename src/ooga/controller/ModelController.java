@@ -1,13 +1,13 @@
 package ooga.controller;
 
 import ooga.model.game_engine.Engine;
-import ooga.model.game_initialization.Creator;
-import ooga.model.game_initialization.GameCreator;
+import ooga.model.game_initialization.Initializer;
+import ooga.model.game_initialization.EngineInitializer;
 
 public class ModelController implements BackEndExternalAPI {
 
   private Engine gameEngine;
-  private Creator creator;
+  private Initializer creator;
   private FrontEndExternalAPI viewController;
 
   public ModelController(){
@@ -16,7 +16,7 @@ public class ModelController implements BackEndExternalAPI {
   @Override
   public void setViewController(FrontEndExternalAPI newViewController) {
     viewController=newViewController;
-    creator = new GameCreator(viewController);
+    creator = new EngineInitializer(viewController);
   }
 
   @Override
