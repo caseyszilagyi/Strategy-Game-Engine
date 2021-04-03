@@ -5,14 +5,14 @@ package ooga;
  *
  * @author Casey Szilagyi
  */
-public class ErrorHandler extends RuntimeException {
+public class ExceptionHandler extends RuntimeException {
 
   /**
    * Sets the message that the error corresponds to
    *
    * @param errorMessage The message corresponding to the error
    */
-  public ErrorHandler(String errorMessage) {
+  public ExceptionHandler(String errorMessage) {
     super(errorMessage);
   }
 
@@ -21,5 +21,5 @@ public class ErrorHandler extends RuntimeException {
    *
    * @param error The type of error
    */
-  public ErrorHandler(Exception error){ super(error.getMessage()); }
+  public ExceptionHandler(Exception error){ super(error.getMessage()); }
 }
