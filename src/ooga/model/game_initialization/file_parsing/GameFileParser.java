@@ -11,7 +11,7 @@ public class GameFileParser implements FileParser {
 
   public GameFileParser(){
     try {
-      parser = new XMLParser("dummy");
+      parser = new XMLParser("dummy","dummy");
     }catch (Exception e){
 
     }
