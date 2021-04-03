@@ -1,5 +1,8 @@
 package ooga.model.game_initialization.file_parsing;
 
+import java.util.ArrayList;
+import java.util.List;
+import javafx.util.Pair;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -16,7 +19,8 @@ import org.xml.sax.SAXException;
 
 
 /**
- * This class handles parsing XML files
+ * This class handles parsing XML files. It has methods to get string to node maps, as
+ * well as string to string maps.
  *
  * @author Casey Szilagyi
  * @author Robert C. Duvall
@@ -49,7 +53,7 @@ public class XMLParser {
    * @return The map for the child nodes of the document element
    * @throws ExceptionHandler If the file type and game name aren't correct
    */
-  public Map<String, Node> makeRootNodeMap(File dataFile, String fileType, String gameName)
+  public Map<String, List<Node>> makeRootNodeMap(File dataFile, String fileType, String gameName)
       throws ExceptionHandler {
     this.fileType = fileType;
     this.gameName = gameName;
@@ -67,14 +71,15 @@ public class XMLParser {
    *
    * @param parentNode The parent node that has children to be parsed through
    */
-  public Map<String, Node> makeNodeMap(Node parentNode) {
-    Map<String, Node> results = new HashMap<>();
+  public Map<String, List<Node>> makeNodeMap(Node parentNode) {
+    Map<String, List<Node>> result = new HashMap<>();
     Node childNode = parentNode.getFirstChild();
     while (childNode != null) {
-      results.put(childNode.getNodeName(), childNode);
+      result.putIfAbsent(childNode.getNodeName(), new ArrayList<Node>());
+      result.get(childNode.getNodeName()).add(childNode);
       childNode = childNode.getNextSibling();
     }
-    return results;
+    return result;
   }
 
   /**
@@ -85,11 +90,16 @@ public class XMLParser {
    * @param node The node that will be used to make the map
    * @return The map with the children of the nodes mapped to their text values
    */
-  public Map<String, String> makeAttributeMap(Node node) {
-    Map<String, Node> nodeMap = makeNodeMap(node);
-    Map<String, String> result = new HashMap<String, String>();
+  public Map<String, List<String>> makeAttributeMap(Node node) {
+    Map<String, List<Node>> nodeMap = makeNodeMap(node);
+    Map<String, List<String>> result = new HashMap<>();
     for (String key : nodeMap.keySet()) {
-      result.put(key, nodeMap.get(key).getTextContent());
+      List<String> attributes = new ArrayList<>();
+      List<Node> currentNodeList = nodeMap.get(key);
+      for(Node n: currentNodeList){
+        attributes.add(n.getTextContent());
+      }
+      result.put(key, attributes);
     }
     return result;
   }
