@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<piece>
+  <moves>
+    <regMove>
+      <changeX>0</changeX>
+      <changeY>1</changeY>
+    </regMove>
+    <regMove>
+      <changeX>0</changeX>
+      <changeY>2</changeY>
+    </regMove>
+    <takeMove>
+      <changeX>1</changeX>
+      <changeY>1</changeY>
+      <takeX>0</takeX>
+      <takeY>0</takeY>
+    </takeMove>
+    <takeMove>
+      <changeX>1</changeX>
+      <changeY>1</changeY>
+      <takeX>0</takeX>
+      <takeY>0</takeY>
+    </takeMove>
+  </moves>
+
+  <regMoveType>FiniteSlide</regMoveType>
+  <takeMoveType>FiniteSlide</takeMoveType>
+  <changeTurns>True</changeTurns>
+  <changeSelf>True</changeSelf>
+
+
+  <regRestrictions>
+    <regRestriction>
+      <type>PieceRestriction</type>
+      <piece>King</piece>
+      <information>isTakeable</information>
+    </regRestriction>
+  </regRestrictions>
+
+  <takeRestrictions>
+    <takeRestriction>
+      <type>PieceRestriction</type>
+      <piece>King</piece>
+      <information>isTakeable</information>
+    </takeRestriction>
+  </takeRestrictions>
+
+</piece>

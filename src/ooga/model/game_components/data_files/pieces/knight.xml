@@ -87,7 +87,6 @@
   <takeMoveType>FiniteJump</takeMoveType>
   <changeTurns>True</changeTurns>
   <changeSelf>False (will be true for pawns because they move to end, but how to know?)</changeSelf>
-  <changeOthers>RemoveOnTake</changeOthers>
 
   <regRestrictions>
     <regRestriction>
