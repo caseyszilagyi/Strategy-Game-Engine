@@ -4,7 +4,7 @@ import ooga.model.game_engine.Engine;
 
 /**
  * This interface will be used to initialize all types of games. This means choosing the game
- * type, setting the board configuration, settting the rules, and setting the players
+ * type, setting the board configuration, setting the rules, and setting the players
  */
 public interface Creator {
 
