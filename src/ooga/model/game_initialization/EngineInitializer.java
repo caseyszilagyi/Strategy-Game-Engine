@@ -10,7 +10,7 @@ import ooga.model.game_initialization.file_parsing.GameFileParser;
  * each method here will pass the file name to the file parser, then the relevant
  * information to the classloader to load the class details
  */
-public class GameCreator implements Creator{
+public class EngineInitializer implements Initializer {
 
   public FrontEndExternalAPI viewController;
 
@@ -19,7 +19,7 @@ public class GameCreator implements Creator{
   public Loader classLoader = new GameClassLoader();
 
 
-  public GameCreator(FrontEndExternalAPI newViewController){
+  public EngineInitializer(FrontEndExternalAPI newViewController){
     viewController = newViewController;
     gameEngine = new GameEngine(viewController);
   }
