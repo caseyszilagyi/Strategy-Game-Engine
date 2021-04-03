@@ -1,2 +1,5 @@
-package ooga.model.game_components.move_types;public class FiniteSlide {
+package ooga.model.game_components.move_types;
+
+public class FiniteSlide extends PieceMove{
+
 }
