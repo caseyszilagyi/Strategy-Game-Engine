@@ -1,0 +1,3 @@
+<note> just to note, a king is takeable if any piece can perform a takeMove and land
+on a spot that it is in. So to check if a move is valid, need to move the piece and loop
+  through all other pieces to see if they can land on the spot</note>
