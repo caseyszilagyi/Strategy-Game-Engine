@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<piece piece="Chess">
+  <test>
+    <test1>Hello</test1>
+    <test2>Hi</test2>
+  </test>
+  <cool>
+    <cool1>Bye</cool1>
+    <cool2>ByeBye</cool2>
+  </cool>
+</piece>

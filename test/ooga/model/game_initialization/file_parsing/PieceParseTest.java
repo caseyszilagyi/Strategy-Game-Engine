@@ -8,11 +8,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Node;
 
-public class XMLParseTest {
+public class PieceParseTest {
 
   private String filePath = "test/ooga/model/game_initialization/file_parsing/XMLTestFiles/";
 
-  XMLParser xmlParser = new XMLParser("piece");
+  XMLParser xmlParser = new XMLParser("piece", "Chess");
 
 
   @BeforeEach
