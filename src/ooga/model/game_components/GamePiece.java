@@ -13,6 +13,7 @@ import java.util.List;
  */
 public abstract class GamePiece{
 
+
   //Global variables, initialized in constructer
   private Coordinate myCoordinates;
   private GameBoard myGameBoard;

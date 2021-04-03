@@ -5,8 +5,8 @@ import ooga.model.game_components.GamePiece;
 import java.util.Map;
 
 public class BoardCreator {
-    GamePiece[][] gameBoard;
-    String dictionary = "abcdefghijklmnopqrstuvwxyz"; //max supported board size is 26x26
+    private static final String dictionary = "abcdefghijklmnopqrstuvwxyz"; //max supported board size is 26x26
+    private GamePiece[][] gameBoard;
 
     /**
      * Builds the board based on the map of user and opponent's pieces
