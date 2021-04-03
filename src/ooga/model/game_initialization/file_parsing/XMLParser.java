@@ -7,8 +7,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import ooga.ErrorHandler;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -23,7 +25,8 @@ public class XMLParser {
   // Readable error message that can be displayed by the GUI
   public static final String ERROR_MESSAGE = "XML file does not represent %s";
   // name of root attribute that notes the type of file expecting to parse
-  private final String TYPE_ATTRIBUTE;
+  private final String FILE_TYPE;
+  private final String GAME_NAME;
   // keep only one documentBuilder because it is expensive to make and can reset it before parsing
   private final DocumentBuilder DOCUMENT_BUILDER;
 
@@ -31,26 +34,62 @@ public class XMLParser {
   /**
    * Create parser for XML files of given type.
    */
-  public XMLParser (String type) throws Exception {
+  public XMLParser (String fileType, String gameName) {
     DOCUMENT_BUILDER = getDocumentBuilder();
-    TYPE_ATTRIBUTE = type;
+    FILE_TYPE = fileType;
+    GAME_NAME = gameName;
+  }
+
+
+  /**
+   * Get data contained in this XML file as an object
+   */
+  public Map<String, Node> getElementMap(File dataFile) {
+    Element root = getRootElement(dataFile);
+    if (!isValidFile(root)) {
+      throw new ErrorHandler("InvalidFileType");
+    }
+    Map<String, Node> results = new HashMap<>();
+    NodeList nodes = root.getChildNodes();
+    for (int i = 0; i < nodes.getLength(); i++) {
+      results.put(nodes.item(i).getNodeName(), nodes.item(i));
+    }
+    return results;
+  }
+
+
+  /**
+   * Get data contained in this XML file as an object
+   */
+  public Map<String, String> getAttribute(File dataFile) {
+    Element root = getRootElement(dataFile);
+    if (!isValidFile(root)) {
+      throw new ErrorHandler("InvalidFileType");
+    }
+    Map<String, String> results = new HashMap<>();
+    NodeList nodes = root.getChildNodes();
+    for (int i = 0; i < nodes.getLength(); i++) {
+      results.put(nodes.item(i).getNodeName(), nodes.item(i).getTextContent());
+    }
+    return results;
   }
 
   // get root element of an XML file
-  private Element getRootElement (File xmlFile) throws Exception {
+  private Element getRootElement (File xmlFile){
     try {
       DOCUMENT_BUILDER.reset();
       Document xmlDocument = DOCUMENT_BUILDER.parse(xmlFile);
       return xmlDocument.getDocumentElement();
     }
     catch (SAXException | IOException e) {
-      throw new Exception(e);
+      e.printStackTrace();
+      throw new ErrorHandler("NoRootElement");
     }
   }
 
   // returns if this is a valid XML file for the specified object type
-  private boolean isValidFile (Element root, String type) {
-    return getAttribute(root, TYPE_ATTRIBUTE).equals(type);
+  private boolean isValidFile (Element root) {
+    return getAttribute(root, FILE_TYPE).equals(GAME_NAME);
   }
 
   // get value of Element's attribute
@@ -61,22 +100,16 @@ public class XMLParser {
   // get value of Element's text
   private String getTextValue (Element e, String tagName) {
     NodeList nodeList = e.getElementsByTagName(tagName);
-    if (nodeList != null && nodeList.getLength() > 0) {
-      return nodeList.item(0).getTextContent();
-    }
-    else {
-      // FIXME: empty string or exception? In some cases it may be an error to not find any text
-      return "";
-    }
+    return nodeList.item(0).getTextContent();
   }
 
   // boilerplate code needed to make a documentBuilder
-  private DocumentBuilder getDocumentBuilder () throws Exception {
+  private DocumentBuilder getDocumentBuilder () {
     try {
       return DocumentBuilderFactory.newInstance().newDocumentBuilder();
     }
     catch (ParserConfigurationException e) {
-      throw new Exception(e);
+      throw new ErrorHandler("DocumentBuilderFailure");
     }
   }
 }
