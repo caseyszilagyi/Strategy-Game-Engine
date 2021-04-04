@@ -16,7 +16,7 @@ public class FiniteJump extends PieceMovement {
   public List<Coordinate> getAllPossibleMoves(Coordinate coordinates, GameBoard board) {
     if(checkIfMoveInBounds(coordinates) && checkIfPieceInTakePosition(coordinates)){
       List<Coordinate> possibleMoves = new ArrayList<Coordinate>();
-      Coordinate result = new Coordinate(coordinates.getX() + getChangeX(),coordinates.getY() + getChangeX());
+      Coordinate result = new Coordinate(coordinates.getX() + getChangeX(),coordinates.getY() + getChangeY());
       possibleMoves.add(result);
       return possibleMoves;
     }
