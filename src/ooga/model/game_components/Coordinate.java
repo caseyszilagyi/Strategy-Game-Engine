@@ -1,12 +1,28 @@
 package ooga.model.game_components;
 
-public class Coordinate {
+public class Coordinate{
+
+  private int x;
+  private int y;
+
+  public Coordinate(int x, int y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  public void setX(int x) {
+    this.x = x;
+  }
+
+  public void setY(int y) {
+    this.y = y;
+  }
 
   public int getY() {
-    return 0;
+    return y;
   }
 
   public int getX() {
-    return 0;
+    return x;
   }
 }

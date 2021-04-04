@@ -43,7 +43,7 @@ public abstract class Creator {
    * @param node The node
    * @return The map
    */
-  protected Map<String, List<String>> makeAttributeMap(Node node){
+  protected Map<String, String> makeAttributeMap(Node node){
     return xmlParser.makeAttributeMap(node);
   }
 
@@ -62,6 +62,10 @@ public abstract class Creator {
    */
   protected Map<String, List<Node>> makeRootNodeMap(String fileName){
     return xmlParser.makeRootNodeMap(makeFile(fileName), fileType, gameType);
+  }
+
+  protected Node getFirstNode(Map<String, List<Node>> nodeMap, String key){
+    return nodeMap.get(key).get(0);
   }
 
   // Makes a file, using the path and the name of the file (without the .xml)

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 import java.util.Map;
+import ooga.model.game_initialization.piece_initialization.PieceCreator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Node;
@@ -13,7 +14,7 @@ public class PieceCreatorTesting {
   private Creator pieceCreator = new PieceCreator("Chess");
   private Map<String, List<Node>> rootNodeMap;
   private Map<String, List<Node>> subNodeMap;
-  private Map<String, List<String>> attributeMap;
+  private Map<String, String> attributeMap;
 
   @BeforeEach
   private void SetUp(){
@@ -50,11 +51,11 @@ public class PieceCreatorTesting {
 
   // asserts that the attribute map has the correct mapping
   private void checkAttributeMapping(String key, String value){
-    assertEquals(value, attributeMap.get(key).get(0));
+    assertEquals(value, attributeMap.get(key));
   }
 
   // Makes the attribute map
-  private Map<String, List<String>> makeAttributeMap(Node node){
+  private Map<String, String> makeAttributeMap(Node node){
     return pieceCreator.makeAttributeMap(node);
   }
 

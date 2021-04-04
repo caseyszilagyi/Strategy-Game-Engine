@@ -1,6 +1,8 @@
 package ooga.model.game_components;
 
+import java.util.ArrayList;
 import java.util.List;
+import ooga.model.game_components.move_types.PieceMovement;
 
 /**
  * Represents a generic game piece. Has a location and an indicator representing whether
@@ -11,30 +13,35 @@ import java.util.List;
  * Need to be able to give the piece a location and ask whether it can attack that location or not.
  * This is how check/checkmate will be determined
  */
-public abstract class GamePiece{
+public class GamePiece{
 
-  //Global variables, initialized in constructer
-  private Coordinate myCoordinates;
-  private GameBoard myGameBoard;
+  private Coordinate pieceCoordinates;
+  private GameBoard gameBoard;
+  private List<PieceMovement> allPossibleMoves;
 
-  //Just thinking about how the pieces will be structured
-  private Boolean isTakeable;
+  public GamePiece(Coordinate coordinates){
+    pieceCoordinates = coordinates;
+  }
 
+  public void setPossibleMoves(List<PieceMovement> allPossibleMoves){
+    this.allPossibleMoves = allPossibleMoves;
+  }
 
-  //returns true if move is possible, false if not
-  public abstract boolean canMove(int newX, int newY);
-
-  public List<Coordinate> getAllPossibleMoves(Coordinate pieceCoor) {
-    return null;
+  public List<Coordinate> getAllPossibleMoves() {
+    List<Coordinate> possibleMoveLocations = new ArrayList<Coordinate>();
+    for(PieceMovement move: allPossibleMoves){
+      possibleMoveLocations.addAll(move.getAllPossibleMoves(pieceCoordinates, gameBoard));
+    }
+    return possibleMoveLocations;
   }
 
 
   public double getXPosition(){
-    return myCoordinates.getX();
+    return pieceCoordinates.getX();
   }
 
   public double getYPosition(){
-    return myCoordinates.getY();
+    return pieceCoordinates.getY();
   }
 }
 
