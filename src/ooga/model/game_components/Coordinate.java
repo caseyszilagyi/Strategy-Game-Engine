@@ -25,4 +25,22 @@ public class Coordinate{
   public int getX() {
     return x;
   }
+
+  @Override
+  public boolean equals(Object coordinates){
+    if(coordinates == null){ return false; }
+    if(coordinates == this) { return true; }
+    if(!(coordinates instanceof Coordinate)) { return false; }
+
+    Coordinate otherCoordinates = (Coordinate) coordinates;
+    if(x == otherCoordinates.getX() && y == otherCoordinates.getY()){
+      return true;
+    }
+    return false;
+  }
+
+  @Override
+  public int hashCode(){
+    return x*100 + y;
+  }
 }
