@@ -27,8 +27,8 @@ public class PieceComponentClassLoader {
     PieceMovement move = null;
     try {
       Object command = CLASS_LOADER.loadClass(PIECE_MOVE_CLASSES_PACKAGE + "." + moveType)
-          .getDeclaredConstructor()
-          .newInstance();
+          .getDeclaredConstructor(Map.class)
+          .newInstance(parameters);
       move = (PieceMovement) command;
     } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException | ClassNotFoundException e) {
       throw new ExceptionHandler("InvalidPieceMovementType");
