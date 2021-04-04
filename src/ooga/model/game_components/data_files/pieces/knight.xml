@@ -4,98 +4,114 @@
     <FiniteJump>
       <changeX>1</changeX>
       <changeY>2</changeY>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
     </FiniteJump>
     <FiniteJump>
       <changeX>1</changeX>
       <changeY>-2</changeY>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
     </FiniteJump>
     <FiniteJump>
       <changeX>2</changeX>
       <changeY>1</changeY>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
     </FiniteJump>
     <FiniteJump>
       <changeX>2</changeX>
       <changeY>-1</changeY>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
     </FiniteJump>
     <FiniteJump>
       <changeX>-1</changeX>
       <changeY>2</changeY>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
     </FiniteJump>
     <FiniteJump>
       <changeX>-1</changeX>
       <changeY>-2</changeY>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
     </FiniteJump>
     <FiniteJump>
       <changeX>-2</changeX>
       <changeY>1</changeY>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
     </FiniteJump>
     <FiniteJump>
       <changeX>-2</changeX>
       <changeY>-1</changeY>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
     </FiniteJump>
     <FiniteJump>
       <changeX>1</changeX>
       <changeY>2</changeY>
-      <canTake>
-        <takeX>0</takeX>
-        <takeY>0</takeY>
-      </canTake>
+      <mustTake>True</mustTake>
+      <takeX>0</takeX>
+      <takeY>0</takeY>
     </FiniteJump>
     <FiniteJump>
       <changeX>1</changeX>
       <changeY>-2</changeY>
-      <canTake>
-        <takeX>0</takeX>
-        <takeY>0</takeY>
-      </canTake>
+      <mustTake>True</mustTake>
+      <takeX>0</takeX>
+      <takeY>0</takeY>
     </FiniteJump>
     <FiniteJump>
       <changeX>2</changeX>
       <changeY>1</changeY>
-      <canTake>
-        <takeX>0</takeX>
-        <takeY>0</takeY>
-      </canTake>
+      <mustTake>True</mustTake>
+      <takeX>0</takeX>
+      <takeY>0</takeY>
     </FiniteJump>
     <FiniteJump>
       <changeX>2</changeX>
       <changeY>-1</changeY>
-      <canTake>
-        <takeX>0</takeX>
-        <takeY>0</takeY>
-      </canTake>
+      <mustTake>True</mustTake>
+      <takeX>0</takeX>
+      <takeY>0</takeY>
     </FiniteJump>
     <FiniteJump>
       <changeX>-1</changeX>
       <changeY>2</changeY>
-      <canTake>
-        <takeX>0</takeX>
-        <takeY>0</takeY>
-      </canTake>
+      <mustTake>True</mustTake>
+      <takeX>0</takeX>
+      <takeY>0</takeY>
     </FiniteJump>
     <FiniteJump>
       <changeX>-1</changeX>
       <changeY>-2</changeY>
-      <canTake>
-        <takeX>0</takeX>
-        <takeY>0</takeY>
-      </canTake>
+      <mustTake>True</mustTake>
+      <takeX>0</takeX>
+      <takeY>0</takeY>
     </FiniteJump>
     <FiniteJump>
       <changeX>-2</changeX>
       <changeY>1</changeY>
-      <canTake>
-        <takeX>0</takeX>
-        <takeY>0</takeY>
-      </canTake>
+      <mustTake>True</mustTake>
+      <takeX>0</takeX>
+      <takeY>0</takeY>
     </FiniteJump>
     <FiniteJump>
       <changeX>-2</changeX>
       <changeY>-1</changeY>
-      <canTake>
-        <takeX>0</takeX>
-        <takeY>0</takeY>
-      </canTake>
+      <mustTake>True</mustTake>
+      <takeX>0</takeX>
+      <takeY>0</takeY>
     </FiniteJump>
   </moves>
 
