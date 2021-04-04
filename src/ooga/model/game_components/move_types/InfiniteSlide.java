@@ -1,5 +1,18 @@
 package ooga.model.game_components.move_types;
 
-public class InfiniteSlide extends PieceMove{
+import java.util.List;
+import java.util.Map;
+import ooga.model.game_components.Coordinate;
+import ooga.model.game_components.GameBoard;
 
+public class InfiniteSlide extends PieceMovement {
+
+  public InfiniteSlide(Map<String, String> parameters){
+    super(parameters);
+  }
+
+  @Override
+  public List<Coordinate> getAllPossibleMoves(Coordinate coordinates, GameBoard board) {
+    return null;
+  }
 }
