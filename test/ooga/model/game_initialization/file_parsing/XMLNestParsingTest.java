@@ -17,7 +17,7 @@ public class XMLNestParsingTest {
   XMLParser xmlParser = new XMLParser();
   Map<String, List<Node>> rootNodeMap;
   Map<String, List<Node>> subNodeMap;
-  Map<String, List<String>> attributeMap;
+  Map<String, String> attributeMap;
 
   @BeforeEach
   private void SetUp(){
@@ -35,11 +35,11 @@ public class XMLNestParsingTest {
 
   // asserts that the attribute map has the correct mapping
   private void checkAttributeMapping(String key, String value){
-    assertEquals(value, attributeMap.get(key).get(0));
+    assertEquals(value, attributeMap.get(key));
   }
 
   // gets the attribute map when given a node
-  private Map<String, List<String>> makeAttributeMap(Node node){
+  private Map<String, String> makeAttributeMap(Node node){
     return xmlParser.makeAttributeMap(node);
   }
 
