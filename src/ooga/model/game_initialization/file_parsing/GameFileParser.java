@@ -10,11 +10,6 @@ public class GameFileParser implements FileParser {
   private XMLParser parser;
 
   public GameFileParser(){
-    try {
-      parser = new XMLParser("dummy");
-    }catch (Exception e){
-
-    }
   }
 
   @Override

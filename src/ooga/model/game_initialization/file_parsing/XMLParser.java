@@ -1,5 +1,8 @@
 package ooga.model.game_initialization.file_parsing;
 
+import java.util.ArrayList;
+import java.util.List;
+import javafx.util.Pair;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -7,76 +10,133 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import ooga.ExceptionHandler;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 
 /**
- * This class handles parsing XML files and returning a completed object.
+ * This class handles parsing XML files. It has methods to get string to node maps, as well as
+ * string to string maps.
  *
- * @author Rhondu Smithwick
+ * @author Casey Szilagyi
  * @author Robert C. Duvall
  */
 public class XMLParser {
-  // Readable error message that can be displayed by the GUI
-  public static final String ERROR_MESSAGE = "XML file does not represent %s";
-  // name of root attribute that notes the type of file expecting to parse
-  private final String TYPE_ATTRIBUTE;
+
   // keep only one documentBuilder because it is expensive to make and can reset it before parsing
   private final DocumentBuilder DOCUMENT_BUILDER;
 
+  // fileType is the type of file that is expected (piece, board), gameName is the name of the game
+  // (chess, checkers)
+  private String fileType;
+  private String gameName;
 
   /**
    * Create parser for XML files of given type.
    */
-  public XMLParser (String type) throws Exception {
+  public XMLParser() throws ExceptionHandler {
     DOCUMENT_BUILDER = getDocumentBuilder();
-    TYPE_ATTRIBUTE = type;
   }
 
+
+  /**
+   * Given a file, makes the map that has the name of each direct child of the document element and
+   * the node objects that represent them. Does some error checking for the file type as well
+   *
+   * @param dataFile The file to read in
+   * @param fileType The type of file that is expected (piece, board, etc)
+   * @param gameName The name of the game that the file corresponds to
+   * @return The map for the child nodes of the document element
+   * @throws ExceptionHandler If the file type and game name aren't correct
+   */
+  public Map<String, List<Node>> makeRootNodeMap(File dataFile, String fileType, String gameName)
+      throws ExceptionHandler {
+    this.fileType = fileType;
+    this.gameName = gameName;
+    Element root = getRootElement(dataFile);
+    //Checks if file is of correct type
+    if (!isValidFile(root)) {
+      throw new ExceptionHandler("InvalidFileType");
+    }
+    return makeNodeMap(root);
+  }
+
+  /**
+   * Given a node, makes a map that has the name of each direct child node and the node objects that
+   * represent these names
+   *
+   * @param parentNode The parent node that has children to be parsed through
+   * @return A map of the string of the node name to the list of all the node objects with that name
+   */
+  public Map<String, List<Node>> makeNodeMap(Node parentNode) {
+    Map<String, List<Node>> result = new HashMap<>();
+    Node childNode = parentNode.getFirstChild();
+    while (childNode != null) {
+      if(childNode.getNodeType() == Node.ELEMENT_NODE) {
+        result.putIfAbsent(childNode.getNodeName(), new ArrayList<Node>());
+        result.get(childNode.getNodeName()).add(childNode);
+      }
+      childNode = childNode.getNextSibling();
+    }
+    return result;
+  }
+
+  /**
+   * Given a node, will make a map of the names of the children of the nodes to the text values that
+   * they hold. This method assumes that each node will only have text as the child, and not other
+   * nodes. It will still execute otherwise, but the map will likely not contain the desired data
+   *
+   * @param node The node that will be used to make the map
+   * @return The map with the children of the nodes mapped to their text values
+   */
+  public Map<String, String> makeAttributeMap(Node node) {
+    Map<String, List<Node>> nodeMap = makeNodeMap(node);
+    Map<String, String> result = new HashMap<>();
+    for (String key : nodeMap.keySet()) {
+      result.put(key, nodeMap.get(key).get(0).getTextContent());
+    }
+    return result;
+  }
+
+
   // get root element of an XML file
-  private Element getRootElement (File xmlFile) throws Exception {
+  private Element getRootElement(File xmlFile) throws ExceptionHandler {
     try {
       DOCUMENT_BUILDER.reset();
       Document xmlDocument = DOCUMENT_BUILDER.parse(xmlFile);
       return xmlDocument.getDocumentElement();
-    }
-    catch (SAXException | IOException e) {
-      throw new Exception(e);
+    } catch (SAXException | IOException e) {
+      e.printStackTrace();
+      throw new ExceptionHandler("NoRootElement");
     }
   }
 
   // returns if this is a valid XML file for the specified object type
-  private boolean isValidFile (Element root, String type) {
-    return getAttribute(root, TYPE_ATTRIBUTE).equals(type);
+  private boolean isValidFile(Element root) {
+    return getAttribute(root, fileType).equals(gameName);
   }
 
   // get value of Element's attribute
-  private String getAttribute (Element e, String attributeName) {
+  private String getAttribute(Element e, String attributeName) {
     return e.getAttribute(attributeName);
   }
 
   // get value of Element's text
-  private String getTextValue (Element e, String tagName) {
+  private String getTextValue(Element e, String tagName) {
     NodeList nodeList = e.getElementsByTagName(tagName);
-    if (nodeList != null && nodeList.getLength() > 0) {
-      return nodeList.item(0).getTextContent();
-    }
-    else {
-      // FIXME: empty string or exception? In some cases it may be an error to not find any text
-      return "";
-    }
+    return nodeList.item(0).getTextContent();
   }
 
   // boilerplate code needed to make a documentBuilder
-  private DocumentBuilder getDocumentBuilder () throws Exception {
+  private DocumentBuilder getDocumentBuilder() throws ExceptionHandler {
     try {
       return DocumentBuilderFactory.newInstance().newDocumentBuilder();
-    }
-    catch (ParserConfigurationException e) {
-      throw new Exception(e);
+    } catch (ParserConfigurationException e) {
+      throw new ExceptionHandler("DocumentBuilderFailure");
     }
   }
 }

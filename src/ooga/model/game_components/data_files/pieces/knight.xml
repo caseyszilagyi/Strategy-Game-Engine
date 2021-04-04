@@ -1,107 +1,130 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<piece>
+<piece piece = "Chess">
   <moves>
-    <regMove>
+    <FiniteJump>
       <changeX>1</changeX>
       <changeY>2</changeY>
-    </regMove>
-    <regMove>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
+    </FiniteJump>
+    <FiniteJump>
       <changeX>1</changeX>
       <changeY>-2</changeY>
-    </regMove>
-    <regMove>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
+    </FiniteJump>
+    <FiniteJump>
       <changeX>2</changeX>
       <changeY>1</changeY>
-    </regMove>
-    <regMove>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
+    </FiniteJump>
+    <FiniteJump>
       <changeX>2</changeX>
       <changeY>-1</changeY>
-    </regMove>
-    <regMove>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
+    </FiniteJump>
+    <FiniteJump>
       <changeX>-1</changeX>
       <changeY>2</changeY>
-    </regMove>
-    <regMove>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
+    </FiniteJump>
+    <FiniteJump>
       <changeX>-1</changeX>
       <changeY>-2</changeY>
-    </regMove>
-    <regMove>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
+    </FiniteJump>
+    <FiniteJump>
       <changeX>-2</changeX>
       <changeY>1</changeY>
-    </regMove>
-    <regMove>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
+    </FiniteJump>
+    <FiniteJump>
       <changeX>-2</changeX>
       <changeY>-1</changeY>
-    </regMove>
-    <takeMove>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
+    </FiniteJump>
+    <FiniteJump>
       <changeX>1</changeX>
       <changeY>2</changeY>
+      <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
-    </takeMove>
-    <takeMove>
+    </FiniteJump>
+    <FiniteJump>
       <changeX>1</changeX>
       <changeY>-2</changeY>
+      <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
-    </takeMove>
-    <takeMove>
+    </FiniteJump>
+    <FiniteJump>
       <changeX>2</changeX>
       <changeY>1</changeY>
+      <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
-    </takeMove>
-    <takeMove>
+    </FiniteJump>
+    <FiniteJump>
       <changeX>2</changeX>
       <changeY>-1</changeY>
+      <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
-    </takeMove>
-    <takeMove>
+    </FiniteJump>
+    <FiniteJump>
       <changeX>-1</changeX>
       <changeY>2</changeY>
+      <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
-    </takeMove>
-    <takeMove>
+    </FiniteJump>
+    <FiniteJump>
       <changeX>-1</changeX>
       <changeY>-2</changeY>
+      <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
-    </takeMove>
-    <takeMove>
+    </FiniteJump>
+    <FiniteJump>
       <changeX>-2</changeX>
       <changeY>1</changeY>
+      <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
-    </takeMove>
-    <takeMove>
+    </FiniteJump>
+    <FiniteJump>
       <changeX>-2</changeX>
       <changeY>-1</changeY>
+      <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
-    </takeMove>
+    </FiniteJump>
   </moves>
 
-  <regMoveType>FiniteJump</regMoveType>
-  <takeMoveType>FiniteJump</takeMoveType>
+
   <changeTurns>True</changeTurns>
   <changeSelf>False (will be true for pawns because they move to end, but how to know?)</changeSelf>
 
-  <regRestrictions>
+  <Restrictions>
     <regRestriction>
       <type>PieceRestriction</type>
       <piece>King</piece>
       <information>isTakeable</information>
     </regRestriction>
-  </regRestrictions>
-
-  <takeRestrictions>
-    <takeRestriction>
-      <type>PieceRestriction</type>
-      <piece>King</piece>
-      <information>isTakeable</information>
-    </takeRestriction>
-  </takeRestrictions>
+  </Restrictions>
 
 </piece>
