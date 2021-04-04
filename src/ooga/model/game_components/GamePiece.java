@@ -19,6 +19,8 @@ public class GamePiece{
   private GameBoard gameBoard;
   private List<PieceMovement> allPossibleMoves;
 
+  private GamePiece[][] dummyBoard;
+
   public GamePiece(Coordinate coordinates){
     pieceCoordinates = coordinates;
   }
@@ -27,12 +29,19 @@ public class GamePiece{
     this.allPossibleMoves = allPossibleMoves;
   }
 
-  public List<Coordinate> getAllPossibleMoves() {
-    List<Coordinate> possibleMoveLocations = new ArrayList<Coordinate>();
+  public List<Coordinate> getAllLegalMoves() {
+    List<Coordinate> possibleMoveLocations = new ArrayList<>();
     for(PieceMovement move: allPossibleMoves){
       possibleMoveLocations.addAll(move.getAllPossibleMoves(pieceCoordinates, gameBoard));
     }
     return possibleMoveLocations;
+  }
+
+  public void setDummyBoard(GamePiece[][] dummyBoard){
+    this.dummyBoard = dummyBoard;
+    for(PieceMovement move: allPossibleMoves){
+      move.setDummyBoard(dummyBoard);
+    }
   }
 
 

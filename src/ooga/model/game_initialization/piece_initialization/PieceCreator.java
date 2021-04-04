@@ -32,8 +32,6 @@ public class PieceCreator extends Creator {
   private Map<String, List<Node>> pieceMoves;
   private final String PIECE_MOVE_TAG = "moves";
 
-  // These are passed to the pieces
-  private List<PieceMovement> pieceMovements = new ArrayList<>();
 
   /**
    * Initializes this piece creator which will be used to make pieces for the given game
@@ -45,19 +43,22 @@ public class PieceCreator extends Creator {
   }
 
 
-  public void makePiece(String pieceName, Coordinate coordinates){
+  public GamePiece makePiece(String pieceName, Coordinate coordinates){
     GamePiece gamePiece = new GamePiece(coordinates);
     pieceFileNodes = super.makeRootNodeMap(pieceName);
-    makePieceMovements();
+    gamePiece.setPossibleMoves(makePieceMovements());
+    return gamePiece;
   }
 
-  private void makePieceMovements(){
+  private List<PieceMovement> makePieceMovements(){
+    List<PieceMovement> pieceMovements = new ArrayList<>();
     pieceMoves = super.makeSubNodeMap(getFirstNode(pieceFileNodes, PIECE_MOVE_TAG));
     for(String s: pieceMoves.keySet()){
       for(Node n: pieceMoves.get(s)){
         pieceMovements.add(pieceComponentClassLoader.makePieceMove(s, makeAttributeMap(n)));
       }
     }
+    return pieceMovements;
   }
 
 
