@@ -20,8 +20,4 @@ public class WelcomeScreenSceneFactory extends AbstractGameSceneFactory {
     addMainView();
   }
 
-  public GameScene getScene() {
-
-    return super.getScene();
-  }
 }
