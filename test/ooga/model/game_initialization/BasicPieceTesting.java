@@ -81,6 +81,10 @@ public class BasicPieceTesting {
   }
 
 
+  /**
+   * Testing the hashcode and equals methods for coordinates to see if comparison in set
+   * objects works properly
+   */
   @Test
   void testCoordinateHashCodeAndEquals(){
     List<Coordinate> testSet = new ArrayList<>();
@@ -89,6 +93,7 @@ public class BasicPieceTesting {
     assertTrue(testActualExpectedCoordinates("1:2 3:4", testSet));
   }
 
+  // Makes a dummy board to use for testing
   private void dummyBoardCreator(String boardConfig){
     char[] board = boardConfig.toCharArray();
     for(int row = 0; row<8; row++){
@@ -103,6 +108,7 @@ public class BasicPieceTesting {
     }
   }
 
+  // Compares a string of expected coordinates to a list of actual coordinates
   private boolean testActualExpectedCoordinates(String expected, List<Coordinate> actual){
     return testExpectedCoordinatesList(makeManyCoordinateList(expected), actual);
   }

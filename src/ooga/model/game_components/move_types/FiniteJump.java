@@ -6,17 +6,38 @@ import java.util.Map;
 import ooga.model.game_components.Coordinate;
 import ooga.model.game_components.GameBoard;
 
+/**
+ * This movement class represents a piece that can travel over other pieces, but only for a
+ * specified number of spaces
+ *
+ * @author Casey Szilagyi
+ */
 public class FiniteJump extends PieceMovement {
 
-  public FiniteJump(Map<String, String> parameters){
+  /**
+   * The constructor takes the parameters of the move. This includes the change in position of the
+   * move, as well as the information about whether this move can take a piece
+   *
+   * @param parameters The map of parameters
+   */
+  public FiniteJump(Map<String, String> parameters) {
     super(parameters);
   }
 
+  /**
+   * Checks if the single move that this PieceMovement object can make if valid. If it is, it
+   * returns it returns it in a single item list. If not, an empty arraylist is returned
+   *
+   * @param coordinates The coordinates of  the piece that this move is acting on
+   * @param board       The board that this piece is on
+   * @return Either the coordinates of the valid move, or an empty ArrayList
+   */
   @Override
   public List<Coordinate> getAllPossibleMoves(Coordinate coordinates, GameBoard board) {
-    if(checkIfMoveInBounds(coordinates) && checkIfPieceInTakePosition(coordinates)){
+    if (checkIfMoveInBounds(coordinates) && checkIfPieceInTakePosition(coordinates)) {
       List<Coordinate> possibleMoves = new ArrayList<Coordinate>();
-      Coordinate result = new Coordinate(coordinates.getX() + getChangeX(),coordinates.getY() + getChangeY());
+      Coordinate result = new Coordinate(coordinates.getX() + getChangeX(),
+          coordinates.getY() + getChangeY());
       possibleMoves.add(result);
       return possibleMoves;
     }
