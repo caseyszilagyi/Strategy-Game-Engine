@@ -19,8 +19,8 @@ import org.xml.sax.SAXException;
 
 
 /**
- * This class handles parsing XML files. It has methods to get string to node maps, as
- * well as string to string maps.
+ * This class handles parsing XML files. It has methods to get string to node maps, as well as
+ * string to string maps.
  *
  * @author Casey Szilagyi
  * @author Robert C. Duvall
@@ -45,7 +45,7 @@ public class XMLParser {
 
   /**
    * Given a file, makes the map that has the name of each direct child of the document element and
-   * the node objects that represent them. Does some error checking
+   * the node objects that represent them. Does some error checking for the file type as well
    *
    * @param dataFile The file to read in
    * @param fileType The type of file that is expected (piece, board, etc)
@@ -70,13 +70,16 @@ public class XMLParser {
    * represent these names
    *
    * @param parentNode The parent node that has children to be parsed through
+   * @return A map of the string of the node name to the list of all the node objects with that name
    */
   public Map<String, List<Node>> makeNodeMap(Node parentNode) {
     Map<String, List<Node>> result = new HashMap<>();
     Node childNode = parentNode.getFirstChild();
     while (childNode != null) {
-      result.putIfAbsent(childNode.getNodeName(), new ArrayList<Node>());
-      result.get(childNode.getNodeName()).add(childNode);
+      if(childNode.getNodeType() == Node.ELEMENT_NODE) {
+        result.putIfAbsent(childNode.getNodeName(), new ArrayList<Node>());
+        result.get(childNode.getNodeName()).add(childNode);
+      }
       childNode = childNode.getNextSibling();
     }
     return result;
