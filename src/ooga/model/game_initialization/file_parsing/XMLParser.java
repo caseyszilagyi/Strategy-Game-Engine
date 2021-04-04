@@ -90,16 +90,11 @@ public class XMLParser {
    * @param node The node that will be used to make the map
    * @return The map with the children of the nodes mapped to their text values
    */
-  public Map<String, List<String>> makeAttributeMap(Node node) {
+  public Map<String, String> makeAttributeMap(Node node) {
     Map<String, List<Node>> nodeMap = makeNodeMap(node);
-    Map<String, List<String>> result = new HashMap<>();
+    Map<String, String> result = new HashMap<>();
     for (String key : nodeMap.keySet()) {
-      List<String> attributes = new ArrayList<>();
-      List<Node> currentNodeList = nodeMap.get(key);
-      for(Node n: currentNodeList){
-        attributes.add(n.getTextContent());
-      }
-      result.put(key, attributes);
+      result.put(key, nodeMap.get(key).get(0).getTextContent());
     }
     return result;
   }
