@@ -60,23 +60,55 @@ public class BasicPieceTesting {
   }
 
   /**
-   * Testing the class loader used to make the movement objects of pieces using reflection.
-   * This isn't integrated with the gameboard object yet, so it just uses a dummy 2D array
+   * Testing the getLegalMoves for a night in the middle of the board
    */
   @Test
-  void testBasicKnightMovement(){
-    dummyBoardCreator("........"
-        + "........"
-        + "........"
-        + "........"
-        + "........"
-        + "........"
-        + "........"
-        + "........");
-    GamePiece knight = pieceCreator.makePiece("knight", makeCoordinates(4,4));
+  void testBasicKnightGetMoves(){
+    makeEmptyBoard();
+    GamePiece knight = makePiece("knight", 4, 4);
     knight.setDummyBoard(dummyBoard);
     allLegalMoves = knight.getAllLegalMoves();
     String expected = "5:6 5:2: 6:5 6:3 3:6 3:2 2:5 2:3";
+    assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
+  }
+
+  /**
+   * Testing the getLegalMoves for a knight on the edge of the board
+   */
+  @Test
+  void testKnightEdgeGetMoves(){
+    makeEmptyBoard();
+    GamePiece knight = makePiece("knight", 7, 4);
+    knight.setDummyBoard(dummyBoard);
+    allLegalMoves = knight.getAllLegalMoves();
+    String expected = "5:5 5:3 6:6 6:2";
+    assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
+  }
+
+  /**
+   * Testing the getLegalMoves for a knight in the corner of the board
+   */
+  @Test
+  void testKnightCornerGetMoves(){
+    makeEmptyBoard();
+    GamePiece knight = makePiece("knight", 7, 7);
+    knight.setDummyBoard(dummyBoard);
+    allLegalMoves = knight.getAllLegalMoves();
+    String expected = "6:5 5:6";
+    assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
+  }
+
+  /**
+   * Testing whether the knight can recognize that it can land on other pieces
+   */
+  @Test
+  void testKnightCornerMovement(){
+    makeEmptyBoard();
+    GamePiece knight = makePiece("knight", 7, 7);
+    dummyBoard[5][6] = makeDummyGamePiece();
+    knight.setDummyBoard(dummyBoard);
+    allLegalMoves = knight.getAllLegalMoves();
+    String expected = "6:5 5:6";
     assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
   }
 
@@ -93,6 +125,19 @@ public class BasicPieceTesting {
     assertTrue(testActualExpectedCoordinates("1:2 3:4", testSet));
   }
 
+
+  // piece creator methods
+  private GamePiece makePiece(String pieceName, int xCoord, int yCoord){
+    return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord));
+  }
+
+
+  // dummy board methods
+
+  private void makeEmptyBoard(){
+    dummyBoardCreator("................................................................");
+  }
+
   // Makes a dummy board to use for testing
   private void dummyBoardCreator(String boardConfig){
     char[] board = boardConfig.toCharArray();
@@ -102,11 +147,17 @@ public class BasicPieceTesting {
           dummyBoard[col][row] = null;
         }
         else{
-          dummyBoard[col][row] = new GamePiece(makeCoordinates(0,0)); // dummy coordinates
+          dummyBoard[col][row] = makeDummyGamePiece();
         }
       }
     }
   }
+
+  private GamePiece makeDummyGamePiece(){
+    return new GamePiece(makeCoordinates(0,0));
+  }
+
+  // Methods used for testing coordinates and piece movement
 
   // Compares a string of expected coordinates to a list of actual coordinates
   private boolean testActualExpectedCoordinates(String expected, List<Coordinate> actual){
@@ -146,6 +197,9 @@ public class BasicPieceTesting {
   private Coordinate makeCoordinates(int x, int y){
     return new Coordinate(x, y);
   }
+
+
+  // XML testing/useful methods
 
   // asserts that the attribute map has the correct mapping
   private void checkAttributeMapping(String key, String value){
