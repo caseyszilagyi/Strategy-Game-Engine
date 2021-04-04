@@ -1,30 +1,27 @@
 package ooga.view;
 
-import javafx.scene.Node;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ResourceBundle;
 
 public class WelcomeScreenSceneFactory extends AbstractGameSceneFactory {
 
-  public WelcomeScreenSceneFactory(String fileName) {
-    super(fileName);
+
+  public WelcomeScreenSceneFactory(ResourceBundle resources)
+      throws ClassNotFoundException, NoSuchMethodException,
+      InstantiationException, IllegalAccessException, InvocationTargetException {
+
+    super(resources);
   }
 
+
   @Override
-  public Node createTopBar() {
-    return null;
+  public void assembleScene() {
+
+    addMainView();
   }
 
-  @Override
-  public Node createMainView() {
-    return null;
-  }
+  public GameScene getScene() {
 
-  @Override
-  public Node createSplitPanes() {
-    return null;
-  }
-
-  @Override
-  public void setBorderSize(int width, int height) {
-
+    return super.getScene();
   }
 }

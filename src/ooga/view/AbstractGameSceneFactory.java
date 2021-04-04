@@ -2,7 +2,6 @@ package ooga.view;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
-import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
 public abstract class AbstractGameSceneFactory {
@@ -12,33 +11,80 @@ public abstract class AbstractGameSceneFactory {
   private int SCENE_WIDTH = DEFAULT_WIDTH;
   private int SCENE_HEIGHT = DEFAULT_HEIGHT;
   private final String DEFAULT_RESOURCES_FOLDER = "view.resources.";
+  private final ResourceBundle resources;
+  private GameScene myScene;
+  private BorderPane myRoot;
 
-  public abstract Node createTopBar();
-
-  public abstract Node createMainView();
-
-  public abstract Node createSplitPanes();
-
-  public abstract void setBorderSize(int width, int height);
-
-  public GameScene assembleScene(String filename)
-      throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-
-    ResourceBundle resources = ResourceBundle.getBundle(DEFAULT_RESOURCES_FOLDER + filename);
-
-    String sceneType = resources.getString("sceneType");
-    Class sceneFactory = Class.forName(sceneType + "SceneFactory");
-    GameScene newScene = (GameScene) sceneFactory.getConstructor().newInstance(resources);
-
-    Node topBar = createTopBar();
-    Node mainView = createMainView();
-    Node splitPane = createSplitPanes();
-
-    BorderPane sceneRoot = (BorderPane) newScene.getRoot();
-    sceneRoot.setTop(topBar);
-    sceneRoot.setCenter(mainView);
-    sceneRoot.setRight(splitPane);
-    return newScene;
+  public AbstractGameSceneFactory(ResourceBundle resources) {
+    this.resources = resources;
+    myScene = createEmptyScene();
+    myRoot = (BorderPane) myScene.getRoot();
   }
 
+  private ViewPane createPane (String paneName) {
+
+    try {
+      if (resources.getString("has" + paneName).equals("false")) {
+        return null;
+      }
+
+      Class paneFactoryClass = Class.forName(paneName + "ViewPanelFactory");
+
+      AbstractViewPaneFactory factory =
+          (AbstractViewPaneFactory) paneFactoryClass.getConstructor(ResourceBundle.class)
+              .newInstance(resources);
+      return factory.createPane();
+    } catch (ClassNotFoundException | NoSuchMethodException |
+        IllegalAccessException | InvocationTargetException | InstantiationException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  public void addTopBar () {
+
+    myRoot.setTop(createPane("TopBar"));
+
+  };
+
+  public void addMainView () {
+
+    myRoot.setCenter(createPane("MainView"));
+  }
+
+  public void addSplitPane () {
+
+    myRoot.setRight(createPane("SplitPane"));
+  }
+
+  public void setBorderSize(int width, int height){
+    SCENE_WIDTH = width;
+    SCENE_HEIGHT = height;
+  };
+
+  public GameScene createEmptyScene() {
+    try {
+      String sceneType = resources.getString("sceneType");
+      Class scene = Class.forName(sceneType + "Scene");
+      setBorderSize(Integer.parseInt(resources.getString("sceneWidth")),
+          Integer.parseInt(resources.getString("sceneHeight")));
+      Class params[] = {BorderPane.class, int.class, int.class};
+      GameScene newScene = (GameScene) scene.getConstructor(params)
+          .newInstance(new BorderPane(), SCENE_WIDTH, SCENE_HEIGHT);
+      newScene.getStylesheets().add(DEFAULT_RESOURCES_FOLDER + resources.getString("CSS"));
+      return newScene;
+    } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException |
+        InvocationTargetException | InstantiationException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+
+  public abstract void assembleScene();
+
+  public GameScene getScene () {
+    assembleScene();
+    return myScene;
+  }
 }
