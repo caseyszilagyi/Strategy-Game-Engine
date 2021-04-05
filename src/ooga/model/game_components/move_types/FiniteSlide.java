@@ -12,7 +12,7 @@ public class FiniteSlide extends PieceMovement {
   }
 
   @Override
-  public List<Coordinate> getAllPossibleMoves(Coordinate coordinates, GameBoard board) {
+  public List<Coordinate> getAllPossibleMoves(Coordinate coordinates, GameBoard board, String teamName) {
     return null;
   }
 }
