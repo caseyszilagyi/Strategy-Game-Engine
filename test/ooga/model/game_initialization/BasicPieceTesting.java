@@ -66,6 +66,7 @@ public class BasicPieceTesting {
   void testBasicKnightGetMoves(){
     makeEmptyBoard();
     GamePiece knight = makePiece("knight", 4, 4);
+    knight.setPieceTeam("Casey");
     knight.setDummyBoard(dummyBoard);
     allLegalMoves = knight.getAllLegalMoves();
     String expected = "5:6 5:2: 6:5 6:3 3:6 3:2 2:5 2:3";
@@ -79,6 +80,7 @@ public class BasicPieceTesting {
   void testKnightEdgeGetMoves(){
     makeEmptyBoard();
     GamePiece knight = makePiece("knight", 7, 4);
+    knight.setPieceTeam("Casey");
     knight.setDummyBoard(dummyBoard);
     allLegalMoves = knight.getAllLegalMoves();
     String expected = "5:5 5:3 6:6 6:2";
@@ -92,6 +94,7 @@ public class BasicPieceTesting {
   void testKnightCornerGetMoves(){
     makeEmptyBoard();
     GamePiece knight = makePiece("knight", 7, 7);
+    knight.setPieceTeam("Casey");
     knight.setDummyBoard(dummyBoard);
     allLegalMoves = knight.getAllLegalMoves();
     String expected = "6:5 5:6";
@@ -99,16 +102,21 @@ public class BasicPieceTesting {
   }
 
   /**
-   * Testing whether the knight can recognize that it can land on other pieces
+   * Testing whether the knight can recognize that it can land on other pieces, and can't
+   * land on friendly pieces
+   *
+   * Should be able to take piece at 6:5 but not 5:6
    */
   @Test
-  void testKnightCornerMovement(){
+  void testKnightTakeMovement(){
     makeEmptyBoard();
     GamePiece knight = makePiece("knight", 7, 7);
-    dummyBoard[5][6] = makeDummyGamePiece();
+    knight.setPieceTeam("Casey");
+    dummyBoard[5][6] = makeDummyGamePiece("notCasey");
+    dummyBoard[6][5] = makeDummyGamePiece("Casey");
     knight.setDummyBoard(dummyBoard);
     allLegalMoves = knight.getAllLegalMoves();
-    String expected = "6:5 5:6";
+    String expected = "6:5";
     assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
   }
 
@@ -147,14 +155,16 @@ public class BasicPieceTesting {
           dummyBoard[col][row] = null;
         }
         else{
-          dummyBoard[col][row] = makeDummyGamePiece();
+          dummyBoard[col][row] = makeDummyGamePiece("Enemy");
         }
       }
     }
   }
 
-  private GamePiece makeDummyGamePiece(){
-    return new GamePiece(makeCoordinates(0,0));
+  private GamePiece makeDummyGamePiece(String teamName){
+    GamePiece piece = new GamePiece(makeCoordinates(0,0));
+    piece.setPieceTeam(teamName);
+    return piece;
   }
 
   // Methods used for testing coordinates and piece movement
