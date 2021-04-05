@@ -23,12 +23,12 @@ public class PieceComponentClassLoader {
    *
    * @return The PieceMovement object
    */
-  public PieceMovement makePieceMove(String moveType, Map<String, String> parameters) {
+  public PieceMovement makePieceMove(String moveType, Map<String, String> parameters, int direction) {
     PieceMovement move = null;
     try {
       Object command = CLASS_LOADER.loadClass(PIECE_MOVE_CLASSES_PACKAGE + "." + moveType)
-          .getDeclaredConstructor(Map.class)
-          .newInstance(parameters);
+          .getDeclaredConstructor(Map.class, int.class)
+          .newInstance(parameters, direction);
       move = (PieceMovement) command;
     } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException | ClassNotFoundException e) {
       throw new ExceptionHandler("InvalidPieceMovementType");
