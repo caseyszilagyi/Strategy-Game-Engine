@@ -150,6 +150,17 @@ public abstract class PieceMovement {
     return true;
   }
 
+
+  /**
+   * Makes a coordinate object
+   * @param xPos The x position of the coordinate
+   * @param yPos The y position of the coordinate
+   * @return The coordinate object
+   */
+  protected Coordinate makeCoordinate(int xPos, int yPos){
+    return new Coordinate(xPos, yPos);
+  }
+
   /**
    * The change in x position of the piece for this move. Could be a finite change, or an infinite
    * change, depending on the subclass that implements
