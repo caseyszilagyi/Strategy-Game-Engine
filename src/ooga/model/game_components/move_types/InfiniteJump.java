@@ -7,8 +7,8 @@ import ooga.model.game_components.GameBoard;
 
 public class InfiniteJump extends PieceMovement {
 
-  public InfiniteJump(Map<String, String> parameters){
-    super(parameters);
+  public InfiniteJump(Map<String, String> parameters, int direction){
+    super(parameters, direction);
   };
 
 

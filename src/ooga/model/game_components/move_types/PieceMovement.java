@@ -31,13 +31,13 @@ public abstract class PieceMovement {
    *
    * @param parameters The map of parameters
    */
-  public PieceMovement(Map<String, String> parameters) {
-    changeX = Integer.parseInt(parameters.get("changeX"));
-    changeY = Integer.parseInt(parameters.get("changeY"));
+  public PieceMovement(Map<String, String> parameters, int direction) {
+    changeX = Integer.parseInt(parameters.get("changeX")) * direction;
+    changeY = Integer.parseInt(parameters.get("changeY")) * direction;
     mustTake = Boolean.parseBoolean(parameters.get("mustTake"));
     if (mustTake) {
-      takeX = Integer.parseInt(parameters.get("takeX"));
-      takeY = Integer.parseInt(parameters.get("takeY"));
+      takeX = Integer.parseInt(parameters.get("takeX")) * direction;
+      takeY = Integer.parseInt(parameters.get("takeY")) * direction;
     }
   }
 

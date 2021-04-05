@@ -7,8 +7,8 @@ import ooga.model.game_components.GameBoard;
 
 public class FiniteSlide extends PieceMovement {
 
-  public FiniteSlide(Map<String, String> parameters){
-    super(parameters);
+  public FiniteSlide(Map<String, String> parameters, int direction){
+    super(parameters, direction);
   }
 
   @Override
