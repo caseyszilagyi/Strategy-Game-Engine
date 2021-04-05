@@ -2,7 +2,6 @@ package ooga.model.game_components.move_types;
 
 import java.util.List;
 import java.util.Map;
-import javafx.util.Pair;
 import ooga.model.game_components.Coordinate;
 import ooga.model.game_components.GameBoard;
 import ooga.model.game_components.GamePiece;
@@ -50,7 +49,8 @@ public abstract class PieceMovement {
    * @param board       The board that this piece is on
    * @return A list of all the coordinates of the possible move locations
    */
-  public abstract List<Coordinate> getAllPossibleMoves(Coordinate coordinates, GameBoard board);
+  public abstract List<Coordinate> getAllPossibleMoves(Coordinate coordinates, GameBoard board,
+      String pieceTeam);
 
   public void setDummyBoard(GamePiece[][] board) {
     dummyBoard = board;
@@ -74,27 +74,80 @@ public abstract class PieceMovement {
   }
 
   /**
-   * Checks if a piece is in the take position, if this move type takes pieces. If not,
-   * automatically returns true
+   * Checks if a piece is in the take position, if this move type takes pieces. If there is, then we
+   * also need to see if the piece taken is where the piece lands, and if it isn't then we need to
+   * make sure that the piece landing spot is empty.
    *
    * @param coordinates The coordinates of the piece that this movement belongs to
+   * @param teamName    the name of the team that this piece corresponds to
    * @return The boolean representing whether it has pieces to take
    */
-  protected boolean checkIfPieceInTakePosition(Coordinate coordinates) {
+  protected boolean checkEnemyPieceLocationConditions(Coordinate coordinates, String teamName) {
     if (mustTake) {
-      if (!checkIfPieceOnBoard(coordinates.getX(), coordinates.getY())) {
+      //checks to see if piece is where it needs to be in order for it to be taken. If not, move invalid
+      if (!checkIfOpponentPieceInLocation(coordinates.getX() + changeX + takeX,
+          coordinates.getY() + changeY + takeY, teamName)) {
         return false;
       }
+      // checks to make sure there is an empty space where the piece lands, if the take location
+      // is different from the landing location of the piece. If no empty space, move invalid
+      if (takeX != 0 || takeY != 0) {
+        if (checkIfOpponentPieceInLocation(coordinates.getX() + changeX, coordinates.getY() + changeY,
+            teamName)) {
+          return false;
+        }
+      }
+      // if piece in take location and not in landing location
+      return true;
+    }
+
+    // if piece can't take, need to make sure landing spot doesn't have opponent's piece
+    if (checkIfOpponentPieceInLocation(coordinates.getX() + changeX, coordinates.getY() + changeY,
+        teamName)) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   * Checks to make sure a friendly piece isn't in the location where the movement object is
+   * supposed to be going
+   *
+   * @param coordinates The starting coordinates of the piece
+   * @param teamName    The name of the team that the piece is on
+   * @return True if there is no piece in the landing location, false otherwise
+   */
+  protected boolean checkThatNoFriendlyPieceInMoveDestination(Coordinate coordinates,
+      String teamName) {
+    if (checkIfFriendlyPieceInLocation(coordinates.getX() + changeX, coordinates.getY() + changeY,
+        teamName)) {
+      return false;
     }
     return true;
   }
 
-  // Checks if a piece is on the board in this location
-  private boolean checkIfPieceOnBoard(int xPos, int yPos) {
-    if (dummyBoard[yPos][xPos] != null) {
+  // Checks if an friendly piece is on the board in this location
+  private boolean checkIfFriendlyPieceInLocation(int xPos, int yPos, String teamName) {
+    if (checkIfPieceInSpace(xPos, yPos) && dummyBoard[yPos][xPos].getPieceTeam().equals(teamName)) {
       return true;
     }
     return false;
+  }
+
+  // Checks if an opponent piece is on the board in this location, used only if this is a take move
+  private boolean checkIfOpponentPieceInLocation(int xPos, int yPos, String teamName) {
+    if (checkIfPieceInSpace(xPos, yPos) && !dummyBoard[yPos][xPos].getPieceTeam().equals(teamName)) {
+      return true;
+    }
+    return false;
+  }
+
+  private boolean checkIfPieceInSpace(int xPos, int yPos) {
+    if (dummyBoard[yPos][xPos] == null) {
+      return false;
+    }
+    return true;
   }
 
   /**
