@@ -136,7 +136,7 @@ public class BasicPieceTesting {
 
   // piece creator methods
   private GamePiece makePiece(String pieceName, int xCoord, int yCoord){
-    return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord));
+    return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), 1);
   }
 
 
