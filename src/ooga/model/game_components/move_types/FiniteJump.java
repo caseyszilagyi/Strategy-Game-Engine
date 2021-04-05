@@ -26,10 +26,11 @@ public class FiniteJump extends PieceMovement {
 
   /**
    * Checks if the single move that this PieceMovement object can make if valid. If it is, it
-   * returns it returns it in a single item list. If not, an empty arraylist is returned
+   * returns it returns it in a single item list. If not, an empty arraylist is returned.
    *
    * @param coordinates The coordinates of  the piece that this move is acting on
    * @param board       The board that this piece is on
+   * @param teamName    The team that the piece is associated with
    * @return Either the coordinates of the valid move, or an empty ArrayList
    */
   @Override
@@ -38,7 +39,7 @@ public class FiniteJump extends PieceMovement {
     if (checkIfMoveInBounds(coordinates) && checkEnemyPieceLocationConditions(coordinates, teamName)
         && checkThatNoFriendlyPieceInMoveDestination(coordinates, teamName)) {
       List<Coordinate> possibleMoves = new ArrayList<>();
-      Coordinate result = new Coordinate(coordinates.getX() + getChangeX(),
+      Coordinate result = makeCoordinate(coordinates.getX() + getChangeX(),
           coordinates.getY() + getChangeY());
       possibleMoves.add(result);
       return possibleMoves;
