@@ -33,9 +33,11 @@ public class FiniteJump extends PieceMovement {
    * @return Either the coordinates of the valid move, or an empty ArrayList
    */
   @Override
-  public List<Coordinate> getAllPossibleMoves(Coordinate coordinates, GameBoard board) {
-    if (checkIfMoveInBounds(coordinates) && checkIfPieceInTakePosition(coordinates)) {
-      List<Coordinate> possibleMoves = new ArrayList<Coordinate>();
+  public List<Coordinate> getAllPossibleMoves(Coordinate coordinates, GameBoard board,
+      String teamName) {
+    if (checkIfMoveInBounds(coordinates) && checkEnemyPieceLocationConditions(coordinates, teamName)
+        && checkThatNoFriendlyPieceInMoveDestination(coordinates, teamName)) {
+      List<Coordinate> possibleMoves = new ArrayList<>();
       Coordinate result = new Coordinate(coordinates.getX() + getChangeX(),
           coordinates.getY() + getChangeY());
       possibleMoves.add(result);
