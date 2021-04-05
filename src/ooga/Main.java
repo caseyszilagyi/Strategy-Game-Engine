@@ -6,6 +6,7 @@ import ooga.controller.BackEndExternalAPI;
 import ooga.controller.FrontEndExternalAPI;
 import ooga.controller.ModelController;
 import ooga.controller.ViewController;
+import ooga.view.GameWindow;
 
 /**
  * This is the class that is run to instantiate the front and back end, and link them together
@@ -32,6 +33,9 @@ public class Main extends Application {
     BackEndExternalAPI modelController = new ModelController();
     viewController.setModelController(modelController);
     modelController.setViewController(viewController);
+
+    GameWindow window = new GameWindow();
+    window.makeSceneAndShow();
   }
 
 }
