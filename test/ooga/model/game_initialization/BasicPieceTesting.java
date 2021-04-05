@@ -60,6 +60,18 @@ public class BasicPieceTesting {
   }
 
   /**
+   * Testing the hashcode and equals methods for coordinates to see if comparison in set
+   * objects works properly
+   */
+  @Test
+  void testCoordinateHashCodeAndEquals(){
+    List<Coordinate> testSet = new ArrayList<>();
+    testSet.add(makeCoordinates(3, 4));
+    testSet.add(makeCoordinates(1,2));
+    assertTrue(testActualExpectedCoordinates("1:2 3:4", testSet));
+  }
+
+  /**
    * Testing the getLegalMoves for a night in the middle of the board
    */
   @Test
@@ -120,18 +132,38 @@ public class BasicPieceTesting {
     assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
   }
 
-
   /**
-   * Testing the hashcode and equals methods for coordinates to see if comparison in set
-   * objects works properly
+   * Testing the legal move coordinates for a bishop on an empty board
    */
   @Test
-  void testCoordinateHashCodeAndEquals(){
-    List<Coordinate> testSet = new ArrayList<>();
-    testSet.add(makeCoordinates(3, 4));
-    testSet.add(makeCoordinates(1,2));
-    assertTrue(testActualExpectedCoordinates("1:2 3:4", testSet));
+  void TestEmptyBoardBishopMovement(){
+    makeEmptyBoard();
+    GamePiece bishop = makePiece("bishop", 6, 5);
+    bishop.setPieceTeam("Casey");
+    bishop.setDummyBoard(dummyBoard);
+    allLegalMoves = bishop.getAllLegalMoves();
+    String expected = "7:6 5:4 4:3 3:2 2:1 1:0 5:6 4:7 7:4";
+    assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
   }
+
+  /**
+   * Testing the legal moves of a bishop on a board with friendly/enemy pieces
+   */
+  @Test
+  void TestBishopWithFriendlyAndOpponentPieces(){
+    makeEmptyBoard();
+    GamePiece bishop = makePiece("bishop", 4, 4);
+    bishop.setPieceTeam("Casey");
+    dummyBoard[6][6] = makeDummyGamePiece("notCasey");
+    dummyBoard[2][2] = makeDummyGamePiece("notCasey");
+    dummyBoard[6][2] = makeDummyGamePiece("Casey");
+    dummyBoard[2][6] = makeDummyGamePiece("Casey");
+    bishop.setDummyBoard(dummyBoard);
+    allLegalMoves = bishop.getAllLegalMoves();
+    String expected = "2:2 3:3 5:5 6:6 5:3 3:5";
+    assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
+  }
+
 
 
   // piece creator methods
