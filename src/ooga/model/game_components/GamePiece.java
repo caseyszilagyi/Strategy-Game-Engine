@@ -1,7 +1,9 @@
 package ooga.model.game_components;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import ooga.model.game_components.move_types.PieceMovement;
 
 /**
@@ -21,6 +23,10 @@ public class GamePiece {
   // right now just being assigned. dummyBoard needs to be integrated with actual Board classs
   private String pieceTeam;
   private GamePiece[][] dummyBoard;
+
+  // used so that when coordinates are given for a move, we know which movement object they correspond
+  // to
+  private Map<Coordinate, PieceMovement> legalMovementMap = new HashMap<>();
 
   /**
    * Constructor that takes the coordinates, because every piece needs it's coordinates to know how
@@ -42,14 +48,22 @@ public class GamePiece {
   }
 
   /**
-   * Gets a list of all the coordinates that represent legal moves
+   * Gets a list of all the coordinates that represent legal moves. Also creates the
+   * legalMovementMap used to retrieve the correct movement object when a set of coordinates is used
+   * to move a piece
    *
    * @return A list of the coordinates of the legal moves
    */
   public List<Coordinate> getAllLegalMoves() {
     List<Coordinate> possibleMoveLocations = new ArrayList<>();
     for (PieceMovement move : allPossibleMoves) {
-      possibleMoveLocations.addAll(move.getAllPossibleMoves(pieceCoordinates, gameBoard, pieceTeam));
+      List<Coordinate> currentPossibilities = move
+          .getAllPossibleMoves(pieceCoordinates, gameBoard, pieceTeam);
+      possibleMoveLocations
+          .addAll(currentPossibilities);
+      for (Coordinate coord : currentPossibilities) {
+        legalMovementMap.put(coord, move);
+      }
     }
     return possibleMoveLocations;
   }
@@ -68,17 +82,19 @@ public class GamePiece {
 
   /**
    * Sets the team that a piece is a part of
+   *
    * @param team The name of the team (or name of the player)
    */
-  public void setPieceTeam(String team){
+  public void setPieceTeam(String team) {
     pieceTeam = team;
   }
 
   /**
    * Gets the team that a piece is a part of
+   *
    * @return the name of the team (or name of the player)
    */
-  public String getPieceTeam(){
+  public String getPieceTeam() {
     return pieceTeam;
   }
 }
