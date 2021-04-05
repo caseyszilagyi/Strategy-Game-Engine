@@ -15,7 +15,11 @@ public class GamePiece {
   private Coordinate pieceCoordinates;
   private GameBoard gameBoard;
   private List<PieceMovement> allPossibleMoves;
+  private String pieceType;
 
+  //These two need to be added to constructor in boardCreator class when making the board,
+  // right now just being assigned. dummyBoard needs to be integrated with actual Board classs
+  private String pieceTeam;
   private GamePiece[][] dummyBoard;
 
   /**
@@ -45,7 +49,7 @@ public class GamePiece {
   public List<Coordinate> getAllLegalMoves() {
     List<Coordinate> possibleMoveLocations = new ArrayList<>();
     for (PieceMovement move : allPossibleMoves) {
-      possibleMoveLocations.addAll(move.getAllPossibleMoves(pieceCoordinates, gameBoard));
+      possibleMoveLocations.addAll(move.getAllPossibleMoves(pieceCoordinates, gameBoard, pieceTeam));
     }
     return possibleMoveLocations;
   }
@@ -63,21 +67,19 @@ public class GamePiece {
   }
 
   /**
-   * Gets the x x position of the piece
-   *
-   * @return The x position
+   * Sets the team that a piece is a part of
+   * @param team The name of the team (or name of the player)
    */
-  public double getXPosition() {
-    return pieceCoordinates.getX();
+  public void setPieceTeam(String team){
+    pieceTeam = team;
   }
 
   /**
-   * Gets the y position of the piece
-   *
-   * @return The y position
+   * Gets the team that a piece is a part of
+   * @return the name of the team (or name of the player)
    */
-  public double getYPosition() {
-    return pieceCoordinates.getY();
+  public String getPieceTeam(){
+    return pieceTeam;
   }
 }
 
