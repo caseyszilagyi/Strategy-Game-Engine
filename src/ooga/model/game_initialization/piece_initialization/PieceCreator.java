@@ -43,19 +43,19 @@ public class PieceCreator extends Creator {
   }
 
 
-  public GamePiece makePiece(String pieceName, Coordinate coordinates){
+  public GamePiece makePiece(String pieceName, Coordinate coordinates, int direction){
     GamePiece gamePiece = new GamePiece(coordinates);
     pieceFileNodes = super.makeRootNodeMap(pieceName);
-    gamePiece.setPossibleMoves(makePieceMovements());
+    gamePiece.setPossibleMoves(makePieceMovements(direction));
     return gamePiece;
   }
 
-  private List<PieceMovement> makePieceMovements(){
+  private List<PieceMovement> makePieceMovements(int direction){
     List<PieceMovement> pieceMovements = new ArrayList<>();
     pieceMoves = super.makeSubNodeMap(getFirstNode(pieceFileNodes, PIECE_MOVE_TAG));
     for(String s: pieceMoves.keySet()){
       for(Node n: pieceMoves.get(s)){
-        pieceMovements.add(pieceComponentClassLoader.makePieceMove(s, makeAttributeMap(n)));
+        pieceMovements.add(pieceComponentClassLoader.makePieceMove(s, makeAttributeMap(n), direction));
       }
     }
     return pieceMovements;

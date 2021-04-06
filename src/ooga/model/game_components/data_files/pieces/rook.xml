@@ -3,6 +3,13 @@
   <moves>
     <InfiniteSlide>
       <changeX>1</changeX>
+      <changeY>0</changeY>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
+    </InfiniteSlide>
+    <InfiniteSlide>
+      <changeX>0</changeX>
       <changeY>1</changeY>
       <mustTake>False</mustTake>
       <takeX>null</takeX>
@@ -10,20 +17,13 @@
     </InfiniteSlide>
     <InfiniteSlide>
       <changeX>-1</changeX>
-      <changeY>1</changeY>
+      <changeY>0</changeY>
       <mustTake>False</mustTake>
       <takeX>null</takeX>
       <takeY>null</takeY>
     </InfiniteSlide>
     <InfiniteSlide>
-      <changeX>1</changeX>
-      <changeY>-1</changeY>
-      <mustTake>False</mustTake>
-      <takeX>null</takeX>
-      <takeY>null</takeY>
-    </InfiniteSlide>
-    <InfiniteSlide>
-      <changeX>-1</changeX>
+      <changeX>0</changeX>
       <changeY>-1</changeY>
       <mustTake>False</mustTake>
       <takeX>null</takeX>
@@ -31,20 +31,13 @@
     </InfiniteSlide>
     <InfiniteSlide>
       <changeX>1</changeX>
-      <changeY>1</changeY>
+      <changeY>0</changeY>
       <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
     </InfiniteSlide>
     <InfiniteSlide>
-      <changeX>1</changeX>
-      <changeY>-1</changeY>
-      <mustTake>True</mustTake>
-      <takeX>0</takeX>
-      <takeY>0</takeY>
-    </InfiniteSlide>
-    <InfiniteSlide>
-      <changeX>-1</changeX>
+      <changeX>0</changeX>
       <changeY>1</changeY>
       <mustTake>True</mustTake>
       <takeX>0</takeX>
@@ -52,6 +45,13 @@
     </InfiniteSlide>
     <InfiniteSlide>
       <changeX>-1</changeX>
+      <changeY>0</changeY>
+      <mustTake>True</mustTake>
+      <takeX>0</takeX>
+      <takeY>0</takeY>
+    </InfiniteSlide>
+    <InfiniteSlide>
+      <changeX>0</changeX>
       <changeY>-1</changeY>
       <mustTake>True</mustTake>
       <takeX>0</takeX>
