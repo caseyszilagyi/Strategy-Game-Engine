@@ -3,24 +3,21 @@ package ooga.model.game_engine;
 import java.util.ArrayList;
 import java.util.List;
 import ooga.controller.FrontEndExternalAPI;
+import ooga.model.game_components.Coordinate;
 import ooga.model.game_components.GameBoard;
+import ooga.model.game_components.GamePiece;
 import ooga.model.game_components.GameRules;
 import ooga.model.game_components.Player;
 
-public class GameEngine extends Engine<GameEngine.actionTypes> {
+public class GameEngine extends Engine {
 
-  public enum actionTypes {
-    MOVE,
-    PLACE;
 
-    @Override
-    public String toString() {
-      String oldToString = super.toString();
-      String newToString = oldToString.substring(0, 1).toUpperCase() + oldToString.substring(1).toLowerCase();
-      return newToString;
-    }
-  }
+  //Final index values
+  private static final int ACTION_TYPE_INDEX = 0;
+  private static final int STARTING_COORDINATE_INDEX = 1;
+  private static final int ENDING_COORDINATE_INDEX = 2;
 
+  //Controller variables
   private FrontEndExternalAPI viewController;
 
   //Game variables
@@ -87,16 +84,19 @@ public class GameEngine extends Engine<GameEngine.actionTypes> {
   }
 
   /**
-   *  Assumes the move is in the format - StartingCoordinate-EndCoordinate where:
+   *  Assumes the move is in the format: ActionType-ParamOne-ParamTwo where:
+   *  ActionType is the type of action to take, i.e. MOVE or PLACE
+   *  ParamOne and ParamTwo will be different for each
    *  StartingCoordinate is the Coordinate for the piece the action will be performed upon
    *  EndCoordinate is the coordinate Piece will end up at after the action is performed
+   *  Coordinates are assumed to be in the format x:y, where x and y are integers
    * @param actionSpecifications is a String, which dictates the move to be performed on the board.
    */
   @Override
   public void makeAction(String actionSpecifications) {
     priorActions.add(actionSpecifications);
 
-
+    String[] actionArray = actionSpecifications.split("/-");
   }
 
 }

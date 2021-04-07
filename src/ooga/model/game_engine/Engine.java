@@ -9,53 +9,54 @@ import ooga.model.game_components.Player;
  * game_engine is the core class that contains all of the references to other classes
  * that are meant to be used in order to give the game_engine its functionality
  */
-public interface Engine {
+public abstract class Engine{
+
 
   /**
    * Checks if a player has one, and makes the appropriate method calls to front end
    * if so
    */
-  public void checkForFinish();
+  public abstract void checkForFinish();
 
   /**
    * Saves the current state of the game in a file
    * @param fileName The name of the file to save the game in
    */
-  public void saveCurrentState(String fileName);
+  public abstract void saveCurrentState(String fileName);
 
   /**
    * Adds a player that is playing
    * @param player The object representing the player
    */
-  public void addActiveUser(Player player);
+  public abstract void addActiveUser(Player player);
 
   /**
    * Checks the rules to see if it's the players next turn, and moves it along
    * if it is
    */
-  public void checkForNextTurn();
+  public abstract void checkForNextTurn();
 
   /**
    * Starts a player's timer
    * @param player The player
    */
-  public void startPlayerTimer(Player player);
+  public abstract void startPlayerTimer(Player player);
 
   /**
    * Stops a player's timer
    * @param player The player
    */
-  public void stopPlayerTimer(Player player);
+  public abstract void stopPlayerTimer(Player player);
 
-  public void setRules(GameRules rules);
+  public abstract void setRules(GameRules rules);
 
-  public void setBoard(GameBoard board);
+  public abstract void setBoard(GameBoard board);
 
   /**
    * Alters the board in the way described in the String parameter
    * @param moveSpecifications is a String, which dictates the move to be performed on the board.
    */
-  public void makeAction(String moveSpecifications);
+  public abstract void makeAction(String moveSpecifications);
 
 
 

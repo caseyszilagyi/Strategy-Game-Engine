@@ -29,4 +29,8 @@ public class GameBoard implements Board {
 
   }
 
+  public GamePiece getPieceAtCoordinate(Coordinate coordinate){
+    return null;
+  }
+
 }
