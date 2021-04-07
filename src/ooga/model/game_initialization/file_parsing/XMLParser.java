@@ -59,7 +59,6 @@ public class XMLParser {
     this.fileType = fileType;
     this.gameName = gameName;
     Element root = getRootElement(dataFile);
-    //Checks if file is of correct type
     if (!isValidFile(root)) {
       throw new ExceptionHandler("InvalidFileType");
     }
@@ -74,16 +73,8 @@ public class XMLParser {
    * @return A map of the string of the node name to the list of all the node objects with that name
    */
   public Map<String, List<Node>> makeNodeMap(Node parentNode) {
-    return Stream.iterate(parentNode.getFirstChild(), n -> n.getNextSibling())
-        .takeWhile(n -> n.getNextSibling() != null)
-        .filter(n -> n.getNodeType() == Node.ELEMENT_NODE)
+    return makeNodeList(parentNode).stream()
         .collect(Collectors.groupingBy(node -> node.getNodeName()));
-  }
-
-
-  // Makes a list of all the direct children nodes that are elements
-  private List<Node> makeNodeList(Node parentNode) {
-    return null;
   }
 
   /**
@@ -91,18 +82,20 @@ public class XMLParser {
    * they hold. This method assumes that each node will only have text as the child, and not other
    * nodes. It will still execute otherwise, but the map will likely not contain the desired data
    *
-   * @param node The node that will be used to make the map
+   * @param parentNode The node that will be used to make the map
    * @return The map with the children of the nodes mapped to their text values
    */
-  public Map<String, String> makeAttributeMap(Node node) {
-    makeNodeMap(node);
+  public Map<String, String> makeAttributeMap(Node parentNode) {
+    return makeNodeList(parentNode).stream()
+        .collect(Collectors.toMap(node -> node.getNodeName(), node -> node.getTextContent()));
+  }
 
-    Map<String, List<Node>> nodeMap = makeNodeMap(node);
-    Map<String, String> result = new HashMap<>();
-    for (String key : nodeMap.keySet()) {
-      result.put(key, nodeMap.get(key).get(0).getTextContent());
-    }
-    return result;
+  // Makes a list of all the direct children nodes that are elements
+  private List<Node> makeNodeList(Node parentNode) {
+    return Stream.iterate(parentNode.getFirstChild(), n -> n.getNextSibling())
+        .takeWhile(n -> n.getNextSibling() != null)
+        .filter(n -> n.getNodeType() == Node.ELEMENT_NODE)
+        .collect(Collectors.toList());
   }
 
 

@@ -180,7 +180,7 @@ public class BasicPieceTest {
   }
 
   /**
-   * Testing the legal moves of a bishop on a board with friendly/enemy pieces
+   * Testing the legal moves of a rook on a board with friendly/enemy pieces
    */
   @Test
   void TestRookWithFriendlyAndOpponentPieces(){
