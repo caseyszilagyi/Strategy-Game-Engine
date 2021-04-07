@@ -69,7 +69,7 @@ public class GameEngine implements Engine {
 
   @Override
   public void setBoard(GameBoard board) {
-
+    curBoard = board;
   }
 
 }
