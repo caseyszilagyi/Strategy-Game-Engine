@@ -1,5 +1,7 @@
 package ooga.model.game_engine;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import ooga.model.game_components.Coordinate;
 import ooga.model.game_components.GameBoard;
 import ooga.model.game_components.GamePiece;
@@ -7,7 +9,7 @@ import ooga.model.game_initialization.piece_initialization.PieceCreator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class ActionTesting {
+public class GameBoardTesting {
 
   private GameBoard board;
   private PieceCreator pieceCreator = new PieceCreator("Chess");
@@ -20,12 +22,17 @@ public class ActionTesting {
   @Test
   void addPiece(){
     board.printBoard();
-    System.out.println("");
-    GamePiece knight = makePiece("Knight", 4, 4);
+    Coordinate testCoordinate = makeCoordinates(4, 4);
+    assertFalse(board.isPieceAtCoordinate(testCoordinate));
+    GamePiece knight = makePiece("Knight", testCoordinate);
     board.addPiece(knight);
     board.printBoard();
+    assertTrue(board.isPieceAtCoordinate(testCoordinate));
   }
 
+  private GamePiece makePiece(String pieceName, Coordinate coord){
+    return pieceCreator.makePiece(pieceName, coord, 1);
+  }
 
   private GamePiece makePiece(String pieceName, int xCoord, int yCoord){
     return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), 1);

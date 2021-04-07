@@ -71,11 +71,13 @@ public class GameBoard implements Board {
   }
 
   public void printBoard(){
+
     String[][] printableBoard = new String[width][height];
     for(GamePiece piece : activePieces){
       printableBoard[piece.getPieceCoordinates().getX()][piece.getPieceCoordinates().getY()] = "p";
     }
 
+    System.out.println("");
     for(String[] row : printableBoard){
       for (String pieceOrNot : row) {
         if(pieceOrNot == null){
