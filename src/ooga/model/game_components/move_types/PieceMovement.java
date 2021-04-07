@@ -198,14 +198,6 @@ public abstract class PieceMovement {
     return mustTake;
   }
 
-  protected void setChangeX(int changeX){
-    this.changeX = changeX;
-  }
-
-  protected void setChangeY(int changeY){
-    this.changeY = changeY;
-  }
-
   /**
    * If the piece corresponding to this object needs to be moved, it might need to take a piece.
    * This method gives the x position oof the piece that needs to be taken relative to the final
@@ -228,5 +220,22 @@ public abstract class PieceMovement {
     return takeY;
   }
 
+  /**
+   * Allows a subclass to set the change in the x direction that this move has. Useful for
+   * manipulating the implementation of different move types.
+   * @param changeX The change in X direction for the move
+   */
+  protected void setChangeX(int changeX){
+    this.changeX = changeX;
+  }
+
+  /**
+   * Allows a subclass to set the change in the x direction that this move has. Useful for
+   * manipulating the implementation of different move types.
+   * @param changeY The change in X direction for the move
+   */
+  protected void setChangeY(int changeY){
+    this.changeY = changeY;
+  }
 
 }
