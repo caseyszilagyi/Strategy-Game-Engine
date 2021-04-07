@@ -27,7 +27,13 @@ public class GameBoard implements Board {
 
   @Override
   public boolean addPiece(GamePiece newPieceType) {
-    return false;
+    for(GamePiece currentPiece : activePieces){
+      if(currentPiece.getPieceCoordinates().equals(newPieceType.getPieceCoordinates())){
+        return false;
+      }
+    }
+    activePieces.add(newPieceType);
+    return true;
   }
 
   public GamePiece getPieceAtCoordinate(Coordinate coordinate){

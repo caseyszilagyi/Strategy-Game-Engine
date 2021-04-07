@@ -39,6 +39,13 @@ public class GamePiece {
   }
 
   /**
+   * Returns the piece's Coordinate
+   * @return a Coordinate which can be used to map this GamePiece on the GameBoard
+   */
+  public Coordinate getPieceCoordinates(){
+    return pieceCoordinates;
+  }
+  /**
    * Sets the piece's possible moves
    *
    * @param allPossibleMoves A list of PieceMovement objects that represent the possible moves

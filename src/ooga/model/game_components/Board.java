@@ -12,6 +12,6 @@ public interface Board{
 
   public boolean changePiece(Coordinate coordinate, GamePiece newPieceType);
 
-  public boolean addPiece(Coordinate coordinate, GamePiece newPieceType);
+  public boolean addPiece(GamePiece newPieceType);
 
 }
