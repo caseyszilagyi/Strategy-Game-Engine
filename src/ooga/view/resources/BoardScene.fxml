@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane xmlns="http://javafx.com/javafx"
+  xmlns:fx="http://javafx.com/fxml"
+  fx:controller="ooga.view.FXMLController"
+  prefHeight="1000.0" prefWidth="1000.0" styleClass="root">
+  <HBox BorderPane.alignment="TOP_CENTER" minHeight="120" styleClass="hbox"
+  spacing="20">
+    <Button text="TestButton1" id="button" minWidth="80"/>
+    <Button text="TestButton2" id="button" minWidth="80"/>
+    <Button text="TestButton3" id="button" minWidth="80"/>
+    <Button text="AnotherButton" id="button" minWidth="80"/>
+  </HBox>
+
+  <stylesheets>
+    <URL value="@BoardSceneDefault.css"/>
+  </stylesheets>
+</BorderPane>

@@ -1,19 +1,20 @@
 .root {
-  -fx-font-size: 14pt;
+  -fx-font-size: 8pt;
   -fx-font-family: "Courier New";
-  -fx-base: rgb(132, 145, 47);
-  -fx-background: rgb(225, 228, 203);
+  -fx-base: rgb(67, 67, 67);
+  -fx-background: rgb(76, 76, 76);
 }
 
 .hbox {
   -fx-border-color: #000000;
-  -fx-background-color: #FFFFFF;
+  -fx-background-color: #5cbde7;
+  -fx-background-radius: 5.0;
   -fx-padding: 8;
 }
 
 .button {
-  -fx-text-fill: #FFFFFF;
-  -fx-background-color: #3F3F3F;
+  -fx-text-fill: #7e7e7e;
+  -fx-background-color: #d4d4d4;
   -fx-border-radius: 10;
   -fx-background-radius: 20;
   -fx-padding: 8;
