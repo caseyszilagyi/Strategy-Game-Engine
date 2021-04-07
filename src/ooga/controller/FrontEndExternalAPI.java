@@ -1,5 +1,6 @@
 package ooga.controller;
 
+import java.util.Map;
 import javafx.util.Pair;
 
 /**
@@ -32,6 +33,27 @@ public interface FrontEndExternalAPI {
   public void setBoardSpace(int row, int column, String identifier);
 
   /**
+   * Sets a board space to empty
+   * @param row The row of the space
+   * @param column The column of the space
+   */
+  public void clearBoardSpace(int row, int column);
+
+  /**
+   * Used for setting
+   * @param friendlyPieces A map of location to piece name for friendly pieces
+   * @param opponentPieces A map of location to piece name for opponent pieces
+   */
+  public void setInitialPieces(Map<String, String> friendlyPieces, Map<String, String> opponentPieces);
+
+  /**
+   * Gives all of the possible moves that were requested
+   * @return An iterable of pairs that represent the possible moves
+   */
+  public Iterable<Pair<Integer, Integer>> giveAllPossibleMoves();
+
+
+  /**
    * Called when the game is done and a player has won
    * @param playerName The name of the winning player
    */
@@ -50,11 +72,6 @@ public interface FrontEndExternalAPI {
    */
   public void setPlayer(int playerNumber, String playerName);
 
-  /**
-   * Gives all of the possible moves that were requested
-   * @return An iterable of pairs that represent the possible moves
-   */
-  public Iterable<Pair<Integer, Integer>> giveAllPossibleMoves();
 
   /**
    * Gives the pieces that a selected piece can be changed to

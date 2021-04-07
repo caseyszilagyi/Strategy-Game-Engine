@@ -1,5 +1,6 @@
 package ooga.controller;
 
+import java.util.Map;
 import javafx.util.Pair;
 import ooga.view.Display;
 import ooga.view.GameDisplay;
@@ -27,6 +28,17 @@ public class ViewController implements FrontEndExternalAPI{
 
   @Override
   public void setBoardSpace(int row, int column, String identifier) {
+
+  }
+
+  @Override
+  public void clearBoardSpace(int row, int column) {
+
+  }
+
+  @Override
+  public void setInitialPieces(Map<String, String> friendlyPieces,
+      Map<String, String> opponentPieces) {
 
   }
 
