@@ -1,33 +1,28 @@
 package ooga.view;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
-public class GameWindow extends Stage {
-  ResourceBundle sceneListBundle;
-  private final String DEFAULT_RESOURCES_FOLDER = "ooga.view.resources.";
-  private ArrayList<GameScene> allScenes;
+/**
+ * The top level UI element of the game. The game can have one or more instances of
+ * {@code GameWindow}, and each will hold a completely independent instance of the game.
+ *
+ * Within a {@code GameWindow}, multiple {@link GameScene} instances can be created,
+ * and any of these can be set as the active view in the window. The windows can be
+ * of different subclasses of {@code Window}, each with different behaviors.
+ *
+ *
+ * @author Yi Chen
+ */
+public interface GameWindow {
 
-  public GameWindow () {
-    allScenes = new ArrayList<>();
-    sceneListBundle = ResourceBundle.getBundle(DEFAULT_RESOURCES_FOLDER + "sceneList");
-    String sceneNames[] = sceneListBundle.getString("allScenes").split(",");
-    for (String name : sceneNames) {
-      allScenes.add(makeScene(name));
-    }
-    this.setScene(allScenes.get(0));
-  }
 
-  private GameScene makeScene(String sceneName) {
-    ResourceBundle sceneResources = ResourceBundle.getBundle(DEFAULT_RESOURCES_FOLDER + sceneName);
-    GameSceneFactory sceneFactory = new GameSceneFactory(sceneResources);
-    return sceneFactory.getScene();
-  }
+  public abstract void makeVisible();
 
-  public void makeSceneAndShow() {
-    this.show();
-  }
+  public abstract void showScene(GameScene scene);
 
 }
