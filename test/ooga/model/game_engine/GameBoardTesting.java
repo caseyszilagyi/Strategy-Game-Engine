@@ -20,7 +20,7 @@ public class GameBoardTesting {
   }
 
   @Test
-  void addPiece(){
+  void testBasicAddPiece(){
     board.printBoard();
     Coordinate testCoordinate = makeCoordinates(4, 4);
     assertFalse(board.isPieceAtCoordinate(testCoordinate));
@@ -28,6 +28,19 @@ public class GameBoardTesting {
     board.addPiece(knight);
     board.printBoard();
     assertTrue(board.isPieceAtCoordinate(testCoordinate));
+  }
+
+  @Test
+  void testUnableToAddToOccupiedSpace(){
+    Coordinate testCoordinate = makeCoordinates(4, 4);
+    assertFalse(board.isPieceAtCoordinate(testCoordinate));
+    GamePiece queen = makePiece("Queen", testCoordinate);
+    assertTrue(board.addPiece(queen));
+    assertTrue(board.isPieceAtCoordinate(testCoordinate));
+
+    GamePiece knight = makePiece("Knight", testCoordinate);
+    assertFalse(board.addPiece(knight));
+
   }
 
   private GamePiece makePiece(String pieceName, Coordinate coord){
