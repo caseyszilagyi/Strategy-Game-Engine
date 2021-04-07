@@ -2,8 +2,10 @@ package ooga.model.game_components;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import ooga.model.game_components.move_types.PieceMovement;
 
 /**
@@ -59,8 +61,8 @@ public class GamePiece {
    *
    * @return A list of the coordinates of the legal moves
    */
-  public List<Coordinate> getAllLegalMoves() {
-    List<Coordinate> possibleMoveLocations = new ArrayList<>();
+  public Set<Coordinate> getAllLegalMoves() {
+    Set<Coordinate> possibleMoveLocations = new HashSet<>();
     for (PieceMovement move : allPossibleMoves) {
       List<Coordinate> currentPossibilities = move
           .getAllPossibleMoves(pieceCoordinates, gameBoard, pieceTeam);
