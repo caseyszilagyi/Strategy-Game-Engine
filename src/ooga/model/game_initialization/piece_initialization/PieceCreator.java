@@ -55,9 +55,8 @@ public class PieceCreator extends Creator {
   private List<PieceMovement> makePieceMovements(int direction) {
     List<PieceMovement> pieceMovements = new ArrayList<>();
     pieceMoves = super.makeSubNodeMap(getFirstNode(pieceFileNodes, PIECE_MOVE_TAG));
-    pieceMoves.keySet()
-        .stream().forEach(key -> pieceMoves.get(key).stream()
-        .forEach(node -> pieceMovements
+    pieceMoves.keySet().stream().forEach(key -> pieceMoves.get(key)
+        .stream().forEach(node -> pieceMovements
         .add(pieceComponentClassLoader.makePieceMove(key, makeAttributeMap(node), direction))));
     return pieceMovements;
 
