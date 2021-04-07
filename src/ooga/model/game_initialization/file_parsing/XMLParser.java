@@ -16,6 +16,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import java.util.stream.*;
 
 
 /**
@@ -73,16 +74,16 @@ public class XMLParser {
    * @return A map of the string of the node name to the list of all the node objects with that name
    */
   public Map<String, List<Node>> makeNodeMap(Node parentNode) {
-    Map<String, List<Node>> result = new HashMap<>();
-    Node childNode = parentNode.getFirstChild();
-    while (childNode != null) {
-      if(childNode.getNodeType() == Node.ELEMENT_NODE) {
-        result.putIfAbsent(childNode.getNodeName(), new ArrayList<Node>());
-        result.get(childNode.getNodeName()).add(childNode);
-      }
-      childNode = childNode.getNextSibling();
-    }
-    return result;
+    return Stream.iterate(parentNode.getFirstChild(), n -> n.getNextSibling())
+        .takeWhile(n -> n.getNextSibling() != null)
+        .filter(n -> n.getNodeType() == Node.ELEMENT_NODE)
+        .collect(Collectors.groupingBy(node -> node.getNodeName()));
+  }
+
+
+  // Makes a list of all the direct children nodes that are elements
+  private List<Node> makeNodeList(Node parentNode) {
+    return null;
   }
 
   /**
@@ -94,6 +95,8 @@ public class XMLParser {
    * @return The map with the children of the nodes mapped to their text values
    */
   public Map<String, String> makeAttributeMap(Node node) {
+    makeNodeMap(node);
+
     Map<String, List<Node>> nodeMap = makeNodeMap(node);
     Map<String, String> result = new HashMap<>();
     for (String key : nodeMap.keySet()) {
