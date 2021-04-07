@@ -7,13 +7,26 @@ import ooga.model.game_components.GameBoard;
 import ooga.model.game_components.GameRules;
 import ooga.model.game_components.Player;
 
-public class GameEngine implements Engine {
+public class GameEngine extends Engine<GameEngine.actionTypes> {
 
-  FrontEndExternalAPI viewController;
+  public enum actionTypes {
+    MOVE,
+    PLACE;
+
+    @Override
+    public String toString() {
+      String oldToString = super.toString();
+      String newToString = oldToString.substring(0, 1).toUpperCase() + oldToString.substring(1).toLowerCase();
+      return newToString;
+    }
+  }
+
+  private FrontEndExternalAPI viewController;
 
   //Game variables
   private GameBoard curBoard;
   private GameRules curRules;
+  private List<String> priorActions;
 
   //Player variables
   private List<Player> activePlayers;
@@ -32,7 +45,7 @@ public class GameEngine implements Engine {
 
   @Override
   public void saveCurrentState(String fileName) {
-
+    //TODO: add saving capabilities for the board and moves
   }
 
   @Override
@@ -74,14 +87,15 @@ public class GameEngine implements Engine {
   }
 
   /**
-   *  Assumes the move is in the format - Piece:ActionType:EndCoordinate where:
-   *  ActionType is the type of action to take, i.e. MOVE or PLACE
-   *  Piece is the piece for the action to be performed upon
+   *  Assumes the move is in the format - StartingCoordinate-EndCoordinate where:
+   *  StartingCoordinate is the Coordinate for the piece the action will be performed upon
    *  EndCoordinate is the coordinate Piece will end up at after the action is performed
-   * @param moveSpecifications is a String, which dictates the move to be performed on the board.
+   * @param actionSpecifications is a String, which dictates the move to be performed on the board.
    */
   @Override
-  public void makeAction(String moveSpecifications) {
+  public void makeAction(String actionSpecifications) {
+    priorActions.add(actionSpecifications);
+
 
   }
 
