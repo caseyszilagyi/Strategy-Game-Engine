@@ -10,16 +10,17 @@ public class GameBoard implements Board {
   }
 
   @Override
-  public void movePiece(GamePiece piece, Coordinate endingCoordinate) {
-  }
-
-  @Override
-  public void removePiece(GamePiece gamePiece) {
+  public void movePiece(Coordinate startingCoordinate, Coordinate endingCoordinate) {
 
   }
 
   @Override
-  public void changePiece(GamePiece gamePiece, GamePiece newPieceType) {
+  public void removePiece(Coordinate coordinate) {
+
+  }
+
+  @Override
+  public void changePiece(Coordinate coordinate, GamePiece newPieceType) {
 
   }
 
