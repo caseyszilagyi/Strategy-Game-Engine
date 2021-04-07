@@ -9,7 +9,9 @@
 
 <?import javafx.scene.image.Image?>
 
-<BorderPane minWidth="1000" minHeight="1000" xmlns="http://javafx.com/javafx"
+<BorderPane minWidth="1000"
+  minHeight="1000"
+  xmlns="http://javafx.com/javafx"
   xmlns:fx="http://javafx.com/fxml"
   fx:controller="ooga.view.FXMLController">
   <center>
