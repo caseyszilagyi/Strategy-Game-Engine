@@ -8,17 +8,24 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * This class creates a 2D GamePiece array that represents the game board,
- * adjustable by the starting state XML files which describe each occupied square in the board
- * in addition to board dimensions
+ * This class creates a 2D GamePiece array that represents the game board, adjustable by the
+ * starting state XML files which describe each occupied square in the board in addition to board dimensions
+ *
+ * @author Shaw Phillips
  */
 public class BoardCreator extends Creator {
     private static final String dictionary = "abcdefghijklmnopqrstuvwxyz"; //max supported board size is 26x26
     private static final String PATH = "src/ooga/model/game_components/data_files/starting_states/";
     private static final String FILE_TYPE = "piece";
+    public static final String BOARD = "board";
+    public static final String PARAMS = "params";
+    public static final String NUMROWS = "numrows";
+    public static final String NUMCOLS = "numcols";
+    public static final String OPPONENT = "opponent";
+    public static final String USER = "user";
     private GamePiece[][] gameBoard;
     private Map<String, List<Node>> boardNodes;
-    private Map<String, List<Node>> subNodes;
+    private Map<String, List<Node>> pieceSubNodes;
     private Map<String, String> userPieces;
     private Map<String, String> opponentPieces;
     private int numRows;
@@ -32,12 +39,12 @@ public class BoardCreator extends Creator {
     }
 
     private void initializeMaps(String game) {
-        boardNodes = super.makeRootNodeMap("chess");
-        subNodes = super.makeSubNodeMap(boardNodes.get("board").get(0));
-        numRows = Integer.parseInt(super.makeAttributeMap(boardNodes.get("params").get(0)).get("numrows"));
-        numCols = Integer.parseInt(super.makeAttributeMap(boardNodes.get("params").get(0)).get("numcols"));
-        opponentPieces = super.makeAttributeMap(subNodes.get("opponent").get(0));
-        userPieces = super.makeAttributeMap(subNodes.get("user").get(0));
+        boardNodes = super.makeRootNodeMap(game);
+        pieceSubNodes = super.makeSubNodeMap(boardNodes.get(BOARD).get(0));
+        numRows = Integer.parseInt(super.makeAttributeMap(boardNodes.get(PARAMS).get(0)).get(NUMROWS));
+        numCols = Integer.parseInt(super.makeAttributeMap(boardNodes.get(PARAMS).get(0)).get(NUMCOLS));
+        opponentPieces = super.makeAttributeMap(pieceSubNodes.get(OPPONENT).get(0));
+        userPieces = super.makeAttributeMap(pieceSubNodes.get(USER).get(0));
     }
 
     public GamePiece[][] makeBoard() {
@@ -48,10 +55,6 @@ public class BoardCreator extends Creator {
         for (Map.Entry<String, String> entry : opponentPieces.entrySet()) {
             buildPiece(numRows, entry, -1);
         }
-        return gameBoard;
-    }
-
-    public GamePiece[][] getGameBoard(){
         return gameBoard;
     }
 
