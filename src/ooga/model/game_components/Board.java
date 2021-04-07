@@ -14,5 +14,4 @@ public interface Board{
 
   public void addPiece(Coordinate coordinate, GamePiece newPieceType);
 
-  public GamePiece getPieceAtCoordinate(Coordinate pieceCoordinate);
 }
