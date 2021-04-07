@@ -1,11 +1,8 @@
 package ooga.model.game_initialization.piece_initialization;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
-import javafx.util.Pair;
 import ooga.model.game_components.Coordinate;
 import ooga.model.game_components.GamePiece;
 import ooga.model.game_components.move_types.PieceMovement;
