@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<piece piece="Chess">
+    <params>
+        <numrows>8</numrows>
+        <numcols>8</numcols>
+    </params>
+    <board>
+        <opponent>
+            <a8>rook</a8>
+            <b8>knight</b8>
+            <c8>bishop</c8>
+            <d8>queen</d8>
+            <e8>king</e8>
+            <f8>bishop</f8>
+            <g8>knight</g8>
+            <h8>rook</h8>
+            <a7>pawn</a7>
+            <b7>pawn</b7>
+            <c7>pawn</c7>
+            <d7>pawn</d7>
+            <e7>pawn</e7>
+            <f7>pawn</f7>
+            <g7>pawn</g7>
+            <h7>pawn</h7>
+        </opponent>
+        <user>
+            <a2>pawn</a2>
+            <b2>pawn</b2>
+            <c2>pawn</c2>
+            <d2>pawn</d2>
+            <e2>pawn</e2>
+            <f2>pawn</f2>
+            <g2>pawn</g2>
+            <h2>pawn</h2>
+            <a1>rook</a1>
+            <b1>knight</b1>
+            <c1>bishop</c1>
+            <d1>queen</d1>
+            <e1>king</e1>
+            <f1>bishop</f1>
+            <g1>knight</g1>
+            <h1>rook</h1>
+        </user>
+    </board>
+</piece>
+
