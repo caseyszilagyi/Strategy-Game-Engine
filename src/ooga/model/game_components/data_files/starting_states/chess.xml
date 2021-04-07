@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<game>
-    <name>chess</name>
-    <numrows>8</numrows>
-    <numcols>8</numcols>
-    <startingboard>
+<piece piece="Chess">
+    <params>
+        <numrows>8</numrows>
+        <numcols>8</numcols>
+    </params>
+    <board>
         <opponent>
             <a8>rook</a8>
             <b8>knight</b8>
@@ -40,6 +41,6 @@
             <g1>knight</g1>
             <h1>rook</h1>
         </user>
-    </startingboard>
-</game>
+    </board>
+</piece>
 
