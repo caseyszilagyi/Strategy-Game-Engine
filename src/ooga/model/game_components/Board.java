@@ -13,4 +13,6 @@ public interface Board{
   public void changePiece(GamePiece gamePiece, GamePiece newPieceType);
 
   public void addPiece(Coordinate coordinate, GamePiece newPieceType);
+
+  public GamePiece getPieceAtCoordinate(Coordinate pieceCoordinate);
 }

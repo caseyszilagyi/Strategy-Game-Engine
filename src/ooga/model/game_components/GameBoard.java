@@ -9,18 +9,23 @@ public class GameBoard implements Board {
     return null;
   }
 
+  @Override
   public void movePiece(GamePiece piece, Coordinate endingCoordinate) {
   }
 
+  @Override
   public void removePiece(GamePiece gamePiece) {
 
   }
 
+  @Override
   public void changePiece(GamePiece gamePiece, GamePiece newPieceType) {
 
   }
 
+  @Override
   public void addPiece(Coordinate coordinate, GamePiece newPieceType) {
 
   }
+
 }

@@ -48,6 +48,7 @@ public class GameEngine implements Engine {
 
   @Override
   public void startPlayerTimer(Player player) {
+    //TODO: possibly remove the Player parameter if we want to do it this way, but this only allows for one turn to be timed at a time.
     playerStartTime = System.currentTimeMillis();
   }
 
@@ -70,6 +71,18 @@ public class GameEngine implements Engine {
   @Override
   public void setBoard(GameBoard board) {
     curBoard = board;
+  }
+
+  /**
+   *  Assumes the move is in the format - Piece:ActionType:EndCoordinate where:
+   *  ActionType is the type of action to take, i.e. MOVE or PLACE
+   *  Piece is the piece for the action to be performed upon
+   *  EndCoordinate is the coordinate Piece will end up at after the action is performed
+   * @param moveSpecifications is a String, which dictates the move to be performed on the board.
+   */
+  @Override
+  public void makeAction(String moveSpecifications) {
+
   }
 
 }
