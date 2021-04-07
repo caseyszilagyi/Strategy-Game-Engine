@@ -31,7 +31,7 @@ public class PieceComponentClassLoader {
           .newInstance(parameters, direction);
       move = (PieceMovement) command;
     } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException | ClassNotFoundException e) {
-      throw new ExceptionHandler("InvalidPieceMovementType");
+      throw new ExceptionHandler("InvalidPieceMovementType" + moveType);
     }
     return move;
   }

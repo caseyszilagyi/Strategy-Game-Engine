@@ -262,7 +262,7 @@ public class BasicPieceTest {
   }
 
   private GamePiece makeDummyGamePiece(String teamName){
-    GamePiece piece = new GamePiece(makeCoordinates(0,0));
+    GamePiece piece = new GamePiece(makeCoordinates(0,0), "dummy");
     piece.setPieceTeam(teamName);
     return piece;
   }

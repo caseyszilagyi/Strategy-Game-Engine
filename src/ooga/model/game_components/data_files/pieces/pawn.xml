@@ -1,26 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<piece>
+<piece piece = "Chess">
   <moves>
-    <regMove>
+    <FiniteSlide>
       <changeX>0</changeX>
       <changeY>1</changeY>
-    </regMove>
-    <regMove>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
+    </FiniteSlide>
+    <FiniteSlide>
       <changeX>0</changeX>
       <changeY>2</changeY>
-    </regMove>
-    <takeMove>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
+    </FiniteSlide>
+    <FiniteSlide>
       <changeX>1</changeX>
       <changeY>1</changeY>
+      <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
-    </takeMove>
-    <takeMove>
+    </FiniteSlide>
+    <FiniteSlide>
       <changeX>1</changeX>
       <changeY>1</changeY>
+      <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
-    </takeMove>
+    </FiniteSlide>
   </moves>
 
   <regMoveType>FiniteSlide</regMoveType>

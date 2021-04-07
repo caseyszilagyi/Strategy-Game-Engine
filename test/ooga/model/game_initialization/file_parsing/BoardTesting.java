@@ -27,7 +27,8 @@ public class BoardTesting {
     }
     @Test
     void testCreator(){
-        boardCreator = new BoardCreator("chess");
+        boardCreator = new BoardCreator("Chess");
+        boardCreator.makeBoard();
     }
 
 
