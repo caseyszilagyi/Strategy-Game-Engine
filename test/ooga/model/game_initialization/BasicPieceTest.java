@@ -19,7 +19,7 @@ import org.w3c.dom.Node;
  * Testing class for piece creation, reflection for various piece components, and basic
  * testing of getAllPossibleMoves
  */
-public class BasicPieceTesting {
+public class BasicPieceTest {
 
   private PieceCreator pieceCreator = new PieceCreator("Chess");
   private Map<String, List<Node>> rootNodeMap;
@@ -156,6 +156,7 @@ public class BasicPieceTesting {
     bishop.setPieceTeam("Casey");
     dummyBoard[6][6] = makeDummyGamePiece("notCasey");
     dummyBoard[2][2] = makeDummyGamePiece("notCasey");
+    dummyBoard[1][1] = makeDummyGamePiece("notCasey");
     dummyBoard[6][2] = makeDummyGamePiece("Casey");
     dummyBoard[2][6] = makeDummyGamePiece("Casey");
     bishop.setDummyBoard(dummyBoard);
@@ -179,7 +180,7 @@ public class BasicPieceTesting {
   }
 
   /**
-   * Testing the legal moves of a bishop on a board with friendly/enemy pieces
+   * Testing the legal moves of a rook on a board with friendly/enemy pieces
    */
   @Test
   void TestRookWithFriendlyAndOpponentPieces(){
