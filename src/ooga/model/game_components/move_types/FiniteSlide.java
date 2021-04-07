@@ -59,9 +59,7 @@ public class FiniteSlide extends PieceMovement {
 
   // if this instance of the pieceMovement doesn't take pieces, this method is called
   private void getNonTakeMoves(Coordinate coordinates, String teamName, List<Coordinate> possibleMoves) {
-    while (checkIfMoveInBounds(coordinates) && checkThatNoFriendlyPieceInMoveDestination(
-        coordinates, teamName)
-        && checkEnemyPieceLocationConditions(coordinates, teamName)) {
+    while (checkIfValidMove(coordinates, teamName)) {
       Coordinate newCoord = makeCoordinate(coordinates.getX() + getChangeX(),
           coordinates.getY() + getChangeY());
       possibleMoves.add(newCoord);

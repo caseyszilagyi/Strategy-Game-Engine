@@ -3,6 +3,8 @@ package ooga.model.game_components.move_types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Stream;
 import ooga.model.game_components.Coordinate;
 import ooga.model.game_components.GameBoard;
 
@@ -55,13 +57,11 @@ public class InfiniteSlide extends PieceMovement {
 
   // if this instance of the pieceMovement doesn't take pieces, this method is called
   private void getNonTakeMoves(Coordinate coordinates, String teamName, List<Coordinate> possibleMoves) {
-    while (checkIfMoveInBounds(coordinates) && checkThatNoFriendlyPieceInMoveDestination(
-        coordinates, teamName)
-        && checkEnemyPieceLocationConditions(coordinates, teamName)) {
-      Coordinate newCoord = makeCoordinate(coordinates.getX() + getChangeX(),
+    while (checkIfValidMove(coordinates, teamName)) {
+      Coordinate newCoordinates = makeCoordinate(coordinates.getX() + getChangeX(),
           coordinates.getY() + getChangeY());
-      possibleMoves.add(newCoord);
-      coordinates = newCoord;
+      possibleMoves.add(newCoordinates);
+      coordinates = newCoordinates;
     }
   }
 
@@ -74,8 +74,7 @@ public class InfiniteSlide extends PieceMovement {
             makeCoordinate(coordinates.getX() + getChangeX(), coordinates.getY() + getChangeY()));
         break;
       }
-      coordinates = makeCoordinate(coordinates.getX() + getChangeX(),
-          coordinates.getY() + getChangeY());
+      coordinates.changeCoordinates(getChangeX(), getChangeY());
     }
   }
 }

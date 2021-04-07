@@ -56,6 +56,14 @@ public abstract class PieceMovement {
     dummyBoard = board;
   }
 
+
+  protected boolean checkIfValidMove(Coordinate coordinates, String teamName){
+    return checkIfMoveInBounds(coordinates) &&
+           checkThatNoFriendlyPieceInMoveDestination(coordinates, teamName) &&
+           checkEnemyPieceLocationConditions(coordinates, teamName);
+  }
+
+
   /**
    * Checks if a move is in bounds. The >= is due to the fact that the coordinate system starts at
    * 0. So if we have an 8x8 board, the possible coordinates range from 0-7, making 8 out of bounds
