@@ -55,7 +55,7 @@ public interface Engine {
    * Alters the board in the way described in the String parameter
    * @param moveSpecifications is a String, which dictates the move to be performed on the board.
    */
-  public void makeMove(String moveSpecifications);
+  public void makeAction(String moveSpecifications);
 
 
 
