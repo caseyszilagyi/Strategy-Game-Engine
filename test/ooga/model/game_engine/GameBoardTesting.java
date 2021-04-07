@@ -43,6 +43,20 @@ public class GameBoardTesting {
 
   }
 
+  @Test
+  void testGetPieceAtCoordinate(){
+    Coordinate testCoordinate = makeCoordinates(4, 4);
+    assertNull(board.getPieceAtCoordinate(testCoordinate));
+    GamePiece queen = makePiece("Queen", testCoordinate);
+    assertTrue(board.addPiece(queen));
+    assertNotNull(board.getPieceAtCoordinate(testCoordinate));
+    assertEquals(board.getPieceAtCoordinate(testCoordinate), queen);
+
+    GamePiece knight = makePiece("Knight", testCoordinate);
+    assertNotEquals(board.getPieceAtCoordinate(testCoordinate), knight);
+
+  }
+
   private GamePiece makePiece(String pieceName, Coordinate coord){
     return pieceCreator.makePiece(pieceName, coord, 1);
   }
