@@ -27,7 +27,7 @@ public class BasicPieceTest {
   private Map<String, String> attributeMap;
 
   GamePiece[][] dummyBoard = new GamePiece[8][8];
-  List<Coordinate> allLegalMoves;
+  Set<Coordinate> allLegalMoves;
 
   @BeforeEach
   private void SetUp(){
@@ -65,7 +65,7 @@ public class BasicPieceTest {
    */
   @Test
   void testCoordinateHashCodeAndEquals(){
-    List<Coordinate> testSet = new ArrayList<>();
+    Set<Coordinate> testSet = new HashSet<>();
     testSet.add(makeCoordinates(3, 4));
     testSet.add(makeCoordinates(1,2));
     assertTrue(testActualExpectedCoordinates("1:2 3:4", testSet));
@@ -233,12 +233,110 @@ public class BasicPieceTest {
     assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
   }
 
+  /**
+   * Testing the legal move coordinates for a king on an empty board
+   */
+  @Test
+  void TestEmptyBoardKingMovement(){
+    makeEmptyBoard();
+    GamePiece king = makePiece("king", 4, 4);
+    king.setPieceTeam("Casey");
+    king.setDummyBoard(dummyBoard);
+    allLegalMoves = king.getAllLegalMoves();
+    String expected = "4:5 4:3 5:3 5:4 5:5 3:3 3:4 3:5";
+    assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
+  }
+
+  /**
+   * Testing the legal move coordinates for a king on an empty board
+   */
+  @Test
+  void TestKingWithFriendlyAndOpponentPieces(){
+    makeEmptyBoard();
+    GamePiece king = makePiece("king", 4, 4);
+    king.setPieceTeam("Casey");
+    king.setDummyBoard(dummyBoard);
+    dummyBoard[4][5] = makeDummyGamePiece("Casey");
+    dummyBoard[5][4] = makeDummyGamePiece("notCasey");
+    allLegalMoves = king.getAllLegalMoves();
+    String expected = "4:5 4:3 5:3 5:5 3:3 3:4 3:5";
+    assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
+  }
+
+  /**
+   * Test edge board king movement
+   */
+  @Test
+  void TestEdgeBoardKingMovement(){
+    makeEmptyBoard();
+    GamePiece king = makePiece("king", 7, 4);
+    king.setPieceTeam("Casey");
+    king.setDummyBoard(dummyBoard);
+    allLegalMoves = king.getAllLegalMoves();
+    String expected = "7:5 7:3 6:3 6:4 6:5";
+    assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
+  }
+
+  /**
+   * Testing the legal move coordinates for a pawn on an empty board. Note that moving
+   * forward 2 is always allowed, where as it should really have special conditions.
+   */
+  @Test
+  void TestEmptyBoardPawnMovement(){
+    makeEmptyBoard();
+    GamePiece pawn = makePiece("pawn", 4, 4);
+    pawn.setPieceTeam("Casey");
+    pawn.setDummyBoard(dummyBoard);
+    allLegalMoves = pawn.getAllLegalMoves();
+    String expected = "4:5 4:6";
+    assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
+  }
+
+  /**
+   * Tests that a pawn can take enemy pieces on the diagonal, and also can't slide through
+   * opponent/friendly pieces
+   */
+  @Test
+  void TestPawnTakeAndSlideMovement(){
+    makeEmptyBoard();
+    GamePiece pawn = makePiece("pawn", 4, 4);
+    pawn.setPieceTeam("Casey");
+    pawn.setDummyBoard(dummyBoard);
+    dummyBoard[5][5] = makeDummyGamePiece("Casey");
+    dummyBoard[5][3] = makeDummyGamePiece("notCasey");
+    dummyBoard[5][4] = makeDummyGamePiece("Casey");
+    allLegalMoves = pawn.getAllLegalMoves();
+    String expected = "3:5";
+    assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
+  }
+
+  /**
+   * Tests a pawn moving in the opposite direction
+   */
+  @Test
+  void TestPawnReverseMovement(){
+    makeEmptyBoard();
+    GamePiece pawn = makeEnemyPiece("pawn", 4, 4);
+    pawn.setPieceTeam("Casey");
+    pawn.setDummyBoard(dummyBoard);
+    dummyBoard[3][5] = makeDummyGamePiece("Casey");
+    dummyBoard[3][3] = makeDummyGamePiece("notCasey");
+    dummyBoard[3][4] = makeDummyGamePiece("Casey");
+    allLegalMoves = pawn.getAllLegalMoves();
+    String expected = "3:3";
+    assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
+  }
+
+
 
   // piece creator methods
   private GamePiece makePiece(String pieceName, int xCoord, int yCoord){
     return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), 1);
   }
 
+  private GamePiece makeEnemyPiece(String pieceName, int xCoord, int yCoord){
+    return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), -1);
+  }
 
   // dummy board methods
 
@@ -270,13 +368,13 @@ public class BasicPieceTest {
   // Methods used for testing coordinates and piece movement
 
   // Compares a string of expected coordinates to a list of actual coordinates
-  private boolean testActualExpectedCoordinates(String expected, List<Coordinate> actual){
+  private boolean testActualExpectedCoordinates(String expected, Set<Coordinate> actual){
     return testExpectedCoordinatesList(makeManyCoordinateList(expected), actual);
   }
 
 
   // Checks to see if the map of expected coordinates and the list of actual coordinates match
-  private boolean testExpectedCoordinatesList(Set<Coordinate> expected, List<Coordinate> actual){
+  private boolean testExpectedCoordinatesList(Set<Coordinate> expected, Set<Coordinate> actual){
     for(Coordinate currentCoordinate: actual){
       if(expected.contains(currentCoordinate)){
         expected.remove(currentCoordinate);
