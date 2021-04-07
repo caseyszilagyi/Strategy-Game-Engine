@@ -16,7 +16,7 @@
       <takeY>null</takeY>
     </FiniteSlide>
     <FiniteSlide>
-      <changeX>1</changeX>
+      <changeX>-1</changeX>
       <changeY>1</changeY>
       <mustTake>True</mustTake>
       <takeX>0</takeX>
