@@ -58,10 +58,10 @@ public class InfiniteSlide extends PieceMovement {
   // if this instance of the pieceMovement doesn't take pieces, this method is called
   private void getNonTakeMoves(Coordinate coordinates, String teamName, List<Coordinate> possibleMoves) {
     while (checkIfValidMove(coordinates, teamName)) {
-      Coordinate newCoordinates = makeCoordinate(coordinates.getX() + getChangeX(),
+      Coordinate newCoord = makeCoordinate(coordinates.getX() + getChangeX(),
           coordinates.getY() + getChangeY());
-      possibleMoves.add(newCoordinates);
-      coordinates = newCoordinates;
+      possibleMoves.add(newCoord);
+      coordinates = newCoord;
     }
   }
 
@@ -74,7 +74,8 @@ public class InfiniteSlide extends PieceMovement {
             makeCoordinate(coordinates.getX() + getChangeX(), coordinates.getY() + getChangeY()));
         break;
       }
-      coordinates.changeCoordinates(getChangeX(), getChangeY());
+      coordinates = makeCoordinate(coordinates.getX() + getChangeX(),
+          coordinates.getY() + getChangeY());
     }
   }
 }
