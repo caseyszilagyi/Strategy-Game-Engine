@@ -1,5 +1,7 @@
 package ooga.model.game_engine;
 
+import java.util.ArrayList;
+import java.util.List;
 import ooga.controller.FrontEndExternalAPI;
 import ooga.model.game_components.GameBoard;
 import ooga.model.game_components.GameRules;
@@ -8,9 +10,11 @@ import ooga.model.game_components.Player;
 public class GameEngine implements Engine {
 
   FrontEndExternalAPI viewController;
+  List<Player> activePlayers;
 
   public GameEngine(FrontEndExternalAPI newViewController){
     viewController = newViewController;
+    activePlayers = new ArrayList<Player>();
   }
 
   @Override
@@ -25,7 +29,7 @@ public class GameEngine implements Engine {
 
   @Override
   public void addActiveUser(Player player) {
-
+    activePlayers.add(player);
   }
 
   @Override
