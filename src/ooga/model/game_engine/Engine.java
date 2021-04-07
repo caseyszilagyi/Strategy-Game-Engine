@@ -3,6 +3,7 @@ package ooga.model.game_engine;
 import ooga.model.game_components.GameBoard;
 import ooga.model.game_components.GameRules;
 import ooga.model.game_components.Player;
+import ooga.model.game_engine.action_files.Action;
 
 /**
  * Implemented by any type of game engine that is designed to run a specific type of program. The
@@ -53,10 +54,10 @@ public abstract class Engine{
   public abstract void setBoard(GameBoard board);
 
   /**
-   * Alters the board in the way described in the String parameter
-   * @param moveSpecifications is a String, which dictates the move to be performed on the board.
+   * Alters the board in the way described in the Action parameter
+   * @param action is the Action.java to perform
    */
-  public abstract void makeAction(String moveSpecifications);
+  public abstract void executeAction(Action action);
 
 
 

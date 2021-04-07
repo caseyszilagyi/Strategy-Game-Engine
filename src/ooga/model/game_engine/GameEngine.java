@@ -8,6 +8,7 @@ import ooga.model.game_components.GameBoard;
 import ooga.model.game_components.GamePiece;
 import ooga.model.game_components.GameRules;
 import ooga.model.game_components.Player;
+import ooga.model.game_engine.action_files.Action;
 
 public class GameEngine extends Engine {
 
@@ -23,7 +24,7 @@ public class GameEngine extends Engine {
   //Game variables
   private GameBoard curBoard;
   private GameRules curRules;
-  private List<String> priorActions;
+  private List<Action> priorActions;
 
   //Player variables
   private List<Player> activePlayers;
@@ -32,7 +33,8 @@ public class GameEngine extends Engine {
 
   public GameEngine(FrontEndExternalAPI newViewController){
     viewController = newViewController;
-    activePlayers = new ArrayList<Player>();
+    activePlayers = new ArrayList<>();
+    priorActions = new ArrayList<>();
   }
 
   @Override
@@ -84,19 +86,13 @@ public class GameEngine extends Engine {
   }
 
   /**
-   *  Assumes the move is in the format: ActionType-ParamOne-ParamTwo where:
-   *  ActionType is the type of action to take, i.e. MOVE or PLACE
-   *  ParamOne and ParamTwo will be different for each
-   *  StartingCoordinate is the Coordinate for the piece the action will be performed upon
-   *  EndCoordinate is the coordinate Piece will end up at after the action is performed
-   *  Coordinates are assumed to be in the format x:y, where x and y are integers
-   * @param actionSpecifications is a String, which dictates the move to be performed on the board.
+   *
+   * @param action is the Action.java to perform
    */
   @Override
-  public void makeAction(String actionSpecifications) {
-    priorActions.add(actionSpecifications);
+  public void executeAction(Action action) {
+    priorActions.add(action);
 
-    String[] actionArray = actionSpecifications.split("/-");
   }
 
 }

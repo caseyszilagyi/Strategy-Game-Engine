@@ -6,12 +6,12 @@ public interface Board{
 
   public List<Coordinate> getAllActivePieceCoordinates();
 
-  public void movePiece(Coordinate startingCoordinate, Coordinate endingCoordinate);
+  public boolean movePiece(Coordinate startingCoordinate, Coordinate endingCoordinate);
 
-  public void removePiece(Coordinate coordinate);
+  public boolean removePiece(Coordinate coordinate);
 
-  public void changePiece(Coordinate coordinate, GamePiece newPieceType);
+  public boolean changePiece(Coordinate coordinate, GamePiece newPieceType);
 
-  public void addPiece(Coordinate coordinate, GamePiece newPieceType);
+  public boolean addPiece(Coordinate coordinate, GamePiece newPieceType);
 
 }

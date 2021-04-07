@@ -2,12 +2,24 @@ package ooga.model.game_engine.action_files;
 
 import ooga.model.game_components.Coordinate;
 import ooga.model.game_components.GameBoard;
+import ooga.model.game_components.GamePiece;
 import ooga.model.game_components.GameRules;
+import ooga.model.game_initialization.piece_initialization.PieceCreator;
 
 public abstract class Action {
 
   private static final int X_INDEX = 0;
   private static final int Y_INDEX = 1;
+
+
+  public abstract boolean executeAction(GameBoard board, GameRules rules);
+
+  protected GamePiece stringToPiece(String pieceAsString, Coordinate coordinate, GameRules rules){
+    //TODO: get name of game from rules
+    String gameName = "chess"; //this will be overridden with todo above
+    PieceCreator pieceCreator = new PieceCreator(gameName);
+    return pieceCreator.makePiece(pieceAsString, coordinate, 1);
+  }
 
   protected Coordinate stringToCoordinate(String coordinateAsString){
     String[] coordinateArray = coordinateAsString.split("/:");
@@ -32,6 +44,6 @@ public abstract class Action {
     }
   }
 
-  public abstract void executeAction(GameBoard board, GameRules rules);
+
 
 }
