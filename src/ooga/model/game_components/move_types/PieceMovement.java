@@ -198,6 +198,14 @@ public abstract class PieceMovement {
     return mustTake;
   }
 
+  protected void setChangeX(int changeX){
+    this.changeX = changeX;
+  }
+
+  protected void setChangeY(int changeY){
+    this.changeY = changeY;
+  }
+
   /**
    * If the piece corresponding to this object needs to be moved, it might need to take a piece.
    * This method gives the x position oof the piece that needs to be taken relative to the final
