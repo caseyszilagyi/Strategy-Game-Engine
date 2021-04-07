@@ -10,7 +10,15 @@ import ooga.model.game_components.Player;
 public class GameEngine implements Engine {
 
   FrontEndExternalAPI viewController;
-  List<Player> activePlayers;
+
+  //Game variables
+  private GameBoard curBoard;
+  private GameRules curRules;
+
+  //Player variables
+  private List<Player> activePlayers;
+  private List<Long> playerTimes;
+  private Long playerStartTime;
 
   public GameEngine(FrontEndExternalAPI newViewController){
     viewController = newViewController;
@@ -30,6 +38,7 @@ public class GameEngine implements Engine {
   @Override
   public void addActiveUser(Player player) {
     activePlayers.add(player);
+    playerTimes.add(Long.valueOf(0));
   }
 
   @Override
@@ -39,17 +48,23 @@ public class GameEngine implements Engine {
 
   @Override
   public void startPlayerTimer(Player player) {
-
+    playerStartTime = System.currentTimeMillis();
   }
 
   @Override
   public void stopPlayerTimer(Player player) {
-
+    Long endTime = System.currentTimeMillis();
+    if(activePlayers.contains(player)){
+      Long timeElapsed = endTime - playerStartTime;
+      playerTimes.set(activePlayers.indexOf(player), timeElapsed);
+    } else {
+      //TODO: throw exception
+    }
   }
 
   @Override
   public void setRules(GameRules rules) {
-
+    curRules = rules;
   }
 
   @Override
