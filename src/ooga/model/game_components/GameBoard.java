@@ -7,27 +7,37 @@ public class GameBoard implements Board {
 
   private List<GamePiece> activePieces;
   private Player currentTurn;
+  private GamePiece[][] grid;
 
   private int width, height;
+
 
   public GameBoard(int width, int height){
     this.width = width;
     this.height = height;
+    grid = new GamePiece[width][height];
     activePieces = new ArrayList<>();
   }
 
 
   @Override
   public boolean movePiece(Coordinate startingCoordinate, Coordinate endingCoordinate) {
-    if(isAnyCoordinateConflicts(endingCoordinate)){
-      return false;
-    }
     if(!isPieceAtCoordinate(startingCoordinate) || !isCoordinateOnBoard(startingCoordinate)){
       System.err.println("Tried to move non-existing piece");
       return false;
     }
+    if(!isCoordinateOnBoard(endingCoordinate)){
+      System.err.println("Tried to move off the board");
+      return false;
+    }
     GamePiece pieceToMove = getPieceAtCoordinate(startingCoordinate);
+    if(isPieceAtCoordinate(endingCoordinate)){
+      GamePiece conflict = getPieceAtCoordinate(endingCoordinate);
+      activePieces.remove(conflict);
+    }
+    grid[startingCoordinate.getX()][startingCoordinate.getY()] = null;
     pieceToMove.setPieceCoordinates(endingCoordinate);
+    grid[endingCoordinate.getX()][endingCoordinate.getY()] = pieceToMove;
     return true;
   }
 
@@ -48,6 +58,7 @@ public class GameBoard implements Board {
       return false;
     }
     activePieces.add(newPieceType);
+    grid[newPieceCoordinates.getX()][newPieceCoordinates.getY()] = newPieceType;
     return true;
   }
 
@@ -63,7 +74,9 @@ public class GameBoard implements Board {
     return false;
   }
 
-
+  public GamePiece[][] getBoardArray(){
+    return grid;
+  }
 
   public List<Coordinate> getAllActivePieceCoordinates() {
     List<Coordinate> allCoordinates = new ArrayList<>();
@@ -74,12 +87,7 @@ public class GameBoard implements Board {
   }
 
   public GamePiece getPieceAtCoordinate(Coordinate coordinate){
-    for(GamePiece currentPiece : activePieces) {
-      if (currentPiece.getPieceCoordinates().equals(coordinate)) {
-        return currentPiece;
-      }
-    }
-    return null;
+    return grid[coordinate.getX()][coordinate.getY()];
   }
 
   private boolean isCoordinateOnBoard(Coordinate coordinates) {
@@ -91,28 +99,17 @@ public class GameBoard implements Board {
   }
 
   public boolean isPieceAtCoordinate(Coordinate coordinate){
-    for(GamePiece currentPiece : activePieces) {
-      if (currentPiece.getPieceCoordinates().equals(coordinate)) {
-        return true;
-      }
-    }
-    return false;
+    return (isCoordinateOnBoard(coordinate) && grid[coordinate.getX()][coordinate.getY()] != null);
   }
 
   public void printBoard(){
-
-    String[][] printableBoard = new String[width][height];
-    for(GamePiece piece : activePieces){
-      printableBoard[piece.getPieceCoordinates().getX()][piece.getPieceCoordinates().getY()] = "p";
-    }
-
     System.out.println("");
-    for(String[] row : printableBoard){
-      for (String pieceOrNot : row) {
+    for(GamePiece[] row : grid){
+      for (GamePiece pieceOrNot : row) {
         if(pieceOrNot == null){
-          System.out.print("x");
+          System.out.print("_");
         } else {
-          System.out.print(pieceOrNot);
+          System.out.print("p");
         }
       }
       System.out.println("");

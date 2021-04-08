@@ -91,8 +91,9 @@ public class GameEngine extends Engine {
    */
   @Override
   public void executeAction(Action action) {
-    priorActions.add(action);
-
+    if(action.executeAction(curBoard, curRules)){
+      priorActions.add(action);
+    }
   }
 
 }
