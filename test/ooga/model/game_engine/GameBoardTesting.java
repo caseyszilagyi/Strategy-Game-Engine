@@ -57,6 +57,29 @@ public class GameBoardTesting {
 
   }
 
+  @Test
+  void testPlaceOutOfBounds(){
+    Coordinate testCoordinate = makeCoordinates(8, 4);
+    assertFalse(board.isPieceAtCoordinate(testCoordinate));
+    GamePiece knight = makePiece("Knight", testCoordinate);
+    assertFalse(board.addPiece(knight));
+
+    Coordinate testCoordinate2 = makeCoordinates(4, 8);
+    assertFalse(board.isPieceAtCoordinate(testCoordinate2));
+    GamePiece knight2 = makePiece("Knight", testCoordinate2);
+    assertFalse(board.addPiece(knight2));
+
+    Coordinate testCoordinate3 = makeCoordinates(-1, 4);
+    assertFalse(board.isPieceAtCoordinate(testCoordinate3));
+    GamePiece knight3 = makePiece("Knight", testCoordinate3);
+    assertFalse(board.addPiece(knight3));
+
+    Coordinate testCoordinate4 = makeCoordinates(4, -1);
+    assertFalse(board.isPieceAtCoordinate(testCoordinate4));
+    GamePiece knight4 = makePiece("Knight", testCoordinate4);
+    assertFalse(board.addPiece(knight4));
+  }
+
   private GamePiece makePiece(String pieceName, Coordinate coord){
     return pieceCreator.makePiece(pieceName, coord, 1);
   }

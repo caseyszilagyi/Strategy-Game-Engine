@@ -38,7 +38,7 @@ public class GameBoard implements Board {
   @Override
   public boolean addPiece(GamePiece newPieceType) {
     Coordinate newPieceCoordinates = newPieceType.getPieceCoordinates();
-    if(newPieceCoordinates.getX() >= width || newPieceCoordinates.getY() >= height){
+    if(newPieceCoordinates.getX() >= width || newPieceCoordinates.getY() >= height || newPieceCoordinates.getX() < 0 || newPieceCoordinates.getY() < 0){
       System.err.println("Tried to add a piece outside of the board");
       return false;
     }
