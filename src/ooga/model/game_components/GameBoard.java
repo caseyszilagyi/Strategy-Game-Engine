@@ -22,7 +22,17 @@ public class GameBoard implements Board {
 
   @Override
   public boolean movePiece(Coordinate startingCoordinate, Coordinate endingCoordinate) {
-    return false;
+    if(isPieceAtCoordinate(endingCoordinate)){
+      System.err.println("Tried to move piece to occupied space");
+      return false;
+    }
+    if(!isPieceAtCoordinate(startingCoordinate)){
+      System.err.println("Tried to move non-existing piece");
+      return false;
+    }
+    GamePiece pieceToMove = getPieceAtCoordinate(startingCoordinate);
+    pieceToMove.setPieceCoordinates(endingCoordinate);
+    return true;
   }
 
   @Override
@@ -42,11 +52,9 @@ public class GameBoard implements Board {
       System.err.println("Tried to add a piece outside of the board");
       return false;
     }
-    for(GamePiece currentPiece : activePieces){
-      if(currentPiece.getPieceCoordinates().equals(newPieceCoordinates)){
-        System.err.println("Tried to add a piece on another piece");
-        return false;
-      }
+    if(isPieceAtCoordinate(newPieceCoordinates)){
+      System.err.println("Tried to place a piece on top of another piece");
+      return false;
     }
     activePieces.add(newPieceType);
     return true;

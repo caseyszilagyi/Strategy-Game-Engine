@@ -45,6 +45,14 @@ public class GamePiece {
   public Coordinate getPieceCoordinates(){
     return pieceCoordinates;
   }
+
+  /**
+   * Sets this piece's Coordinates to the new, given Coordinates
+   * @param newCoordinates the new Coordinates for this piece to be moved to
+   */
+  public void setPieceCoordinates(Coordinate newCoordinates){
+    pieceCoordinates = newCoordinates;
+  }
   /**
    * Sets the piece's possible moves
    *
