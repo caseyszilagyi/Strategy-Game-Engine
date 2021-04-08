@@ -2,8 +2,10 @@ package ooga.model.game_components;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import ooga.model.game_components.move_types.PieceMovement;
 
 /**
@@ -39,7 +41,7 @@ public class GamePiece {
     this.pieceName = pieceName;
   }
 
-  public String getPieceName(){
+  public String getPieceName() {
     return pieceName;
   }
 
@@ -74,8 +76,8 @@ public class GamePiece {
    *
    * @return A list of the coordinates of the legal moves
    */
-  public List<Coordinate> getAllLegalMoves() {
-    List<Coordinate> possibleMoveLocations = new ArrayList<>();
+  public Set<Coordinate> getAllLegalMoves() {
+    Set<Coordinate> possibleMoveLocations = new HashSet<>();
     for (PieceMovement move : allPossibleMoves) {
       List<Coordinate> currentPossibilities = move
           .getAllPossibleMoves(pieceCoordinates, gameBoard, pieceTeam);
@@ -86,6 +88,16 @@ public class GamePiece {
       }
     }
     return possibleMoveLocations;
+  }
+
+  /**
+   * When given the final coordinates of a move, this move is executed
+   *
+   * @param coordinates The final coordinates of the move
+   */
+  public void executeMove(Coordinate coordinates) {
+    PieceMovement correspondingMove = legalMovementMap.get(coordinates);
+    correspondingMove.executeMove(coordinates);
   }
 
   /**

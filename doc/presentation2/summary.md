@@ -18,18 +18,18 @@ What we need to do
 
 ## View
 
-The view hierarchy is show below: 
-![UML View Diagram](viewUML.jpg)
+The view hierarchy is show below:
+![Imgur](https://imgur.com/J1x5W4s.jpg)
 
-Overall structure: 
-- `GameWindow` is an interface, and concrete subclasses include `StageWindow`, which extends `Stage`, and `FloatingWindow`, which extends `PopupWindow`. These windows behave differently: 
-  - `StageWindow` are used for displaying persistent windows that persist for the duration of the game.
-  - `FloatingWindow` is used to display configurations, pause menus, alerts, popups, and other views that the user can dismiss. These must have a parent window and will appear floating on top of their parent. 
+Overall structure:
+- `GameWindow` is an interface, and concrete subclasses include `StageWindow`, which extends `Stage`, and `FloatingWindow`, which extends `PopupWindow`. These windows behave differently:
+    - `StageWindow` are used for displaying persistent windows that persist for the duration of the game.
+    - `FloatingWindow` is used to display configurations, pause menus, alerts, popups, and other views that the user can dismiss. These must have a parent window and will appear floating on top of their parent.
 - Each `GameWindow` is associated with at least 1 `GameScene`, which extends `Scene`. A `GameWindow` can switch to other `GameScene`s at any time.
-- `GameScene` objects are created using a parent object created by a `FXML` file. 
-- `GameWindow` and `GameScene` objects are created by their respective factories, so that the interface remains extensible to new windows and scenes. 
+- `GameScene` objects are created using a parent object created by a `FXML` file.
+- `GameWindow` and `GameScene` objects are created by their respective factories, so that the interface remains extensible to new windows and scenes.
 - Each `GameScene` has its own FXML file, and may share a CSS file with other scenes to maintain unified color scheme.
-- At initialization, an `init.properties` data file determines the first `GameWindow` and `GameScene` to show. 
+- At initialization, an `init.properties` data file determines the first `GameWindow` and `GameScene` to show.
 
 ## Java Method Examples
 
@@ -61,7 +61,7 @@ public Set<Coordinate> getAllLegalMoves() {
 ```
 
 
-Initializing the first view: 
+Initializing the first view:
 
 ```java  
 public void start(Stage primaryStage) throws Exception {
@@ -207,7 +207,7 @@ initialWindowScene = BoardScene
 ```
 
 #### Example properties file for a `GameScene`
-- The file provides information about the scene size, as well as the names of the structural and stylizing files. 
+- The file provides information about the scene size, as well as the names of the structural and stylizing files.
 ```properties
 FXML = BoardScene.fxml
 CSS = BoardSceneDefault.css
@@ -399,41 +399,39 @@ void TestRookWithFriendlyAndOpponentPieces(){
         - Player files
         - Checkers
 - View
-    - Create storyboard flow logic that can switch between scenes and stages. 
-    - Connect front end board to board model in backend. 
-    - Continue to create FXML files for each `GameScene` and 
-    - Create control classes for each `GameScene` that provide a reliable way for the backend to communicate with the view. 
+    - Create storyboard flow logic that can switch between scenes and stages.
+    - Connect front end board to board model in backend.
+    - Continue to create FXML files for each `GameScene` and
+    - Create control classes for each `GameScene` that provide a reliable way for the backend to communicate with the view.
 
 ## Planned Features Complete and What Helped/Impeded Progress
-describe how much of the planned features were completed this Sprint and what helped or impeded progress (or if the estimate was just too much)
 - Model
     - All of the non special cases for possible moves were implemented for the pieces
         - Still need to do castling, en passant, pawn promotion
     - Board can be read in from XML file and initializes generic pieces from data files
-    - We set out to implement the GamePiece class, and we essentially did that. However, it definitely took 
+    - We set out to implement the GamePiece class, and we essentially did that. However, it definitely took a little longer than expected so we didn't get to some of our more ambitious goals for this sprint
 - View
-    - Created a data-driven view rendering system using FXML that can be highly flexible with no changes to the source code. 
-    - Initially: tried to invent our own view data files from scratch, which became complicated very quickly. 
-    - FXML simplified much of the process of creating flexible views. 
+    - Created a data-driven view rendering system using FXML that can be highly flexible with no changes to the source code.
+    - Initially: tried to invent our own view data files from scratch, which became complicated very quickly.
+    - FXML simplified much of the process of creating flexible views.
 
 ## Significant Events/Teamwork
 
-describe two specific significant events that occurred this Sprint (one positive and one that caused issues) and what the team learned from each
-
 - Positive
-  - We were initially going to attempt to create a new file format for reading in view configurations, however we discovered FXML which simplifies a lot of the details and leaves us with more freedom to create an extensible view structure. We learned that with data files, we don't always have to reinvent the wheel because there might be existing data file formats created that can be very useful. 
+    - We were initially going to attempt to create a new file format for reading in view configurations, however we discovered FXML which simplifies a lot of the details and leaves us with more freedom to create an extensible view structure. We learned that with data files, we don't always have to reinvent the wheel because there might be existing data file formats created that can be very useful.
 
 - Issues
+    - Place piece games (othello, connect 4) and move piece games (checkers, chess) have some core behaviors that are different, but still follow the same logic flow
+    - Figuring out how to deal with this was tricky
+        - Clicking on a piece for a move game highlights all possible moves
+        - Clicking on a spot in a place piece game places the piece
+    - Decided that the game engine will need to have a logic flow to determine what to do with coordinates sent from the front end
 
-
-describe what worked regarding your teamwork and communication, what did not, and something specific that is planned for improvement next Sprint
-
+- Teamwork
+    - Slack works very well for us
+    - Planning to have mid-week goals to streamline focus on certain features
 
 ## Next Sprint
-- Model
-    - 
-
-
 - Casey
     - Start working on piece restrictions/special cases
         - Will need to abstract these behaviors as much as possible.
@@ -443,16 +441,11 @@ describe what worked regarding your teamwork and communication, what did not, an
     - Once this is completed, will start working on the player files
 - Cole
     - Get gameEngine working such that a series of Actions can be called and a chess game will be run
-    
 - Shaw
 - Yi
     - Was very busy this week so could not get as much view done as planned
     - Will work more closely with Kenny on the view classes
 - Kenny
-- 
-what features are planned to be completed during the next Sprint (taking into account what was, or was not, done this Sprint), who will work on each feature, and any concerns that may complicate the plan
-
-
-Materials developed specifically for your presentation can include files such as code, images, UML diagrams, or written text (using Markdown, Javadoc or a wiki page on Gitlab). PowerPoint slides are discouraged because they are completely separate from the project and unlikely to be maintained even if they are added to the repository, but here are some tools to convert Markdown to a slide style format.
+    - Work with Yi to figure out how to implement control buttons with FXML
 
 
