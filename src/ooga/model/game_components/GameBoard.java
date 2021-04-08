@@ -16,9 +16,6 @@ public class GameBoard implements Board {
     activePieces = new ArrayList<>();
   }
 
-  public List<Coordinate> getAllActivePieceCoordinates() {
-    return null;
-  }
 
   @Override
   public boolean movePiece(Coordinate startingCoordinate, Coordinate endingCoordinate) {
@@ -58,6 +55,14 @@ public class GameBoard implements Board {
     }
     activePieces.add(newPieceType);
     return true;
+  }
+
+  public List<Coordinate> getAllActivePieceCoordinates() {
+    List<Coordinate> allCoordinates = new ArrayList<>();
+    for(GamePiece piece : activePieces){
+      allCoordinates.add(piece.getPieceCoordinates());
+    }
+    return allCoordinates;
   }
 
   public GamePiece getPieceAtCoordinate(Coordinate coordinate){

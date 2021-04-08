@@ -80,6 +80,26 @@ public class GameBoardTesting {
     assertFalse(board.addPiece(knight4));
   }
 
+  @Test
+  void testBasicMovePiece(){
+    board.printBoard();
+    Coordinate startingCoordinate = makeCoordinates(4, 4);
+    assertFalse(board.isPieceAtCoordinate(startingCoordinate));
+    GamePiece knight = makePiece("Knight", startingCoordinate);
+    board.addPiece(knight);
+    assertTrue(board.isPieceAtCoordinate(startingCoordinate));
+    board.printBoard();
+
+    Coordinate endingCoordinate = makeCoordinates(0,0);
+    assertFalse(board.isPieceAtCoordinate(endingCoordinate));
+    assertTrue(board.movePiece(startingCoordinate, endingCoordinate));
+    board.printBoard();
+
+    assertFalse(board.isPieceAtCoordinate(startingCoordinate));
+    assertTrue(board.isPieceAtCoordinate(endingCoordinate));
+
+  }
+
   private GamePiece makePiece(String pieceName, Coordinate coord){
     return pieceCreator.makePiece(pieceName, coord, 1);
   }
