@@ -56,14 +56,6 @@ public class ActionTesting {
   }
 
 
-  private GamePiece makePiece(String pieceName, Coordinate coord){
-    return pieceCreator.makePiece(pieceName, coord, 1);
-  }
-
-  private GamePiece makePiece(String pieceName, int xCoord, int yCoord){
-    return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), 1);
-  }
-
   private Coordinate makeCoordinates(int x, int y){
     return new Coordinate(x, y);
   }
