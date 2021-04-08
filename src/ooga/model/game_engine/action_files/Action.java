@@ -16,13 +16,13 @@ public abstract class Action {
 
   protected GamePiece stringToPiece(String pieceAsString, Coordinate coordinate, GameRules rules){
     //TODO: get name of game from rules
-    String gameName = "chess"; //this will be overridden with todo above
+    String gameName = "Chess"; //this will be overridden with todo above
     PieceCreator pieceCreator = new PieceCreator(gameName);
     return pieceCreator.makePiece(pieceAsString, coordinate, 1);
   }
 
   protected Coordinate stringToCoordinate(String coordinateAsString){
-    String[] coordinateArray = coordinateAsString.split("/:");
+    String[] coordinateArray = coordinateAsString.split("\\:");
     if(!ensureStringToCoordinateTranslation(coordinateArray)){
       //TODO: Throw exception
       System.err.println("String " + coordinateAsString + " is not translatable to type Coordinate");

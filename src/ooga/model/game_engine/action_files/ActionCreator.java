@@ -12,13 +12,16 @@ public class ActionCreator {
   public Action createAction(String actionType, List<String> actionParameters){
     try{
       Class<?> actionClass = Class.forName("ooga.model.game_engine.action_files." + actionType + "Action");
-      return (Action) actionClass.getDeclaredConstructor(GameBoard.class, GameRules.class).newInstance(actionType, actionParameters);
+      return (Action) actionClass.getConstructor(List.class).newInstance(actionParameters);
 
-    } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException | ClassNotFoundException e) {
+    } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
       System.err.println("No Action found for action type: " + actionType);
       e.printStackTrace();
-      return null;
+    } catch (ClassNotFoundException e){
+      System.err.println("No Class found for action type: " + actionType);
+      e.printStackTrace();
     }
+    return null;
 
   }
 
