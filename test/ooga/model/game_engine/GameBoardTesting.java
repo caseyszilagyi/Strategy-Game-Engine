@@ -14,6 +14,7 @@ public class GameBoardTesting {
   private GameBoard board;
   private PieceCreator pieceCreator = new PieceCreator("Chess");
 
+  /*
   @BeforeEach
   void setup(){
     board = new GameBoard(8, 8);
@@ -156,4 +157,6 @@ public class GameBoardTesting {
     return new Coordinate(x, y);
   }
 
+
+   */
 }
