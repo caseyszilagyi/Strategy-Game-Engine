@@ -44,7 +44,7 @@ public class PieceCreator extends Creator {
 
 
   public GamePiece makePiece(String pieceName, Coordinate coordinates, int direction){
-    GamePiece gamePiece = new GamePiece(coordinates);
+    GamePiece gamePiece = new GamePiece(coordinates, pieceName);
     pieceFileNodes = super.makeRootNodeMap(pieceName);
     gamePiece.setPossibleMoves(makePieceMovements(direction));
     return gamePiece;
