@@ -97,6 +97,15 @@ public class GameBoardTesting {
 
     assertFalse(board.isPieceAtCoordinate(startingCoordinate));
     assertTrue(board.isPieceAtCoordinate(endingCoordinate));
+  }
+
+  @Test
+  void testMoveNonExistingPiece(){
+    Coordinate startingCoordinate = makeCoordinates(4, 4);
+    assertFalse(board.isPieceAtCoordinate(startingCoordinate));
+    Coordinate endingCoordinate = makeCoordinates(0,0);
+    assertFalse(board.isPieceAtCoordinate(endingCoordinate));
+    assertFalse(board.movePiece(startingCoordinate, endingCoordinate));
 
   }
 
