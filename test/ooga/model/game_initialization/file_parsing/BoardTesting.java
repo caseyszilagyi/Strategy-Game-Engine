@@ -2,6 +2,7 @@ package ooga.model.game_initialization.file_parsing;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import ooga.model.game_components.GameBoard;
 import ooga.model.game_components.GamePiece;
 import ooga.model.game_initialization.BoardCreator;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,12 +11,14 @@ import org.junit.jupiter.api.Test;
 
 public class BoardTesting {
     private BoardCreator boardCreator;
-    private GamePiece[][] testBoard;
+    private GameBoard testBoard;
+    private GamePiece[][] gameBoard;
 
     @BeforeEach
     private void setUp() {
         boardCreator = new BoardCreator("Chess");
         testBoard = boardCreator.makeBoard();
+        gameBoard = testBoard.getBoardArray();
     }
 
     @Test
@@ -26,16 +29,16 @@ public class BoardTesting {
 
     @Test
     void testOpponentPieces() {
-        assertEquals("rook", testBoard[0][0].getPieceName());
-        assertEquals("knight", testBoard[1][0].getPieceName());
-        assertEquals("pawn", testBoard[4][1].getPieceName());
+        assertEquals("rook", gameBoard[0][0].getPieceName());
+        assertEquals("knight", gameBoard[0][1].getPieceName());
+        assertEquals("pawn", gameBoard[1][4].getPieceName());
     }
 
     @Test
     void testUserPieces() {
-        assertEquals("pawn", testBoard[0][6].getPieceName());
-        assertEquals("rook", testBoard[0][7].getPieceName());
-        assertEquals("king", testBoard[4][7].getPieceName());
+        assertEquals("pawn", gameBoard[6][0].getPieceName());
+        assertEquals("rook", gameBoard[7][0].getPieceName());
+        assertEquals("king", gameBoard[7][4].getPieceName());
     }
 
 
