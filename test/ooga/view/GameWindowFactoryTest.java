@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 
 public class GameWindowFactoryTest {
 
-  private GameWindowFactory windowFactory = new GameWindowFactory();
-  private GameSceneFactory sceneFactory = new GameSceneFactory();
+  //private GameWindowFactory windowFactory = new GameWindowFactory();
+  //private GameSceneFactory sceneFactory = new GameSceneFactory();
 
   @Test
   void testReflection(){
