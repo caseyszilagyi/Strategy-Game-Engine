@@ -19,14 +19,18 @@ public class GameBoard implements Board {
 
   @Override
   public boolean movePiece(Coordinate startingCoordinate, Coordinate endingCoordinate) {
-    if(isAnyCoordinateConflicts(endingCoordinate)){
-      return false;
-    }
     if(!isPieceAtCoordinate(startingCoordinate) || !isCoordinateOnBoard(startingCoordinate)){
       System.err.println("Tried to move non-existing piece");
       return false;
     }
+    if(!isCoordinateOnBoard(endingCoordinate)){
+      System.err.println("Tried to move off the board");
+      return false;
+    }
     GamePiece pieceToMove = getPieceAtCoordinate(startingCoordinate);
+    if(isAnyCoordinateConflicts(endingCoordinate)){
+      activePieces.remove(getPieceAtCoordinate(endingCoordinate));
+    }
     pieceToMove.setPieceCoordinates(endingCoordinate);
     return true;
   }

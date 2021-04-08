@@ -3,22 +3,12 @@
  <actionType>
   Move
  </actionType>
- <piece>
-  bishop
- </piece>
- <piece>
-  king
- </piece>
- <piece>
-  knight
- </piece>
- <piece>
-  pawn
- </piece>
- <piece>
-  queen
- </piece>
- <piece>
-  rook
- </piece>
+ <specialCases>
+  <case case = "jumped">
+   <action classToCall = "removeInBetween">
+
+   </action>
+  </case>
+ </specialCases>
+
 </rules>
