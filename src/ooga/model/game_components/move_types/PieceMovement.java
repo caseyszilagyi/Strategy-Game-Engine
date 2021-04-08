@@ -57,6 +57,9 @@ public abstract class PieceMovement {
   }
 
 
+  public abstract void executeMove(Coordinate coordinates);
+
+
   protected boolean checkIfValidMove(Coordinate coordinates, String teamName){
     return checkIfMoveInBounds(coordinates) &&
            checkThatNoFriendlyPieceInMoveDestination(coordinates, teamName) &&
@@ -92,21 +95,7 @@ public abstract class PieceMovement {
    */
   protected boolean checkEnemyPieceLocationConditions(Coordinate coordinates, String teamName) {
     if (mustTake) {
-      //checks to see if piece is where it needs to be in order for it to be taken. If not, move invalid
-      if (!checkIfOpponentPieceInLocation(coordinates.getX() + changeX + takeX,
-          coordinates.getY() + changeY + takeY, teamName)) {
-        return false;
-      }
-      // checks to make sure there is an empty space where the piece lands, if the take location
-      // is different from the landing location of the piece. If no empty space, move invalid
-      if (takeX != 0 || takeY != 0) {
-        if (checkIfOpponentPieceInLocation(coordinates.getX() + changeX, coordinates.getY() + changeY,
-            teamName)) {
-          return false;
-        }
-      }
-      // if piece in take location and not in landing location
-      return true;
+      return checkEnemyPieceLocationConditionsForTakeMove(coordinates, teamName);
     }
 
     // if piece can't take, need to make sure landing spot doesn't have opponent's piece
@@ -115,6 +104,25 @@ public abstract class PieceMovement {
       return false;
     }
 
+    return true;
+  }
+
+  // Checks the locations of enemy pieces for a take move to see if conditions are met
+  private boolean checkEnemyPieceLocationConditionsForTakeMove(Coordinate coordinates, String teamName) {
+    //checks to see if piece is where it needs to be in order for it to be taken. If not, move invalid
+    if (!checkIfOpponentPieceInLocation(coordinates.getX() + changeX + takeX,
+        coordinates.getY() + changeY + takeY, teamName)) {
+      return false;
+    }
+    // checks to make sure there is an empty space where the piece lands, if the take location
+    // is different from the landing location of the piece. If no empty space, move invalid
+    if (takeX != 0 || takeY != 0) {
+      if (checkIfOpponentPieceInLocation(coordinates.getX() + changeX, coordinates.getY() + changeY,
+          teamName)) {
+        return false;
+      }
+    }
+    // if piece in take location and not in landing location
     return true;
   }
 

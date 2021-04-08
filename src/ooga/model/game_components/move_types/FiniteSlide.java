@@ -56,6 +56,13 @@ public class FiniteSlide extends PieceMovement {
     return possibleMoves;
   }
 
+  @Override
+  public void executeMove(Coordinate coordinates) {
+    if(isMustTake()){
+
+    }
+  }
+
 
   // if this instance of the pieceMovement doesn't take pieces, this method is called
   private void getNonTakeMoves(Coordinate coordinates, String teamName, List<Coordinate> possibleMoves) {

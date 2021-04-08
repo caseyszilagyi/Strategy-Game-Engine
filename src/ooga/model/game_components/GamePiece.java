@@ -41,7 +41,7 @@ public class GamePiece {
     this.pieceName = pieceName;
   }
 
-  public String getPieceName(){
+  public String getPieceName() {
     return pieceName;
   }
 
@@ -73,6 +73,16 @@ public class GamePiece {
       }
     }
     return possibleMoveLocations;
+  }
+
+  /**
+   * When given the final coordinates of a move, this move is executed
+   *
+   * @param coordinates The final coordinates of the move
+   */
+  public void executeMove(Coordinate coordinates) {
+    PieceMovement correspondingMove = legalMovementMap.get(coordinates);
+    correspondingMove.executeMove(coordinates);
   }
 
   /**
