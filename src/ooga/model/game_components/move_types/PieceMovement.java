@@ -11,7 +11,7 @@ import ooga.model.game_components.move_types.move_restrictions.GeneralRestrictio
  * This class is used to represent a singular move that a piece can do. It needs the board, as well
  * as sets of opponent/friendly pieces in order to determine whether moves are valid
  *
- * @Casey Szilagyi
+ * @author Casey Szilagyi
  */
 public abstract class PieceMovement {
 
