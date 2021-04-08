@@ -23,6 +23,6 @@
   </HBox>
 
   <stylesheets>
-    <URL value="@BoardSceneDefault.css"/>
+    <URL value="@DefaultStyle.css"/>
   </stylesheets>
 </BorderPane>
