@@ -30,6 +30,7 @@ public class EngineInitializer implements Initializer {
   @Override
   public void initializeGame(String gameName) {
     classLoader.makeRules(gameName);
+
   }
 
   @Override

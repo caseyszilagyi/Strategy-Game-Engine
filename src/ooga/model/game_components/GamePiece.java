@@ -17,7 +17,7 @@ public class GamePiece {
   private Coordinate pieceCoordinates;
   private GameBoard gameBoard;
   private List<PieceMovement> allPossibleMoves;
-  private String pieceType;
+  private String pieceName;
 
   //These two need to be added to constructor in boardCreator class when making the board,
   // right now just being assigned. dummyBoard needs to be integrated with actual Board classs
@@ -34,10 +34,30 @@ public class GamePiece {
    *
    * @param coordinates The coordinates object representing the piece's coordinates
    */
-  public GamePiece(Coordinate coordinates) {
+  public GamePiece(Coordinate coordinates, String pieceName) {
     pieceCoordinates = coordinates;
+    this.pieceName = pieceName;
   }
 
+  public String getPieceName(){
+    return pieceName;
+  }
+
+  /**
+   * Returns the piece's Coordinate
+   * @return a Coordinate which can be used to map this GamePiece on the GameBoard
+   */
+  public Coordinate getPieceCoordinates(){
+    return pieceCoordinates;
+  }
+
+  /**
+   * Sets this piece's Coordinates to the new, given Coordinates
+   * @param newCoordinates the new Coordinates for this piece to be moved to
+   */
+  public void setPieceCoordinates(Coordinate newCoordinates){
+    pieceCoordinates = newCoordinates;
+  }
   /**
    * Sets the piece's possible moves
    *

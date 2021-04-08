@@ -24,7 +24,7 @@ public class GameClassLoader implements Loader {
 
   @Override
   public GameBoard makeBoard(String boardDetails) {
-    return new GameBoard();
+    return new GameBoard(8, 8); //values are defaults
   }
 
   @Override
