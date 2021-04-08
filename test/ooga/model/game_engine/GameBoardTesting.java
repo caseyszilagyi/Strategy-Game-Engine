@@ -120,10 +120,11 @@ public class GameBoardTesting {
     GamePiece queen = makePiece("Queen", endingCoordinate);
     assertTrue(board.addPiece(queen));
     assertTrue(board.isPieceAtCoordinate(endingCoordinate));
-    assertFalse(board.movePiece(startingCoordinate, endingCoordinate));
+    assertTrue(board.movePiece(startingCoordinate, endingCoordinate));
 
-    assertTrue(board.isPieceAtCoordinate(startingCoordinate));
+    assertFalse(board.isPieceAtCoordinate(startingCoordinate));
     assertTrue(board.isPieceAtCoordinate(endingCoordinate));
+    assertEquals(knight, board.getPieceAtCoordinate(endingCoordinate));
   }
 
   @Test
@@ -141,6 +142,7 @@ public class GameBoardTesting {
     assertTrue(board.isPieceAtCoordinate(startingCoordinate));
     assertFalse(board.isPieceAtCoordinate(endingCoordinate));
   }
+
 
   private GamePiece makePiece(String pieceName, Coordinate coord){
     return pieceCreator.makePiece(pieceName, coord, 1);

@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rules rule="Chess">
  <actionType>
-  Move
+  Place
  </actionType>
- <piece>
-  bishop
- </piece>
- <piece>
-  king
- </piece>
- <piece>
-  knight
- </piece>
- <piece>
-  pawn
- </piece>
- <piece>
-  queen
- </piece>
- <piece>
-  rook
- </piece>
+ <specialCases>
+  <case case = "jumped">
+   <action classToCall = "removeInBetween">
+
+   </action>
+  </case>
+ </specialCases>
+
 </rules>
