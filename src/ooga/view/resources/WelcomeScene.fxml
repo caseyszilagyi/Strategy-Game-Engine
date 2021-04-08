@@ -33,7 +33,7 @@
   <HBox GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2"
     styleClass="hbox"
   maxHeight="30" alignment="BOTTOM_CENTER">
-    <Button text="Start Game"/>
+    <Button text="Start Game" onAction="#handleClick"/>
   </HBox>
 
   <stylesheets>

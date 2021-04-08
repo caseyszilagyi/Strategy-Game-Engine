@@ -1,7 +1,7 @@
 package ooga.view;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.input.MouseEvent;
 
 public class FXMLController {
   public FXMLController(){
@@ -9,7 +9,7 @@ public class FXMLController {
   }
 
   @FXML
-  private void handleImageClick(MouseEvent mouseEvent){
-    System.out.println("Clicked on image");
+  private void handleClick(ActionEvent mouseEvent){
+    System.out.println("User clicked Start");
   }
 }
