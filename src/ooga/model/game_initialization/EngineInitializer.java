@@ -7,8 +7,8 @@ import ooga.model.game_initialization.file_parsing.FileParser;
 import ooga.model.game_initialization.file_parsing.GameFileParser;
 
 /**
- * each method here will pass the file name to the file parser, then the relevant
- * information to the classloader to load the class details
+ * These methods are designed to initialize parts of the game that the engine needs to run.
+ * This includes the players, board state, rules, and pieces.
  */
 public class EngineInitializer implements Initializer {
 
@@ -16,8 +16,7 @@ public class EngineInitializer implements Initializer {
 
   public Engine gameEngine;
   public FileParser fileParser = new GameFileParser();
-  public Loader classLoader = new GameClassLoader();
-
+  public BoardCreator boardCreator;
 
   public EngineInitializer(FrontEndExternalAPI newViewController){
     viewController = newViewController;
@@ -29,8 +28,8 @@ public class EngineInitializer implements Initializer {
    */
   @Override
   public void initializeGame(String gameName) {
-    classLoader.makeRules(gameName);
-
+    boardCreator = new BoardCreator(gameName);
+    gameEngine.setBoard(boardCreator.makeBoard());
   }
 
   @Override
@@ -50,6 +49,6 @@ public class EngineInitializer implements Initializer {
 
   @Override
   public Engine getEngine() {
-    return null;
+    return gameEngine;
   }
 }

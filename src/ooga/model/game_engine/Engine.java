@@ -59,6 +59,10 @@ public abstract class Engine{
    */
   public abstract void executeAction(Action action);
 
+  public abstract void executeAction(String action);
 
+  public abstract GameBoard getBoard();
+
+  public abstract void printAllPossibleMoves(int xPos, int yPos);
 
 }

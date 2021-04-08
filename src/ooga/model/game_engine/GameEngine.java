@@ -9,6 +9,7 @@ import ooga.model.game_components.GamePiece;
 import ooga.model.game_components.GameRules;
 import ooga.model.game_components.Player;
 import ooga.model.game_engine.action_files.Action;
+import ooga.model.game_engine.action_files.ActionCreator;
 
 public class GameEngine extends Engine {
 
@@ -30,6 +31,9 @@ public class GameEngine extends Engine {
   private List<Player> activePlayers;
   private List<Long> playerTimes;
   private Long playerStartTime;
+
+  //Action creator
+  private ActionCreator actionCreator = new ActionCreator();
 
   public GameEngine(FrontEndExternalAPI newViewController){
     viewController = newViewController;
@@ -83,6 +87,21 @@ public class GameEngine extends Engine {
   @Override
   public void setBoard(GameBoard board) {
     curBoard = board;
+  }
+
+  // for testing
+  public GameBoard getBoard(){
+    return curBoard;
+  }
+
+  // testing
+  public void printAllPossibleMoves(int xPos, int yPos){
+    curBoard.printAllPossibleMoves(xPos, yPos);
+  }
+
+
+  public void executeAction(String action){
+    executeAction(actionCreator.createAction(action));
   }
 
   /**

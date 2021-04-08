@@ -1,6 +1,7 @@
 package ooga.controller;
 
 import javafx.util.Pair;
+import ooga.model.game_engine.Engine;
 
 /**
  * Classes that implement this interface are meant to be passed around the front end in
@@ -67,6 +68,15 @@ public interface BackEndExternalAPI {
    */
   public void getAllPossibleMoves(int row, int col);
 
+
+  /**
+   * Makes the engine execute an action
+   * @param actionString The action to execute
+   */
+  public void executeAction(String actionString);
+
+  // for testing
+  public Engine getEngine();
 
 
 }
