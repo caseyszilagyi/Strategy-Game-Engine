@@ -106,6 +106,10 @@ public class GameBoardTesting {
     Coordinate endingCoordinate = makeCoordinates(0,0);
     assertFalse(board.isPieceAtCoordinate(endingCoordinate));
     assertFalse(board.movePiece(startingCoordinate, endingCoordinate));
+  }
+
+  @Test
+  void testMoveToOccupiedSpace(){
 
   }
 

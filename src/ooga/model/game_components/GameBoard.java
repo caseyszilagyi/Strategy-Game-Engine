@@ -19,11 +19,10 @@ public class GameBoard implements Board {
 
   @Override
   public boolean movePiece(Coordinate startingCoordinate, Coordinate endingCoordinate) {
-    if(isPieceAtCoordinate(endingCoordinate)){
-      System.err.println("Tried to move piece to occupied space");
+    if(isAnyCoordinateConflicts(endingCoordinate)){
       return false;
     }
-    if(!isPieceAtCoordinate(startingCoordinate)){
+    if(!isPieceAtCoordinate(startingCoordinate) || !isCoordinateOnBoard(startingCoordinate)){
       System.err.println("Tried to move non-existing piece");
       return false;
     }
@@ -45,17 +44,26 @@ public class GameBoard implements Board {
   @Override
   public boolean addPiece(GamePiece newPieceType) {
     Coordinate newPieceCoordinates = newPieceType.getPieceCoordinates();
-    if(newPieceCoordinates.getX() >= width || newPieceCoordinates.getY() >= height || newPieceCoordinates.getX() < 0 || newPieceCoordinates.getY() < 0){
-      System.err.println("Tried to add a piece outside of the board");
-      return false;
-    }
-    if(isPieceAtCoordinate(newPieceCoordinates)){
-      System.err.println("Tried to place a piece on top of another piece");
+    if (isAnyCoordinateConflicts(newPieceCoordinates)) {
       return false;
     }
     activePieces.add(newPieceType);
     return true;
   }
+
+  private boolean isAnyCoordinateConflicts(Coordinate coordinates) {
+    if (!isCoordinateOnBoard(coordinates)) {
+      System.err.println("Coordinate outside of the board");
+      return true;
+    }
+    if (isPieceAtCoordinate(coordinates)) {
+      System.err.println("Coordinate is occupied");
+      return true;
+    }
+    return false;
+  }
+
+
 
   public List<Coordinate> getAllActivePieceCoordinates() {
     List<Coordinate> allCoordinates = new ArrayList<>();
@@ -72,6 +80,14 @@ public class GameBoard implements Board {
       }
     }
     return null;
+  }
+
+  private boolean isCoordinateOnBoard(Coordinate coordinates) {
+    if(coordinates.getX() >= width || coordinates.getY() >= height || coordinates
+        .getX() < 0 || coordinates.getY() < 0){
+      return false;
+    }
+    return true;
   }
 
   public boolean isPieceAtCoordinate(Coordinate coordinate){
