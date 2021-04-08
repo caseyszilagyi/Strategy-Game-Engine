@@ -41,7 +41,7 @@ public class Controller2 {
     System.out.println("Chess pressed");
     Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
     GameScene newScene = sceneFactory.makeScene("BoardScene");//TODO: hardcoded
-    stage.setScene(new Scene(new Pane()));
+    stage.setScene(newScene);
 //    initialshowScene(newScene);
 //    initialWindow.makeVisible();
   }
