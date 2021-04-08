@@ -15,6 +15,7 @@
 <GridPane
   xmlns="http://javafx.com/javafx"
   xmlns:fx="http://javafx.com/fxml"
+  fx:controller="ooga.view.FXMLController"
   alignment="TOP_CENTER"
   hgap="10"
   vgap="300"
@@ -30,7 +31,7 @@
     GridPane.columnSpan="2"/>
 
   <HBox GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2"
-    styleClass="hbox" id="hbox-custom"
+    styleClass="hbox"
   maxHeight="30" alignment="BOTTOM_CENTER">
     <Button text="Start Game"/>
   </HBox>
