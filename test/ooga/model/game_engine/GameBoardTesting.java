@@ -110,7 +110,36 @@ public class GameBoardTesting {
 
   @Test
   void testMoveToOccupiedSpace(){
+    Coordinate startingCoordinate = makeCoordinates(4, 4);
+    assertFalse(board.isPieceAtCoordinate(startingCoordinate));
+    GamePiece knight = makePiece("Knight", startingCoordinate);
+    assertTrue(board.addPiece(knight));
+    assertTrue(board.isPieceAtCoordinate(startingCoordinate));
 
+    Coordinate endingCoordinate = makeCoordinates(0,0);
+    GamePiece queen = makePiece("Queen", endingCoordinate);
+    assertTrue(board.addPiece(queen));
+    assertTrue(board.isPieceAtCoordinate(endingCoordinate));
+    assertFalse(board.movePiece(startingCoordinate, endingCoordinate));
+
+    assertTrue(board.isPieceAtCoordinate(startingCoordinate));
+    assertTrue(board.isPieceAtCoordinate(endingCoordinate));
+  }
+
+  @Test
+  void testMoveOutOfBounds(){
+    Coordinate startingCoordinate = makeCoordinates(4, 4);
+    assertFalse(board.isPieceAtCoordinate(startingCoordinate));
+    GamePiece knight = makePiece("Knight", startingCoordinate);
+    board.addPiece(knight);
+    assertTrue(board.isPieceAtCoordinate(startingCoordinate));
+
+    Coordinate endingCoordinate = makeCoordinates(-1,0);
+    assertFalse(board.isPieceAtCoordinate(endingCoordinate));
+    assertFalse(board.movePiece(startingCoordinate, endingCoordinate));
+
+    assertTrue(board.isPieceAtCoordinate(startingCoordinate));
+    assertFalse(board.isPieceAtCoordinate(endingCoordinate));
   }
 
   private GamePiece makePiece(String pieceName, Coordinate coord){
