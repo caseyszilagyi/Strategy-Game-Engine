@@ -38,6 +38,23 @@ public class ActionTesting {
     assertTrue(board.isPieceAtCoordinate(testCoordinate));
   }
 
+  @Test
+  void testBasicMoveAction(){
+    Coordinate startingCoordinate = makeCoordinates(4, 4);
+    Coordinate endingCoordinate = makeCoordinates(0, 0);
+    assertFalse(board.isPieceAtCoordinate(startingCoordinate));
+    assertFalse(board.isPieceAtCoordinate(endingCoordinate));
+    testBasicPlaceAction();
+    assertTrue(board.isPieceAtCoordinate(startingCoordinate));
+    assertFalse(board.isPieceAtCoordinate(endingCoordinate));
+    String actionType = "Move";
+    List<String> actionParameters = Arrays.asList("4:4", "0:0");
+    Action action = actionCreator.createAction(actionType, actionParameters);
+    action.executeAction(board, rules);
+    assertFalse(board.isPieceAtCoordinate(startingCoordinate));
+    assertTrue(board.isPieceAtCoordinate(endingCoordinate));
+  }
+
 
   private GamePiece makePiece(String pieceName, Coordinate coord){
     return pieceCreator.makePiece(pieceName, coord, 1);
