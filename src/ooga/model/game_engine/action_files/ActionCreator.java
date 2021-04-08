@@ -2,12 +2,29 @@ package ooga.model.game_engine.action_files;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import ooga.model.game_components.GameBoard;
 import ooga.model.game_components.GameRules;
 
 public class ActionCreator {
 
+
+  /**
+   * Spaces between actions
+   * i.e "Move 2:2 3:3"
+   *
+   * @param actionString The string representation the action
+   * @return The action represented by the string
+   */
+  public Action createAction(String actionString){
+    String[] actionSplit = actionString.split(" ");
+    List<String> params = new ArrayList<String>(Arrays.asList(actionSplit));
+    String type = params.get(0);
+    params.remove(0);
+    return createAction(type, params);
+  }
 
   public Action createAction(String actionType, List<String> actionParameters){
     try{

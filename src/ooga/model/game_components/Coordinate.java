@@ -105,4 +105,9 @@ public class Coordinate {
   public int hashCode() {
     return x * 100 + y;
   }
+
+  @Override
+  public String toString(){
+    return Integer.toString(x) + ":" + Integer.toString(y);
+  }
 }

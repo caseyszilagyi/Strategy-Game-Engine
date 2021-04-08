@@ -1,6 +1,7 @@
 package ooga.controller;
 
 import ooga.model.game_engine.Engine;
+import ooga.model.game_engine.GameEngine;
 import ooga.model.game_initialization.Initializer;
 import ooga.model.game_initialization.EngineInitializer;
 
@@ -17,6 +18,7 @@ public class ModelController implements BackEndExternalAPI {
   public void setViewController(FrontEndExternalAPI newViewController) {
     viewController=newViewController;
     creator = new EngineInitializer(viewController);
+    gameEngine = creator.getEngine();
   }
 
   @Override
@@ -55,8 +57,18 @@ public class ModelController implements BackEndExternalAPI {
   }
 
   @Override
-  public void getAllPossibleMoves(int row, int col) {
+  public void getAllPossibleMoves(int xPos, int yPos) {
+    gameEngine.printAllPossibleMoves(xPos, yPos);
+  }
 
+  //for testing
+  public Engine getEngine(){
+    return gameEngine;
+  }
+
+  @Override
+  public void executeAction(String actionString) {
+    gameEngine.executeAction(actionString);
   }
 
 }

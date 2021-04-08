@@ -2,6 +2,7 @@ package ooga.model.game_components;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class GameBoard implements Board {
 
@@ -19,6 +20,18 @@ public class GameBoard implements Board {
     activePieces = new ArrayList<>();
   }
 
+  public void setGrid(GamePiece[][] grid){
+    this.grid = grid;
+  }
+
+  // For testing
+  public void printAllPossibleMoves(int xPos, int yPos){
+    grid[yPos][xPos].setDummyBoard(grid);
+    Set<Coordinate> moves= grid[yPos][xPos].getAllLegalMoves();
+    for(Coordinate coords: moves){
+      System.out.println(coords.toString());
+    }
+  }
 
   @Override
   public boolean movePiece(Coordinate startingCoordinate, Coordinate endingCoordinate) {
@@ -35,9 +48,9 @@ public class GameBoard implements Board {
       GamePiece conflict = getPieceAtCoordinate(endingCoordinate);
       activePieces.remove(conflict);
     }
-    grid[startingCoordinate.getX()][startingCoordinate.getY()] = null;
+    grid[startingCoordinate.getY()][startingCoordinate.getX()] = null;
     pieceToMove.setPieceCoordinates(endingCoordinate);
-    grid[endingCoordinate.getX()][endingCoordinate.getY()] = pieceToMove;
+    grid[endingCoordinate.getY()][endingCoordinate.getX()] = pieceToMove;
     return true;
   }
 
@@ -58,7 +71,7 @@ public class GameBoard implements Board {
       return false;
     }
     activePieces.add(newPieceType);
-    grid[newPieceCoordinates.getX()][newPieceCoordinates.getY()] = newPieceType;
+    grid[newPieceCoordinates.getY()][newPieceCoordinates.getX()] = newPieceType;
     return true;
   }
 
@@ -87,7 +100,7 @@ public class GameBoard implements Board {
   }
 
   public GamePiece getPieceAtCoordinate(Coordinate coordinate){
-    return grid[coordinate.getX()][coordinate.getY()];
+    return grid[coordinate.getY()][coordinate.getX()];
   }
 
   private boolean isCoordinateOnBoard(Coordinate coordinates) {
@@ -99,7 +112,7 @@ public class GameBoard implements Board {
   }
 
   public boolean isPieceAtCoordinate(Coordinate coordinate){
-    return (isCoordinateOnBoard(coordinate) && grid[coordinate.getX()][coordinate.getY()] != null);
+    return (isCoordinateOnBoard(coordinate) && grid[coordinate.getY()][coordinate.getX()] != null);
   }
 
   public void printBoard(){
