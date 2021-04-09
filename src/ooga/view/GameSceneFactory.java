@@ -48,6 +48,13 @@ public class GameSceneFactory {
     return myScene;
   }
 
+  public GameScene makeWelcomeScene(ResourceBundle resources){
+    if (!resources.getString("sceneType").equals("WelcomeScene")) {
+
+    }
+
+  }
+
   /**
    * Creates a {@link GameScene} using the {@code String} name of a resources file.
    * @param sceneName name of the {@code GameScene} to instantiate, must match a data file

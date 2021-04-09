@@ -25,6 +25,7 @@
   spacing="20">
     <Button text="Pause" id="button" minWidth="80"/>
     <Button text="End Turn" id="button" minWidth="80"/>
+    <Button text="Settings" id="button" minWidth="80"/>
     <Button text="Help" id="button" minWidth="80"/>
   </HBox>
 
