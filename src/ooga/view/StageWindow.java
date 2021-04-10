@@ -6,6 +6,7 @@ public class StageWindow extends Stage implements GameWindow {
 
   @Override
   public void makeVisible() {
+    this.setResizable(false);
     this.show();
   }
 
