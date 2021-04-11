@@ -33,12 +33,13 @@ public class GameEngine extends Engine {
   private Long playerStartTime;
 
   //Action creator
-  private ActionCreator actionCreator = new ActionCreator();
+  private ActionCreator actionCreator;
 
   public GameEngine(FrontEndExternalAPI newViewController) {
     viewController = newViewController;
     activePlayers = new ArrayList<>();
     priorActions = new ArrayList<>();
+    actionCreator = new ActionCreator(viewController);
   }
 
 
@@ -51,7 +52,7 @@ public class GameEngine extends Engine {
   @Override
   public void actOnCoordinates(int x, int y) {
     // TODO: Add logic that determines what method is called on the game board depending on the game type
-    //curBoard.actOnCoordinates(x, y);
+    curBoard.determineAllLegalMoves(x, y);
   }
 
   /**
@@ -134,11 +135,6 @@ public class GameEngine extends Engine {
   // for testing
   public GameBoard getBoard() {
     return curBoard;
-  }
-
-  // testing
-  public void printAllPossibleMoves(int xPos, int yPos) {
-    curBoard.printAllPossibleMoves(xPos, yPos);
   }
 
 
