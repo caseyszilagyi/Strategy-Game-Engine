@@ -30,52 +30,35 @@ public interface FrontEndExternalAPI {
    * @param column The column of the space
    * @param identifier The identifier of the piece
    */
-  public void setBoardSpace(int row, int column, String identifier);
+  public void setBoardSpace(int row, int column, String identifier, String teamName);
+
+  public void movePiece(int startX, int startY, int endX, int endY);
 
   /**
    * Sets a board space to empty
    * @param row The row of the space
    * @param column The column of the space
    */
-  public void clearBoardSpace(int row, int column);
+  public void removePiece(int row, int column);
 
-  /**
-   * Used for setting
-   * @param friendlyPieces A map of location to piece name for friendly pieces
-   * @param opponentPieces A map of location to piece name for opponent pieces
-   */
-  public void setInitialPieces(Map<String, String> friendlyPieces, Map<String, String> opponentPieces);
 
   /**
    * Gives all of the possible moves that were requested
    * @return An iterable of pairs that represent the possible moves
    */
-  public Iterable<Pair<Integer, Integer>> giveAllPossibleMoves();
+  public void giveAllPossibleMoves(Iterable<Pair<Integer, Integer>> possibleMoves);
 
 
   /**
    * Called when the game is done and a player has won
    * @param playerName The name of the winning player
    */
-  public void gameWin(String playerName);
-
-  /**
-   * Called when the game is done and a player has lost
-   * @param playerName The name of the losing player
-   */
-  public void gameLose(String playerName);
-
-  /**
-   * Sets a player that is playing the game
-   * @param playerNumber The number of the player so it can be kept track of
-   * @param playerName The name of the player
-   */
-  public void setPlayer(int playerNumber, String playerName);
+  public void gameEnd(String playerName);
 
 
   /**
    * Gives the pieces that a selected piece can be changed to
    * @return The pieces it can be changed to
    */
-  public Iterable<String> givePieceChangeOptions();
+  public void givePieceChangeOptions(Iterable<String> pieceChangeOptions);
 }

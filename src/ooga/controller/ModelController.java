@@ -1,7 +1,6 @@
 package ooga.controller;
 
 import ooga.model.game_engine.Engine;
-import ooga.model.game_engine.GameEngine;
 import ooga.model.game_initialization.Initializer;
 import ooga.model.game_initialization.EngineInitializer;
 
@@ -14,6 +13,10 @@ public class ModelController implements BackEndExternalAPI {
   public ModelController(){
   }
 
+  /**
+   * Sets the view controller that this modelController is linked to
+   * @param newViewController The view controller
+   */
   @Override
   public void setViewController(FrontEndExternalAPI newViewController) {
     viewController=newViewController;
@@ -31,12 +34,6 @@ public class ModelController implements BackEndExternalAPI {
     creator.initializeGame(gameName);
   }
 
-
-  @Override
-  public void setGameRules(String rulesFileName) {
-    creator.setGameRules(rulesFileName);
-  }
-
   /**
    * The method that the front end calls whenever a square is clicked on the board
    * @param x The x coordinate
@@ -47,18 +44,26 @@ public class ModelController implements BackEndExternalAPI {
     gameEngine.actOnCoordinates(x, y);
   }
 
-  /**
-   * Adds an active player to the game
-   * @param playerFileName The string associated with the player name
-   */
+
   @Override
-  public void addPlayer(String playerFileName) {
-    creator.setPlayer(playerFileName);
+  public void modifyGameRules(String rulesFileName) {
+    creator.setGameRules(rulesFileName);
   }
 
+  @Override
+  public void setPlayers(String player1, String player2) {
 
+  }
 
+  @Override
+  public void pauseGame() {
 
+  }
+
+  @Override
+  public void resumeGame() {
+
+  }
 
   /**
    * Sets the board state to a different one than the default
@@ -74,27 +79,14 @@ public class ModelController implements BackEndExternalAPI {
    * @param fileName The name of the file to store the game information
    */
   @Override
-  public void saveCurrentBoardState(String fileName) {
+  public void saveGame(String fileName) {
 
-  }
-
-  @Override
-  public void saveCurrentRules(String fileName) {
-
-  }
-
-
-  @Override
-  public void getAllPossibleMoves(int xPos, int yPos) {
-    gameEngine.printAllPossibleMoves(xPos, yPos);
   }
 
   @Override
   public void executeAction(String actionString) {
     gameEngine.executeAction(actionString);
   }
-
-
 
   //for testing
   public Engine getEngine(){

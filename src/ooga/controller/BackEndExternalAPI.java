@@ -29,13 +29,14 @@ public interface BackEndExternalAPI {
    * Sets the rules that the game will follow
    * @param rulesFileName The name of the file with all the rules
    */
-  public void setGameRules(String rulesFileName);
+  public void modifyGameRules(String rulesFileName);
 
   /**
    * Sets a player that is playing the game
-   * @param playerFileName The string associated with the player name
+   * @param player1 The string associated with the player name
+   * @param player2 The string associated with the player name
    */
-  public void addPlayer(String playerFileName);
+  public void setPlayers(String player1, String player2);
 
   /**
    * Sets the initial state of the board
@@ -47,20 +48,7 @@ public interface BackEndExternalAPI {
    * Saves the current state of the game in a file
    * @param fileName The name of the file to store the game information
    */
-  public void saveCurrentBoardState(String fileName);
-
-  /**
-   * Saves the current rules of the game in a file
-   * @param fileName The name of the file to save the rules in
-   */
-  public void saveCurrentRules(String fileName);
-
-  /**
-   * Calls a request to get the possible moves
-   * @param row The row of the piece
-   * @param col The column of the piece
-   */
-  public void getAllPossibleMoves(int row, int col);
+  public void saveGame(String fileName);
 
 
   /**
@@ -77,6 +65,18 @@ public interface BackEndExternalAPI {
    * @param y The y coordinate
    */
   public void actOnCoordinates(int x, int y);
+
+
+  /**
+   * Used to pause the game
+   */
+  public void pauseGame();
+
+  /**
+   * Used to resume the game
+   */
+  public void resumeGame();
+
 
   // for testing
   public Engine getEngine();
