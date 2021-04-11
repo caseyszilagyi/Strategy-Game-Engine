@@ -36,19 +36,9 @@ public class GameBoard implements Board {
   }
 
 
-  /**
-   * Is given coordinates and makes the appropriate method calls to the front end
-   * @param x The x coordinate
-   * @param y The y coordinate
-  */
-  public void actOnCoordinates(int x, int y, boolean isMovement){
-    Coordinate currentCoordinates = makeCoordinates(x, y);
-    // TODO: this method needs to be generalized for place games. should be done in game engine method call
-    if(pieceCoordMap.containsKey(currentCoordinates) && isMovement){
-      pieceCoordMap.get(currentCoordinates);
-    }
+  public void determineAllLegalMoves(int x, int y){
+    pieceCoordMap.get(makeCoordinates(x,y)).determineAllLegalMoves();
   }
-  
 
   public void setGrid(GamePiece[][] grid){
     this.grid = grid;
@@ -176,15 +166,6 @@ public class GameBoard implements Board {
         }
       }
       System.out.println("");
-    }
-  }
-
-  // For testing
-  public void printAllPossibleMoves(int xPos, int yPos){
-    grid[yPos][xPos].setDummyBoard(grid);
-    Set<Coordinate> moves= grid[yPos][xPos].getAllLegalMoves();
-    for(Coordinate coords: moves){
-      System.out.println(coords.toString());
     }
   }
 

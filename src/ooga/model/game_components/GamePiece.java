@@ -3,10 +3,16 @@ package ooga.model.game_components;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import javafx.util.Pair;
+import ooga.controller.FrontEndExternalAPI;
 import ooga.model.game_components.move_types.PieceMovement;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Represents a generic game piece. Has a location, the board it is on, and a list of possible
@@ -20,6 +26,7 @@ public class GamePiece {
   private GameBoard gameBoard;
   private List<PieceMovement> allPossibleMoves;
   private String pieceName;
+  private FrontEndExternalAPI viewController;
 
   //These two need to be added to constructor in boardCreator class when making the board,
   // right now just being assigned. dummyBoard needs to be integrated with actual Board classs
@@ -36,9 +43,10 @@ public class GamePiece {
    *
    * @param coordinates The coordinates object representing the piece's coordinates
    */
-  public GamePiece(Coordinate coordinates, String pieceName) {
+  public GamePiece(Coordinate coordinates, String pieceName, FrontEndExternalAPI viewController) {
     pieceCoordinates = coordinates;
     this.pieceName = pieceName;
+    this.viewController = viewController;
   }
 
   public String getPieceName() {
@@ -76,7 +84,7 @@ public class GamePiece {
    *
    * @return A list of the coordinates of the legal moves
    */
-  public Set<Coordinate> getAllLegalMoves() {
+  public void determineAllLegalMoves() {
     Set<Coordinate> possibleMoveLocations = new HashSet<>();
     for (PieceMovement move : allPossibleMoves) {
       List<Coordinate> currentPossibilities = move
@@ -87,7 +95,15 @@ public class GamePiece {
         legalMovementMap.put(coord, move);
       }
     }
-    return possibleMoveLocations;
+    passLegalMoves(possibleMoveLocations);
+  }
+
+  private void passLegalMoves(Set<Coordinate> possibleMoveLocations){
+    Set<Pair<Integer, Integer>> coordPairs = new HashSet<>();
+    for(Coordinate coords: possibleMoveLocations){
+      coordPairs.add(new Pair(coords.getX(), coords.getY()));
+    }
+    viewController.giveAllPossibleMoves(coordPairs.iterator());
   }
 
   /**
