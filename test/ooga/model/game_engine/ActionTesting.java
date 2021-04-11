@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
+import ooga.controller.FrontEndExternalAPI;
+import ooga.model.DummyViewController;
 import ooga.model.game_components.Coordinate;
 import ooga.model.game_components.GameBoard;
 import ooga.model.game_components.GamePiece;
@@ -16,10 +18,11 @@ import org.junit.jupiter.api.Test;
 
 public class ActionTesting {
 
+  private FrontEndExternalAPI viewController = new DummyViewController();
   private GameBoard board;
   private GameRules rules;
   private PieceCreator pieceCreator = new PieceCreator("Chess");
-  private ActionCreator actionCreator = new ActionCreator();
+  private ActionCreator actionCreator = new ActionCreator(viewController);
 
   @BeforeEach
   void setup(){
