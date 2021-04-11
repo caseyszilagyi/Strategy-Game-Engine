@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javafx.util.Pair;
+import ooga.controller.FrontEndExternalAPI;
 import ooga.model.game_components.Coordinate;
 import ooga.model.game_components.GamePiece;
 import ooga.model.game_components.move_types.PieceMovement;
@@ -43,8 +44,8 @@ public class PieceCreator extends Creator {
   }
 
 
-  public GamePiece makePiece(String pieceName, Coordinate coordinates, int direction){
-    GamePiece gamePiece = new GamePiece(coordinates, pieceName);
+  public GamePiece makePiece(String pieceName, Coordinate coordinates, int direction, FrontEndExternalAPI viewController){
+    GamePiece gamePiece = new GamePiece(coordinates, pieceName, viewController);
     pieceFileNodes = super.makeRootNodeMap(pieceName);
     gamePiece.setPossibleMoves(makePieceMovements(direction));
     return gamePiece;
