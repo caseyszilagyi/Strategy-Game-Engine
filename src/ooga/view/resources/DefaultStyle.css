@@ -1,0 +1,77 @@
+.root {
+  -fx-font-size: 8pt;
+  -fx-font-family: "Courier New";
+  -fx-base: rgb(67, 67, 67);
+  -fx-background: rgb(76, 76, 76);
+}
+
+.title-text {
+  -fx-font-size: 25pt;
+  -fx-font-family: "Silom";
+  -fx-text-fill: white;
+  -fx-font-weight: bold;
+  -fx-text-alignment: center;
+}
+
+.title {
+  -fx-border-color: #000000;
+  -fx-background-image: url("WelcomeBackground.jpg");
+  -fx-background-color: #000000;
+  -fx-background-radius: 5.0;
+  -fx-padding: 8;
+  -fx-background-size: 500,300;
+  -fx-background-repeat: no-repeat;
+  -fx-font-size: 25pt;
+  -fx-font-family: "Silom";
+  -fx-text-fill: #FFFFFF;
+  -fx-font-weight: bold;
+  -fx-text-alignment: center;
+}
+
+.hbox {
+  -fx-background-radius: 5.0;
+  -fx-padding: 8;
+}
+
+#hbox-custom {
+  -fx-border-color: #000000;
+  -fx-background-radius: 5.0;
+  -fx-padding: 8;
+}
+
+.button {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-size: 15;
+  -fx-font-family: "Silom";
+  -fx-background-color: #2c2c2c;
+  -fx-border-radius: 10;
+  -fx-background-radius: 20;
+  -fx-padding: 8;
+}
+
+.button:hover {
+  -fx-background-color: #6afc60;
+  -fx-text-fill: #000000;
+}
+
+.combo-box-base {
+  -fx-text-base-color: #006464;
+  -fx-background-color: #DFB951;
+  -fx-border-radius: 20;
+  -fx-background-radius: 20;
+}
+.combo-box-base:hover {
+  -fx-background-color: #3a3a3a;
+}
+
+/*.label {*/
+/*  -fx-font-size: 11pt;*/
+/*  -fx-font-family: "Segoe UI Semibold";*/
+/*  -fx-text-fill: #006464;*/
+/*  -fx-opacity: 0.6;*/
+/*}*/
+
+.text-field {
+  -fx-font-size: 14pt;
+  -fx-font-family: "Segoe UI Semibold";
+}

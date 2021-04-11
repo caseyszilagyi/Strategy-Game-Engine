@@ -12,6 +12,10 @@ import javafx.scene.layout.Pane;
 public class GameScene extends Scene {
   private BorderPane sceneRoot;
 
+  public GameScene (Parent sceneBorder){
+    super(sceneBorder);
+  }
+
   public GameScene (Parent sceneBorder, int width, int height){
     super(sceneBorder, width, height);
     sceneRoot = (BorderPane) this.getRoot();

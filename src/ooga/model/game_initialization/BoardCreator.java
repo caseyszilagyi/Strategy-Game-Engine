@@ -1,6 +1,7 @@
 package ooga.model.game_initialization;
 
 import ooga.model.game_components.Coordinate;
+import ooga.model.game_components.GameBoard;
 import ooga.model.game_components.GamePiece;
 import ooga.model.game_initialization.piece_initialization.PieceCreator;
 import org.w3c.dom.Node;
@@ -47,22 +48,25 @@ public class BoardCreator extends Creator {
         userPieces = super.makeAttributeMap(pieceSubNodes.get(USER).get(0));
     }
 
-    public GamePiece[][] makeBoard() {
+    public GameBoard makeBoard() {
         gameBoard = new GamePiece[numRows][numCols];
         for (Map.Entry<String, String> entry : userPieces.entrySet()) {
-            buildPiece(numRows, entry, 1);
+            buildPiece(numRows, entry, -1, USER);
         }
         for (Map.Entry<String, String> entry : opponentPieces.entrySet()) {
-            buildPiece(numRows, entry, -1);
+            buildPiece(numRows, entry, 1, OPPONENT);
         }
-        return gameBoard;
+        GameBoard board= new GameBoard(numCols, numRows);
+        board.setGrid(gameBoard);
+        return board;
     }
 
-    private void buildPiece(int numRows, Map.Entry<String, String> entry, int direction) {
+    private void buildPiece(int numRows, Map.Entry<String, String> entry, int direction, String team) {
         int pieceX = translateX(entry.getKey());
         int pieceY = translateY(entry.getKey(), numRows);
         Coordinate pieceCoordinate = new Coordinate(pieceX, pieceY);
-        gameBoard[pieceX][pieceY] = pieceCreator.makePiece(entry.getValue(), pieceCoordinate, direction);
+        gameBoard[pieceY][pieceX] = pieceCreator.makePiece(entry.getValue(), pieceCoordinate, direction);
+        gameBoard[pieceY][pieceX].setPieceTeam(team);
     }
 
     private int translateX(String coordinate) {

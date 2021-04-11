@@ -56,30 +56,82 @@ public class FiniteSlide extends PieceMovement {
     return possibleMoves;
   }
 
+  @Override
+  public void executeMove(Coordinate coordinates) {
+    if(isMustTake()){
+
+    }
+  }
+
 
   // if this instance of the pieceMovement doesn't take pieces, this method is called
   private void getNonTakeMoves(Coordinate coordinates, String teamName, List<Coordinate> possibleMoves) {
-    while (checkIfMoveInBounds(coordinates) && checkThatNoFriendlyPieceInMoveDestination(
-        coordinates, teamName)
-        && checkEnemyPieceLocationConditions(coordinates, teamName)) {
-      Coordinate newCoord = makeCoordinate(coordinates.getX() + getChangeX(),
-          coordinates.getY() + getChangeY());
-      possibleMoves.add(newCoord);
-      coordinates = newCoord;
+    int xLimit = getChangeX();
+    int yLimit = getChangeY();
+    int xDirection;
+    int yDirection;
+    if(xLimit != 0){
+      xDirection = xLimit/Math.abs(xLimit);
+    }
+    else{
+      xDirection = 0;
+    }
+    if(yLimit != 0){
+      yDirection = yLimit/Math.abs(yLimit);
+    }
+    else{
+      yDirection = 0;
+    }
+
+    int currX = xDirection;
+    int currY = yDirection;
+    setChangeX(xDirection);
+    setChangeY(yDirection);
+
+    while (checkIfValidMove(coordinates, teamName) && Math.abs(currX) <= Math.abs(xLimit) && Math.abs(currY) <= Math.abs(yLimit)) {
+      Coordinate newCoordinates = makeCoordinate(coordinates.getX() + xDirection,
+          coordinates.getY() + yDirection);
+      possibleMoves.add(newCoordinates);
+      coordinates = newCoordinates;
+      currX+= xDirection;
+      currY+= yDirection;
     }
   }
 
   // if this instance of the pieceMovement takes pieces, this method is called
   private void getTakeMoves(Coordinate coordinates, String teamName, List<Coordinate> possibleMoves) {
+    int xLimit = getChangeX();
+    int yLimit = getChangeY();
+    int xDirection;
+    int yDirection;
+    if(xLimit != 0){
+      xDirection = xLimit/Math.abs(xLimit);
+    }
+    else{
+      xDirection = 0;
+    }
+    if(yLimit != 0){
+      yDirection = yLimit/Math.abs(yLimit);
+    }
+    else{
+      yDirection = 0;
+    }
+
+    int currX = xDirection;
+    int currY = yDirection;
+    setChangeX(xDirection);
+    setChangeY(yDirection);
+
     while (checkIfMoveInBounds(coordinates) && checkThatNoFriendlyPieceInMoveDestination(
-        coordinates, teamName)) {
+        coordinates, teamName) && Math.abs(currX) <= Math.abs(xLimit) && Math.abs(currY) <= Math.abs(yLimit)) {
       if (checkEnemyPieceLocationConditions(coordinates, teamName)) {
         possibleMoves.add(
             makeCoordinate(coordinates.getX() + getChangeX(), coordinates.getY() + getChangeY()));
         break;
       }
-      coordinates = makeCoordinate(coordinates.getX() + getChangeX(),
-          coordinates.getY() + getChangeY());
+      coordinates.changeCoordinates(xDirection, yDirection);
+      currX+= xDirection;
+      currY+= yDirection;
     }
   }
 

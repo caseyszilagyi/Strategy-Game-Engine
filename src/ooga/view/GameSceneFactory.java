@@ -22,7 +22,7 @@ public class GameSceneFactory {
   private final String DEFAULT_RESOURCES_PACKAGE = "ooga.view.resources.";
   private ResourceBundle resources;
   private GameScene myScene;
-  private BorderPane myRoot;
+  private Parent myRoot;
 
 
   /**
@@ -37,11 +37,11 @@ public class GameSceneFactory {
     String FXMLName = resources.getString("FXML");
     try {
       Parent root = FXMLLoader.load(new File(DEFAULT_RESOURCES_FOLDER + FXMLName).toURI().toURL());
-      setSceneSize(Integer.parseInt(resources.getString("sceneWidth")),
-          Integer.parseInt(resources.getString("sceneHeight")));
-      myScene = new GameScene(root, SCENE_WIDTH, SCENE_HEIGHT);
+//      setSceneSize(Integer.parseInt(resources.getString("sceneWidth")),
+//          Integer.parseInt(resources.getString("sceneHeight")));
+      myScene = new GameScene(root);
 
-      myRoot = (BorderPane) myScene.getRoot();
+      myRoot = myScene.getRoot();
     } catch (IOException e) {
       e.printStackTrace();
     }

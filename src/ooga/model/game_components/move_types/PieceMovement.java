@@ -11,7 +11,7 @@ import ooga.model.game_components.move_types.move_restrictions.GeneralRestrictio
  * This class is used to represent a singular move that a piece can do. It needs the board, as well
  * as sets of opponent/friendly pieces in order to determine whether moves are valid
  *
- * @Casey Szilagyi
+ * @author Casey Szilagyi
  */
 public abstract class PieceMovement {
 
@@ -56,6 +56,17 @@ public abstract class PieceMovement {
     dummyBoard = board;
   }
 
+
+  public abstract void executeMove(Coordinate coordinates);
+
+
+  protected boolean checkIfValidMove(Coordinate coordinates, String teamName){
+    return checkIfMoveInBounds(coordinates) &&
+           checkThatNoFriendlyPieceInMoveDestination(coordinates, teamName) &&
+           checkEnemyPieceLocationConditions(coordinates, teamName);
+  }
+
+
   /**
    * Checks if a move is in bounds. The >= is due to the fact that the coordinate system starts at
    * 0. So if we have an 8x8 board, the possible coordinates range from 0-7, making 8 out of bounds
@@ -84,21 +95,7 @@ public abstract class PieceMovement {
    */
   protected boolean checkEnemyPieceLocationConditions(Coordinate coordinates, String teamName) {
     if (mustTake) {
-      //checks to see if piece is where it needs to be in order for it to be taken. If not, move invalid
-      if (!checkIfOpponentPieceInLocation(coordinates.getX() + changeX + takeX,
-          coordinates.getY() + changeY + takeY, teamName)) {
-        return false;
-      }
-      // checks to make sure there is an empty space where the piece lands, if the take location
-      // is different from the landing location of the piece. If no empty space, move invalid
-      if (takeX != 0 || takeY != 0) {
-        if (checkIfOpponentPieceInLocation(coordinates.getX() + changeX, coordinates.getY() + changeY,
-            teamName)) {
-          return false;
-        }
-      }
-      // if piece in take location and not in landing location
-      return true;
+      return checkEnemyPieceLocationConditionsForTakeMove(coordinates, teamName);
     }
 
     // if piece can't take, need to make sure landing spot doesn't have opponent's piece
@@ -107,6 +104,25 @@ public abstract class PieceMovement {
       return false;
     }
 
+    return true;
+  }
+
+  // Checks the locations of enemy pieces for a take move to see if conditions are met
+  private boolean checkEnemyPieceLocationConditionsForTakeMove(Coordinate coordinates, String teamName) {
+    //checks to see if piece is where it needs to be in order for it to be taken. If not, move invalid
+    if (!checkIfOpponentPieceInLocation(coordinates.getX() + changeX + takeX,
+        coordinates.getY() + changeY + takeY, teamName)) {
+      return false;
+    }
+    // checks to make sure there is an empty space where the piece lands, if the take location
+    // is different from the landing location of the piece. If no empty space, move invalid
+    if (takeX != 0 || takeY != 0) {
+      if (checkIfOpponentPieceInLocation(coordinates.getX() + changeX, coordinates.getY() + changeY,
+          teamName)) {
+        return false;
+      }
+    }
+    // if piece in take location and not in landing location
     return true;
   }
 
@@ -212,5 +228,22 @@ public abstract class PieceMovement {
     return takeY;
   }
 
+  /**
+   * Allows a subclass to set the change in the x direction that this move has. Useful for
+   * manipulating the implementation of different move types.
+   * @param changeX The change in X direction for the move
+   */
+  protected void setChangeX(int changeX){
+    this.changeX = changeX;
+  }
+
+  /**
+   * Allows a subclass to set the change in the x direction that this move has. Useful for
+   * manipulating the implementation of different move types.
+   * @param changeY The change in X direction for the move
+   */
+  protected void setChangeY(int changeY){
+    this.changeY = changeY;
+  }
 
 }

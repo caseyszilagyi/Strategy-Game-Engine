@@ -58,6 +58,16 @@ public class Coordinate {
     return y;
   }
 
+  /**
+   * Allows coordinates to be changed by a certain amount
+   *
+   * @param changeX The change in the X direction
+   * @param changeY The change in the Y direction
+   */
+  public void changeCoordinates(int changeX, int changeY) {
+    x += changeX;
+    y += changeY;
+  }
 
   /**
    * This method is overridden so that two coordinates with equal values can be compared, and return
@@ -94,5 +104,10 @@ public class Coordinate {
   @Override
   public int hashCode() {
     return x * 100 + y;
+  }
+
+  @Override
+  public String toString(){
+    return Integer.toString(x) + ":" + Integer.toString(y);
   }
 }

@@ -2,7 +2,10 @@ ooga
 ooga.controller
 ooga.model
 ooga.model.game_components
+ooga.model.game_components.move_types
+ooga.model.game_components.move_types.move_restrictions
 ooga.model.game_engine
 ooga.model.game_initialization
 ooga.model.game_initialization.file_parsing
+ooga.model.game_initialization.piece_initialization
 ooga.view
