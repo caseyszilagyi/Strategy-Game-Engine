@@ -5,11 +5,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import ooga.controller.FrontEndExternalAPI;
 import ooga.model.game_components.GameBoard;
 import ooga.model.game_components.GameRules;
 
 public class ActionCreator {
 
+  FrontEndExternalAPI viewController;
+
+  public ActionCreator(FrontEndExternalAPI viewController){
+    this.viewController = viewController;
+  }
 
   /**
    * Spaces between actions
@@ -29,7 +35,7 @@ public class ActionCreator {
   public Action createAction(String actionType, List<String> actionParameters){
     try{
       Class<?> actionClass = Class.forName("ooga.model.game_engine.action_files." + actionType + "Action");
-      return (Action) actionClass.getConstructor(List.class).newInstance(actionParameters);
+      return (Action) actionClass.getConstructor(List.class, FrontEndExternalAPI.class).newInstance(actionParameters, viewController);
 
     } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
       System.err.println("No Action found for action type: " + actionType);

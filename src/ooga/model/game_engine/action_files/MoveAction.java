@@ -1,6 +1,7 @@
 package ooga.model.game_engine.action_files;
 
 import java.util.List;
+import ooga.controller.FrontEndExternalAPI;
 import ooga.model.game_components.Coordinate;
 import ooga.model.game_components.GameBoard;
 import ooga.model.game_components.GameRules;
@@ -17,7 +18,8 @@ public class MoveAction extends Action{
    * in the form x:y, where x and y can be cast to an int.
    */
 
-  public MoveAction(List<String> parameters) {
+  public MoveAction(List<String> parameters, FrontEndExternalAPI viewController) {
+    super(viewController);
     if(parameters.size() != 2){
       System.err.println("Invalid parameters for MoveAction");
       //TODO: throw an error
