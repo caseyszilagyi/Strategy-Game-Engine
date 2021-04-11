@@ -32,16 +32,10 @@ public interface BackEndExternalAPI {
   public void setGameRules(String rulesFileName);
 
   /**
-   * Sets the language
-   * @param language The language
-   */
-  public void setLanguage(String language);
-
-  /**
    * Sets a player that is playing the game
    * @param playerFileName The string associated with the player name
    */
-  public void setPlayer(String playerFileName);
+  public void addPlayer(String playerFileName);
 
   /**
    * Sets the initial state of the board
@@ -74,6 +68,15 @@ public interface BackEndExternalAPI {
    * @param actionString The action to execute
    */
   public void executeAction(String actionString);
+
+
+  /**
+   * Acts on this set of coordinates. May include showing all possible moves, placing
+   * a piece, or doing nothing
+   * @param x The x coordinate
+   * @param y The y coordinate
+   */
+  public void actOnCoordinates(int x, int y);
 
   // for testing
   public Engine getEngine();
