@@ -1,10 +1,10 @@
 package ooga.model.game_components;
 
 import java.util.List;
+import java.util.Set;
 
 public interface Board{
 
-  public List<Coordinate> getAllActivePieceCoordinates();
 
   public boolean movePiece(Coordinate startingCoordinate, Coordinate endingCoordinate);
 

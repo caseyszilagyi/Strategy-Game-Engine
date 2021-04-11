@@ -51,7 +51,7 @@ public class GameEngine extends Engine {
   @Override
   public void actOnCoordinates(int x, int y) {
     // TODO: Add logic that determines what method is called on the game board depending on the game type
-    curBoard.actOnCoordinates(x, y, true);
+    //curBoard.actOnCoordinates(x, y);
   }
 
   /**
