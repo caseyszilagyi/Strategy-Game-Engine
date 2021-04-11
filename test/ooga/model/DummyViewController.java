@@ -8,6 +8,7 @@ import ooga.controller.ViewController;
 
 public class DummyViewController implements FrontEndExternalAPI {
 
+
   @Override
   public void setModelController(BackEndExternalAPI modelController) {
 
@@ -19,43 +20,32 @@ public class DummyViewController implements FrontEndExternalAPI {
   }
 
   @Override
-  public void setBoardSpace(int row, int column, String identifier) {
+  public void setBoardSpace(int row, int column, String identifier, String teamName) {
 
   }
 
   @Override
-  public void clearBoardSpace(int row, int column) {
+  public void movePiece(int startX, int startY, int endX, int endY) {
 
   }
 
   @Override
-  public void setInitialPieces(Map<String, String> friendlyPieces,
-      Map<String, String> opponentPieces) {
+  public void removePiece(int row, int column) {
 
   }
 
   @Override
-  public Iterable<Pair<Integer, Integer>> giveAllPossibleMoves() {
-    return null;
-  }
-
-  @Override
-  public void gameWin(String playerName) {
+  public void giveAllPossibleMoves(Iterable<Pair<Integer, Integer>> possibleMoves) {
 
   }
 
   @Override
-  public void gameLose(String playerName) {
+  public void gameEnd(String playerName) {
 
   }
 
   @Override
-  public void setPlayer(int playerNumber, String playerName) {
+  public void givePieceChangeOptions(Iterable<String> pieceChangeOptions) {
 
-  }
-
-  @Override
-  public Iterable<String> givePieceChangeOptions() {
-    return null;
   }
 }

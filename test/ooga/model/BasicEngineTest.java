@@ -41,9 +41,9 @@ public class BasicEngineTest {
     gameEngine = modelController.getEngine();
     gameBoard = gameEngine.getBoard();
     gameBoard.printBoard();
-    modelController.getAllPossibleMoves(0,1);
+    //modelController.getAllPossibleMoves(0,1);
     System.out.println();
-    modelController.getAllPossibleMoves(1,0);
+    //modelController.getAllPossibleMoves(1,0);
     gameEngine.executeAction("Move 1:0 2:2");
     gameBoard.printBoard();
 
