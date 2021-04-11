@@ -1,5 +1,6 @@
 package ooga.model.game_initialization;
 
+import ooga.controller.FrontEndExternalAPI;
 import ooga.model.game_components.Coordinate;
 import ooga.model.game_components.GameBoard;
 import ooga.model.game_components.GamePiece;
@@ -24,6 +25,7 @@ public class BoardCreator extends Creator {
     public static final String NUMCOLS = "numcols";
     public static final String OPPONENT = "opponent";
     public static final String USER = "user";
+    private FrontEndExternalAPI viewController;
     private GamePiece[][] gameBoard;
     private Map<String, List<Node>> boardNodes;
     private Map<String, List<Node>> pieceSubNodes;
@@ -33,7 +35,8 @@ public class BoardCreator extends Creator {
     private int numCols;
     private final PieceCreator pieceCreator;
 
-    public BoardCreator(String game) {
+    public BoardCreator(String game, FrontEndExternalAPI viewController) {
+        this.viewController = viewController;
         pieceCreator = new PieceCreator(game);
         super.setComponents(PATH, FILE_TYPE, game);
         initializeMaps(game);
@@ -65,7 +68,7 @@ public class BoardCreator extends Creator {
         int pieceX = translateX(entry.getKey());
         int pieceY = translateY(entry.getKey(), numRows);
         Coordinate pieceCoordinate = new Coordinate(pieceX, pieceY);
-        gameBoard[pieceY][pieceX] = pieceCreator.makePiece(entry.getValue(), pieceCoordinate, direction);
+        gameBoard[pieceY][pieceX] = pieceCreator.makePiece(entry.getValue(), pieceCoordinate, direction, viewController);
         gameBoard[pieceY][pieceX].setPieceTeam(team);
     }
 
