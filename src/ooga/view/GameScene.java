@@ -1,27 +1,39 @@
 package ooga.view;
 
-import java.awt.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.Node;
+import java.util.ResourceBundle;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 
-public class GameScene extends Scene {
-  private BorderPane sceneRoot;
+public abstract class GameScene extends Scene {
 
-  public GameScene (Parent sceneBorder){
-    super(sceneBorder);
+  public static final String DEFAULT_RESOURCES_PACKAGE = "view.resources.";
+  public static final String DEFAULT_RESOURCES_PATH = "ooga/view/resources/";
+  private ResourceBundle resources;
+
+  public GameScene(Parent root, ResourceBundle resources){
+    super(root);
+    this.resources = resources;
+
   }
 
-  public GameScene (Parent sceneBorder, int width, int height){
-    super(sceneBorder, width, height);
-    sceneRoot = (BorderPane) this.getRoot();
+  public void setSceneSize(int width, int height){
+    GridPane sceneRoot = (GridPane) this.getRoot();
     sceneRoot.setMinWidth(width);
     sceneRoot.setMinHeight(height);
   }
 
+  public Label makeLabel(String property) {
+    Label label = new Label();
+    label.setId(property);
+    label.setText(resources.getString(label.getId()));
+
+    return label;
+  }
+
+  public abstract void populateScene();
 
 }
+
+
