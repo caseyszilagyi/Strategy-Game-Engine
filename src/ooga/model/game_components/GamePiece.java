@@ -1,18 +1,13 @@
 package ooga.model.game_components;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 import javafx.util.Pair;
 import ooga.controller.FrontEndExternalAPI;
 import ooga.model.game_components.move_types.PieceMovement;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Represents a generic game piece. Has a location, the board it is on, and a list of possible
@@ -31,7 +26,6 @@ public class GamePiece {
   //These two need to be added to constructor in boardCreator class when making the board,
   // right now just being assigned. dummyBoard needs to be integrated with actual Board classs
   private String pieceTeam;
-  private GamePiece[][] dummyBoard;
 
   // used so that when coordinates are given for a move, we know which movement object they correspond
   // to
@@ -114,18 +108,6 @@ public class GamePiece {
   public void executeMove(Coordinate coordinates) {
     PieceMovement correspondingMove = legalMovementMap.get(coordinates);
     correspondingMove.executeMove(coordinates);
-  }
-
-  /**
-   * Used for testing, sets a dummy board
-   *
-   * @param dummyBoard The dummy board
-   */
-  public void setDummyBoard(GamePiece[][] dummyBoard) {
-    this.dummyBoard = dummyBoard;
-    for (PieceMovement move : allPossibleMoves) {
-      move.setDummyBoard(dummyBoard);
-    }
   }
 
   /**
