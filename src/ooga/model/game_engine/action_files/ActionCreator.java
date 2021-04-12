@@ -12,9 +12,11 @@ import ooga.model.game_components.GameRules;
 public class ActionCreator {
 
   FrontEndExternalAPI viewController;
+  GameBoard gameBoard;
 
-  public ActionCreator(FrontEndExternalAPI viewController){
+  public ActionCreator(FrontEndExternalAPI viewController, GameBoard gameBoard){
     this.viewController = viewController;
+    this.gameBoard = gameBoard;
   }
 
   /**
@@ -35,7 +37,7 @@ public class ActionCreator {
   public Action createAction(String actionType, List<String> actionParameters){
     try{
       Class<?> actionClass = Class.forName("ooga.model.game_engine.action_files." + actionType + "Action");
-      return (Action) actionClass.getConstructor(List.class, FrontEndExternalAPI.class).newInstance(actionParameters, viewController);
+      return (Action) actionClass.getConstructor(List.class, FrontEndExternalAPI.class, GameBoard.class).newInstance(actionParameters, viewController, gameBoard);
 
     } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
       System.err.println("No Action found for action type: " + actionType);

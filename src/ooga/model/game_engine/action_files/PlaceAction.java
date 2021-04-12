@@ -21,8 +21,8 @@ public class PlaceAction extends Action {
    * the piece to be created
    * @param parameters
    */
-  public PlaceAction(List<String> parameters, FrontEndExternalAPI viewController){
-    super(viewController);
+  public PlaceAction(List<String> parameters, FrontEndExternalAPI viewController, GameBoard gameBoard){
+    super(viewController, gameBoard);
     pieceCoordinate = stringToCoordinate(parameters.get(PARAM_ONE_INDEX));
     pieceName = parameters.get(PARAM_TWO_INDEX);
   }

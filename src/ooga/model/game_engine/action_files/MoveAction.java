@@ -18,8 +18,8 @@ public class MoveAction extends Action{
    * in the form x:y, where x and y can be cast to an int.
    */
 
-  public MoveAction(List<String> parameters, FrontEndExternalAPI viewController) {
-    super(viewController);
+  public MoveAction(List<String> parameters, FrontEndExternalAPI viewController, GameBoard gameBoard) {
+    super(viewController, gameBoard);
     if(parameters.size() != 2){
       System.err.println("Invalid parameters for MoveAction");
       //TODO: throw an error
