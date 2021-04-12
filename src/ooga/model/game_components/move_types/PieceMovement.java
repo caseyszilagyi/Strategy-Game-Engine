@@ -17,7 +17,6 @@ public abstract class PieceMovement {
 
   // A list of restrictions that the subclass has to check for before declaring a move valid
   private List<GeneralRestriction> restrictions;
-  private GamePiece[][] dummyBoard;
   private GameBoard gameBoard;
 
   private int changeX;
@@ -56,10 +55,6 @@ public abstract class PieceMovement {
   public abstract List<Coordinate> getAllPossibleMoves(Coordinate coordinates, GameBoard board,
       String pieceTeam);
 
-  public void setDummyBoard(GamePiece[][] board) {
-    dummyBoard = board;
-  }
-
 
   public abstract void executeMove(Coordinate coordinates);
 
@@ -79,13 +74,7 @@ public abstract class PieceMovement {
    * @return A boolean representing if the move is in bounds or not
    */
   protected boolean checkIfMoveInBounds(Coordinate coordinates) {
-    if (coordinates.getX() + changeX >= dummyBoard[0].length ||
-        coordinates.getX() + changeX < 0 ||
-        coordinates.getY() + changeY >= dummyBoard.length ||
-        coordinates.getY() + changeY < 0) {
-      return false;
-    }
-    return true;
+    return gameBoard.isCoordinateOnBoard(makeCoordinate(coordinates.getX() + changeX, coordinates.getY() + changeY));
   }
 
   /**
