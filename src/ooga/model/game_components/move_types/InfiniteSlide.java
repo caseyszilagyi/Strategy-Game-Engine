@@ -24,8 +24,8 @@ public class InfiniteSlide extends PieceMovement {
    * @param direction  1 if going up, -1 if going down. Used to adjust parameters for different
    *                   sides of the board
    */
-  public InfiniteSlide(Map<String, String> parameters, int direction) {
-    super(parameters, direction);
+  public InfiniteSlide(Map<String, String> parameters, int direction, GameBoard gameBoard) {
+    super(parameters, direction, gameBoard);
   }
 
   /**

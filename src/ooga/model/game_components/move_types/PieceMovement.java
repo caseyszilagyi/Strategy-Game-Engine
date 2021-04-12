@@ -18,6 +18,7 @@ public abstract class PieceMovement {
   // A list of restrictions that the subclass has to check for before declaring a move valid
   private List<GeneralRestriction> restrictions;
   private GamePiece[][] dummyBoard;
+  private GameBoard gameBoard;
 
   private int changeX;
   private int changeY;
@@ -30,8 +31,10 @@ public abstract class PieceMovement {
    * move, as well as the information about whether this move can take a piece
    *
    * @param parameters The map of parameters
+   * @param direction The multiplier used to change the direction that the piece uses
+   * @param gameBoard The board that the piece moves on
    */
-  public PieceMovement(Map<String, String> parameters, int direction) {
+  public PieceMovement(Map<String, String> parameters, int direction, GameBoard gameBoard) {
     changeX = Integer.parseInt(parameters.get("changeX")) * direction;
     changeY = Integer.parseInt(parameters.get("changeY")) * direction;
     mustTake = Boolean.parseBoolean(parameters.get("mustTake"));
@@ -39,6 +42,7 @@ public abstract class PieceMovement {
       takeX = Integer.parseInt(parameters.get("takeX")) * direction;
       takeY = Integer.parseInt(parameters.get("takeY")) * direction;
     }
+    this.gameBoard = gameBoard;
   }
 
   /**
