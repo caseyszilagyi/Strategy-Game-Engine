@@ -2,6 +2,7 @@ package ooga.model.game_engine;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import ooga.model.DummyViewController;
 import ooga.model.game_components.Coordinate;
 import ooga.model.game_components.GameBoard;
 import ooga.model.game_components.GamePiece;
@@ -12,11 +13,13 @@ import org.junit.jupiter.api.Test;
 public class GameBoardTesting {
 
   private GameBoard board;
-  private PieceCreator pieceCreator = new PieceCreator("Chess");
+  private PieceCreator pieceCreator;
+  private DummyViewController viewController = new DummyViewController();
 
   @BeforeEach
   void setup(){
     board = new GameBoard(8, 8);
+    pieceCreator = new PieceCreator("Chess", viewController, board);
   }
 
   @Test
@@ -145,11 +148,11 @@ public class GameBoardTesting {
 
 
   private GamePiece makePiece(String pieceName, Coordinate coord){
-    return pieceCreator.makePiece(pieceName, coord, 1);
+    return pieceCreator.makePiece(pieceName, coord, 1, viewController);
   }
 
   private GamePiece makePiece(String pieceName, int xCoord, int yCoord){
-    return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), 1);
+    return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), 1, viewController);
   }
 
   private Coordinate makeCoordinates(int x, int y){

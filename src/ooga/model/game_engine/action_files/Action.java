@@ -1,5 +1,6 @@
 package ooga.model.game_engine.action_files;
 
+import ooga.controller.FrontEndExternalAPI;
 import ooga.model.game_components.Coordinate;
 import ooga.model.game_components.GameBoard;
 import ooga.model.game_components.GamePiece;
@@ -10,15 +11,21 @@ public abstract class Action {
 
   private static final int X_INDEX = 0;
   private static final int Y_INDEX = 1;
+  private FrontEndExternalAPI viewController;
+  private GameBoard gameBoard;
 
+  public Action(FrontEndExternalAPI viewController, GameBoard gameBoard){
+    this.viewController = viewController;
+    this.gameBoard = gameBoard;
+  }
 
   public abstract boolean executeAction(GameBoard board, GameRules rules);
 
   protected GamePiece stringToPiece(String pieceAsString, Coordinate coordinate, GameRules rules){
     //TODO: get name of game from rules
     String gameName = "Chess"; //this will be overridden with todo above
-    PieceCreator pieceCreator = new PieceCreator(gameName);
-    return pieceCreator.makePiece(pieceAsString, coordinate, 1);
+    PieceCreator pieceCreator = new PieceCreator(gameName, viewController, gameBoard);
+    return pieceCreator.makePiece(pieceAsString, coordinate, 1, viewController);
   }
 
   protected Coordinate stringToCoordinate(String coordinateAsString){

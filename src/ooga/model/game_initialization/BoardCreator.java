@@ -1,5 +1,8 @@
 package ooga.model.game_initialization;
 
+import java.util.HashSet;
+import java.util.Set;
+import ooga.controller.FrontEndExternalAPI;
 import ooga.model.game_components.Coordinate;
 import ooga.model.game_components.GameBoard;
 import ooga.model.game_components.GamePiece;
@@ -24,6 +27,8 @@ public class BoardCreator extends Creator {
     public static final String NUMCOLS = "numcols";
     public static final String OPPONENT = "opponent";
     public static final String USER = "user";
+    private String gameName;
+    private FrontEndExternalAPI viewController;
     private GamePiece[][] gameBoard;
     private Map<String, List<Node>> boardNodes;
     private Map<String, List<Node>> pieceSubNodes;
@@ -31,11 +36,13 @@ public class BoardCreator extends Creator {
     private Map<String, String> opponentPieces;
     private int numRows;
     private int numCols;
-    private final PieceCreator pieceCreator;
+    private PieceCreator pieceCreator;
+    private Set<GamePiece> pieceSet = new HashSet<>();
 
-    public BoardCreator(String game) {
-        pieceCreator = new PieceCreator(game);
+    public BoardCreator(String game, FrontEndExternalAPI viewController) {
+        this.viewController = viewController;
         super.setComponents(PATH, FILE_TYPE, game);
+        gameName = game;
         initializeMaps(game);
     }
 
@@ -49,6 +56,9 @@ public class BoardCreator extends Creator {
     }
 
     public GameBoard makeBoard() {
+        GameBoard board= new GameBoard(numCols, numRows);
+        pieceCreator = new PieceCreator(gameName, viewController, board);
+
         gameBoard = new GamePiece[numRows][numCols];
         for (Map.Entry<String, String> entry : userPieces.entrySet()) {
             buildPiece(numRows, entry, -1, USER);
@@ -56,8 +66,8 @@ public class BoardCreator extends Creator {
         for (Map.Entry<String, String> entry : opponentPieces.entrySet()) {
             buildPiece(numRows, entry, 1, OPPONENT);
         }
-        GameBoard board= new GameBoard(numCols, numRows);
         board.setGrid(gameBoard);
+        board.setPieceSet(pieceSet);
         return board;
     }
 
@@ -65,7 +75,9 @@ public class BoardCreator extends Creator {
         int pieceX = translateX(entry.getKey());
         int pieceY = translateY(entry.getKey(), numRows);
         Coordinate pieceCoordinate = new Coordinate(pieceX, pieceY);
-        gameBoard[pieceY][pieceX] = pieceCreator.makePiece(entry.getValue(), pieceCoordinate, direction);
+        GamePiece newPiece = pieceCreator.makePiece(entry.getValue(), pieceCoordinate, direction, viewController);
+        pieceSet.add(newPiece);
+        gameBoard[pieceY][pieceX] = newPiece;
         gameBoard[pieceY][pieceX].setPieceTeam(team);
     }
 

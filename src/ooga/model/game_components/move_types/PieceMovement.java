@@ -18,6 +18,7 @@ public abstract class PieceMovement {
   // A list of restrictions that the subclass has to check for before declaring a move valid
   private List<GeneralRestriction> restrictions;
   private GamePiece[][] dummyBoard;
+  private GameBoard gameBoard;
 
   private int changeX;
   private int changeY;
@@ -30,8 +31,10 @@ public abstract class PieceMovement {
    * move, as well as the information about whether this move can take a piece
    *
    * @param parameters The map of parameters
+   * @param direction The multiplier used to change the direction that the piece uses
+   * @param gameBoard The board that the piece moves on
    */
-  public PieceMovement(Map<String, String> parameters, int direction) {
+  public PieceMovement(Map<String, String> parameters, int direction, GameBoard gameBoard) {
     changeX = Integer.parseInt(parameters.get("changeX")) * direction;
     changeY = Integer.parseInt(parameters.get("changeY")) * direction;
     mustTake = Boolean.parseBoolean(parameters.get("mustTake"));
@@ -39,6 +42,7 @@ public abstract class PieceMovement {
       takeX = Integer.parseInt(parameters.get("takeX")) * direction;
       takeY = Integer.parseInt(parameters.get("takeY")) * direction;
     }
+    this.gameBoard = gameBoard;
   }
 
   /**
@@ -99,7 +103,7 @@ public abstract class PieceMovement {
     }
 
     // if piece can't take, need to make sure landing spot doesn't have opponent's piece
-    if (checkIfOpponentPieceInLocation(coordinates.getX() + changeX, coordinates.getY() + changeY,
+    if (gameBoard.checkIfOpponentPieceInLocation(makeCoordinate(coordinates.getX() + changeX, coordinates.getY() + changeY),
         teamName)) {
       return false;
     }
@@ -110,14 +114,14 @@ public abstract class PieceMovement {
   // Checks the locations of enemy pieces for a take move to see if conditions are met
   private boolean checkEnemyPieceLocationConditionsForTakeMove(Coordinate coordinates, String teamName) {
     //checks to see if piece is where it needs to be in order for it to be taken. If not, move invalid
-    if (!checkIfOpponentPieceInLocation(coordinates.getX() + changeX + takeX,
-        coordinates.getY() + changeY + takeY, teamName)) {
+    if (!gameBoard.checkIfOpponentPieceInLocation(makeCoordinate(coordinates.getX() + changeX + takeX,
+        coordinates.getY() + changeY + takeY), teamName)) {
       return false;
     }
     // checks to make sure there is an empty space where the piece lands, if the take location
     // is different from the landing location of the piece. If no empty space, move invalid
     if (takeX != 0 || takeY != 0) {
-      if (checkIfOpponentPieceInLocation(coordinates.getX() + changeX, coordinates.getY() + changeY,
+      if (gameBoard.checkIfOpponentPieceInLocation(makeCoordinate(coordinates.getX() + changeX, coordinates.getY() + changeY),
           teamName)) {
         return false;
       }
@@ -136,31 +140,8 @@ public abstract class PieceMovement {
    */
   protected boolean checkThatNoFriendlyPieceInMoveDestination(Coordinate coordinates,
       String teamName) {
-    if (checkIfFriendlyPieceInLocation(coordinates.getX() + changeX, coordinates.getY() + changeY,
-        teamName)) {
-      return false;
-    }
-    return true;
-  }
-
-  // Checks if an friendly piece is on the board in this location
-  private boolean checkIfFriendlyPieceInLocation(int xPos, int yPos, String teamName) {
-    if (checkIfPieceInSpace(xPos, yPos) && dummyBoard[yPos][xPos].getPieceTeam().equals(teamName)) {
-      return true;
-    }
-    return false;
-  }
-
-  // Checks if an opponent piece is on the board in this location, used only if this is a take move
-  private boolean checkIfOpponentPieceInLocation(int xPos, int yPos, String teamName) {
-    if (checkIfPieceInSpace(xPos, yPos) && !dummyBoard[yPos][xPos].getPieceTeam().equals(teamName)) {
-      return true;
-    }
-    return false;
-  }
-
-  private boolean checkIfPieceInSpace(int xPos, int yPos) {
-    if (dummyBoard[yPos][xPos] == null) {
+    Coordinate moveCoords = makeCoordinate(coordinates.getX() + changeX, coordinates.getY() + changeY);
+    if (gameBoard.checkIfFriendlyPieceInLocation(moveCoords, teamName)){
       return false;
     }
     return true;
