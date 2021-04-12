@@ -13,12 +13,13 @@ import org.junit.jupiter.api.Test;
 public class GameBoardTesting {
 
   private GameBoard board;
-  private PieceCreator pieceCreator = new PieceCreator("Chess");
+  private PieceCreator pieceCreator;
   private DummyViewController viewController = new DummyViewController();
 
   @BeforeEach
   void setup(){
     board = new GameBoard(8, 8);
+    pieceCreator = new PieceCreator("Chess", viewController, board);
   }
 
   @Test
