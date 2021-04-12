@@ -41,12 +41,12 @@ public class GamePiece {
    * Constructor that takes the coordinates, because every piece needs it's coordinates to know how
    * it can move
    *
-   * @param coordinates The coordinates object representing the piece's coordinates
    */
-  public GamePiece(Coordinate coordinates, String pieceName, FrontEndExternalAPI viewController) {
-    pieceCoordinates = coordinates;
+  public GamePiece(Coordinate pieceCoordinates, String pieceName, FrontEndExternalAPI viewController, GameBoard gameBoard) {
+    this.pieceCoordinates = pieceCoordinates;
     this.pieceName = pieceName;
     this.viewController = viewController;
+    this.gameBoard = gameBoard;
   }
 
   public String getPieceName() {
