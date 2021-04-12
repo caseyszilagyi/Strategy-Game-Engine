@@ -27,7 +27,6 @@ public class BasicPieceTest {
   private Map<String, List<Node>> subNodeMap;
   private Map<String, String> attributeMap;
 
-  GamePiece[][] dummyBoard = new GamePiece[8][8];
   Set<Coordinate> allLegalMoves;
   DummyViewController dummyViewController = new DummyViewController();
   private GameBoard gameBoard= new GameBoard(8,8);
@@ -80,10 +79,8 @@ public class BasicPieceTest {
    */
   @Test
   void testBasicKnightGetMoves(){
-    makeEmptyBoard();
     GamePiece knight = makePiece("knight", 4, 4);
     knight.setPieceTeam("Casey");
-    knight.setDummyBoard(dummyBoard);
     knight.determineAllLegalMoves();
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "5:6 5:2: 6:5 6:3 3:6 3:2 2:5 2:3";
@@ -95,10 +92,8 @@ public class BasicPieceTest {
    */
   @Test
   void testKnightEdgeGetMoves(){
-    makeEmptyBoard();
     GamePiece knight = makePiece("knight", 7, 4);
     knight.setPieceTeam("Casey");
-    knight.setDummyBoard(dummyBoard);
     knight.determineAllLegalMoves();
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "5:5 5:3 6:6 6:2";
@@ -110,10 +105,8 @@ public class BasicPieceTest {
    */
   @Test
   void testKnightCornerGetMoves(){
-    makeEmptyBoard();
     GamePiece knight = makePiece("knight", 7, 7);
     knight.setPieceTeam("Casey");
-    knight.setDummyBoard(dummyBoard);
     knight.determineAllLegalMoves();
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "6:5 5:6";
@@ -128,13 +121,10 @@ public class BasicPieceTest {
    */
   @Test
   void testKnightTakeMovement(){
-    makeEmptyBoard();
     GamePiece knight = makePiece("knight", 7, 7);
     knight.setPieceTeam("Casey");
-    dummyBoard[5][6] = makeDummyGamePiece("notCasey", 6, 5);
-    dummyBoard[6][5] = makeDummyGamePiece("Casey", 5, 6);
-    gameBoard.setGrid(dummyBoard);
-    knight.setDummyBoard(dummyBoard);
+    makeDummyGamePiece("notCasey", 6, 5);
+    makeDummyGamePiece("Casey", 5, 6);
     knight.determineAllLegalMoves();
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "6:5";
@@ -146,11 +136,8 @@ public class BasicPieceTest {
    */
   @Test
   void TestEmptyBoardBishopMovement(){
-    makeEmptyBoard();
     GamePiece bishop = makePiece("bishop", 6, 5);
     bishop.setPieceTeam("Casey");
-    bishop.setDummyBoard(dummyBoard);
-    gameBoard.setGrid(dummyBoard);
     bishop.determineAllLegalMoves();
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "7:6 5:4 4:3 3:2 2:1 1:0 5:6 4:7 7:4";
@@ -162,16 +149,13 @@ public class BasicPieceTest {
    */
   @Test
   void TestBishopWithFriendlyAndOpponentPieces(){
-    makeEmptyBoard();
     GamePiece bishop = makePiece("bishop", 4, 4);
     bishop.setPieceTeam("Casey");
-    dummyBoard[6][6] = makeDummyGamePiece("notCasey", 6, 6);
-    dummyBoard[2][2] = makeDummyGamePiece("notCasey", 2, 2);
-    dummyBoard[1][1] = makeDummyGamePiece("notCasey", 1, 1);
-    dummyBoard[6][2] = makeDummyGamePiece("Casey",2 ,6);
-    dummyBoard[2][6] = makeDummyGamePiece("Casey", 6, 2);
-    bishop.setDummyBoard(dummyBoard);
-    gameBoard.setGrid(dummyBoard);
+    makeDummyGamePiece("notCasey", 6, 6);
+    makeDummyGamePiece("notCasey", 2, 2);
+    makeDummyGamePiece("notCasey", 1, 1);
+    makeDummyGamePiece("Casey",2 ,6);
+    makeDummyGamePiece("Casey", 6, 2);
     bishop.determineAllLegalMoves();
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "2:2 3:3 5:5 6:6 5:3 3:5";
@@ -183,11 +167,8 @@ public class BasicPieceTest {
    */
   @Test
   void TestEmptyBoardRookMovement(){
-    makeEmptyBoard();
     GamePiece rook = makePiece("rook", 6, 5);
     rook.setPieceTeam("Casey");
-    rook.setDummyBoard(dummyBoard);
-    gameBoard.setGrid(dummyBoard);
     rook.determineAllLegalMoves();
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "6:6 6:7 6:4 6:3 6:2 6:1 6:0 0:5 1:5 2:5 3:5 4:5 5:5 7:5";
@@ -199,15 +180,12 @@ public class BasicPieceTest {
    */
   @Test
   void TestRookWithFriendlyAndOpponentPieces(){
-    makeEmptyBoard();
     GamePiece rook = makePiece("rook", 4, 4);
     rook.setPieceTeam("Casey");
-    dummyBoard[4][6] = makeDummyGamePiece("notCasey", 6, 4);
-    dummyBoard[4][2] = makeDummyGamePiece("notCasey", 2, 4);
-    dummyBoard[6][4] = makeDummyGamePiece("Casey", 4, 6);
-    dummyBoard[2][4] = makeDummyGamePiece("Casey", 4, 2);
-    rook.setDummyBoard(dummyBoard);
-    gameBoard.setGrid(dummyBoard);
+    makeDummyGamePiece("notCasey", 6, 4);
+    makeDummyGamePiece("notCasey", 2, 4);
+    makeDummyGamePiece("Casey", 4, 6);
+    makeDummyGamePiece("Casey", 4, 2);
     rook.determineAllLegalMoves();
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "2:4 3:4 5:4 6:4 4:5 4:3";
@@ -219,11 +197,8 @@ public class BasicPieceTest {
    */
   @Test
   void TestEmptyBoardQueenMovement(){
-    makeEmptyBoard();
     GamePiece queen = makePiece("queen", 6, 5);
     queen.setPieceTeam("Casey");
-    queen.setDummyBoard(dummyBoard);
-    gameBoard.setGrid(dummyBoard);
     queen.determineAllLegalMoves();
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "6:6 6:7 6:4 6:3 6:2 6:1 6:0 0:5 1:5 2:5 3:5 4:5 5:5 7:5 7:6 5:4 4:3 3:2 2:1 1:0 5:6 4:7 7:4";
@@ -235,19 +210,16 @@ public class BasicPieceTest {
    */
   @Test
   void TestQueenWithFriendlyAndOpponentPieces(){
-    makeEmptyBoard();
     GamePiece queen = makePiece("queen", 4, 4);
     queen.setPieceTeam("Casey");
-    dummyBoard[4][6] = makeDummyGamePiece("notCasey", 6, 4);
-    dummyBoard[4][2] = makeDummyGamePiece("notCasey", 2, 4);
-    dummyBoard[6][4] = makeDummyGamePiece("Casey", 4, 6);
-    dummyBoard[2][4] = makeDummyGamePiece("Casey", 4, 2);
-    dummyBoard[6][6] = makeDummyGamePiece("notCasey", 6, 6);
-    dummyBoard[2][2] = makeDummyGamePiece("notCasey", 2, 2);
-    dummyBoard[6][2] = makeDummyGamePiece("Casey", 2, 6);
-    dummyBoard[2][6] = makeDummyGamePiece("Casey", 6, 2);
-    queen.setDummyBoard(dummyBoard);
-    gameBoard.setGrid(dummyBoard);
+    makeDummyGamePiece("notCasey", 6, 4);
+    makeDummyGamePiece("notCasey", 2, 4);
+    makeDummyGamePiece("Casey", 4, 6);
+    makeDummyGamePiece("Casey", 4, 2);
+    makeDummyGamePiece("notCasey", 6, 6);
+    makeDummyGamePiece("notCasey", 2, 2);
+    makeDummyGamePiece("Casey", 2, 6);
+    makeDummyGamePiece("Casey", 6, 2);
     queen.determineAllLegalMoves();
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "2:4 3:4 5:4 6:4 4:5 4:3 2:2 3:3 5:5 6:6 5:3 3:5";
@@ -259,10 +231,8 @@ public class BasicPieceTest {
    */
   @Test
   void TestEmptyBoardKingMovement(){
-    makeEmptyBoard();
     GamePiece king = makePiece("king", 4, 4);
     king.setPieceTeam("Casey");
-    king.setDummyBoard(dummyBoard);
     king.determineAllLegalMoves();
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "4:5 4:3 5:3 5:4 5:5 3:3 3:4 3:5";
@@ -274,13 +244,10 @@ public class BasicPieceTest {
    */
   @Test
   void TestKingWithFriendlyAndOpponentPieces(){
-    makeEmptyBoard();
     GamePiece king = makePiece("king", 4, 4);
     king.setPieceTeam("Casey");
-    king.setDummyBoard(dummyBoard);
-    dummyBoard[4][5] = makeDummyGamePiece("Casey", 5, 4);
-    dummyBoard[5][4] = makeDummyGamePiece("notCasey", 4, 5);
-    gameBoard.setGrid(dummyBoard);
+    makeDummyGamePiece("Casey", 5, 4);
+    makeDummyGamePiece("notCasey", 4, 5);
     king.determineAllLegalMoves();
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "4:5 4:3 5:3 5:5 3:3 3:4 3:5";
@@ -292,11 +259,8 @@ public class BasicPieceTest {
    */
   @Test
   void TestEdgeBoardKingMovement(){
-    makeEmptyBoard();
     GamePiece king = makePiece("king", 7, 4);
     king.setPieceTeam("Casey");
-    king.setDummyBoard(dummyBoard);
-    gameBoard.setGrid(dummyBoard);
     king.determineAllLegalMoves();
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "7:5 7:3 6:3 6:4 6:5";
@@ -309,11 +273,8 @@ public class BasicPieceTest {
    */
   @Test
   void TestEmptyBoardPawnMovement(){
-    makeEmptyBoard();
     GamePiece pawn = makePiece("pawn", 4, 4);
     pawn.setPieceTeam("Casey");
-    pawn.setDummyBoard(dummyBoard);
-    gameBoard.setGrid(dummyBoard);
     pawn.determineAllLegalMoves();
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "4:5 4:6";
@@ -326,14 +287,11 @@ public class BasicPieceTest {
    */
   @Test
   void TestPawnTakeAndSlideMovement(){
-    makeEmptyBoard();
     GamePiece pawn = makePiece("pawn", 4, 4);
     pawn.setPieceTeam("Casey");
-    pawn.setDummyBoard(dummyBoard);
-    dummyBoard[5][5] = makeDummyGamePiece("Casey", 5, 5);
-    dummyBoard[5][3] = makeDummyGamePiece("notCasey", 3, 5);
-    dummyBoard[5][4] = makeDummyGamePiece("Casey", 4, 5);
-    gameBoard.setGrid(dummyBoard);
+    makeDummyGamePiece("Casey", 5, 5);
+    makeDummyGamePiece("notCasey", 3, 5);
+    makeDummyGamePiece("Casey", 4, 5);
     pawn.determineAllLegalMoves();
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "3:5";
@@ -345,14 +303,11 @@ public class BasicPieceTest {
    */
   @Test
   void TestPawnReverseMovement(){
-    makeEmptyBoard();
     GamePiece pawn = makeEnemyPiece("pawn", 4, 4);
     pawn.setPieceTeam("Casey");
-    pawn.setDummyBoard(dummyBoard);
-    dummyBoard[3][5] = makeDummyGamePiece("Casey", 5, 3);
-    dummyBoard[3][3] = makeDummyGamePiece("notCasey", 3, 3);
-    dummyBoard[3][4] = makeDummyGamePiece("Casey", 4, 3);
-    gameBoard.setGrid(dummyBoard);
+    makeDummyGamePiece("Casey", 5, 3);
+    makeDummyGamePiece("notCasey", 3, 3);
+    makeDummyGamePiece("Casey", 4, 3);
     pawn.determineAllLegalMoves();
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "3:3";
@@ -370,30 +325,11 @@ public class BasicPieceTest {
     return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), -1, dummyViewController);
   }
 
-  // dummy board methods
-
-  private void makeEmptyBoard(){
-    dummyBoardCreator("................................................................");
-  }
-
-  // Makes a dummy board to use for testing
-  private void dummyBoardCreator(String boardConfig){
-    char[] board = boardConfig.toCharArray();
-    for(int row = 0; row<8; row++){
-      for(int col = 0; col<8; col++){
-        if(board[8*row+col] - '.' == 0){
-          dummyBoard[row][col] = null;
-        }
-        else{
-          dummyBoard[row][col] = makeDummyGamePiece("Enemy", col, row);
-        }
-      }
-    }
-  }
 
   private GamePiece makeDummyGamePiece(String teamName, int x, int y){
     GamePiece piece = new GamePiece(makeCoordinates(x,y), "dummy", dummyViewController, gameBoard);
     piece.setPieceTeam(teamName);
+    gameBoard.addPiece(piece);
     return piece;
   }
 
