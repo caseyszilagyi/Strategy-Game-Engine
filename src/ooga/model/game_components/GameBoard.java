@@ -52,6 +52,7 @@ public class GameBoard implements Board {
         }
       }
     }
+    makePieceCoordMap();
   }
 
 
@@ -73,6 +74,7 @@ public class GameBoard implements Board {
     }
     grid[startingCoordinate.getY()][startingCoordinate.getX()] = null;
     pieceToMove.setPieceCoordinates(endingCoordinate);
+    pieceCoordMap.put(endingCoordinate, pieceToMove);
     grid[endingCoordinate.getY()][endingCoordinate.getX()] = pieceToMove;
     return true;
   }
@@ -94,6 +96,7 @@ public class GameBoard implements Board {
       return false;
     }
     activePieces.add(newPieceType);
+    pieceCoordMap.put(newPieceCoordinates, newPieceType);
     grid[newPieceCoordinates.getY()][newPieceCoordinates.getX()] = newPieceType;
     return true;
   }
@@ -120,7 +123,7 @@ public class GameBoard implements Board {
     return pieceCoordMap.get(coordinate);
   }
 
-  private boolean isCoordinateOnBoard(Coordinate coordinates) {
+  public boolean isCoordinateOnBoard(Coordinate coordinates) {
     if(coordinates.getX() >= width || coordinates.getY() >= height || coordinates
         .getX() < 0 || coordinates.getY() < 0){
       return false;
@@ -156,19 +159,19 @@ public class GameBoard implements Board {
 
 
   // Checks if an friendly piece is on the board in this location
-  private boolean checkIfFriendlyPieceInLocation(Coordinate coordinates, String teamName) {
-    if (checkIfPieceInSpace(coordinates) && getPieceAtCoordinate(coordinates).equals(teamName)) {
+  public boolean checkIfFriendlyPieceInLocation(Coordinate coordinates, String teamName) {
+    if (checkIfPieceInSpace(coordinates) && getPieceAtCoordinate(coordinates).getPieceTeam().equals(teamName)) {
       return true;
     }
     return false;
   }
 
   // Checks if an opponent piece is on the board in this location, used only if this is a take move
-  private boolean checkIfOpponentPieceInLocation(Coordinate coordinates, String teamName) {
-    if (checkIfPieceInSpace(coordinates) && getPieceAtCoordinate(coordinates).equals(teamName)) {
-      return false;
+  public boolean checkIfOpponentPieceInLocation(Coordinate coordinates, String teamName) {
+    if (checkIfPieceInSpace(coordinates) && !getPieceAtCoordinate(coordinates).getPieceTeam().equals(teamName)) {
+      return true;
     }
-    return true;
+    return false;
   }
 
   private boolean checkIfPieceInSpace(Coordinate coordinates) {
