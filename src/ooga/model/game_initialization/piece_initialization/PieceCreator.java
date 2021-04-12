@@ -25,7 +25,7 @@ public class PieceCreator extends Creator {
   private String gameType;
 
   private XMLParser xmlParser = new XMLParser();
-  private PieceComponentClassLoader pieceComponentClassLoader = new PieceComponentClassLoader();
+  private PieceComponentClassLoader pieceComponentClassLoader;
 
   // Intermediate node maps to keep track of things
   private Map<String, List<Node>> pieceFileNodes;
@@ -45,6 +45,7 @@ public class PieceCreator extends Creator {
     super.setComponents(PIECE_FILE_PATH, FILE_TYPE, this.gameType);
     this.viewController = viewController;
     this.gameBoard = gameBoard;
+    pieceComponentClassLoader = new PieceComponentClassLoader(gameBoard);
   }
 
   /**
