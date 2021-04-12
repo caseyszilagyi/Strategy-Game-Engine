@@ -11,7 +11,7 @@ import ooga.controller.FrontEndExternalAPI;
 public class GameBoard implements Board {
 
   private FrontEndExternalAPI viewController;
-  private List<GamePiece> activePieces;
+  private Set<GamePiece> activePieces = new HashSet<>();
   private Player currentTurn;
   private GamePiece[][] grid;
 
@@ -23,8 +23,6 @@ public class GameBoard implements Board {
     this.width = width;
     this.height = height;
     grid = new GamePiece[width][height];
-    activePieces = new ArrayList<>();
-    makePieceCoordMap();
   }
 
   /**
@@ -33,6 +31,11 @@ public class GameBoard implements Board {
    */
   public void setViewController(FrontEndExternalAPI viewController){
     this.viewController = viewController;
+  }
+
+  public void setPieceSet(Set<GamePiece> pieceSet){
+    activePieces = pieceSet;
+    makePieceCoordMap();
   }
 
 
@@ -114,7 +117,7 @@ public class GameBoard implements Board {
 
 
   public GamePiece getPieceAtCoordinate(Coordinate coordinate){
-    return grid[coordinate.getY()][coordinate.getX()];
+    return pieceCoordMap.get(coordinate);
   }
 
   private boolean isCoordinateOnBoard(Coordinate coordinates) {
@@ -146,6 +149,45 @@ public class GameBoard implements Board {
     }
     return allCoordinates;
   }
+
+
+
+
+
+
+  // Checks if an friendly piece is on the board in this location
+  private boolean checkIfFriendlyPieceInLocation(Coordinate coordinates, String teamName) {
+    if (checkIfPieceInSpace(coordinates) && getPieceAtCoordinate(coordinates).equals(teamName)) {
+      return true;
+    }
+    return false;
+  }
+
+  // Checks if an opponent piece is on the board in this location, used only if this is a take move
+  private boolean checkIfOpponentPieceInLocation(Coordinate coordinates, String teamName) {
+    if (checkIfPieceInSpace(coordinates) && getPieceAtCoordinate(coordinates).equals(teamName)) {
+      return false;
+    }
+    return true;
+  }
+
+  private boolean checkIfPieceInSpace(Coordinate coordinates) {
+    if (pieceCoordMap.keySet().contains(coordinates)) {
+      return true;
+    }
+    return false;
+  }
+
+
+
+
+
+
+
+
+
+
+
 
   // makes a set of coordinates, useful so that coordinate implementation is only present
   // in our gameboard
