@@ -39,7 +39,7 @@ public class GameEngine extends Engine {
     viewController = newViewController;
     activePlayers = new ArrayList<>();
     priorActions = new ArrayList<>();
-    actionCreator = new ActionCreator(viewController);
+    actionCreator = new ActionCreator(viewController, curBoard);
   }
 
 
