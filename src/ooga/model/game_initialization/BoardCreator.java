@@ -25,6 +25,7 @@ public class BoardCreator extends Creator {
     public static final String NUMCOLS = "numcols";
     public static final String OPPONENT = "opponent";
     public static final String USER = "user";
+    private String gameName;
     private FrontEndExternalAPI viewController;
     private GamePiece[][] gameBoard;
     private Map<String, List<Node>> boardNodes;
@@ -33,12 +34,12 @@ public class BoardCreator extends Creator {
     private Map<String, String> opponentPieces;
     private int numRows;
     private int numCols;
-    private final PieceCreator pieceCreator;
+    private PieceCreator pieceCreator;
 
     public BoardCreator(String game, FrontEndExternalAPI viewController) {
         this.viewController = viewController;
-        pieceCreator = new PieceCreator(game);
         super.setComponents(PATH, FILE_TYPE, game);
+        gameName = game;
         initializeMaps(game);
     }
 
@@ -52,6 +53,9 @@ public class BoardCreator extends Creator {
     }
 
     public GameBoard makeBoard() {
+        GameBoard board= new GameBoard(numCols, numRows);
+        pieceCreator = new PieceCreator(gameName, viewController, board);
+
         gameBoard = new GamePiece[numRows][numCols];
         for (Map.Entry<String, String> entry : userPieces.entrySet()) {
             buildPiece(numRows, entry, -1, USER);
@@ -59,7 +63,6 @@ public class BoardCreator extends Creator {
         for (Map.Entry<String, String> entry : opponentPieces.entrySet()) {
             buildPiece(numRows, entry, 1, OPPONENT);
         }
-        GameBoard board= new GameBoard(numCols, numRows);
         board.setGrid(gameBoard);
         return board;
     }
