@@ -1,5 +1,7 @@
 package ooga.model.game_initialization;
 
+import java.util.HashSet;
+import java.util.Set;
 import ooga.controller.FrontEndExternalAPI;
 import ooga.model.game_components.Coordinate;
 import ooga.model.game_components.GameBoard;
@@ -35,6 +37,7 @@ public class BoardCreator extends Creator {
     private int numRows;
     private int numCols;
     private PieceCreator pieceCreator;
+    private Set<GamePiece> pieceSet = new HashSet<>();
 
     public BoardCreator(String game, FrontEndExternalAPI viewController) {
         this.viewController = viewController;
@@ -64,6 +67,7 @@ public class BoardCreator extends Creator {
             buildPiece(numRows, entry, 1, OPPONENT);
         }
         board.setGrid(gameBoard);
+        board.setPieceSet(pieceSet);
         return board;
     }
 
@@ -71,7 +75,9 @@ public class BoardCreator extends Creator {
         int pieceX = translateX(entry.getKey());
         int pieceY = translateY(entry.getKey(), numRows);
         Coordinate pieceCoordinate = new Coordinate(pieceX, pieceY);
-        gameBoard[pieceY][pieceX] = pieceCreator.makePiece(entry.getValue(), pieceCoordinate, direction, viewController);
+        GamePiece newPiece = pieceCreator.makePiece(entry.getValue(), pieceCoordinate, direction, viewController);
+        pieceSet.add(newPiece);
+        gameBoard[pieceY][pieceX] = newPiece;
         gameBoard[pieceY][pieceX].setPieceTeam(team);
     }
 
