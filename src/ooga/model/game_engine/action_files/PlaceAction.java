@@ -1,6 +1,7 @@
 package ooga.model.game_engine.action_files;
 
 import java.util.List;
+import ooga.controller.FrontEndExternalAPI;
 import ooga.model.game_components.Coordinate;
 import ooga.model.game_components.GameBoard;
 import ooga.model.game_components.GamePiece;
@@ -20,7 +21,8 @@ public class PlaceAction extends Action {
    * the piece to be created
    * @param parameters
    */
-  public PlaceAction(List<String> parameters){
+  public PlaceAction(List<String> parameters, FrontEndExternalAPI viewController, GameBoard gameBoard){
+    super(viewController, gameBoard);
     pieceCoordinate = stringToCoordinate(parameters.get(PARAM_ONE_INDEX));
     pieceName = parameters.get(PARAM_TWO_INDEX);
   }

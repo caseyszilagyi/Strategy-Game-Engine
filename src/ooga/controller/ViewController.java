@@ -1,5 +1,6 @@
 package ooga.controller;
 
+import java.util.Iterator;
 import java.util.Map;
 import javafx.util.Pair;
 import ooga.view.Display;
@@ -42,7 +43,7 @@ public class ViewController implements FrontEndExternalAPI{
   }
 
   @Override
-  public void giveAllPossibleMoves(Iterable<Pair<Integer, Integer>> possibleMoves) {
+  public void giveAllPossibleMoves(Iterator<Pair<Integer, Integer>> possibleMoves) {
 
   }
 

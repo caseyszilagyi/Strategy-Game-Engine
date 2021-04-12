@@ -20,8 +20,8 @@ public class FiniteJump extends PieceMovement {
    *
    * @param parameters The map of parameters
    */
-  public FiniteJump(Map<String, String> parameters, int direction) {
-    super(parameters, direction);
+  public FiniteJump(Map<String, String> parameters, int direction, GameBoard gameBoard) {
+    super(parameters, direction, gameBoard);
   }
 
   /**

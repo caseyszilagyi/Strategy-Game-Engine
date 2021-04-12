@@ -1,5 +1,6 @@
 package ooga.controller;
 
+import java.util.Iterator;
 import java.util.Map;
 import javafx.util.Pair;
 
@@ -46,7 +47,7 @@ public interface FrontEndExternalAPI {
    * Gives all of the possible moves that were requested
    * @return An iterable of pairs that represent the possible moves
    */
-  public void giveAllPossibleMoves(Iterable<Pair<Integer, Integer>> possibleMoves);
+  public void giveAllPossibleMoves(Iterator<Pair<Integer, Integer>> possibleMoves);
 
 
   /**
