@@ -1,4 +1,4 @@
-package ooga.model.components.movetypes;
+package ooga.model.components.moves;
 
 import java.util.ArrayList;
 import java.util.List;

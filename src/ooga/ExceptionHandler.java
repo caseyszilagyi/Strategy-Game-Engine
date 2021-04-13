@@ -22,4 +22,5 @@ public class ExceptionHandler extends RuntimeException {
    * @param error The type of error
    */
   public ExceptionHandler(Exception error){ super(error.getMessage()); }
+
 }
