@@ -1,4 +1,4 @@
-package ooga.model.engine.testclasses;
+package ooga.model.engine;
 
 import static org.junit.jupiter.api.Assertions.*;
 
