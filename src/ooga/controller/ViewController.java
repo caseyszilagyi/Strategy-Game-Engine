@@ -1,7 +1,6 @@
 package ooga.controller;
 
 import java.util.Iterator;
-import java.util.Map;
 import javafx.util.Pair;
 import ooga.view.Display;
 import ooga.view.GameDisplay;
