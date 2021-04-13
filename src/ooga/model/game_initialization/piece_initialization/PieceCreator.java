@@ -45,7 +45,7 @@ public class PieceCreator extends Creator {
     super.setComponents(PIECE_FILE_PATH, FILE_TYPE, this.gameType);
     this.viewController = viewController;
     this.gameBoard = gameBoard;
-    pieceComponentClassLoader = new PieceComponentClassLoader(gameBoard);
+    pieceComponentClassLoader = new PieceComponentClassLoader(gameBoard, viewController);
   }
 
   /**

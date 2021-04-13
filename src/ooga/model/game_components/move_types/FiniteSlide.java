@@ -3,6 +3,7 @@ package ooga.model.game_components.move_types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import ooga.controller.FrontEndExternalAPI;
 import ooga.model.game_components.Coordinate;
 import ooga.model.game_components.GameBoard;
 
@@ -27,8 +28,8 @@ public class FiniteSlide extends PieceMovement {
    * @param direction  1 if going up, -1 if going down. Used to adjust parameters for different
    *                   sides of the board
    */
-  public FiniteSlide(Map<String, String> parameters, int direction, GameBoard gameBoard) {
-    super(parameters, direction, gameBoard);
+  public FiniteSlide(Map<String, String> parameters, int direction, GameBoard gameBoard, FrontEndExternalAPI viewController) {
+    super(parameters, direction, gameBoard, viewController);
   }
 
   /**
@@ -54,13 +55,6 @@ public class FiniteSlide extends PieceMovement {
       getNonTakeMoves(coordinates, teamName, possibleMoves);
     }
     return possibleMoves;
-  }
-
-  @Override
-  public void executeMove(Coordinate coordinates) {
-    if(isMustTake()){
-
-    }
   }
 
 
@@ -129,7 +123,7 @@ public class FiniteSlide extends PieceMovement {
             makeCoordinate(coordinates.getX() + getChangeX(), coordinates.getY() + getChangeY()));
         break;
       }
-      coordinates.changeCoordinates(xDirection, yDirection);
+      coordinates = makeCoordinate(coordinates.getX() + xDirection, coordinates.getY()+yDirection);
       currX+= xDirection;
       currY+= yDirection;
     }

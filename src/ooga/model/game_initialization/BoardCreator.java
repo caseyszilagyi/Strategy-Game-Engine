@@ -29,7 +29,6 @@ public class BoardCreator extends Creator {
     public static final String USER = "user";
     private String gameName;
     private FrontEndExternalAPI viewController;
-    private GamePiece[][] gameBoard;
     private Map<String, List<Node>> boardNodes;
     private Map<String, List<Node>> pieceSubNodes;
     private Map<String, String> userPieces;
@@ -38,6 +37,7 @@ public class BoardCreator extends Creator {
     private int numCols;
     private PieceCreator pieceCreator;
     private Set<GamePiece> pieceSet = new HashSet<>();
+    private GameBoard board;
 
     public BoardCreator(String game, FrontEndExternalAPI viewController) {
         this.viewController = viewController;
@@ -56,29 +56,29 @@ public class BoardCreator extends Creator {
     }
 
     public GameBoard makeBoard() {
-        GameBoard board= new GameBoard(numCols, numRows);
+        board= new GameBoard(numCols, numRows);
+        viewController.setBoardDimensions(numCols, numRows);
         pieceCreator = new PieceCreator(gameName, viewController, board);
 
-        gameBoard = new GamePiece[numRows][numCols];
         for (Map.Entry<String, String> entry : userPieces.entrySet()) {
             buildPiece(numRows, entry, -1, USER);
         }
         for (Map.Entry<String, String> entry : opponentPieces.entrySet()) {
             buildPiece(numRows, entry, 1, OPPONENT);
         }
-        board.setGrid(gameBoard);
-        board.setPieceSet(pieceSet);
         return board;
     }
 
     private void buildPiece(int numRows, Map.Entry<String, String> entry, int direction, String team) {
         int pieceX = translateX(entry.getKey());
         int pieceY = translateY(entry.getKey(), numRows);
+        String pieceType = entry.getValue();
         Coordinate pieceCoordinate = new Coordinate(pieceX, pieceY);
-        GamePiece newPiece = pieceCreator.makePiece(entry.getValue(), pieceCoordinate, direction, viewController);
+        GamePiece newPiece = pieceCreator.makePiece(pieceType, pieceCoordinate, direction, viewController);
         pieceSet.add(newPiece);
-        gameBoard[pieceY][pieceX] = newPiece;
-        gameBoard[pieceY][pieceX].setPieceTeam(team);
+        newPiece.setPieceTeam(team);
+        board.addPiece(newPiece);
+        viewController.setBoardSpace(pieceX, pieceY, pieceType, team);
     }
 
     private int translateX(String coordinate) {
