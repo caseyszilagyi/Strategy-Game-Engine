@@ -7,7 +7,7 @@ import ooga.controller.FrontEndExternalAPI;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;
-import ooga.model.components.movetypes.PieceMovement;
+import ooga.model.components.moves.PieceMovement;
 import ooga.model.initialization.Creator;
 import ooga.model.initialization.fileparsing.XMLParser;
 import org.w3c.dom.Node;

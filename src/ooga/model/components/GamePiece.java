@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 import javafx.util.Pair;
 import ooga.controller.FrontEndExternalAPI;
-import ooga.model.components.movetypes.PieceMovement;
+import ooga.model.components.moves.PieceMovement;
 
 /**
  * Represents a generic game piece. Has a location, the board it is on, and a list of possible
