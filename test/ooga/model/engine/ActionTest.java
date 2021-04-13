@@ -15,7 +15,7 @@ import ooga.model.initialization.pieces.PieceCreator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class ActionTesting {
+public class ActionTest {
 
   private FrontEndExternalAPI viewController = new DummyViewController();
   private GameBoard board;

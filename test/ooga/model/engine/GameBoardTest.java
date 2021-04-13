@@ -10,7 +10,7 @@ import ooga.model.initialization.pieces.PieceCreator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class GameBoardTesting {
+public class GameBoardTest {
 
   private GameBoard board;
   private PieceCreator pieceCreator;
