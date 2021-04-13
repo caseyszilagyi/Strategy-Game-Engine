@@ -2,6 +2,7 @@ package ooga.model.game_components;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import ooga.controller.FrontEndExternalAPI;
 
 /**
@@ -13,6 +14,7 @@ public class GameBoard implements Board {
   private FrontEndExternalAPI viewController;
   private int width, height;
   private Map<Coordinate, GamePiece> pieceCoordMap = new HashMap<>();
+  private Set<Coordinate> currentLegalMoveCoordinates;
 
   private GamePiece activePiece;
 
@@ -46,10 +48,19 @@ public class GameBoard implements Board {
    */
   public void determineAllLegalMoves(int x, int y) {
     Coordinate current = makeCoordinates(x, y);
-    pieceCoordMap.get(current).determineAllLegalMoves();
+    currentLegalMoveCoordinates= pieceCoordMap.get(current).determineAllLegalMoves();
     activePiece = pieceCoordMap.get(current);
   }
 
+  /**
+   * Determines if the coordinates given are listed as a legal move for the active piece
+   * @param x The x coordinate
+   * @param y The y coordinate
+   * @return True if the move is legal, false otherwise
+   */
+  public boolean isLegalMoveLocation(int x, int y){
+    return currentLegalMoveCoordinates.contains(makeCoordinates(x,y));
+  }
 
   /**
    * Checks tho see if a piece is at a certain coordinate
@@ -59,6 +70,17 @@ public class GameBoard implements Board {
    */
   public boolean isPieceAtCoordinate(Coordinate coordinate) {
     return (isCoordinateOnBoard(coordinate) && pieceCoordMap.keySet().contains(coordinate));
+  }
+
+  /**
+   * Checks tho see if a piece is at a certain coordinate
+   *
+   * @param x The x coordinate value
+   * @param y The y coordinate value
+   * @return True if there is a piece at the coordinate, false otherwise
+   */
+  public boolean isPieceAtCoordinate(int x, int y){
+    return isPieceAtCoordinate(makeCoordinates(x, y));
   }
 
 
@@ -118,6 +140,15 @@ public class GameBoard implements Board {
   }
 
 
+  // Piece movements by passing coordinates to the pieces
+
+  public void movePiece(int x, int y){
+    activePiece.executeMove(makeCoordinates(x, y));
+  }
+
+
+  // Movements through actions
+
   @Override
   public boolean movePiece(Coordinate startingCoordinate, Coordinate endingCoordinate) {
     if (!isPieceAtCoordinate(startingCoordinate) || !isCoordinateOnBoard(startingCoordinate)) {
@@ -140,8 +171,8 @@ public class GameBoard implements Board {
   }
 
   @Override
-  public boolean removePiece(Coordinate coordinate) {
-    return false;
+  public void removePiece(Coordinate coordinate) {
+    pieceCoordMap.remove(coordinate);
   }
 
   @Override
@@ -172,18 +203,19 @@ public class GameBoard implements Board {
   }
 
 
-  // makes a set of coordinates, useful so that coordinate implementation is only present
-  // in our gameboard
+  // helper methods
+
+
+  // makes a set of coordinates
   private Coordinate makeCoordinates(int x, int y) {
     return new Coordinate(x, y);
   }
 
-
   // for testing
   public void printBoard() {
     System.out.println("");
-    for (int x = 0; x < width; x++) {
-      for (int y = 0; y < width; y++) {
+    for (int y = 0; y < height; y++) {
+      for (int x = 0; x < width; x++) {
         Coordinate curr = makeCoordinates(x, y);
         if (isPieceAtCoordinate(curr)) {
           System.out.print(getPieceAtCoordinate(curr).getPieceName().charAt(0));

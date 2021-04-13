@@ -8,7 +8,7 @@ public interface Board{
 
   public boolean movePiece(Coordinate startingCoordinate, Coordinate endingCoordinate);
 
-  public boolean removePiece(Coordinate coordinate);
+  public void removePiece(Coordinate coordinate);
 
   public boolean changePiece(Coordinate coordinate, GamePiece newPieceType);
 
