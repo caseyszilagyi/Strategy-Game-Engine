@@ -6,6 +6,7 @@ import java.util.Map;
 import ooga.controller.FrontEndExternalAPI;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
+import ooga.model.components.GamePiece;
 
 /**
  * This movement class represents a piece that can travel over other pieces, but only for a
@@ -21,8 +22,8 @@ public class FiniteJump extends PieceMovement {
    *
    * @param parameters The map of parameters
    */
-  public FiniteJump(Map<String, String> parameters, int direction, GameBoard gameBoard, FrontEndExternalAPI viewController) {
-    super(parameters, direction, gameBoard, viewController);
+  public FiniteJump(Map<String, String> parameters, int direction, GameBoard gameBoard, FrontEndExternalAPI viewController, GamePiece piece) {
+    super(parameters, direction, gameBoard, viewController, piece);
   }
 
   /**
