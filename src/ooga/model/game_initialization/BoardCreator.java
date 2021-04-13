@@ -19,7 +19,7 @@ import java.util.Map;
  */
 public class BoardCreator extends Creator {
     private static final String dictionary = "abcdefghijklmnopqrstuvwxyz"; //max supported board size is 26x26
-    private static final String PATH = "src/ooga/model/game_components/data_files/starting_states/";
+    private static final String PATH = "data/gamelogic/starting_states/";
     private static final String FILE_TYPE = "piece";
     public static final String BOARD = "board";
     public static final String PARAMS = "params";

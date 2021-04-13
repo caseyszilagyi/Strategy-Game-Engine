@@ -20,7 +20,7 @@ import org.w3c.dom.Node;
  */
 public class PieceCreator extends Creator {
 
-  private final String PIECE_FILE_PATH = "src/ooga/model/game_components/data_files/pieces/";
+  private final String PIECE_FILE_PATH = "data/gamelogic/pieces/";
   private final String FILE_TYPE = "piece";
   private String gameType;
 
