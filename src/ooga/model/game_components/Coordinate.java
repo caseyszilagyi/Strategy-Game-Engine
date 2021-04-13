@@ -23,24 +23,6 @@ public class Coordinate {
   }
 
   /**
-   * Sets the x coordinate
-   *
-   * @param x The x coordinate
-   */
-  public void setX(int x) {
-    this.x = x;
-  }
-
-  /**
-   * Sets the y coordinate
-   *
-   * @param y Theh y coordinate
-   */
-  public void setY(int y) {
-    this.y = y;
-  }
-
-  /**
    * Gets the x coordinate
    *
    * @return The x coordinate
@@ -56,17 +38,6 @@ public class Coordinate {
    */
   public int getY() {
     return y;
-  }
-
-  /**
-   * Allows coordinates to be changed by a certain amount
-   *
-   * @param changeX The change in the X direction
-   * @param changeY The change in the Y direction
-   */
-  public void changeCoordinates(int changeX, int changeY) {
-    x += changeX;
-    y += changeY;
   }
 
   /**

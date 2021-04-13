@@ -20,7 +20,7 @@ import org.w3c.dom.Node;
  */
 public class PieceCreator extends Creator {
 
-  private final String PIECE_FILE_PATH = "src/ooga/model/game_components/data_files/pieces/";
+  private final String PIECE_FILE_PATH = "data/gamelogic/pieces/";
   private final String FILE_TYPE = "piece";
   private String gameType;
 
@@ -45,7 +45,7 @@ public class PieceCreator extends Creator {
     super.setComponents(PIECE_FILE_PATH, FILE_TYPE, this.gameType);
     this.viewController = viewController;
     this.gameBoard = gameBoard;
-    pieceComponentClassLoader = new PieceComponentClassLoader(gameBoard);
+    pieceComponentClassLoader = new PieceComponentClassLoader(gameBoard, viewController);
   }
 
   /**
