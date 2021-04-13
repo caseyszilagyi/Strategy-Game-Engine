@@ -45,6 +45,8 @@ public class ModelController implements BackEndExternalAPI {
   }
 
 
+  //Everything below has not yet been implemented
+
   @Override
   public void modifyGameRules(String rulesFileName) {
     creator.setGameRules(rulesFileName);
@@ -64,7 +66,6 @@ public class ModelController implements BackEndExternalAPI {
   public void resumeGame() {
 
   }
-
   /**
    * Sets the board state to a different one than the default
    * @param boardFileName The file name that contains the board
