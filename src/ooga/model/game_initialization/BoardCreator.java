@@ -1,6 +1,7 @@
 package ooga.model.game_initialization;
 
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 import ooga.controller.FrontEndExternalAPI;
 import ooga.model.game_components.Coordinate;
@@ -22,14 +23,15 @@ public class BoardCreator extends Creator {
 
   private static final String dictionary = "abcdefghijklmnopqrstuvwxyz"; //max supported board size is 26x26
   private static final String PATH = "data/gamelogic/starting_states/";
-  private static final String FILE_TYPE = "piece";
   public static final String BOARD = "board";
   public static final String PARAMS = "params";
   public static final String NUMROWS = "numrows";
   public static final String NUMCOLS = "numcols";
   public static final String OPPONENT = "opponent";
   public static final String USER = "user";
+  private static final String FILE_TYPE = "piece";
   private String gameName;
+  private String gameFileName;
   private FrontEndExternalAPI viewController;
   private Map<String, List<Node>> boardNodes;
   private Map<String, List<Node>> pieceSubNodes;
@@ -45,7 +47,8 @@ public class BoardCreator extends Creator {
     this.viewController = viewController;
     super.setComponents(PATH, FILE_TYPE, game);
     gameName = game;
-    initializeMaps(game);
+    gameFileName = game.toLowerCase();
+    initializeMaps(gameFileName);
   }
 
   private void initializeMaps(String game) {

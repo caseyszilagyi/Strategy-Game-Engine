@@ -2,6 +2,7 @@ package ooga.model.game_initialization;
 
 import java.io.File;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import ooga.model.game_initialization.file_parsing.XMLParser;
 import org.w3c.dom.Node;
