@@ -9,8 +9,6 @@ import ooga.model.game_engine.Engine;
 import ooga.model.game_engine.GameEngine;
 import ooga.model.game_initialization.Creator;
 import ooga.model.game_initialization.GameCreator;
-import ooga.model.game_initialization.file_parsing.FileParser;
-import ooga.model.game_initialization.file_parsing.GameFileParser;
 import ooga.model.game_initialization.file_parsing.XMLParser;
 
 public class BasicCases {

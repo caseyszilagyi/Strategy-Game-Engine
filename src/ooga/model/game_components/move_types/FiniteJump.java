@@ -3,6 +3,7 @@ package ooga.model.game_components.move_types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import ooga.controller.FrontEndExternalAPI;
 import ooga.model.game_components.Coordinate;
 import ooga.model.game_components.GameBoard;
 
@@ -20,8 +21,8 @@ public class FiniteJump extends PieceMovement {
    *
    * @param parameters The map of parameters
    */
-  public FiniteJump(Map<String, String> parameters, int direction, GameBoard gameBoard) {
-    super(parameters, direction, gameBoard);
+  public FiniteJump(Map<String, String> parameters, int direction, GameBoard gameBoard, FrontEndExternalAPI viewController) {
+    super(parameters, direction, gameBoard, viewController);
   }
 
   /**

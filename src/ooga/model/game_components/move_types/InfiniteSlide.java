@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Stream;
+import ooga.controller.FrontEndExternalAPI;
 import ooga.model.game_components.Coordinate;
 import ooga.model.game_components.GameBoard;
 
@@ -24,8 +25,8 @@ public class InfiniteSlide extends PieceMovement {
    * @param direction  1 if going up, -1 if going down. Used to adjust parameters for different
    *                   sides of the board
    */
-  public InfiniteSlide(Map<String, String> parameters, int direction, GameBoard gameBoard) {
-    super(parameters, direction, gameBoard);
+  public InfiniteSlide(Map<String, String> parameters, int direction, GameBoard gameBoard, FrontEndExternalAPI viewController) {
+    super(parameters, direction, gameBoard, viewController);
   }
 
   /**

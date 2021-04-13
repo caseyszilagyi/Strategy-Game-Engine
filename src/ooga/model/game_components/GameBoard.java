@@ -16,6 +16,7 @@ public class GameBoard implements Board {
   private Map<Coordinate, GamePiece> pieceCoordMap = new HashMap<>();
   private Set<Coordinate> currentLegalMoveCoordinates;
 
+  private Coordinate activeCoordinates;
   private GamePiece activePiece;
 
   /**
@@ -47,9 +48,9 @@ public class GameBoard implements Board {
    * @param y The y coordinate
    */
   public void determineAllLegalMoves(int x, int y) {
-    Coordinate current = makeCoordinates(x, y);
-    currentLegalMoveCoordinates= pieceCoordMap.get(current).determineAllLegalMoves();
-    activePiece = pieceCoordMap.get(current);
+    activeCoordinates = makeCoordinates(x, y);
+    currentLegalMoveCoordinates= pieceCoordMap.get(activeCoordinates).determineAllLegalMoves();
+    activePiece = pieceCoordMap.get(activeCoordinates);
   }
 
   /**
@@ -140,10 +141,17 @@ public class GameBoard implements Board {
   }
 
 
-  // Piece movements by passing coordinates to the pieces
-
+  /**
+   * Moves a piece by giving it the ending coordinates. Will move the activePiece based
+   * on the activeCoordinates
+   * @param x The ending x position
+   * @param y The ending y position
+   */
   public void movePiece(int x, int y){
-    activePiece.executeMove(makeCoordinates(x, y));
+    Coordinate newCoordinates = makeCoordinates(x, y);
+    activePiece.executeMove(newCoordinates);
+    pieceCoordMap.remove(activeCoordinates);
+    pieceCoordMap.put(newCoordinates, activePiece);
   }
 
 
