@@ -6,6 +6,9 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 import javafx.util.Pair;
+import ooga.controller.DummyViewController;
+import ooga.controller.FrontEndExternalAPI;
+import ooga.model.game_initialization.BoardCreator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Node;
@@ -18,6 +21,7 @@ public class XMLNestParsingTest {
   Map<String, List<Node>> rootNodeMap;
   Map<String, List<Node>> subNodeMap;
   Map<String, String> attributeMap;
+  FrontEndExternalAPI viewController = new DummyViewController();
 
   @BeforeEach
   private void SetUp(){
@@ -29,6 +33,11 @@ public class XMLNestParsingTest {
     subNodeMap = makeSubNodeMap(rootNodeMap.get("test").get(0));
     attributeMap = makeAttributeMap(subNodeMap.get("nest1").get(0));
     checkAttributeMapping("test1", "Hello");
+  }
+
+  @Test
+  void BoardCreatorTest(){
+    BoardCreator boardCreator = new BoardCreator("Chess", viewController);
   }
 
 
