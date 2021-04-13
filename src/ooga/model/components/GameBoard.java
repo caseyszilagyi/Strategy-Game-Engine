@@ -49,7 +49,7 @@ public class GameBoard implements Board {
    */
   public void determineAllLegalMoves(int x, int y) {
     activeCoordinates = makeCoordinates(x, y);
-    currentLegalMoveCoordinates= pieceCoordMap.get(activeCoordinates).determineAllLegalMoves();
+    currentLegalMoveCoordinates = pieceCoordMap.get(activeCoordinates).determineAllLegalMoves();
     activePiece = pieceCoordMap.get(activeCoordinates);
   }
 
@@ -209,7 +209,12 @@ public class GameBoard implements Board {
     }
     return false;
   }
-
+  public Coordinate findKing(String team){
+    for(GamePiece piece : pieceCoordMap.values()){
+      if(piece.getPieceName() == "king" && piece.getPieceTeam() == team) return piece.getPieceCoordinates();
+    }
+    return null;
+  }
 
   // helper methods
 
