@@ -20,6 +20,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Node;
 
+/**
+ * Methods to test the engine and it's interactions with the viewController
+ */
 public class BasicEngineTest {
 
   ModelController modelController;
@@ -32,20 +35,9 @@ public class BasicEngineTest {
     modelController.setViewController(new DummyViewController());
   }
 
-  /**
-   * Tests the engine getting moves
-   */
   @Test
-  void TestEngineMoveGet(){
-    modelController.setGameType("Chess");
-    gameEngine = modelController.getEngine();
-    gameBoard = gameEngine.getBoard();
-    gameBoard.printBoard();
-    //modelController.getAllPossibleMoves(0,1);
-    System.out.println();
-    //modelController.getAllPossibleMoves(1,0);
-    gameEngine.executeAction("Move 1:0 2:2");
-    gameBoard.printBoard();
+  void testNormalChessSetUp(){
 
   }
+
 }

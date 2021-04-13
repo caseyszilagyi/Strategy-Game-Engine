@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import ooga.controller.FrontEndExternalAPI;
-import ooga.model.DummyViewController;
+import ooga.controller.DummyViewController;
 import ooga.model.game_components.GamePiece;
 import ooga.model.game_initialization.BoardCreator;
 import org.junit.jupiter.api.BeforeEach;

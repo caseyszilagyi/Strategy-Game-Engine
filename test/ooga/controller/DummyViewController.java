@@ -14,6 +14,7 @@ public class DummyViewController implements FrontEndExternalAPI {
 
   private Set<Coordinate> allPossibleMoves;
 
+
   @Override
   public void setModelController(BackEndExternalAPI modelController) {
 
