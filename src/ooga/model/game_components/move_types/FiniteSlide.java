@@ -123,7 +123,7 @@ public class FiniteSlide extends PieceMovement {
             makeCoordinate(coordinates.getX() + getChangeX(), coordinates.getY() + getChangeY()));
         break;
       }
-      coordinates.changeCoordinates(xDirection, yDirection);
+      coordinates = makeCoordinate(coordinates.getX() + xDirection, coordinates.getY()+yDirection);
       currX+= xDirection;
       currY+= yDirection;
     }
