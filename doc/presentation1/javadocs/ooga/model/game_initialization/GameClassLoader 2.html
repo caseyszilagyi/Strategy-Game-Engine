@@ -6,7 +6,7 @@
 <title>GameClassLoader</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2021-04-01">
-<meta name="description" content="declaration: package: ooga.model.game_initialization, class: GameClassLoader">
+<meta name="description" content="declaration: package: ooga.model.initialization, class: GameClassLoader">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../script-dir/jquery-ui.min.css" title="Style">
@@ -73,21 +73,21 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ooga.model.game_initialization</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ooga.model.initialization</a></div>
 <h1 title="Class GameClassLoader" class="title">Class GameClassLoader</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree">java.lang.Object
-<div class="inheritance">ooga.model.game_initialization.GameClassLoader</div>
+<div class="inheritance">ooga.model.initialization.GameClassLoader</div>
 </div>
 <section class="description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="ClassLoader.html" title="interface in ooga.model.game_initialization">ClassLoader</a></code></dd>
+<dd><code><a href="ClassLoader.html" title="interface in ooga.model.initialization">ClassLoader</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="type-name-label">GameClassLoader</span>
 extends java.lang.Object
-implements <a href="ClassLoader.html" title="interface in ooga.model.game_initialization">ClassLoader</a></pre>
+implements <a href="ClassLoader.html" title="interface in ooga.model.initialization">ClassLoader</a></pre>
 <div class="block">This may or may not need to be different for each game type? probably not but not 100% sure</div>
 </section>
 <section class="summary">
@@ -132,14 +132,14 @@ implements <a href="ClassLoader.html" title="interface in ooga.model.game_initia
 </thead>
 <tbody>
 <tr class="alt-color" id="i0">
-<td class="col-first"><code><a href="../game_components/Board.html" title="class in ooga.model.game_components">Board</a></code></td>
+<td class="col-first"><code><a href="../game_components/Board.html" title="class in ooga.model.components">Board</a></code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#makeBoard(java.lang.String)">makeBoard</a></span>&#8203;(java.lang.String&nbsp;boardFileName)</code></th>
 <td class="col-last">
 <div class="block">Makes a board from the given file</div>
 </td>
 </tr>
 <tr class="row-color" id="i1">
-<td class="col-first"><code><a href="../game_engine/Engine.html" title="interface in ooga.model.game_engine">Engine</a></code></td>
+<td class="col-first"><code><a href="../game_engine/Engine.html" title="interface in ooga.model.engine">Engine</a></code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#makeEngine(java.lang.String,java.lang.String)">makeEngine</a></span>&#8203;(java.lang.String&nbsp;gameType,
 java.lang.String&nbsp;gameData)</code></th>
 <td class="col-last">
@@ -147,14 +147,14 @@ java.lang.String&nbsp;gameData)</code></th>
 </td>
 </tr>
 <tr class="alt-color" id="i2">
-<td class="col-first"><code><a href="../game_components/Piece.html" title="class in ooga.model.game_components">Piece</a></code></td>
+<td class="col-first"><code><a href="../game_components/Piece.html" title="class in ooga.model.components">Piece</a></code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#makePiece(java.lang.String)">makePiece</a></span>&#8203;(java.lang.String&nbsp;pieceFileName)</code></th>
 <td class="col-last">
 <div class="block">Makes a piece from the given file</div>
 </td>
 </tr>
 <tr class="row-color" id="i3">
-<td class="col-first"><code><a href="../game_components/Player.html" title="class in ooga.model.game_components">Player</a></code></td>
+<td class="col-first"><code><a href="../game_components/Player.html" title="class in ooga.model.components">Player</a></code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#makePlayer(java.lang.String)">makePlayer</a></span>&#8203;(java.lang.String&nbsp;playerFileName)</code></th>
 <td class="col-last">
 <div class="block">Makes a player from the given file</div>
@@ -195,13 +195,13 @@ java.lang.String&nbsp;gameData)</code></th>
 <li>
 <section class="detail" id="makeEngine(java.lang.String,java.lang.String)">
 <h3>makeEngine</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../game_engine/Engine.html" title="interface in ooga.model.game_engine">Engine</a></span>&nbsp;<span class="member-name">makeEngine</span>&#8203;(<span class="parameters">java.lang.String&nbsp;gameType,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../game_engine/Engine.html" title="interface in ooga.model.engine">Engine</a></span>&nbsp;<span class="member-name">makeEngine</span>&#8203;(<span class="parameters">java.lang.String&nbsp;gameType,
 java.lang.String&nbsp;gameData)</span></div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="ClassLoader.html#makeEngine(java.lang.String,java.lang.String)">ClassLoader</a></code></span></div>
 <div class="block">Makes an engine that runs the given game type</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ClassLoader.html#makeEngine(java.lang.String,java.lang.String)">makeEngine</a></code>&nbsp;in interface&nbsp;<code><a href="ClassLoader.html" title="interface in ooga.model.game_initialization">ClassLoader</a></code></dd>
+<dd><code><a href="ClassLoader.html#makeEngine(java.lang.String,java.lang.String)">makeEngine</a></code>&nbsp;in interface&nbsp;<code><a href="ClassLoader.html" title="interface in ooga.model.initialization">ClassLoader</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>gameType</code> - The name of the game</dd>
 <dd><code>gameData</code> - The data of the game</dd>
@@ -213,12 +213,12 @@ java.lang.String&nbsp;gameData)</span></div>
 <li>
 <section class="detail" id="makePlayer(java.lang.String)">
 <h3>makePlayer</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../game_components/Player.html" title="class in ooga.model.game_components">Player</a></span>&nbsp;<span class="member-name">makePlayer</span>&#8203;(<span class="parameters">java.lang.String&nbsp;playerFileName)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../game_components/Player.html" title="class in ooga.model.components">Player</a></span>&nbsp;<span class="member-name">makePlayer</span>&#8203;(<span class="parameters">java.lang.String&nbsp;playerFileName)</span></div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="ClassLoader.html#makePlayer(java.lang.String)">ClassLoader</a></code></span></div>
 <div class="block">Makes a player from the given file</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ClassLoader.html#makePlayer(java.lang.String)">makePlayer</a></code>&nbsp;in interface&nbsp;<code><a href="ClassLoader.html" title="interface in ooga.model.game_initialization">ClassLoader</a></code></dd>
+<dd><code><a href="ClassLoader.html#makePlayer(java.lang.String)">makePlayer</a></code>&nbsp;in interface&nbsp;<code><a href="ClassLoader.html" title="interface in ooga.model.initialization">ClassLoader</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>playerFileName</code> - The file name that has the player information</dd>
 <dt>Returns:</dt>
@@ -229,12 +229,12 @@ java.lang.String&nbsp;gameData)</span></div>
 <li>
 <section class="detail" id="makeBoard(java.lang.String)">
 <h3>makeBoard</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../game_components/Board.html" title="class in ooga.model.game_components">Board</a></span>&nbsp;<span class="member-name">makeBoard</span>&#8203;(<span class="parameters">java.lang.String&nbsp;boardFileName)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../game_components/Board.html" title="class in ooga.model.components">Board</a></span>&nbsp;<span class="member-name">makeBoard</span>&#8203;(<span class="parameters">java.lang.String&nbsp;boardFileName)</span></div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="ClassLoader.html#makeBoard(java.lang.String)">ClassLoader</a></code></span></div>
 <div class="block">Makes a board from the given file</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ClassLoader.html#makeBoard(java.lang.String)">makeBoard</a></code>&nbsp;in interface&nbsp;<code><a href="ClassLoader.html" title="interface in ooga.model.game_initialization">ClassLoader</a></code></dd>
+<dd><code><a href="ClassLoader.html#makeBoard(java.lang.String)">makeBoard</a></code>&nbsp;in interface&nbsp;<code><a href="ClassLoader.html" title="interface in ooga.model.initialization">ClassLoader</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>boardFileName</code> - The file name that has the board information</dd>
 <dt>Returns:</dt>
@@ -245,12 +245,12 @@ java.lang.String&nbsp;gameData)</span></div>
 <li>
 <section class="detail" id="makePiece(java.lang.String)">
 <h3>makePiece</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../game_components/Piece.html" title="class in ooga.model.game_components">Piece</a></span>&nbsp;<span class="member-name">makePiece</span>&#8203;(<span class="parameters">java.lang.String&nbsp;pieceFileName)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../game_components/Piece.html" title="class in ooga.model.components">Piece</a></span>&nbsp;<span class="member-name">makePiece</span>&#8203;(<span class="parameters">java.lang.String&nbsp;pieceFileName)</span></div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="ClassLoader.html#makePiece(java.lang.String)">ClassLoader</a></code></span></div>
 <div class="block">Makes a piece from the given file</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ClassLoader.html#makePiece(java.lang.String)">makePiece</a></code>&nbsp;in interface&nbsp;<code><a href="ClassLoader.html" title="interface in ooga.model.game_initialization">ClassLoader</a></code></dd>
+<dd><code><a href="ClassLoader.html#makePiece(java.lang.String)">makePiece</a></code>&nbsp;in interface&nbsp;<code><a href="ClassLoader.html" title="interface in ooga.model.initialization">ClassLoader</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>pieceFileName</code> - The file name that has the board information</dd>
 <dt>Returns:</dt>

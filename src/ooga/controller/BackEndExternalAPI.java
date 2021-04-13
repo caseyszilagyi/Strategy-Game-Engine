@@ -1,7 +1,6 @@
 package ooga.controller;
 
-import javafx.util.Pair;
-import ooga.model.game_engine.Engine;
+import ooga.model.engine.Engine;
 
 /**
  * Classes that implement this interface are meant to be passed around the front end in
