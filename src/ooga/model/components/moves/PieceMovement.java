@@ -1,5 +1,6 @@
 package ooga.model.components.moves;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import ooga.controller.FrontEndExternalAPI;
@@ -16,7 +17,7 @@ import ooga.model.components.moverestrictions.Restriction;
 public abstract class PieceMovement {
 
   FrontEndExternalAPI viewController;
-  private List<Restriction> restrictions;
+  private List<Restriction> restrictions = new ArrayList<>();
   private GameBoard gameBoard;
 
   private int changeX;
