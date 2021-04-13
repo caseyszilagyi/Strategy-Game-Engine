@@ -6,7 +6,7 @@
 <title>PieceCreator</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2021-04-07">
-<meta name="description" content="declaration: package: ooga.model.game_initialization.piece_initialization, class: PieceCreator">
+<meta name="description" content="declaration: package: ooga.model.initialization.pieces, class: PieceCreator">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -73,18 +73,18 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ooga.model.game_initialization.piece_initialization</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ooga.model.initialization.pieces</a></div>
 <h1 title="Class PieceCreator" class="title">Class PieceCreator</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree">java.lang.Object
-<div class="inheritance"><a href="../Creator.html" title="class in ooga.model.game_initialization">ooga.model.game_initialization.Creator</a>
-<div class="inheritance">ooga.model.game_initialization.piece_initialization.PieceCreator</div>
+<div class="inheritance"><a href="../Creator.html" title="class in ooga.model.initialization">ooga.model.initialization.Creator</a>
+<div class="inheritance">ooga.model.initialization.pieces.PieceCreator</div>
 </div>
 </div>
 <section class="description">
 <hr>
 <pre>public class <span class="type-name-label">PieceCreator</span>
-extends <a href="../Creator.html" title="class in ooga.model.game_initialization">Creator</a></pre>
+extends <a href="../Creator.html" title="class in ooga.model.initialization">Creator</a></pre>
 <div class="block">This class is used to coordinate the creation of pieces, starting from parsing through the XML
  file and then going on to use reflection to compose the pieces</div>
 </section>
@@ -126,7 +126,7 @@ extends <a href="../Creator.html" title="class in ooga.model.game_initialization
 <td class="col-last">&nbsp;</td>
 </tr>
 <tr class="alt-color">
-<td class="col-first"><code>private <a href="PieceComponentClassLoader.html" title="class in ooga.model.game_initialization.piece_initialization">PieceComponentClassLoader</a></code></td>
+<td class="col-first"><code>private <a href="PieceComponentClassLoader.html" title="class in ooga.model.initialization.pieces">PieceComponentClassLoader</a></code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#pieceComponentClassLoader">pieceComponentClassLoader</a></span></code></th>
 <td class="col-last">&nbsp;</td>
 </tr>
@@ -141,7 +141,7 @@ extends <a href="../Creator.html" title="class in ooga.model.game_initialization
 <td class="col-last">&nbsp;</td>
 </tr>
 <tr class="row-color">
-<td class="col-first"><code>private <a href="../file_parsing/XMLParser.html" title="class in ooga.model.game_initialization.file_parsing">XMLParser</a></code></td>
+<td class="col-first"><code>private <a href="../file_parsing/XMLParser.html" title="class in ooga.model.initialization.fileparsing">XMLParser</a></code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#xmlParser">xmlParser</a></span></code></th>
 <td class="col-last">&nbsp;</td>
 </tr>
@@ -192,14 +192,14 @@ extends <a href="../Creator.html" title="class in ooga.model.game_initialization
 </thead>
 <tbody>
 <tr class="alt-color" id="i0">
-<td class="col-first"><code><a href="../../game_components/GamePiece.html" title="class in ooga.model.game_components">GamePiece</a></code></td>
+<td class="col-first"><code><a href="../../game_components/GamePiece.html" title="class in ooga.model.components">GamePiece</a></code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#makePiece(java.lang.String,ooga.model.game_components.Coordinate,int)">makePiece</a></span>&#8203;(java.lang.String&nbsp;pieceName,
-<a href="../../game_components/Coordinate.html" title="class in ooga.model.game_components">Coordinate</a>&nbsp;coordinates,
+<a href="../../game_components/Coordinate.html" title="class in ooga.model.components">Coordinate</a>&nbsp;coordinates,
 int&nbsp;direction)</code></th>
 <td class="col-last">&nbsp;</td>
 </tr>
 <tr class="row-color" id="i1">
-<td class="col-first"><code>private java.util.List&lt;<a href="../../game_components/move_types/PieceMovement.html" title="class in ooga.model.game_components.move_types">PieceMovement</a>&gt;</code></td>
+<td class="col-first"><code>private java.util.List&lt;<a href="../../game_components/move_types/PieceMovement.html" title="class in ooga.model.components.movetypes">PieceMovement</a>&gt;</code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#makePieceMovements(int)">makePieceMovements</a></span>&#8203;(int&nbsp;direction)</code></th>
 <td class="col-last">&nbsp;</td>
 </tr>
@@ -208,7 +208,7 @@ int&nbsp;direction)</code></th>
 </div>
 </div>
 <div class="inherited-list">
-<h3 id="methods.inherited.from.class.ooga.model.game_initialization.Creator">Methods inherited from class&nbsp;ooga.model.game_initialization.<a href="../Creator.html" title="class in ooga.model.game_initialization">Creator</a></h3>
+<h3 id="methods.inherited.from.class.ooga.model.game_initialization.Creator">Methods inherited from class&nbsp;ooga.model.initialization.<a href="../Creator.html" title="class in ooga.model.initialization">Creator</a></h3>
 <code><a href="../Creator.html#getFirstNode(java.util.Map,java.lang.String)">getFirstNode</a>, <a href="../Creator.html#makeAttributeMap(org.w3c.dom.Node)">makeAttributeMap</a>, <a href="../Creator.html#makeRootNodeMap(java.lang.String)">makeRootNodeMap</a>, <a href="../Creator.html#makeSubNodeMap(org.w3c.dom.Node)">makeSubNodeMap</a>, <a href="../Creator.html#setComponents(java.lang.String,java.lang.String,java.lang.String)">setComponents</a></code></div>
 <div class="inherited-list">
 <h3 id="methods.inherited.from.class.java.lang.Object">Methods inherited from class&nbsp;java.lang.Object</h3>
@@ -253,13 +253,13 @@ int&nbsp;direction)</code></th>
 <li>
 <section class="detail" id="xmlParser">
 <h3>xmlParser</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="../file_parsing/XMLParser.html" title="class in ooga.model.game_initialization.file_parsing">XMLParser</a></span>&nbsp;<span class="member-name">xmlParser</span></div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="../file_parsing/XMLParser.html" title="class in ooga.model.initialization.fileparsing">XMLParser</a></span>&nbsp;<span class="member-name">xmlParser</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="pieceComponentClassLoader">
 <h3>pieceComponentClassLoader</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="PieceComponentClassLoader.html" title="class in ooga.model.game_initialization.piece_initialization">PieceComponentClassLoader</a></span>&nbsp;<span class="member-name">pieceComponentClassLoader</span></div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="PieceComponentClassLoader.html" title="class in ooga.model.initialization.pieces">PieceComponentClassLoader</a></span>&nbsp;<span class="member-name">pieceComponentClassLoader</span></div>
 </section>
 </li>
 <li>
@@ -314,15 +314,15 @@ int&nbsp;direction)</code></th>
 <li>
 <section class="detail" id="makePiece(java.lang.String,ooga.model.game_components.Coordinate,int)">
 <h3>makePiece</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../game_components/GamePiece.html" title="class in ooga.model.game_components">GamePiece</a></span>&nbsp;<span class="member-name">makePiece</span>&#8203;(<span class="parameters">java.lang.String&nbsp;pieceName,
-<a href="../../game_components/Coordinate.html" title="class in ooga.model.game_components">Coordinate</a>&nbsp;coordinates,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../game_components/GamePiece.html" title="class in ooga.model.components">GamePiece</a></span>&nbsp;<span class="member-name">makePiece</span>&#8203;(<span class="parameters">java.lang.String&nbsp;pieceName,
+<a href="../../game_components/Coordinate.html" title="class in ooga.model.components">Coordinate</a>&nbsp;coordinates,
 int&nbsp;direction)</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="makePieceMovements(int)">
 <h3>makePieceMovements</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">java.util.List&lt;<a href="../../game_components/move_types/PieceMovement.html" title="class in ooga.model.game_components.move_types">PieceMovement</a>&gt;</span>&nbsp;<span class="member-name">makePieceMovements</span>&#8203;(<span class="parameters">int&nbsp;direction)</span></div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">java.util.List&lt;<a href="../../game_components/move_types/PieceMovement.html" title="class in ooga.model.components.movetypes">PieceMovement</a>&gt;</span>&nbsp;<span class="member-name">makePieceMovements</span>&#8203;(<span class="parameters">int&nbsp;direction)</span></div>
 </section>
 </li>
 </ul>

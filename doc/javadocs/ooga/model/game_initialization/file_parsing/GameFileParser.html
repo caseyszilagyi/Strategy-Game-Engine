@@ -6,7 +6,7 @@
 <title>GameFileParser</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2021-04-07">
-<meta name="description" content="declaration: package: ooga.model.game_initialization.file_parsing, class: GameFileParser">
+<meta name="description" content="declaration: package: ooga.model.initialization.fileparsing, class: GameFileParser">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -73,21 +73,21 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ooga.model.game_initialization.file_parsing</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ooga.model.initialization.fileparsing</a></div>
 <h1 title="Class GameFileParser" class="title">Class GameFileParser</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree">java.lang.Object
-<div class="inheritance">ooga.model.game_initialization.file_parsing.GameFileParser</div>
+<div class="inheritance">ooga.model.initialization.fileparsing.GameFileParser</div>
 </div>
 <section class="description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="FileParser.html" title="interface in ooga.model.game_initialization.file_parsing">FileParser</a></code></dd>
+<dd><code><a href="FileParser.html" title="interface in ooga.model.initialization.fileparsing">FileParser</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="type-name-label">GameFileParser</span>
 extends java.lang.Object
-implements <a href="FileParser.html" title="interface in ooga.model.game_initialization.file_parsing">FileParser</a></pre>
+implements <a href="FileParser.html" title="interface in ooga.model.initialization.fileparsing">FileParser</a></pre>
 <div class="block">I think this will need to be specific for each game type because the files will be parsed
  differently. Also need to determine what data format the information will be passed
  down in before loading it into classes</div>
@@ -110,7 +110,7 @@ implements <a href="FileParser.html" title="interface in ooga.model.game_initial
 </thead>
 <tbody>
 <tr class="alt-color">
-<td class="col-first"><code>private <a href="XMLParser.html" title="class in ooga.model.game_initialization.file_parsing">XMLParser</a></code></td>
+<td class="col-first"><code>private <a href="XMLParser.html" title="class in ooga.model.initialization.fileparsing">XMLParser</a></code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#parser">parser</a></span></code></th>
 <td class="col-last">&nbsp;</td>
 </tr>
@@ -207,7 +207,7 @@ implements <a href="FileParser.html" title="interface in ooga.model.game_initial
 <li>
 <section class="detail" id="parser">
 <h3>parser</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="XMLParser.html" title="class in ooga.model.game_initialization.file_parsing">XMLParser</a></span>&nbsp;<span class="member-name">parser</span></div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="XMLParser.html" title="class in ooga.model.initialization.fileparsing">XMLParser</a></span>&nbsp;<span class="member-name">parser</span></div>
 </section>
 </li>
 </ul>
@@ -240,7 +240,7 @@ implements <a href="FileParser.html" title="interface in ooga.model.game_initial
 <div class="block">Creates an instance of the specific game type</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="FileParser.html#initializeGame(java.lang.String)">initializeGame</a></code>&nbsp;in interface&nbsp;<code><a href="FileParser.html" title="interface in ooga.model.game_initialization.file_parsing">FileParser</a></code></dd>
+<dd><code><a href="FileParser.html#initializeGame(java.lang.String)">initializeGame</a></code>&nbsp;in interface&nbsp;<code><a href="FileParser.html" title="interface in ooga.model.initialization.fileparsing">FileParser</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>gameName</code> - The name of the game</dd>
 <dt>Returns:</dt>
@@ -256,7 +256,7 @@ implements <a href="FileParser.html" title="interface in ooga.model.game_initial
 <div class="block">Sets the initial state of the board</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="FileParser.html#parseBoard(java.lang.String)">parseBoard</a></code>&nbsp;in interface&nbsp;<code><a href="FileParser.html" title="interface in ooga.model.game_initialization.file_parsing">FileParser</a></code></dd>
+<dd><code><a href="FileParser.html#parseBoard(java.lang.String)">parseBoard</a></code>&nbsp;in interface&nbsp;<code><a href="FileParser.html" title="interface in ooga.model.initialization.fileparsing">FileParser</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>boardFileName</code> - The file name that contains the board</dd>
 </dl>
@@ -270,7 +270,7 @@ implements <a href="FileParser.html" title="interface in ooga.model.game_initial
 <div class="block">Sets the rules that the user will play with</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="FileParser.html#parseGameRules(java.lang.String)">parseGameRules</a></code>&nbsp;in interface&nbsp;<code><a href="FileParser.html" title="interface in ooga.model.game_initialization.file_parsing">FileParser</a></code></dd>
+<dd><code><a href="FileParser.html#parseGameRules(java.lang.String)">parseGameRules</a></code>&nbsp;in interface&nbsp;<code><a href="FileParser.html" title="interface in ooga.model.initialization.fileparsing">FileParser</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>rulesFileName</code> - The file name that contains the rules of the game</dd>
 </dl>
@@ -284,7 +284,7 @@ implements <a href="FileParser.html" title="interface in ooga.model.game_initial
 <div class="block">Parses a player's file. Returns default values if the player doesn't exist</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="FileParser.html#parsePlayerInfo(java.lang.String)">parsePlayerInfo</a></code>&nbsp;in interface&nbsp;<code><a href="FileParser.html" title="interface in ooga.model.game_initialization.file_parsing">FileParser</a></code></dd>
+<dd><code><a href="FileParser.html#parsePlayerInfo(java.lang.String)">parsePlayerInfo</a></code>&nbsp;in interface&nbsp;<code><a href="FileParser.html" title="interface in ooga.model.initialization.fileparsing">FileParser</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>playerFileName</code> - The string associated with the player name</dd>
 </dl>

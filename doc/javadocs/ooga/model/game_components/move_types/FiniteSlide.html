@@ -6,7 +6,7 @@
 <title>FiniteSlide</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2021-04-07">
-<meta name="description" content="declaration: package: ooga.model.game_components.move_types, class: FiniteSlide">
+<meta name="description" content="declaration: package: ooga.model.components.movetypes, class: FiniteSlide">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -73,18 +73,18 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ooga.model.game_components.move_types</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ooga.model.components.movetypes</a></div>
 <h1 title="Class FiniteSlide" class="title">Class FiniteSlide</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree">java.lang.Object
-<div class="inheritance"><a href="PieceMovement.html" title="class in ooga.model.game_components.move_types">ooga.model.game_components.move_types.PieceMovement</a>
-<div class="inheritance">ooga.model.game_components.move_types.FiniteSlide</div>
+<div class="inheritance"><a href="PieceMovement.html" title="class in ooga.model.components.movetypes">ooga.model.components.movetypes.PieceMovement</a>
+<div class="inheritance">ooga.model.components.movetypes.FiniteSlide</div>
 </div>
 </div>
 <section class="description">
 <hr>
 <pre>public class <span class="type-name-label">FiniteSlide</span>
-extends <a href="PieceMovement.html" title="class in ooga.model.game_components.move_types">PieceMovement</a></pre>
+extends <a href="PieceMovement.html" title="class in ooga.model.components.movetypes">PieceMovement</a></pre>
 <div class="block">This movement class represents a move that can travel an finite number of spaces in a certain
  direction. However, it cannot travel through other pieces because it slides.
  <p>
@@ -139,9 +139,9 @@ int&nbsp;direction)</code></th>
 </thead>
 <tbody>
 <tr class="alt-color" id="i0">
-<td class="col-first"><code>java.util.List&lt;<a href="../Coordinate.html" title="class in ooga.model.game_components">Coordinate</a>&gt;</code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#getAllPossibleMoves(ooga.model.game_components.Coordinate,ooga.model.game_components.GameBoard,java.lang.String)">getAllPossibleMoves</a></span>&#8203;(<a href="../Coordinate.html" title="class in ooga.model.game_components">Coordinate</a>&nbsp;coordinates,
-<a href="../GameBoard.html" title="class in ooga.model.game_components">GameBoard</a>&nbsp;board,
+<td class="col-first"><code>java.util.List&lt;<a href="../Coordinate.html" title="class in ooga.model.components">Coordinate</a>&gt;</code></td>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#getAllPossibleMoves(ooga.model.game_components.Coordinate,ooga.model.game_components.GameBoard,java.lang.String)">getAllPossibleMoves</a></span>&#8203;(<a href="../Coordinate.html" title="class in ooga.model.components">Coordinate</a>&nbsp;coordinates,
+<a href="../GameBoard.html" title="class in ooga.model.components">GameBoard</a>&nbsp;board,
 java.lang.String&nbsp;teamName)</code></th>
 <td class="col-last">
 <div class="block">Gets all the possible moves associated with this finiteSlide movement object.</div>
@@ -149,16 +149,16 @@ java.lang.String&nbsp;teamName)</code></th>
 </tr>
 <tr class="row-color" id="i1">
 <td class="col-first"><code>private void</code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#getNonTakeMoves(ooga.model.game_components.Coordinate,java.lang.String,java.util.List)">getNonTakeMoves</a></span>&#8203;(<a href="../Coordinate.html" title="class in ooga.model.game_components">Coordinate</a>&nbsp;coordinates,
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#getNonTakeMoves(ooga.model.game_components.Coordinate,java.lang.String,java.util.List)">getNonTakeMoves</a></span>&#8203;(<a href="../Coordinate.html" title="class in ooga.model.components">Coordinate</a>&nbsp;coordinates,
 java.lang.String&nbsp;teamName,
-java.util.List&lt;<a href="../Coordinate.html" title="class in ooga.model.game_components">Coordinate</a>&gt;&nbsp;possibleMoves)</code></th>
+java.util.List&lt;<a href="../Coordinate.html" title="class in ooga.model.components">Coordinate</a>&gt;&nbsp;possibleMoves)</code></th>
 <td class="col-last">&nbsp;</td>
 </tr>
 <tr class="alt-color" id="i2">
 <td class="col-first"><code>private void</code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#getTakeMoves(ooga.model.game_components.Coordinate,java.lang.String,java.util.List)">getTakeMoves</a></span>&#8203;(<a href="../Coordinate.html" title="class in ooga.model.game_components">Coordinate</a>&nbsp;coordinates,
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#getTakeMoves(ooga.model.game_components.Coordinate,java.lang.String,java.util.List)">getTakeMoves</a></span>&#8203;(<a href="../Coordinate.html" title="class in ooga.model.components">Coordinate</a>&nbsp;coordinates,
 java.lang.String&nbsp;teamName,
-java.util.List&lt;<a href="../Coordinate.html" title="class in ooga.model.game_components">Coordinate</a>&gt;&nbsp;possibleMoves)</code></th>
+java.util.List&lt;<a href="../Coordinate.html" title="class in ooga.model.components">Coordinate</a>&gt;&nbsp;possibleMoves)</code></th>
 <td class="col-last">&nbsp;</td>
 </tr>
 </tbody>
@@ -166,7 +166,7 @@ java.util.List&lt;<a href="../Coordinate.html" title="class in ooga.model.game_c
 </div>
 </div>
 <div class="inherited-list">
-<h3 id="methods.inherited.from.class.ooga.model.game_components.move_types.PieceMovement">Methods inherited from class&nbsp;ooga.model.game_components.move_types.<a href="PieceMovement.html" title="class in ooga.model.game_components.move_types">PieceMovement</a></h3>
+<h3 id="methods.inherited.from.class.ooga.model.game_components.move_types.PieceMovement">Methods inherited from class&nbsp;ooga.model.components.movetypes.<a href="PieceMovement.html" title="class in ooga.model.components.movetypes">PieceMovement</a></h3>
 <code><a href="PieceMovement.html#checkEnemyPieceLocationConditions(ooga.model.game_components.Coordinate,java.lang.String)">checkEnemyPieceLocationConditions</a>, <a href="PieceMovement.html#checkIfMoveInBounds(ooga.model.game_components.Coordinate)">checkIfMoveInBounds</a>, <a href="PieceMovement.html#checkThatNoFriendlyPieceInMoveDestination(ooga.model.game_components.Coordinate,java.lang.String)">checkThatNoFriendlyPieceInMoveDestination</a>, <a href="PieceMovement.html#getChangeX()">getChangeX</a>, <a href="PieceMovement.html#getChangeY()">getChangeY</a>, <a href="PieceMovement.html#getTakeX()">getTakeX</a>, <a href="PieceMovement.html#getTakeY()">getTakeY</a>, <a href="PieceMovement.html#isMustTake()">isMustTake</a>, <a href="PieceMovement.html#makeCoordinate(int,int)">makeCoordinate</a>, <a href="PieceMovement.html#setDummyBoard(ooga.model.game_components.GamePiece%5B%5D%5B%5D)">setDummyBoard</a></code></div>
 <div class="inherited-list">
 <h3 id="methods.inherited.from.class.java.lang.Object">Methods inherited from class&nbsp;java.lang.Object</h3>
@@ -208,8 +208,8 @@ int&nbsp;direction)</span></div>
 <li>
 <section class="detail" id="getAllPossibleMoves(ooga.model.game_components.Coordinate,ooga.model.game_components.GameBoard,java.lang.String)">
 <h3>getAllPossibleMoves</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">java.util.List&lt;<a href="../Coordinate.html" title="class in ooga.model.game_components">Coordinate</a>&gt;</span>&nbsp;<span class="member-name">getAllPossibleMoves</span>&#8203;(<span class="parameters"><a href="../Coordinate.html" title="class in ooga.model.game_components">Coordinate</a>&nbsp;coordinates,
-<a href="../GameBoard.html" title="class in ooga.model.game_components">GameBoard</a>&nbsp;board,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">java.util.List&lt;<a href="../Coordinate.html" title="class in ooga.model.components">Coordinate</a>&gt;</span>&nbsp;<span class="member-name">getAllPossibleMoves</span>&#8203;(<span class="parameters"><a href="../Coordinate.html" title="class in ooga.model.components">Coordinate</a>&nbsp;coordinates,
+<a href="../GameBoard.html" title="class in ooga.model.components">GameBoard</a>&nbsp;board,
 java.lang.String&nbsp;teamName)</span></div>
 <div class="block">Gets all the possible moves associated with this finiteSlide movement object. Will be a single
  set of coordinates or no coordinates if it can take pieces, because it will simply slide until
@@ -219,7 +219,7 @@ java.lang.String&nbsp;teamName)</span></div>
  it should be passed from the front end but not used for anything else besides this method</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PieceMovement.html#getAllPossibleMoves(ooga.model.game_components.Coordinate,ooga.model.game_components.GameBoard,java.lang.String)">getAllPossibleMoves</a></code>&nbsp;in class&nbsp;<code><a href="PieceMovement.html" title="class in ooga.model.game_components.move_types">PieceMovement</a></code></dd>
+<dd><code><a href="PieceMovement.html#getAllPossibleMoves(ooga.model.game_components.Coordinate,ooga.model.game_components.GameBoard,java.lang.String)">getAllPossibleMoves</a></code>&nbsp;in class&nbsp;<code><a href="PieceMovement.html" title="class in ooga.model.components.movetypes">PieceMovement</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>coordinates</code> - The coordinates of the piece that this move is acting on</dd>
 <dd><code>board</code> - The board that this piece is on</dd>
@@ -232,17 +232,17 @@ java.lang.String&nbsp;teamName)</span></div>
 <li>
 <section class="detail" id="getNonTakeMoves(ooga.model.game_components.Coordinate,java.lang.String,java.util.List)">
 <h3>getNonTakeMoves</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">getNonTakeMoves</span>&#8203;(<span class="parameters"><a href="../Coordinate.html" title="class in ooga.model.game_components">Coordinate</a>&nbsp;coordinates,
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">getNonTakeMoves</span>&#8203;(<span class="parameters"><a href="../Coordinate.html" title="class in ooga.model.components">Coordinate</a>&nbsp;coordinates,
 java.lang.String&nbsp;teamName,
-java.util.List&lt;<a href="../Coordinate.html" title="class in ooga.model.game_components">Coordinate</a>&gt;&nbsp;possibleMoves)</span></div>
+java.util.List&lt;<a href="../Coordinate.html" title="class in ooga.model.components">Coordinate</a>&gt;&nbsp;possibleMoves)</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="getTakeMoves(ooga.model.game_components.Coordinate,java.lang.String,java.util.List)">
 <h3>getTakeMoves</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">getTakeMoves</span>&#8203;(<span class="parameters"><a href="../Coordinate.html" title="class in ooga.model.game_components">Coordinate</a>&nbsp;coordinates,
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">getTakeMoves</span>&#8203;(<span class="parameters"><a href="../Coordinate.html" title="class in ooga.model.components">Coordinate</a>&nbsp;coordinates,
 java.lang.String&nbsp;teamName,
-java.util.List&lt;<a href="../Coordinate.html" title="class in ooga.model.game_components">Coordinate</a>&gt;&nbsp;possibleMoves)</span></div>
+java.util.List&lt;<a href="../Coordinate.html" title="class in ooga.model.components">Coordinate</a>&gt;&nbsp;possibleMoves)</span></div>
 </section>
 </li>
 </ul>

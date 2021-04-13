@@ -6,7 +6,7 @@
 <title>GameBoard</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2021-04-07">
-<meta name="description" content="declaration: package: ooga.model.game_components, class: GameBoard">
+<meta name="description" content="declaration: package: ooga.model.components, class: GameBoard">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../script-dir/jquery-ui.min.css" title="Style">
@@ -73,21 +73,21 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ooga.model.game_components</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ooga.model.components</a></div>
 <h1 title="Class GameBoard" class="title">Class GameBoard</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree">java.lang.Object
-<div class="inheritance">ooga.model.game_components.GameBoard</div>
+<div class="inheritance">ooga.model.components.GameBoard</div>
 </div>
 <section class="description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="Board.html" title="interface in ooga.model.game_components">Board</a></code></dd>
+<dd><code><a href="Board.html" title="interface in ooga.model.components">Board</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="type-name-label">GameBoard</span>
 extends java.lang.Object
-implements <a href="Board.html" title="interface in ooga.model.game_components">Board</a></pre>
+implements <a href="Board.html" title="interface in ooga.model.components">Board</a></pre>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -107,7 +107,7 @@ implements <a href="Board.html" title="interface in ooga.model.game_components">
 </thead>
 <tbody>
 <tr class="alt-color">
-<td class="col-first"><code>private java.util.List&lt;<a href="GamePiece.html" title="class in ooga.model.game_components">GamePiece</a>&gt;</code></td>
+<td class="col-first"><code>private java.util.List&lt;<a href="GamePiece.html" title="class in ooga.model.components">GamePiece</a>&gt;</code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#activePieces">activePieces</a></span></code></th>
 <td class="col-last">&nbsp;</td>
 </tr>
@@ -157,30 +157,30 @@ implements <a href="Board.html" title="interface in ooga.model.game_components">
 <tbody>
 <tr class="alt-color" id="i0">
 <td class="col-first"><code>void</code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#addPiece(ooga.model.game_components.Coordinate,ooga.model.game_components.GamePiece)">addPiece</a></span>&#8203;(<a href="Coordinate.html" title="class in ooga.model.game_components">Coordinate</a>&nbsp;coordinate,
-<a href="GamePiece.html" title="class in ooga.model.game_components">GamePiece</a>&nbsp;newPieceType)</code></th>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#addPiece(ooga.model.game_components.Coordinate,ooga.model.game_components.GamePiece)">addPiece</a></span>&#8203;(<a href="Coordinate.html" title="class in ooga.model.components">Coordinate</a>&nbsp;coordinate,
+<a href="GamePiece.html" title="class in ooga.model.components">GamePiece</a>&nbsp;newPieceType)</code></th>
 <td class="col-last">&nbsp;</td>
 </tr>
 <tr class="row-color" id="i1">
 <td class="col-first"><code>void</code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#changePiece(ooga.model.game_components.GamePiece,ooga.model.game_components.GamePiece)">changePiece</a></span>&#8203;(<a href="GamePiece.html" title="class in ooga.model.game_components">GamePiece</a>&nbsp;gamePiece,
-<a href="GamePiece.html" title="class in ooga.model.game_components">GamePiece</a>&nbsp;newPieceType)</code></th>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#changePiece(ooga.model.game_components.GamePiece,ooga.model.game_components.GamePiece)">changePiece</a></span>&#8203;(<a href="GamePiece.html" title="class in ooga.model.components">GamePiece</a>&nbsp;gamePiece,
+<a href="GamePiece.html" title="class in ooga.model.components">GamePiece</a>&nbsp;newPieceType)</code></th>
 <td class="col-last">&nbsp;</td>
 </tr>
 <tr class="alt-color" id="i2">
-<td class="col-first"><code>java.util.List&lt;<a href="Coordinate.html" title="class in ooga.model.game_components">Coordinate</a>&gt;</code></td>
+<td class="col-first"><code>java.util.List&lt;<a href="Coordinate.html" title="class in ooga.model.components">Coordinate</a>&gt;</code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#getAllActivePieceCoordinates()">getAllActivePieceCoordinates</a></span>()</code></th>
 <td class="col-last">&nbsp;</td>
 </tr>
 <tr class="row-color" id="i3">
 <td class="col-first"><code>void</code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#movePiece(ooga.model.game_components.GamePiece,ooga.model.game_components.Coordinate)">movePiece</a></span>&#8203;(<a href="GamePiece.html" title="class in ooga.model.game_components">GamePiece</a>&nbsp;piece,
-<a href="Coordinate.html" title="class in ooga.model.game_components">Coordinate</a>&nbsp;endingCoordinate)</code></th>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#movePiece(ooga.model.game_components.GamePiece,ooga.model.game_components.Coordinate)">movePiece</a></span>&#8203;(<a href="GamePiece.html" title="class in ooga.model.components">GamePiece</a>&nbsp;piece,
+<a href="Coordinate.html" title="class in ooga.model.components">Coordinate</a>&nbsp;endingCoordinate)</code></th>
 <td class="col-last">&nbsp;</td>
 </tr>
 <tr class="alt-color" id="i4">
 <td class="col-first"><code>void</code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#removePiece(ooga.model.game_components.GamePiece)">removePiece</a></span>&#8203;(<a href="GamePiece.html" title="class in ooga.model.game_components">GamePiece</a>&nbsp;gamePiece)</code></th>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#removePiece(ooga.model.game_components.GamePiece)">removePiece</a></span>&#8203;(<a href="GamePiece.html" title="class in ooga.model.components">GamePiece</a>&nbsp;gamePiece)</code></th>
 <td class="col-last">&nbsp;</td>
 </tr>
 </tbody>
@@ -204,7 +204,7 @@ implements <a href="Board.html" title="interface in ooga.model.game_components">
 <li>
 <section class="detail" id="activePieces">
 <h3>activePieces</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">java.util.List&lt;<a href="GamePiece.html" title="class in ooga.model.game_components">GamePiece</a>&gt;</span>&nbsp;<span class="member-name">activePieces</span></div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">java.util.List&lt;<a href="GamePiece.html" title="class in ooga.model.components">GamePiece</a>&gt;</span>&nbsp;<span class="member-name">activePieces</span></div>
 </section>
 </li>
 </ul>
@@ -232,53 +232,53 @@ implements <a href="Board.html" title="interface in ooga.model.game_components">
 <li>
 <section class="detail" id="getAllActivePieceCoordinates()">
 <h3>getAllActivePieceCoordinates</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">java.util.List&lt;<a href="Coordinate.html" title="class in ooga.model.game_components">Coordinate</a>&gt;</span>&nbsp;<span class="member-name">getAllActivePieceCoordinates</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">java.util.List&lt;<a href="Coordinate.html" title="class in ooga.model.components">Coordinate</a>&gt;</span>&nbsp;<span class="member-name">getAllActivePieceCoordinates</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Board.html#getAllActivePieceCoordinates()">getAllActivePieceCoordinates</a></code>&nbsp;in interface&nbsp;<code><a href="Board.html" title="interface in ooga.model.game_components">Board</a></code></dd>
+<dd><code><a href="Board.html#getAllActivePieceCoordinates()">getAllActivePieceCoordinates</a></code>&nbsp;in interface&nbsp;<code><a href="Board.html" title="interface in ooga.model.components">Board</a></code></dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="movePiece(ooga.model.game_components.GamePiece,ooga.model.game_components.Coordinate)">
 <h3>movePiece</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">movePiece</span>&#8203;(<span class="parameters"><a href="GamePiece.html" title="class in ooga.model.game_components">GamePiece</a>&nbsp;piece,
-<a href="Coordinate.html" title="class in ooga.model.game_components">Coordinate</a>&nbsp;endingCoordinate)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">movePiece</span>&#8203;(<span class="parameters"><a href="GamePiece.html" title="class in ooga.model.components">GamePiece</a>&nbsp;piece,
+<a href="Coordinate.html" title="class in ooga.model.components">Coordinate</a>&nbsp;endingCoordinate)</span></div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Board.html#movePiece(ooga.model.game_components.GamePiece,ooga.model.game_components.Coordinate)">movePiece</a></code>&nbsp;in interface&nbsp;<code><a href="Board.html" title="interface in ooga.model.game_components">Board</a></code></dd>
+<dd><code><a href="Board.html#movePiece(ooga.model.game_components.GamePiece,ooga.model.game_components.Coordinate)">movePiece</a></code>&nbsp;in interface&nbsp;<code><a href="Board.html" title="interface in ooga.model.components">Board</a></code></dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="removePiece(ooga.model.game_components.GamePiece)">
 <h3>removePiece</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">removePiece</span>&#8203;(<span class="parameters"><a href="GamePiece.html" title="class in ooga.model.game_components">GamePiece</a>&nbsp;gamePiece)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">removePiece</span>&#8203;(<span class="parameters"><a href="GamePiece.html" title="class in ooga.model.components">GamePiece</a>&nbsp;gamePiece)</span></div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Board.html#removePiece(ooga.model.game_components.GamePiece)">removePiece</a></code>&nbsp;in interface&nbsp;<code><a href="Board.html" title="interface in ooga.model.game_components">Board</a></code></dd>
+<dd><code><a href="Board.html#removePiece(ooga.model.game_components.GamePiece)">removePiece</a></code>&nbsp;in interface&nbsp;<code><a href="Board.html" title="interface in ooga.model.components">Board</a></code></dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="changePiece(ooga.model.game_components.GamePiece,ooga.model.game_components.GamePiece)">
 <h3>changePiece</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">changePiece</span>&#8203;(<span class="parameters"><a href="GamePiece.html" title="class in ooga.model.game_components">GamePiece</a>&nbsp;gamePiece,
-<a href="GamePiece.html" title="class in ooga.model.game_components">GamePiece</a>&nbsp;newPieceType)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">changePiece</span>&#8203;(<span class="parameters"><a href="GamePiece.html" title="class in ooga.model.components">GamePiece</a>&nbsp;gamePiece,
+<a href="GamePiece.html" title="class in ooga.model.components">GamePiece</a>&nbsp;newPieceType)</span></div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Board.html#changePiece(ooga.model.game_components.GamePiece,ooga.model.game_components.GamePiece)">changePiece</a></code>&nbsp;in interface&nbsp;<code><a href="Board.html" title="interface in ooga.model.game_components">Board</a></code></dd>
+<dd><code><a href="Board.html#changePiece(ooga.model.game_components.GamePiece,ooga.model.game_components.GamePiece)">changePiece</a></code>&nbsp;in interface&nbsp;<code><a href="Board.html" title="interface in ooga.model.components">Board</a></code></dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="addPiece(ooga.model.game_components.Coordinate,ooga.model.game_components.GamePiece)">
 <h3>addPiece</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">addPiece</span>&#8203;(<span class="parameters"><a href="Coordinate.html" title="class in ooga.model.game_components">Coordinate</a>&nbsp;coordinate,
-<a href="GamePiece.html" title="class in ooga.model.game_components">GamePiece</a>&nbsp;newPieceType)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">addPiece</span>&#8203;(<span class="parameters"><a href="Coordinate.html" title="class in ooga.model.components">Coordinate</a>&nbsp;coordinate,
+<a href="GamePiece.html" title="class in ooga.model.components">GamePiece</a>&nbsp;newPieceType)</span></div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Board.html#addPiece(ooga.model.game_components.Coordinate,ooga.model.game_components.GamePiece)">addPiece</a></code>&nbsp;in interface&nbsp;<code><a href="Board.html" title="interface in ooga.model.game_components">Board</a></code></dd>
+<dd><code><a href="Board.html#addPiece(ooga.model.game_components.Coordinate,ooga.model.game_components.GamePiece)">addPiece</a></code>&nbsp;in interface&nbsp;<code><a href="Board.html" title="interface in ooga.model.components">Board</a></code></dd>
 </dl>
 </section>
 </li>
