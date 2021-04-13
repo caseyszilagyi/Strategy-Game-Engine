@@ -35,6 +35,9 @@ public class GameEngine extends Engine {
   //Action creator
   private ActionCreator actionCreator;
 
+  //Logic flow variables
+  boolean pieceSelected = false;
+
   public GameEngine(FrontEndExternalAPI newViewController) {
     viewController = newViewController;
     activePlayers = new ArrayList<>();
@@ -44,15 +47,26 @@ public class GameEngine extends Engine {
 
 
   /**
-   * The method that actually decides what to do and acts on coordinates passed fromt the front end
+   * The method that actually decides what to do and acts on coordinates passed from the front end
    *
    * @param x The x coordinate
    * @param y The y coordinate
    */
   @Override
   public void actOnCoordinates(int x, int y) {
-    // TODO: Add logic that determines what method is called on the game board depending on the game type
-    curBoard.determineAllLegalMoves(x, y);
+    // This logic is for move games, only works for chess and not for double jumps in checkers
+    if(pieceSelected){
+      if(curBoard.isLegalMoveLocation(x, y)){
+        curBoard.movePiece(x,y);
+      }
+      pieceSelected = false;
+    }
+    else {
+      if (curBoard.isPieceAtCoordinate(x, y)) {
+        curBoard.determineAllLegalMoves(x, y);
+        pieceSelected = true;
+      }
+    }
   }
 
   /**

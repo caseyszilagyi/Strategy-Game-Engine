@@ -55,11 +55,6 @@ public class InfiniteSlide extends PieceMovement {
 
   }
 
-  @Override
-  public void executeMove(Coordinate coordinates) {
-
-  }
-
   // if this instance of the pieceMovement doesn't take pieces, this method is called
   private void getNonTakeMoves(Coordinate coordinates, String teamName, List<Coordinate> possibleMoves) {
     while (checkIfValidMove(coordinates, teamName)) {

@@ -45,8 +45,4 @@ public class FiniteJump extends PieceMovement {
     return possibleMoves;
   }
 
-  @Override
-  public void executeMove(Coordinate coordinates) {
-
-  }
 }

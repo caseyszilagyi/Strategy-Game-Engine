@@ -1,87 +1,178 @@
 package ooga.model.game_components;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import ooga.controller.FrontEndExternalAPI;
 
+/**
+ * This is the representation of the board. It holds all of the GamePiece objects, and has the
+ * coordinates corresponding to each of these objects
+ */
 public class GameBoard implements Board {
 
   private FrontEndExternalAPI viewController;
-  private Set<GamePiece> activePieces = new HashSet<>();
-  private Player currentTurn;
-  private GamePiece[][] grid;
-
-  private Map<Coordinate, GamePiece> pieceCoordMap = new HashMap<>();
-
   private int width, height;
+  private Map<Coordinate, GamePiece> pieceCoordMap = new HashMap<>();
+  private Set<Coordinate> currentLegalMoveCoordinates;
 
-  public GameBoard(int width, int height){
+  private GamePiece activePiece;
+
+  /**
+   * Initializes this board
+   *
+   * @param width  The width of the board
+   * @param height The height of the board
+   */
+  public GameBoard(int width, int height) {
     this.width = width;
     this.height = height;
-    grid = new GamePiece[width][height];
   }
 
   /**
    * Sets the view controller that the board will use to make method calls to the front end
+   *
    * @param viewController The view controller
    */
-  public void setViewController(FrontEndExternalAPI viewController){
+  public void setViewController(FrontEndExternalAPI viewController) {
     this.viewController = viewController;
   }
 
-  public void setPieceSet(Set<GamePiece> pieceSet){
-    activePieces = pieceSet;
-    makePieceCoordMap();
+
+  /**
+   * Determines all legal moves for a piece at a given coordinate. Automatically sets this piece as
+   * the active piece when this is done.
+   *
+   * @param x The x coordinate
+   * @param y The y coordinate
+   */
+  public void determineAllLegalMoves(int x, int y) {
+    Coordinate current = makeCoordinates(x, y);
+    currentLegalMoveCoordinates= pieceCoordMap.get(current).determineAllLegalMoves();
+    activePiece = pieceCoordMap.get(current);
+  }
+
+  /**
+   * Determines if the coordinates given are listed as a legal move for the active piece
+   * @param x The x coordinate
+   * @param y The y coordinate
+   * @return True if the move is legal, false otherwise
+   */
+  public boolean isLegalMoveLocation(int x, int y){
+    return currentLegalMoveCoordinates.contains(makeCoordinates(x,y));
+  }
+
+  /**
+   * Checks tho see if a piece is at a certain coordinate
+   *
+   * @param coordinate The coordinate object that may or may not correspond to a certain piece
+   * @return True if there is a piece at the coordinate, false otherwise
+   */
+  public boolean isPieceAtCoordinate(Coordinate coordinate) {
+    return (isCoordinateOnBoard(coordinate) && pieceCoordMap.keySet().contains(coordinate));
+  }
+
+  /**
+   * Checks tho see if a piece is at a certain coordinate
+   *
+   * @param x The x coordinate value
+   * @param y The y coordinate value
+   * @return True if there is a piece at the coordinate, false otherwise
+   */
+  public boolean isPieceAtCoordinate(int x, int y){
+    return isPieceAtCoordinate(makeCoordinates(x, y));
   }
 
 
-  public void determineAllLegalMoves(int x, int y){
-    pieceCoordMap.get(makeCoordinates(x,y)).determineAllLegalMoves();
+  /**
+   * Gets a piece at a certain coordinate
+   *
+   * @param coordinate The coordinate object that corresponds to the piece
+   * @return The piece object
+   */
+  public GamePiece getPieceAtCoordinate(Coordinate coordinate) {
+    return pieceCoordMap.get(coordinate);
   }
 
-  public void setGrid(GamePiece[][] grid){
-    this.grid = grid;
-    for(int x = 0; x<grid[0].length; x++){
-      for(int y = 0; y<grid.length; y++){
-        if(grid[y][x] != null){
-          activePieces.add(grid[y][x]);
-        }
-      }
+  /**
+   * Checks if a coordinate is on the board
+   *
+   * @param coordinates The coordinate object
+   * @return True if it is on the board, false otherwise
+   */
+  public boolean isCoordinateOnBoard(Coordinate coordinates) {
+    if (coordinates.getX() >= width || coordinates.getY() >= height || coordinates
+        .getX() < 0 || coordinates.getY() < 0) {
+      return false;
     }
-    makePieceCoordMap();
+    return true;
   }
 
 
+  /**
+   * Checks if a friendly piece is on the board in this location
+   *
+   * @param coordinates The coordinate object corresponding to the location
+   * @param teamName    The name of the team
+   * @return True if there is a friendly piece there, false otherwise
+   */
+  public boolean checkIfFriendlyPieceInLocation(Coordinate coordinates, String teamName) {
+    if (isPieceAtCoordinate(coordinates) && getPieceAtCoordinate(coordinates).getPieceTeam()
+        .equals(teamName)) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Checks if an enemy piece is on the board in this location
+   *
+   * @param coordinates The coordinate object corresponding to the location
+   * @param teamName    The name of the team
+   * @return True if there is a enemy piece there, false otherwise
+   */
+  public boolean checkIfOpponentPieceInLocation(Coordinate coordinates, String teamName) {
+    if (isPieceAtCoordinate(coordinates) && !getPieceAtCoordinate(coordinates).getPieceTeam()
+        .equals(teamName)) {
+      return true;
+    }
+    return false;
+  }
+
+
+  // Piece movements by passing coordinates to the pieces
+
+  public void movePiece(int x, int y){
+    activePiece.executeMove(makeCoordinates(x, y));
+  }
+
+
+  // Movements through actions
 
   @Override
   public boolean movePiece(Coordinate startingCoordinate, Coordinate endingCoordinate) {
-    if(!isPieceAtCoordinate(startingCoordinate) || !isCoordinateOnBoard(startingCoordinate)){
+    if (!isPieceAtCoordinate(startingCoordinate) || !isCoordinateOnBoard(startingCoordinate)) {
       System.err.println("Tried to move non-existing piece");
       return false;
     }
-    if(!isCoordinateOnBoard(endingCoordinate)){
+    if (!isCoordinateOnBoard(endingCoordinate)) {
       System.err.println("Tried to move off the board");
       return false;
     }
     GamePiece pieceToMove = getPieceAtCoordinate(startingCoordinate);
-    if(isPieceAtCoordinate(endingCoordinate)){
+    if (isPieceAtCoordinate(endingCoordinate)) {
       GamePiece conflict = getPieceAtCoordinate(endingCoordinate);
-      activePieces.remove(conflict);
     }
-    grid[startingCoordinate.getY()][startingCoordinate.getX()] = null;
+
     pieceToMove.setPieceCoordinates(endingCoordinate);
     pieceCoordMap.put(endingCoordinate, pieceToMove);
-    grid[endingCoordinate.getY()][endingCoordinate.getX()] = pieceToMove;
+    pieceCoordMap.remove(startingCoordinate);
     return true;
   }
 
   @Override
-  public boolean removePiece(Coordinate coordinate) {
-    return false;
+  public void removePiece(Coordinate coordinate) {
+    pieceCoordMap.remove(coordinate);
   }
 
   @Override
@@ -95,9 +186,7 @@ public class GameBoard implements Board {
     if (isAnyCoordinateConflicts(newPieceCoordinates)) {
       return false;
     }
-    activePieces.add(newPieceType);
     pieceCoordMap.put(newPieceCoordinates, newPieceType);
-    grid[newPieceCoordinates.getY()][newPieceCoordinates.getX()] = newPieceType;
     return true;
   }
 
@@ -113,104 +202,28 @@ public class GameBoard implements Board {
     return false;
   }
 
-  public GamePiece[][] getBoardArray(){
-    return grid;
+
+  // helper methods
+
+
+  // makes a set of coordinates
+  private Coordinate makeCoordinates(int x, int y) {
+    return new Coordinate(x, y);
   }
-
-
-
-  public GamePiece getPieceAtCoordinate(Coordinate coordinate){
-    return pieceCoordMap.get(coordinate);
-  }
-
-  public boolean isCoordinateOnBoard(Coordinate coordinates) {
-    if(coordinates.getX() >= width || coordinates.getY() >= height || coordinates
-        .getX() < 0 || coordinates.getY() < 0){
-      return false;
-    }
-    return true;
-  }
-
-  public boolean isPieceAtCoordinate(Coordinate coordinate){
-    return (isCoordinateOnBoard(coordinate) && grid[coordinate.getY()][coordinate.getX()] != null);
-  }
-
-
-
-
-  //makes the coordinate:piece map
-  private void makePieceCoordMap(){
-    for(GamePiece piece: activePieces){
-      pieceCoordMap.put(piece.getPieceCoordinates(), piece);
-    }
-  }
-
-  private Set<Coordinate> getAllActivePieceCoordinates() {
-    Set<Coordinate> allCoordinates = new HashSet<>();
-    for(GamePiece piece : activePieces){
-      allCoordinates.add(piece.getPieceCoordinates());
-    }
-    return allCoordinates;
-  }
-
-
-
-
-
-
-  // Checks if an friendly piece is on the board in this location
-  public boolean checkIfFriendlyPieceInLocation(Coordinate coordinates, String teamName) {
-    if (checkIfPieceInSpace(coordinates) && getPieceAtCoordinate(coordinates).getPieceTeam().equals(teamName)) {
-      return true;
-    }
-    return false;
-  }
-
-  // Checks if an opponent piece is on the board in this location, used only if this is a take move
-  public boolean checkIfOpponentPieceInLocation(Coordinate coordinates, String teamName) {
-    if (checkIfPieceInSpace(coordinates) && !getPieceAtCoordinate(coordinates).getPieceTeam().equals(teamName)) {
-      return true;
-    }
-    return false;
-  }
-
-  private boolean checkIfPieceInSpace(Coordinate coordinates) {
-    if (pieceCoordMap.keySet().contains(coordinates)) {
-      return true;
-    }
-    return false;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-  // makes a set of coordinates, useful so that coordinate implementation is only present
-  // in our gameboard
-  private Coordinate makeCoordinates(int x, int y){
-    return new Coordinate(x,y);
-  }
-
 
   // for testing
-  public void printBoard(){
+  public void printBoard() {
     System.out.println("");
-    for(GamePiece[] row : grid){
-      for (GamePiece pieceOrNot : row) {
-        if(pieceOrNot == null){
-          System.out.print("_");
+    for (int y = 0; y < height; y++) {
+      for (int x = 0; x < width; x++) {
+        Coordinate curr = makeCoordinates(x, y);
+        if (isPieceAtCoordinate(curr)) {
+          System.out.print(getPieceAtCoordinate(curr).getPieceName().charAt(0));
         } else {
-          System.out.print("p");
+          System.out.print("_");
         }
       }
-      System.out.println("");
+      System.out.println();
     }
   }
 
