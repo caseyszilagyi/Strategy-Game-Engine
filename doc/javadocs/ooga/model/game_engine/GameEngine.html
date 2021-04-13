@@ -6,7 +6,7 @@
 <title>GameEngine</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2021-04-07">
-<meta name="description" content="declaration: package: ooga.model.game_engine, class: GameEngine">
+<meta name="description" content="declaration: package: ooga.model.engine, class: GameEngine">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../script-dir/jquery-ui.min.css" title="Style">
@@ -73,21 +73,21 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ooga.model.game_engine</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ooga.model.engine</a></div>
 <h1 title="Class GameEngine" class="title">Class GameEngine</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree">java.lang.Object
-<div class="inheritance">ooga.model.game_engine.GameEngine</div>
+<div class="inheritance">ooga.model.engine.GameEngine</div>
 </div>
 <section class="description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="Engine.html" title="interface in ooga.model.game_engine">Engine</a></code></dd>
+<dd><code><a href="Engine.html" title="interface in ooga.model.engine">Engine</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="type-name-label">GameEngine</span>
 extends java.lang.Object
-implements <a href="Engine.html" title="interface in ooga.model.game_engine">Engine</a></pre>
+implements <a href="Engine.html" title="interface in ooga.model.engine">Engine</a></pre>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -157,7 +157,7 @@ implements <a href="Engine.html" title="interface in ooga.model.game_engine">Eng
 <tbody>
 <tr class="alt-color" id="i0">
 <td class="col-first"><code>void</code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#addActiveUser(ooga.model.game_components.Player)">addActiveUser</a></span>&#8203;(<a href="../game_components/Player.html" title="class in ooga.model.game_components">Player</a>&nbsp;player)</code></th>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#addActiveUser(ooga.model.game_components.Player)">addActiveUser</a></span>&#8203;(<a href="../game_components/Player.html" title="class in ooga.model.components">Player</a>&nbsp;player)</code></th>
 <td class="col-last">
 <div class="block">Adds a player that is playing</div>
 </td>
@@ -187,24 +187,24 @@ implements <a href="Engine.html" title="interface in ooga.model.game_engine">Eng
 </tr>
 <tr class="alt-color" id="i4">
 <td class="col-first"><code>void</code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#setBoard(ooga.model.game_components.GameBoard)">setBoard</a></span>&#8203;(<a href="../game_components/GameBoard.html" title="class in ooga.model.game_components">GameBoard</a>&nbsp;board)</code></th>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#setBoard(ooga.model.game_components.GameBoard)">setBoard</a></span>&#8203;(<a href="../game_components/GameBoard.html" title="class in ooga.model.components">GameBoard</a>&nbsp;board)</code></th>
 <td class="col-last">&nbsp;</td>
 </tr>
 <tr class="row-color" id="i5">
 <td class="col-first"><code>void</code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#setRules(ooga.model.game_components.GameRules)">setRules</a></span>&#8203;(<a href="../game_components/GameRules.html" title="class in ooga.model.game_components">GameRules</a>&nbsp;rules)</code></th>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#setRules(ooga.model.game_components.GameRules)">setRules</a></span>&#8203;(<a href="../game_components/GameRules.html" title="class in ooga.model.components">GameRules</a>&nbsp;rules)</code></th>
 <td class="col-last">&nbsp;</td>
 </tr>
 <tr class="alt-color" id="i6">
 <td class="col-first"><code>void</code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#startPlayerTimer(ooga.model.game_components.Player)">startPlayerTimer</a></span>&#8203;(<a href="../game_components/Player.html" title="class in ooga.model.game_components">Player</a>&nbsp;player)</code></th>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#startPlayerTimer(ooga.model.game_components.Player)">startPlayerTimer</a></span>&#8203;(<a href="../game_components/Player.html" title="class in ooga.model.components">Player</a>&nbsp;player)</code></th>
 <td class="col-last">
 <div class="block">Starts a player's timer</div>
 </td>
 </tr>
 <tr class="row-color" id="i7">
 <td class="col-first"><code>void</code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#stopPlayerTimer(ooga.model.game_components.Player)">stopPlayerTimer</a></span>&#8203;(<a href="../game_components/Player.html" title="class in ooga.model.game_components">Player</a>&nbsp;player)</code></th>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#stopPlayerTimer(ooga.model.game_components.Player)">stopPlayerTimer</a></span>&#8203;(<a href="../game_components/Player.html" title="class in ooga.model.components">Player</a>&nbsp;player)</code></th>
 <td class="col-last">
 <div class="block">Stops a player's timer</div>
 </td>
@@ -264,7 +264,7 @@ implements <a href="Engine.html" title="interface in ooga.model.game_engine">Eng
  if so</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Engine.html#checkForFinish()">checkForFinish</a></code>&nbsp;in interface&nbsp;<code><a href="Engine.html" title="interface in ooga.model.game_engine">Engine</a></code></dd>
+<dd><code><a href="Engine.html#checkForFinish()">checkForFinish</a></code>&nbsp;in interface&nbsp;<code><a href="Engine.html" title="interface in ooga.model.engine">Engine</a></code></dd>
 </dl>
 </section>
 </li>
@@ -276,7 +276,7 @@ implements <a href="Engine.html" title="interface in ooga.model.game_engine">Eng
 <div class="block">Saves the current state of the game in a file</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Engine.html#saveCurrentState(java.lang.String)">saveCurrentState</a></code>&nbsp;in interface&nbsp;<code><a href="Engine.html" title="interface in ooga.model.game_engine">Engine</a></code></dd>
+<dd><code><a href="Engine.html#saveCurrentState(java.lang.String)">saveCurrentState</a></code>&nbsp;in interface&nbsp;<code><a href="Engine.html" title="interface in ooga.model.engine">Engine</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>fileName</code> - The name of the file to save the game in</dd>
 </dl>
@@ -285,12 +285,12 @@ implements <a href="Engine.html" title="interface in ooga.model.game_engine">Eng
 <li>
 <section class="detail" id="addActiveUser(ooga.model.game_components.Player)">
 <h3>addActiveUser</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">addActiveUser</span>&#8203;(<span class="parameters"><a href="../game_components/Player.html" title="class in ooga.model.game_components">Player</a>&nbsp;player)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">addActiveUser</span>&#8203;(<span class="parameters"><a href="../game_components/Player.html" title="class in ooga.model.components">Player</a>&nbsp;player)</span></div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Engine.html#addActiveUser(ooga.model.game_components.Player)">Engine</a></code></span></div>
 <div class="block">Adds a player that is playing</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Engine.html#addActiveUser(ooga.model.game_components.Player)">addActiveUser</a></code>&nbsp;in interface&nbsp;<code><a href="Engine.html" title="interface in ooga.model.game_engine">Engine</a></code></dd>
+<dd><code><a href="Engine.html#addActiveUser(ooga.model.game_components.Player)">addActiveUser</a></code>&nbsp;in interface&nbsp;<code><a href="Engine.html" title="interface in ooga.model.engine">Engine</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>player</code> - The object representing the player</dd>
 </dl>
@@ -305,19 +305,19 @@ implements <a href="Engine.html" title="interface in ooga.model.game_engine">Eng
  if it is</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Engine.html#checkForNextTurn()">checkForNextTurn</a></code>&nbsp;in interface&nbsp;<code><a href="Engine.html" title="interface in ooga.model.game_engine">Engine</a></code></dd>
+<dd><code><a href="Engine.html#checkForNextTurn()">checkForNextTurn</a></code>&nbsp;in interface&nbsp;<code><a href="Engine.html" title="interface in ooga.model.engine">Engine</a></code></dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="startPlayerTimer(ooga.model.game_components.Player)">
 <h3>startPlayerTimer</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">startPlayerTimer</span>&#8203;(<span class="parameters"><a href="../game_components/Player.html" title="class in ooga.model.game_components">Player</a>&nbsp;player)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">startPlayerTimer</span>&#8203;(<span class="parameters"><a href="../game_components/Player.html" title="class in ooga.model.components">Player</a>&nbsp;player)</span></div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Engine.html#startPlayerTimer(ooga.model.game_components.Player)">Engine</a></code></span></div>
 <div class="block">Starts a player's timer</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Engine.html#startPlayerTimer(ooga.model.game_components.Player)">startPlayerTimer</a></code>&nbsp;in interface&nbsp;<code><a href="Engine.html" title="interface in ooga.model.game_engine">Engine</a></code></dd>
+<dd><code><a href="Engine.html#startPlayerTimer(ooga.model.game_components.Player)">startPlayerTimer</a></code>&nbsp;in interface&nbsp;<code><a href="Engine.html" title="interface in ooga.model.engine">Engine</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>player</code> - The player</dd>
 </dl>
@@ -326,12 +326,12 @@ implements <a href="Engine.html" title="interface in ooga.model.game_engine">Eng
 <li>
 <section class="detail" id="stopPlayerTimer(ooga.model.game_components.Player)">
 <h3>stopPlayerTimer</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">stopPlayerTimer</span>&#8203;(<span class="parameters"><a href="../game_components/Player.html" title="class in ooga.model.game_components">Player</a>&nbsp;player)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">stopPlayerTimer</span>&#8203;(<span class="parameters"><a href="../game_components/Player.html" title="class in ooga.model.components">Player</a>&nbsp;player)</span></div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Engine.html#stopPlayerTimer(ooga.model.game_components.Player)">Engine</a></code></span></div>
 <div class="block">Stops a player's timer</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Engine.html#stopPlayerTimer(ooga.model.game_components.Player)">stopPlayerTimer</a></code>&nbsp;in interface&nbsp;<code><a href="Engine.html" title="interface in ooga.model.game_engine">Engine</a></code></dd>
+<dd><code><a href="Engine.html#stopPlayerTimer(ooga.model.game_components.Player)">stopPlayerTimer</a></code>&nbsp;in interface&nbsp;<code><a href="Engine.html" title="interface in ooga.model.engine">Engine</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>player</code> - The player</dd>
 </dl>
@@ -340,20 +340,20 @@ implements <a href="Engine.html" title="interface in ooga.model.game_engine">Eng
 <li>
 <section class="detail" id="setRules(ooga.model.game_components.GameRules)">
 <h3>setRules</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">setRules</span>&#8203;(<span class="parameters"><a href="../game_components/GameRules.html" title="class in ooga.model.game_components">GameRules</a>&nbsp;rules)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">setRules</span>&#8203;(<span class="parameters"><a href="../game_components/GameRules.html" title="class in ooga.model.components">GameRules</a>&nbsp;rules)</span></div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Engine.html#setRules(ooga.model.game_components.GameRules)">setRules</a></code>&nbsp;in interface&nbsp;<code><a href="Engine.html" title="interface in ooga.model.game_engine">Engine</a></code></dd>
+<dd><code><a href="Engine.html#setRules(ooga.model.game_components.GameRules)">setRules</a></code>&nbsp;in interface&nbsp;<code><a href="Engine.html" title="interface in ooga.model.engine">Engine</a></code></dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setBoard(ooga.model.game_components.GameBoard)">
 <h3>setBoard</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">setBoard</span>&#8203;(<span class="parameters"><a href="../game_components/GameBoard.html" title="class in ooga.model.game_components">GameBoard</a>&nbsp;board)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">setBoard</span>&#8203;(<span class="parameters"><a href="../game_components/GameBoard.html" title="class in ooga.model.components">GameBoard</a>&nbsp;board)</span></div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Engine.html#setBoard(ooga.model.game_components.GameBoard)">setBoard</a></code>&nbsp;in interface&nbsp;<code><a href="Engine.html" title="interface in ooga.model.game_engine">Engine</a></code></dd>
+<dd><code><a href="Engine.html#setBoard(ooga.model.game_components.GameBoard)">setBoard</a></code>&nbsp;in interface&nbsp;<code><a href="Engine.html" title="interface in ooga.model.engine">Engine</a></code></dd>
 </dl>
 </section>
 </li>

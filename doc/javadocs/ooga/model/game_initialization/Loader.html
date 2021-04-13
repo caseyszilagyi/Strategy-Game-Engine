@@ -6,7 +6,7 @@
 <title>Loader</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2021-04-07">
-<meta name="description" content="declaration: package: ooga.model.game_initialization, interface: Loader">
+<meta name="description" content="declaration: package: ooga.model.initialization, interface: Loader">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../script-dir/jquery-ui.min.css" title="Style">
@@ -73,13 +73,13 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ooga.model.game_initialization</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ooga.model.initialization</a></div>
 <h1 title="Interface Loader" class="title">Interface Loader</h1>
 </div>
 <section class="description">
 <dl class="notes">
 <dt>All Known Implementing Classes:</dt>
-<dd><code><a href="GameClassLoader.html" title="class in ooga.model.game_initialization">GameClassLoader</a></code></dd>
+<dd><code><a href="GameClassLoader.html" title="class in ooga.model.initialization">GameClassLoader</a></code></dd>
 </dl>
 <hr>
 <pre>public interface <span class="type-name-label">Loader</span></pre>
@@ -103,28 +103,28 @@ loadScripts(document, 'script');</script>
 </thead>
 <tbody>
 <tr class="alt-color" id="i0">
-<td class="col-first"><code><a href="../game_components/GameBoard.html" title="class in ooga.model.game_components">GameBoard</a></code></td>
+<td class="col-first"><code><a href="../game_components/GameBoard.html" title="class in ooga.model.components">GameBoard</a></code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#makeBoard(java.lang.String)">makeBoard</a></span>&#8203;(java.lang.String&nbsp;boardDetails)</code></th>
 <td class="col-last">
 <div class="block">Makes a board from the given file</div>
 </td>
 </tr>
 <tr class="row-color" id="i1">
-<td class="col-first"><code><a href="../game_components/GamePiece.html" title="class in ooga.model.game_components">GamePiece</a></code></td>
+<td class="col-first"><code><a href="../game_components/GamePiece.html" title="class in ooga.model.components">GamePiece</a></code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#makePiece(java.lang.String)">makePiece</a></span>&#8203;(java.lang.String&nbsp;pieceDetails)</code></th>
 <td class="col-last">
 <div class="block">Makes a piece from the given file</div>
 </td>
 </tr>
 <tr class="alt-color" id="i2">
-<td class="col-first"><code><a href="../game_components/Player.html" title="class in ooga.model.game_components">Player</a></code></td>
+<td class="col-first"><code><a href="../game_components/Player.html" title="class in ooga.model.components">Player</a></code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#makePlayer(java.lang.String)">makePlayer</a></span>&#8203;(java.lang.String&nbsp;playerDetails)</code></th>
 <td class="col-last">
 <div class="block">Makes a player from the given file</div>
 </td>
 </tr>
 <tr class="row-color" id="i3">
-<td class="col-first"><code><a href="../game_components/GameRules.html" title="class in ooga.model.game_components">GameRules</a></code></td>
+<td class="col-first"><code><a href="../game_components/GameRules.html" title="class in ooga.model.components">GameRules</a></code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#makeRules(java.lang.String)">makeRules</a></span>&#8203;(java.lang.String&nbsp;gameType)</code></th>
 <td class="col-last">
 <div class="block">Makes the rules that define the game</div>
@@ -148,7 +148,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="makeRules(java.lang.String)">
 <h3>makeRules</h3>
-<div class="member-signature"><span class="return-type"><a href="../game_components/GameRules.html" title="class in ooga.model.game_components">GameRules</a></span>&nbsp;<span class="member-name">makeRules</span>&#8203;(<span class="parameters">java.lang.String&nbsp;gameType)</span></div>
+<div class="member-signature"><span class="return-type"><a href="../game_components/GameRules.html" title="class in ooga.model.components">GameRules</a></span>&nbsp;<span class="member-name">makeRules</span>&#8203;(<span class="parameters">java.lang.String&nbsp;gameType)</span></div>
 <div class="block">Makes the rules that define the game</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -161,7 +161,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="makePlayer(java.lang.String)">
 <h3>makePlayer</h3>
-<div class="member-signature"><span class="return-type"><a href="../game_components/Player.html" title="class in ooga.model.game_components">Player</a></span>&nbsp;<span class="member-name">makePlayer</span>&#8203;(<span class="parameters">java.lang.String&nbsp;playerDetails)</span></div>
+<div class="member-signature"><span class="return-type"><a href="../game_components/Player.html" title="class in ooga.model.components">Player</a></span>&nbsp;<span class="member-name">makePlayer</span>&#8203;(<span class="parameters">java.lang.String&nbsp;playerDetails)</span></div>
 <div class="block">Makes a player from the given file</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -174,7 +174,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="makeBoard(java.lang.String)">
 <h3>makeBoard</h3>
-<div class="member-signature"><span class="return-type"><a href="../game_components/GameBoard.html" title="class in ooga.model.game_components">GameBoard</a></span>&nbsp;<span class="member-name">makeBoard</span>&#8203;(<span class="parameters">java.lang.String&nbsp;boardDetails)</span></div>
+<div class="member-signature"><span class="return-type"><a href="../game_components/GameBoard.html" title="class in ooga.model.components">GameBoard</a></span>&nbsp;<span class="member-name">makeBoard</span>&#8203;(<span class="parameters">java.lang.String&nbsp;boardDetails)</span></div>
 <div class="block">Makes a board from the given file</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -187,7 +187,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="makePiece(java.lang.String)">
 <h3>makePiece</h3>
-<div class="member-signature"><span class="return-type"><a href="../game_components/GamePiece.html" title="class in ooga.model.game_components">GamePiece</a></span>&nbsp;<span class="member-name">makePiece</span>&#8203;(<span class="parameters">java.lang.String&nbsp;pieceDetails)</span></div>
+<div class="member-signature"><span class="return-type"><a href="../game_components/GamePiece.html" title="class in ooga.model.components">GamePiece</a></span>&nbsp;<span class="member-name">makePiece</span>&#8203;(<span class="parameters">java.lang.String&nbsp;pieceDetails)</span></div>
 <div class="block">Makes a piece from the given file</div>
 <dl class="notes">
 <dt>Parameters:</dt>

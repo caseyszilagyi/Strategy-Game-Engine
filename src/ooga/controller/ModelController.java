@@ -1,8 +1,8 @@
 package ooga.controller;
 
-import ooga.model.game_engine.Engine;
-import ooga.model.game_initialization.Initializer;
-import ooga.model.game_initialization.EngineInitializer;
+import ooga.model.engine.Engine;
+import ooga.model.initialization.engine.Initializer;
+import ooga.model.initialization.engine.EngineInitializer;
 
 public class ModelController implements BackEndExternalAPI {
 

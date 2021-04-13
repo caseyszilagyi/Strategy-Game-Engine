@@ -4,12 +4,12 @@ import ooga.controller.BackEndExternalAPI;
 import ooga.controller.FrontEndExternalAPI;
 import ooga.controller.ModelController;
 import ooga.controller.ViewController;
-import ooga.model.game_components.Player;
-import ooga.model.game_engine.Engine;
-import ooga.model.game_engine.GameEngine;
-import ooga.model.game_initialization.Creator;
-import ooga.model.game_initialization.GameCreator;
-import ooga.model.game_initialization.file_parsing.XMLParser;
+import ooga.model.components.Player;
+import ooga.model.engine.Engine;
+import ooga.model.engine.GameEngine;
+import ooga.model.initialization.Creator;
+import ooga.model.initialization.GameCreator;
+import ooga.model.initialization.fileparsing.XMLParser;
 
 public class BasicCases {
 

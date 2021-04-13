@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import javafx.util.Pair;
-import ooga.model.game_components.Coordinate;
+import ooga.model.components.Coordinate;
 
 public class DummyViewController implements FrontEndExternalAPI {
 
