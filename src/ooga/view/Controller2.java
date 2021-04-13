@@ -1,6 +1,6 @@
 package ooga.view;
 
-import javafx.fxml.FXML;
+//import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,9 +17,9 @@ public class Controller2 {
 
   }
 
-  @FXML
+
   private Button searchButton;
-  @FXML
+
   private void initialize() {
     // search panel
     searchButton.setText("Search");
