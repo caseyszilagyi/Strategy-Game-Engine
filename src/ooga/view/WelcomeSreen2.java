@@ -1,2 +1,5 @@
-package ooga.view;public class WelcomeSreen2 {
+package ooga.view;
+
+public class WelcomeSreen2 {
+
 }
