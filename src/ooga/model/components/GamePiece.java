@@ -35,11 +35,12 @@ public class GamePiece {
    * @param viewController The controller that this piece can use to make front end method calls
    * @param gameBoard The board that this piece is on
    */
-  public GamePiece(Coordinate pieceCoordinates, String pieceName, FrontEndExternalAPI viewController, GameBoard gameBoard) {
+  public GamePiece(Coordinate pieceCoordinates, String pieceName, FrontEndExternalAPI viewController, GameBoard gameBoard, String pieceTeam) {
     this.pieceCoordinates = pieceCoordinates;
     this.pieceName = pieceName;
     this.viewController = viewController;
     this.gameBoard = gameBoard;
+    this.pieceTeam = pieceTeam;
   }
 
   /**
