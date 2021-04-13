@@ -1,14 +1,13 @@
-package ooga.model.game_engine;
+package ooga.model.game_engine.testclasses;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
 import ooga.controller.FrontEndExternalAPI;
-import ooga.model.DummyViewController;
+import ooga.controller.DummyViewController;
 import ooga.model.game_components.Coordinate;
 import ooga.model.game_components.GameBoard;
-import ooga.model.game_components.GamePiece;
 import ooga.model.game_components.GameRules;
 import ooga.model.game_engine.action_files.Action;
 import ooga.model.game_engine.action_files.ActionCreator;
