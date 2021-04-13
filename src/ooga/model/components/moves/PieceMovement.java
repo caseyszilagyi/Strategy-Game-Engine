@@ -1,5 +1,6 @@
-package ooga.model.components.movetypes;
+package ooga.model.components.moves;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import ooga.controller.FrontEndExternalAPI;
@@ -16,7 +17,7 @@ import ooga.model.components.moverestrictions.Restriction;
 public abstract class PieceMovement {
 
   FrontEndExternalAPI viewController;
-  private List<Restriction> restrictions;
+  private List<Restriction> restrictions = new ArrayList<>();
   private GameBoard gameBoard;
 
   private int changeX;
@@ -84,9 +85,23 @@ public abstract class PieceMovement {
   protected boolean checkIfValidMove(Coordinate coordinates, String teamName){
     return checkIfMoveInBounds(coordinates) &&
            checkThatNoFriendlyPieceInMoveDestination(coordinates, teamName) &&
-           checkEnemyPieceLocationConditions(coordinates, teamName);
+           checkEnemyPieceLocationConditions(coordinates, teamName) &&
+           checkRestrictions();
   }
 
+
+  public void setRestrictions(List<Restriction> restrictions){
+    this.restrictions=restrictions;
+  }
+
+  private boolean checkRestrictions(){
+    for(Restriction restriction: restrictions){
+      if(!restriction.checkRestriction()){
+        return false;
+      }
+    }
+    return true;
+  }
 
   /**
    * Checks if a move is in bounds. The >= is due to the fact that the coordinate system starts at

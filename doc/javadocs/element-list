@@ -2,7 +2,7 @@ ooga
 ooga.controller
 ooga.model
 ooga.model.components
-ooga.model.components.movetypes
+ooga.model.components.moves
 ooga.model.components.moverestrictions
 ooga.model.engine
 ooga.model.initialization
