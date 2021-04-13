@@ -57,6 +57,7 @@ public class BoardCreator extends Creator {
 
     public GameBoard makeBoard() {
         board= new GameBoard(numCols, numRows);
+        viewController.setBoardDimensions(numCols, numRows);
         pieceCreator = new PieceCreator(gameName, viewController, board);
 
         for (Map.Entry<String, String> entry : userPieces.entrySet()) {
@@ -71,11 +72,13 @@ public class BoardCreator extends Creator {
     private void buildPiece(int numRows, Map.Entry<String, String> entry, int direction, String team) {
         int pieceX = translateX(entry.getKey());
         int pieceY = translateY(entry.getKey(), numRows);
+        String pieceType = entry.getValue();
         Coordinate pieceCoordinate = new Coordinate(pieceX, pieceY);
-        GamePiece newPiece = pieceCreator.makePiece(entry.getValue(), pieceCoordinate, direction, viewController);
+        GamePiece newPiece = pieceCreator.makePiece(pieceType, pieceCoordinate, direction, viewController);
         pieceSet.add(newPiece);
         newPiece.setPieceTeam(team);
         board.addPiece(newPiece);
+        viewController.setBoardSpace(pieceX, pieceY, pieceType, team);
     }
 
     private int translateX(String coordinate) {
