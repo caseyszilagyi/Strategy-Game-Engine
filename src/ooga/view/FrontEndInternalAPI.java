@@ -11,5 +11,5 @@ package ooga.view;
  * @author Casey Szilagyi
  */
 public interface FrontEndInternalAPI {
-
+  
 }
