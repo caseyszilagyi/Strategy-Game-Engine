@@ -272,7 +272,7 @@ public class BasicPieceTest {
    */
   @Test
   void TestEmptyBoardPawnMovement(){
-    GamePiece pawn = makePiece("pawn", 4, 4);
+    GamePiece pawn = makePiece("Pawn", 4, 4);
     pawn.setPieceTeam("Casey");
     pawn.determineAllLegalMoves();
     allLegalMoves = dummyViewController.getAllPossibleMoves();
@@ -317,16 +317,16 @@ public class BasicPieceTest {
 
   // piece creator methods
   private GamePiece makePiece(String pieceName, int xCoord, int yCoord){
-    return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), 1, dummyViewController);
+    return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), 1, dummyViewController, "Casey");
   }
 
   private GamePiece makeEnemyPiece(String pieceName, int xCoord, int yCoord){
-    return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), -1, dummyViewController);
+    return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), -1, dummyViewController, "NotCasey");
   }
 
 
   private GamePiece makeDummyGamePiece(String teamName, int x, int y){
-    GamePiece piece = new GamePiece(makeCoordinates(x,y), "dummy", dummyViewController, gameBoard);
+    GamePiece piece = new GamePiece(makeCoordinates(x,y), "dummy", dummyViewController, gameBoard, " dummy");
     piece.setPieceTeam(teamName);
     gameBoard.addPiece(piece);
     return piece;
