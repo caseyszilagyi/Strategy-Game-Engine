@@ -3,6 +3,8 @@ package ooga.model.game_initialization.file_parsing;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import ooga.controller.FrontEndExternalAPI;
+import ooga.model.DummyViewController;
 import ooga.model.game_components.GamePiece;
 import ooga.model.game_initialization.BoardCreator;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,6 +22,7 @@ public class BoardTesting {
     private GamePiece[][] testBoard;
     private int rows;
     private int cols;
+    private FrontEndExternalAPI dummyViewController = new DummyViewController();
 
     @BeforeEach
     private void setUp(){
@@ -27,7 +30,7 @@ public class BoardTesting {
     }
     @Test
     void testCreator(){
-        boardCreator = new BoardCreator("Chess");
+        boardCreator = new BoardCreator("Chess", dummyViewController);
         boardCreator.makeBoard();
     }
 

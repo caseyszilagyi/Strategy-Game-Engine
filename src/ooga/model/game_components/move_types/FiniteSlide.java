@@ -27,8 +27,8 @@ public class FiniteSlide extends PieceMovement {
    * @param direction  1 if going up, -1 if going down. Used to adjust parameters for different
    *                   sides of the board
    */
-  public FiniteSlide(Map<String, String> parameters, int direction) {
-    super(parameters, direction);
+  public FiniteSlide(Map<String, String> parameters, int direction, GameBoard gameBoard) {
+    super(parameters, direction, gameBoard);
   }
 
   /**

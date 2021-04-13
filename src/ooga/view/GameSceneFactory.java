@@ -1,12 +1,10 @@
 package ooga.view;
 
-import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import ooga.view.resources.WelcomeScene;
 
 /**
  * Creates {@link GameScene} subclasses, however returns the general {@code GameScene}
@@ -21,8 +19,6 @@ public class GameSceneFactory {
   private final String DEFAULT_RESOURCES_FOLDER = "src/ooga/view/resources/";
   private final String DEFAULT_RESOURCES_PACKAGE = "ooga.view.resources.";
   private ResourceBundle resources;
-  private GameScene myScene;
-  private Parent myRoot;
 
 
   /**
@@ -34,18 +30,27 @@ public class GameSceneFactory {
   public GameScene makeScene(ResourceBundle resources) {
 
     this.resources = resources;
-    String FXMLName = resources.getString("FXML");
-    try {
-      Parent root = FXMLLoader.load(new File(DEFAULT_RESOURCES_FOLDER + FXMLName).toURI().toURL());
-//      setSceneSize(Integer.parseInt(resources.getString("sceneWidth")),
-//          Integer.parseInt(resources.getString("sceneHeight")));
-      myScene = new GameScene(root);
 
-      myRoot = myScene.getRoot();
-    } catch (IOException e) {
+
+
+    Parent root = new GridPane();
+
+    String sceneType = resources.getString("sceneType");
+    GameScene myScene = null;
+    try {
+      myScene = (GameScene) this.getClass()
+          .getDeclaredMethod("make" + sceneType, Parent.class, ResourceBundle.class)
+          .invoke(this, new Object[]{root, resources});
+    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
       e.printStackTrace();
     }
     return myScene;
+  }
+
+  private GameScene makeWelcomeScene(Parent root, ResourceBundle resources){
+    GameScene newScene = new WelcomeScene(root, resources);
+
+    return newScene;
   }
 
   /**
@@ -59,13 +64,4 @@ public class GameSceneFactory {
     return makeScene(sceneResources);
   }
 
-  /**
-   * Sets the scene to the desired width and height
-   * @param width desired width of scene
-   * @param height desired height of scene
-   */
-  private void setSceneSize(int width, int height){
-    SCENE_WIDTH = width;
-    SCENE_HEIGHT = height;
-  }
 }

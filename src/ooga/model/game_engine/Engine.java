@@ -63,6 +63,6 @@ public abstract class Engine{
 
   public abstract GameBoard getBoard();
 
-  public abstract void printAllPossibleMoves(int xPos, int yPos);
+  public abstract void actOnCoordinates(int x, int y);
 
 }

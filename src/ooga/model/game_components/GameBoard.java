@@ -1,37 +1,61 @@
 package ooga.model.game_components;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import ooga.controller.FrontEndExternalAPI;
 
 public class GameBoard implements Board {
 
-  private List<GamePiece> activePieces;
+  private FrontEndExternalAPI viewController;
+  private Set<GamePiece> activePieces = new HashSet<>();
   private Player currentTurn;
   private GamePiece[][] grid;
 
-  private int width, height;
+  private Map<Coordinate, GamePiece> pieceCoordMap = new HashMap<>();
 
+  private int width, height;
 
   public GameBoard(int width, int height){
     this.width = width;
     this.height = height;
     grid = new GamePiece[width][height];
-    activePieces = new ArrayList<>();
+  }
+
+  /**
+   * Sets the view controller that the board will use to make method calls to the front end
+   * @param viewController The view controller
+   */
+  public void setViewController(FrontEndExternalAPI viewController){
+    this.viewController = viewController;
+  }
+
+  public void setPieceSet(Set<GamePiece> pieceSet){
+    activePieces = pieceSet;
+    makePieceCoordMap();
+  }
+
+
+  public void determineAllLegalMoves(int x, int y){
+    pieceCoordMap.get(makeCoordinates(x,y)).determineAllLegalMoves();
   }
 
   public void setGrid(GamePiece[][] grid){
     this.grid = grid;
+    for(int x = 0; x<grid[0].length; x++){
+      for(int y = 0; y<grid.length; y++){
+        if(grid[y][x] != null){
+          activePieces.add(grid[y][x]);
+        }
+      }
+    }
+    makePieceCoordMap();
   }
 
-  // For testing
-  public void printAllPossibleMoves(int xPos, int yPos){
-    grid[yPos][xPos].setDummyBoard(grid);
-    Set<Coordinate> moves= grid[yPos][xPos].getAllLegalMoves();
-    for(Coordinate coords: moves){
-      System.out.println(coords.toString());
-    }
-  }
+
 
   @Override
   public boolean movePiece(Coordinate startingCoordinate, Coordinate endingCoordinate) {
@@ -50,6 +74,7 @@ public class GameBoard implements Board {
     }
     grid[startingCoordinate.getY()][startingCoordinate.getX()] = null;
     pieceToMove.setPieceCoordinates(endingCoordinate);
+    pieceCoordMap.put(endingCoordinate, pieceToMove);
     grid[endingCoordinate.getY()][endingCoordinate.getX()] = pieceToMove;
     return true;
   }
@@ -71,6 +96,7 @@ public class GameBoard implements Board {
       return false;
     }
     activePieces.add(newPieceType);
+    pieceCoordMap.put(newPieceCoordinates, newPieceType);
     grid[newPieceCoordinates.getY()][newPieceCoordinates.getX()] = newPieceType;
     return true;
   }
@@ -91,19 +117,13 @@ public class GameBoard implements Board {
     return grid;
   }
 
-  public List<Coordinate> getAllActivePieceCoordinates() {
-    List<Coordinate> allCoordinates = new ArrayList<>();
-    for(GamePiece piece : activePieces){
-      allCoordinates.add(piece.getPieceCoordinates());
-    }
-    return allCoordinates;
-  }
+
 
   public GamePiece getPieceAtCoordinate(Coordinate coordinate){
-    return grid[coordinate.getY()][coordinate.getX()];
+    return pieceCoordMap.get(coordinate);
   }
 
-  private boolean isCoordinateOnBoard(Coordinate coordinates) {
+  public boolean isCoordinateOnBoard(Coordinate coordinates) {
     if(coordinates.getX() >= width || coordinates.getY() >= height || coordinates
         .getX() < 0 || coordinates.getY() < 0){
       return false;
@@ -115,6 +135,71 @@ public class GameBoard implements Board {
     return (isCoordinateOnBoard(coordinate) && grid[coordinate.getY()][coordinate.getX()] != null);
   }
 
+
+
+
+  //makes the coordinate:piece map
+  private void makePieceCoordMap(){
+    for(GamePiece piece: activePieces){
+      pieceCoordMap.put(piece.getPieceCoordinates(), piece);
+    }
+  }
+
+  private Set<Coordinate> getAllActivePieceCoordinates() {
+    Set<Coordinate> allCoordinates = new HashSet<>();
+    for(GamePiece piece : activePieces){
+      allCoordinates.add(piece.getPieceCoordinates());
+    }
+    return allCoordinates;
+  }
+
+
+
+
+
+
+  // Checks if an friendly piece is on the board in this location
+  public boolean checkIfFriendlyPieceInLocation(Coordinate coordinates, String teamName) {
+    if (checkIfPieceInSpace(coordinates) && getPieceAtCoordinate(coordinates).getPieceTeam().equals(teamName)) {
+      return true;
+    }
+    return false;
+  }
+
+  // Checks if an opponent piece is on the board in this location, used only if this is a take move
+  public boolean checkIfOpponentPieceInLocation(Coordinate coordinates, String teamName) {
+    if (checkIfPieceInSpace(coordinates) && !getPieceAtCoordinate(coordinates).getPieceTeam().equals(teamName)) {
+      return true;
+    }
+    return false;
+  }
+
+  private boolean checkIfPieceInSpace(Coordinate coordinates) {
+    if (pieceCoordMap.keySet().contains(coordinates)) {
+      return true;
+    }
+    return false;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+  // makes a set of coordinates, useful so that coordinate implementation is only present
+  // in our gameboard
+  private Coordinate makeCoordinates(int x, int y){
+    return new Coordinate(x,y);
+  }
+
+
+  // for testing
   public void printBoard(){
     System.out.println("");
     for(GamePiece[] row : grid){

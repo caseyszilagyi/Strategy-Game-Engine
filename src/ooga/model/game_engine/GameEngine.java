@@ -33,13 +33,49 @@ public class GameEngine extends Engine {
   private Long playerStartTime;
 
   //Action creator
-  private ActionCreator actionCreator = new ActionCreator();
+  private ActionCreator actionCreator;
 
-  public GameEngine(FrontEndExternalAPI newViewController){
+  public GameEngine(FrontEndExternalAPI newViewController) {
     viewController = newViewController;
     activePlayers = new ArrayList<>();
     priorActions = new ArrayList<>();
+    actionCreator = new ActionCreator(viewController, curBoard);
   }
+
+
+  /**
+   * The method that actually decides what to do and acts on coordinates passed fromt the front end
+   *
+   * @param x The x coordinate
+   * @param y The y coordinate
+   */
+  @Override
+  public void actOnCoordinates(int x, int y) {
+    // TODO: Add logic that determines what method is called on the game board depending on the game type
+    curBoard.determineAllLegalMoves(x, y);
+  }
+
+  /**
+   * Executes an action. An action can be something that has to do with a piece
+   *
+   * @param action is the Action.java to perform
+   */
+  @Override
+  public void executeAction(Action action) {
+    if (action.executeAction(curBoard, curRules)) {
+      priorActions.add(action);
+    }
+  }
+
+  /**
+   * Executes an action, given in string form
+   *
+   * @param action the string representation of the action
+   */
+  public void executeAction(String action) {
+    executeAction(actionCreator.createAction(action));
+  }
+
 
   @Override
   public void checkForFinish() {
@@ -71,7 +107,7 @@ public class GameEngine extends Engine {
   @Override
   public void stopPlayerTimer(Player player) {
     Long endTime = System.currentTimeMillis();
-    if(activePlayers.contains(player)){
+    if (activePlayers.contains(player)) {
       Long timeElapsed = endTime - playerStartTime;
       playerTimes.set(activePlayers.indexOf(player), timeElapsed);
     } else {
@@ -79,40 +115,27 @@ public class GameEngine extends Engine {
     }
   }
 
+
   @Override
   public void setRules(GameRules rules) {
     curRules = rules;
   }
 
+  /**
+   * Sets the game board, and gives the game board the proper view controller
+   * @param board The board that holds the GamePiece objects
+   */
   @Override
   public void setBoard(GameBoard board) {
     curBoard = board;
+    curBoard.setViewController(viewController);
   }
 
+
   // for testing
-  public GameBoard getBoard(){
+  public GameBoard getBoard() {
     return curBoard;
   }
 
-  // testing
-  public void printAllPossibleMoves(int xPos, int yPos){
-    curBoard.printAllPossibleMoves(xPos, yPos);
-  }
-
-
-  public void executeAction(String action){
-    executeAction(actionCreator.createAction(action));
-  }
-
-  /**
-   *
-   * @param action is the Action.java to perform
-   */
-  @Override
-  public void executeAction(Action action) {
-    if(action.executeAction(curBoard, curRules)){
-      priorActions.add(action);
-    }
-  }
 
 }
