@@ -56,9 +56,25 @@ public abstract class PieceMovement {
       String pieceTeam);
 
 
-  public abstract void executeMove(Coordinate coordinates);
+  /**
+   * Executes a move when given the final coordinates
+   * @param startingCoordinates The coordinates that the piece starts at
+   * @param endingCoordinates The ending coordinates of the move
+   */
+  public void executeMove(Coordinate startingCoordinates, Coordinate endingCoordinates){
+    if(mustTake){
+      gameBoard.removePiece(makeCoordinate(endingCoordinates.getX() + takeX, endingCoordinates.getY() + takeY));
+    }
+    gameBoard.movePiece(startingCoordinates, endingCoordinates);
+  }
 
 
+  /**
+   * Checks if a move is valid based on the ending coordinates and name of the team
+   * @param coordinates The ending coordinates of the move
+   * @param teamName The name of the team of the piece being moved
+   * @return True if the move is valid, false if not
+   */
   protected boolean checkIfValidMove(Coordinate coordinates, String teamName){
     return checkIfMoveInBounds(coordinates) &&
            checkThatNoFriendlyPieceInMoveDestination(coordinates, teamName) &&
@@ -174,28 +190,6 @@ public abstract class PieceMovement {
    */
   protected boolean isMustTake() {
     return mustTake;
-  }
-
-  /**
-   * If the piece corresponding to this object needs to be moved, it might need to take a piece.
-   * This method gives the x position oof the piece that needs to be taken relative to the final
-   * position of this piece
-   *
-   * @return The x position relative to the final position of the piece being moved
-   */
-  protected int getTakeX() {
-    return takeX;
-  }
-
-  /**
-   * If the piece corresponding to this object needs to be moved, it might need to take a piece.
-   * This method gives the y position oof the piece that needs to be taken relative to the final
-   * position of this piece
-   *
-   * @return The y position relative to the final position of the piece being moved
-   */
-  protected int getTakeY() {
-    return takeY;
   }
 
   /**
