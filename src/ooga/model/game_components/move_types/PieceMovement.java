@@ -2,6 +2,7 @@ package ooga.model.game_components.move_types;
 
 import java.util.List;
 import java.util.Map;
+import ooga.controller.FrontEndExternalAPI;
 import ooga.model.game_components.Coordinate;
 import ooga.model.game_components.GameBoard;
 import ooga.model.game_components.GamePiece;
@@ -15,7 +16,7 @@ import ooga.model.game_components.move_types.move_restrictions.GeneralRestrictio
  */
 public abstract class PieceMovement {
 
-  // A list of restrictions that the subclass has to check for before declaring a move valid
+  FrontEndExternalAPI viewController;
   private List<GeneralRestriction> restrictions;
   private GameBoard gameBoard;
 
@@ -33,7 +34,7 @@ public abstract class PieceMovement {
    * @param direction The multiplier used to change the direction that the piece uses
    * @param gameBoard The board that the piece moves on
    */
-  public PieceMovement(Map<String, String> parameters, int direction, GameBoard gameBoard) {
+  public PieceMovement(Map<String, String> parameters, int direction, GameBoard gameBoard, FrontEndExternalAPI viewController) {
     changeX = Integer.parseInt(parameters.get("changeX")) * direction;
     changeY = Integer.parseInt(parameters.get("changeY")) * direction;
     mustTake = Boolean.parseBoolean(parameters.get("mustTake"));
@@ -42,6 +43,7 @@ public abstract class PieceMovement {
       takeY = Integer.parseInt(parameters.get("takeY")) * direction;
     }
     this.gameBoard = gameBoard;
+    this.viewController = viewController;
   }
 
   /**
@@ -63,9 +65,14 @@ public abstract class PieceMovement {
    */
   public void executeMove(Coordinate startingCoordinates, Coordinate endingCoordinates){
     if(mustTake){
-      gameBoard.removePiece(makeCoordinate(endingCoordinates.getX() + takeX, endingCoordinates.getY() + takeY));
+      int removeX = endingCoordinates.getX() + takeX;
+      int removeY = endingCoordinates.getY() + takeY;
+      gameBoard.removePiece(makeCoordinate(removeX, removeY));
+      viewController.removePiece(removeX, removeY);
     }
     gameBoard.movePiece(startingCoordinates, endingCoordinates);
+    viewController.movePiece(startingCoordinates.getX(), startingCoordinates.getY(),
+        endingCoordinates.getX(), endingCoordinates.getY());
   }
 
 
