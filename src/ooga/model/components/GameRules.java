@@ -14,7 +14,7 @@ import org.w3c.dom.Node;
 public class GameRules {
 
   private static final String RULE_FILE_PATH = "data/gamelogic/game_rules/";
-  private static final String TURN_CONDITION_FILE_PATH = "src/model/components/turnconditions/";
+  private static final String TURN_CONDITION_FILE_PATH = "ooga.model.components.turnconditions.";
   private static final String FILE_EXTENSION = ".xml";
   private static final String TURN_CONDITION_NAME_EXTENSION = "TurnCondition";
   private static final String FILE_TYPE = "rules";
@@ -55,7 +55,7 @@ public class GameRules {
         Class<?> clazz = Class.forName(TURN_CONDITION_FILE_PATH + condition + TURN_CONDITION_NAME_EXTENSION);
         TurnCondition turnConditionClass = (TurnCondition) clazz.getConstructor().newInstance();
         if(turnConditionClass.isTurnOver()){
-          return false;
+          return true;
         }
       } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
         System.err.println("No Condition found for condition type: " + condition);
@@ -65,7 +65,7 @@ public class GameRules {
         e.printStackTrace();
       }
     }
-    return true;
+    return false;
   }
 
   /**
