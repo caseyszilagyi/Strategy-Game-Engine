@@ -14,7 +14,7 @@ import org.w3c.dom.Node;
 import java.util.List;
 import java.util.Map;
 
-public class BoardTesting {
+public class BoardTest {
     private BoardCreator boardCreator;
     private Map<String, List<Node>> boardNodes;
     private Map<String, String> userPieces;

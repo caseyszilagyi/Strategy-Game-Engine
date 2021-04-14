@@ -3,14 +3,17 @@
   <moves>
     <FiniteSlide>
       <changeX>0</changeX>
-      <changeY>1</changeY>
+      <changeY>2</changeY>
       <mustTake>False</mustTake>
       <takeX>null</takeX>
       <takeY>null</takeY>
+      <restrictions>
+        <PawnFirstMove></PawnFirstMove>
+      </restrictions>
     </FiniteSlide>
     <FiniteSlide>
       <changeX>0</changeX>
-      <changeY>2</changeY>
+      <changeY>1</changeY>
       <mustTake>False</mustTake>
       <takeX>null</takeX>
       <takeY>null</takeY>
