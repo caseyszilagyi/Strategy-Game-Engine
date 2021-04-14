@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rules rule="Chess">
- <actionType>
-  Place
- </actionType>
- <specialCases>
-  <case case = "jumped">
-   <action classToCall = "removeInBetween">
-
-   </action>
-  </case>
- </specialCases>
-
+<rules rules="Chess">
+ <turnConditions>
+  <condition>Force</condition>
+ </turnConditions>
 </rules>

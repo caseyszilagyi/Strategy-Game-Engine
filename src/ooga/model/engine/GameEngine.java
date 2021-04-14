@@ -26,6 +26,7 @@ public class GameEngine extends Engine {
   private List<Action> priorActions;
 
   //Player variables
+  private Player currentPlayerTurn;
   private List<Player> activePlayers;
   private List<Long> playerTimes;
   private Long playerStartTime;
@@ -41,6 +42,32 @@ public class GameEngine extends Engine {
     activePlayers = new ArrayList<>();
     priorActions = new ArrayList<>();
     actionCreator = new ActionCreator(viewController, curBoard);
+  }
+
+  /**
+   * This is the method that is called to run the current turn
+   * must set a currentPlayerTurn before calling
+   * Todo: make sure that a currentPlayerTurn has been set
+   */
+  public void runTurn(){
+    if(currentPlayerTurn == null){
+      System.err.println("No player turn set");
+      return;
+    }
+    startPlayerTimer(currentPlayerTurn);
+    boolean isTurnOver = true;
+    do {
+
+    } while (!isTurnOver);
+  }
+
+  /**
+   * Sets the player who's turn it is
+   *
+   * @param player is the Player.java object to set the current turn to
+   */
+  public void setCurrentPlayerTurn(Player player){
+
   }
 
 
