@@ -1,4 +1,4 @@
-package ooga.model.engine.testclasses;
+package ooga.model.engine;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,7 +10,7 @@ import ooga.model.initialization.pieces.PieceCreator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class GameBoardTesting {
+public class GameBoardTest {
 
   private GameBoard board;
   private PieceCreator pieceCreator;
@@ -19,7 +19,7 @@ public class GameBoardTesting {
   @BeforeEach
   void setup(){
     board = new GameBoard(8, 8);
-    pieceCreator = new PieceCreator("Chess", viewController, board);
+    pieceCreator = new PieceCreator("chess", viewController, board);
   }
 
   @Test
@@ -27,7 +27,7 @@ public class GameBoardTesting {
     board.printBoard();
     Coordinate testCoordinate = makeCoordinates(4, 4);
     assertFalse(board.isPieceAtCoordinate(testCoordinate));
-    GamePiece knight = makePiece("Knight", testCoordinate);
+    GamePiece knight = makePiece("knight", testCoordinate);
     board.addPiece(knight);
     board.printBoard();
     assertTrue(board.isPieceAtCoordinate(testCoordinate));
@@ -37,11 +37,11 @@ public class GameBoardTesting {
   void testUnableToAddToOccupiedSpace(){
     Coordinate testCoordinate = makeCoordinates(4, 4);
     assertFalse(board.isPieceAtCoordinate(testCoordinate));
-    GamePiece queen = makePiece("Queen", testCoordinate);
+    GamePiece queen = makePiece("queen", testCoordinate);
     assertTrue(board.addPiece(queen));
     assertTrue(board.isPieceAtCoordinate(testCoordinate));
 
-    GamePiece knight = makePiece("Knight", testCoordinate);
+    GamePiece knight = makePiece("knight", testCoordinate);
     assertFalse(board.addPiece(knight));
 
   }
@@ -50,12 +50,12 @@ public class GameBoardTesting {
   void testGetPieceAtCoordinate(){
     Coordinate testCoordinate = makeCoordinates(4, 4);
     assertNull(board.getPieceAtCoordinate(testCoordinate));
-    GamePiece queen = makePiece("Queen", testCoordinate);
+    GamePiece queen = makePiece("queen", testCoordinate);
     assertTrue(board.addPiece(queen));
     assertNotNull(board.getPieceAtCoordinate(testCoordinate));
     assertEquals(board.getPieceAtCoordinate(testCoordinate), queen);
 
-    GamePiece knight = makePiece("Knight", testCoordinate);
+    GamePiece knight = makePiece("knight", testCoordinate);
     assertNotEquals(board.getPieceAtCoordinate(testCoordinate), knight);
 
   }
@@ -64,22 +64,22 @@ public class GameBoardTesting {
   void testPlaceOutOfBounds(){
     Coordinate testCoordinate = makeCoordinates(8, 4);
     assertFalse(board.isPieceAtCoordinate(testCoordinate));
-    GamePiece knight = makePiece("Knight", testCoordinate);
+    GamePiece knight = makePiece("knight", testCoordinate);
     assertFalse(board.addPiece(knight));
 
     Coordinate testCoordinate2 = makeCoordinates(4, 8);
     assertFalse(board.isPieceAtCoordinate(testCoordinate2));
-    GamePiece knight2 = makePiece("Knight", testCoordinate2);
+    GamePiece knight2 = makePiece("knight", testCoordinate2);
     assertFalse(board.addPiece(knight2));
 
     Coordinate testCoordinate3 = makeCoordinates(-1, 4);
     assertFalse(board.isPieceAtCoordinate(testCoordinate3));
-    GamePiece knight3 = makePiece("Knight", testCoordinate3);
+    GamePiece knight3 = makePiece("knight", testCoordinate3);
     assertFalse(board.addPiece(knight3));
 
     Coordinate testCoordinate4 = makeCoordinates(4, -1);
     assertFalse(board.isPieceAtCoordinate(testCoordinate4));
-    GamePiece knight4 = makePiece("Knight", testCoordinate4);
+    GamePiece knight4 = makePiece("knight", testCoordinate4);
     assertFalse(board.addPiece(knight4));
   }
 
@@ -88,7 +88,7 @@ public class GameBoardTesting {
     board.printBoard();
     Coordinate startingCoordinate = makeCoordinates(4, 4);
     assertFalse(board.isPieceAtCoordinate(startingCoordinate));
-    GamePiece knight = makePiece("Knight", startingCoordinate);
+    GamePiece knight = makePiece("knight", startingCoordinate);
     board.addPiece(knight);
     assertTrue(board.isPieceAtCoordinate(startingCoordinate));
     board.printBoard();
@@ -115,12 +115,12 @@ public class GameBoardTesting {
   void testMoveToOccupiedSpace(){
     Coordinate startingCoordinate = makeCoordinates(4, 4);
     assertFalse(board.isPieceAtCoordinate(startingCoordinate));
-    GamePiece knight = makePiece("Knight", startingCoordinate);
+    GamePiece knight = makePiece("knight", startingCoordinate);
     assertTrue(board.addPiece(knight));
     assertTrue(board.isPieceAtCoordinate(startingCoordinate));
 
     Coordinate endingCoordinate = makeCoordinates(0,0);
-    GamePiece queen = makePiece("Queen", endingCoordinate);
+    GamePiece queen = makePiece("queen", endingCoordinate);
     assertTrue(board.addPiece(queen));
     assertTrue(board.isPieceAtCoordinate(endingCoordinate));
     assertTrue(board.movePiece(startingCoordinate, endingCoordinate));
@@ -134,7 +134,7 @@ public class GameBoardTesting {
   void testMoveOutOfBounds(){
     Coordinate startingCoordinate = makeCoordinates(4, 4);
     assertFalse(board.isPieceAtCoordinate(startingCoordinate));
-    GamePiece knight = makePiece("Knight", startingCoordinate);
+    GamePiece knight = makePiece("knight", startingCoordinate);
     board.addPiece(knight);
     assertTrue(board.isPieceAtCoordinate(startingCoordinate));
 
@@ -148,11 +148,11 @@ public class GameBoardTesting {
 
 
   private GamePiece makePiece(String pieceName, Coordinate coord){
-    return pieceCreator.makePiece(pieceName, coord, 1, viewController);
+    return pieceCreator.makePiece(pieceName, coord, 1, viewController, "noTeam");
   }
 
   private GamePiece makePiece(String pieceName, int xCoord, int yCoord){
-    return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), 1, viewController);
+    return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), 1, viewController, "noTeam");
   }
 
   private Coordinate makeCoordinates(int x, int y){

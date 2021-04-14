@@ -28,7 +28,7 @@ public class XMLNestParsingTest {
 
   @Test
   void TripleNestTest(){
-    rootNodeMap = makeRootNodeMap("NestedElements.xml", "piece", "Chess");
+    rootNodeMap = makeRootNodeMap("NestedElements.xml", "piece", "chess");
     subNodeMap = makeSubNodeMap(rootNodeMap.get("test").get(0));
     attributeMap = makeAttributeMap(subNodeMap.get("nest1").get(0));
     checkAttributeMapping("test1", "Hello");
@@ -36,7 +36,7 @@ public class XMLNestParsingTest {
 
   @Test
   void BoardCreatorTest(){
-    BoardCreator boardCreator = new BoardCreator("Chess", viewController);
+    BoardCreator boardCreator = new BoardCreator("chess", viewController);
   }
 
 

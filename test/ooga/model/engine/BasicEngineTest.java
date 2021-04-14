@@ -1,4 +1,4 @@
-package ooga.model.engine.testclasses;
+package ooga.model.engine;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -29,7 +29,7 @@ public class BasicEngineTest {
     modelController = new ModelController();
     viewController = new DummyViewController();
     modelController.setViewController(viewController);
-    modelController.setGameType("Chess");
+    modelController.setGameType("chess");
     gameBoard = modelController.getEngine().getBoard();
     printBoard();
   }
@@ -41,7 +41,7 @@ public class BasicEngineTest {
   @Test
   void testNormalChessMethodCalls(){
     System.out.println("testNormalChessMethodCalls");
-    modelController.setGameType("Chess");
+    modelController.setGameType("chess");
     assertEquals(8, viewController.getWidth());
     assertEquals(8, viewController.getHeight());
     checkSetBoardSpaceCall(0,0,"rook","opponent");
@@ -93,6 +93,22 @@ public class BasicEngineTest {
     actOnCoordinates(2,0);
     actOnCoordinates(6,4);
     checkMoveCall(2,0,6,4);
+    printBoard();
+  }
+
+  @Test
+  void testTaking(){
+    System.out.println("testTaking");
+    testMoving();
+    actOnCoordinates(6,4);
+    actOnCoordinates(4,6);
+    checkRemoveCall(4,6);
+    checkMoveCall(6,4,4,6);
+    printBoard();
+    actOnCoordinates(3,7);
+    actOnCoordinates(4,6);
+    checkRemoveCall(4,6);
+    checkMoveCall(3,7,4,6);
     printBoard();
   }
 

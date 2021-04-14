@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<piece piece = "Chess">
+<piece piece = "chess">
   <moves>
-    <FiniteSlide>
-      <changeX>0</changeX>
-      <changeY>1</changeY>
-      <mustTake>False</mustTake>
-      <takeX>null</takeX>
-      <takeY>null</takeY>
-    </FiniteSlide>
     <FiniteSlide>
       <changeX>0</changeX>
       <changeY>2</changeY>
       <mustTake>False</mustTake>
       <takeX>null</takeX>
       <takeY>null</takeY>
+      <restrictions>
+        <PawnFirstMove></PawnFirstMove>
+      </restrictions>
+    </FiniteSlide>
+    <FiniteSlide>
+      <changeX>0</changeX>
+      <changeY>1</changeY>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
+      <conditions>
+        <PawnPromotion></PawnPromotion>
+      </conditions>
     </FiniteSlide>
     <FiniteSlide>
       <changeX>-1</changeX>
@@ -21,6 +27,9 @@
       <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
+      <conditions>
+        <PawnPromotion></PawnPromotion>
+      </conditions>
     </FiniteSlide>
     <FiniteSlide>
       <changeX>1</changeX>
@@ -28,6 +37,9 @@
       <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
+      <conditions>
+        <PawnPromotion></PawnPromotion>
+      </conditions>
     </FiniteSlide>
   </moves>
 

@@ -23,9 +23,9 @@ public abstract class Action {
 
   protected GamePiece stringToPiece(String pieceAsString, Coordinate coordinate, GameRules rules){
     //TODO: get name of game from rules
-    String gameName = "Chess"; //this will be overridden with todo above
+    String gameName = "chess"; //this will be overridden with todo above
     PieceCreator pieceCreator = new PieceCreator(gameName, viewController, gameBoard);
-    return pieceCreator.makePiece(pieceAsString, coordinate, 1, viewController);
+    return pieceCreator.makePiece(pieceAsString, coordinate, 1, viewController, "addTeam");
   }
 
   protected Coordinate stringToCoordinate(String coordinateAsString){

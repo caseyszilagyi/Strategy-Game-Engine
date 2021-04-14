@@ -1,4 +1,4 @@
-package ooga.model.engine.testclasses;
+package ooga.model.engine;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +15,7 @@ import ooga.model.initialization.pieces.PieceCreator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class ActionTesting {
+public class ActionTest {
 
   private FrontEndExternalAPI viewController = new DummyViewController();
   private GameBoard board;
@@ -26,8 +26,8 @@ public class ActionTesting {
   @BeforeEach
   void setup(){
     board = new GameBoard(8, 8);
-    rules = new GameRules();
-    pieceCreator = new PieceCreator("Chess", viewController, board);
+    rules = new GameRules("chess");
+    pieceCreator = new PieceCreator("chess", viewController, board);
     actionCreator = new ActionCreator(viewController, board);
   }
 
@@ -36,7 +36,7 @@ public class ActionTesting {
     Coordinate testCoordinate = makeCoordinates(4, 4);
     assertFalse(board.isPieceAtCoordinate(testCoordinate));
     String actionType = "Place";
-    List<String> actionParameters = Arrays.asList("4:4", "Knight");
+    List<String> actionParameters = Arrays.asList("4:4", "knight");
     Action action = actionCreator.createAction(actionType, actionParameters);
     action.executeAction(board, rules);
     assertTrue(board.isPieceAtCoordinate(testCoordinate));

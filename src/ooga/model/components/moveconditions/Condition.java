@@ -1,4 +1,4 @@
-package ooga.model.components.moverestrictions;
+package ooga.model.components.moveconditions;
 
 
 import java.util.Map;
@@ -8,12 +8,12 @@ import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;
 
 /**
- * Meant to be used as a component of a piece movement object, gives the movement some type
- * of restriction that alters how it is able to move
+ * Meant to be used as a component of a piece movement object. Gives the movement a condition
+ * that is executed if true.
  *
  * @author Casey Szilagyi
  */
-public abstract class Restriction {
+public abstract class Condition {
 
   private GameBoard gameBoard;
   private FrontEndExternalAPI viewController;
@@ -27,13 +27,14 @@ public abstract class Restriction {
    * @param parameters The map with parameters, if there are any
    * @param piece The piece that the restriction corresponds to
    */
-  public Restriction(FrontEndExternalAPI viewController, GameBoard gameBoard, Map<String, String> parameters, GamePiece piece){
+  public Condition(FrontEndExternalAPI viewController, GameBoard gameBoard, Map<String, String> parameters, GamePiece piece){
     this.gameBoard = gameBoard;
     this.viewController = viewController;
     this.correspondingPiece = piece;
     this.teamName = piece.getPieceTeam();
   }
 
-  public abstract boolean checkRestriction(Coordinate endingCoordinates);
+
+  public abstract void executeCondition(Coordinate endingCoordinates);
 
 }

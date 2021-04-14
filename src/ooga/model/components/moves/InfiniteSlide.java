@@ -6,6 +6,7 @@ import java.util.Map;
 import ooga.controller.FrontEndExternalAPI;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
+import ooga.model.components.GamePiece;
 
 /**
  * This movement class represents a move that can travel an infinite number of spaces in a certain
@@ -23,8 +24,8 @@ public class InfiniteSlide extends PieceMovement {
    * @param direction  1 if going up, -1 if going down. Used to adjust parameters for different
    *                   sides of the board
    */
-  public InfiniteSlide(Map<String, String> parameters, int direction, GameBoard gameBoard, FrontEndExternalAPI viewController) {
-    super(parameters, direction, gameBoard, viewController);
+  public InfiniteSlide(Map<String, String> parameters, int direction, GameBoard gameBoard, FrontEndExternalAPI viewController, GamePiece piece) {
+    super(parameters, direction, gameBoard, viewController, piece);
   }
 
   /**

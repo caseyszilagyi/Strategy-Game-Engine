@@ -30,7 +30,6 @@ public class BoardCreator extends Creator {
   public static final String USER = "user";
   private static final String FILE_TYPE = "piece";
   private String gameName;
-  private String gameFileName;
   private FrontEndExternalAPI viewController;
   private Map<String, List<Node>> boardNodes;
   private Map<String, List<Node>> pieceSubNodes;
@@ -46,8 +45,7 @@ public class BoardCreator extends Creator {
     this.viewController = viewController;
     super.setComponents(PATH, FILE_TYPE, game);
     gameName = game;
-    gameFileName = game.toLowerCase();
-    initializeMaps(gameFileName);
+    initializeMaps(gameName);
   }
 
   private void initializeMaps(String game) {
@@ -80,9 +78,8 @@ public class BoardCreator extends Creator {
     String pieceType = entry.getValue();
     Coordinate pieceCoordinate = new Coordinate(pieceX, pieceY);
     GamePiece newPiece = pieceCreator
-        .makePiece(pieceType, pieceCoordinate, direction, viewController);
+        .makePiece(pieceType, pieceCoordinate, direction, viewController, team);
     pieceSet.add(newPiece);
-    newPiece.setPieceTeam(team);
     board.addPiece(newPiece);
     viewController.setBoardSpace(pieceX, pieceY, pieceType, team);
   }

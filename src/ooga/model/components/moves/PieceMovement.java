@@ -6,6 +6,8 @@ import java.util.Map;
 import ooga.controller.FrontEndExternalAPI;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
+import ooga.model.components.GamePiece;
+import ooga.model.components.moveconditions.Condition;
 import ooga.model.components.moverestrictions.Restriction;
 
 /**
@@ -18,7 +20,9 @@ public abstract class PieceMovement {
 
   FrontEndExternalAPI viewController;
   private List<Restriction> restrictions = new ArrayList<>();
+  private List<Condition> conditions = new ArrayList<>();
   private GameBoard gameBoard;
+  private GamePiece correspondingPiece;
 
   private int changeX;
   private int changeY;
@@ -33,8 +37,10 @@ public abstract class PieceMovement {
    * @param parameters The map of parameters
    * @param direction The multiplier used to change the direction that the piece uses
    * @param gameBoard The board that the piece moves on
+   * @param viewController The view controller used to make front-end method calls
+   * @param correspondingPiece The piece that this move corresponds to
    */
-  public PieceMovement(Map<String, String> parameters, int direction, GameBoard gameBoard, FrontEndExternalAPI viewController) {
+  public PieceMovement(Map<String, String> parameters, int direction, GameBoard gameBoard, FrontEndExternalAPI viewController, GamePiece correspondingPiece) {
     changeX = Integer.parseInt(parameters.get("changeX")) * direction;
     changeY = Integer.parseInt(parameters.get("changeY")) * direction;
     mustTake = Boolean.parseBoolean(parameters.get("mustTake"));
@@ -44,6 +50,7 @@ public abstract class PieceMovement {
     }
     this.gameBoard = gameBoard;
     this.viewController = viewController;
+    this.correspondingPiece = correspondingPiece;
   }
 
   /**
@@ -73,6 +80,7 @@ public abstract class PieceMovement {
     gameBoard.movePiece(startingCoordinates, endingCoordinates);
     viewController.movePiece(startingCoordinates.getX(), startingCoordinates.getY(),
         endingCoordinates.getX(), endingCoordinates.getY());
+    executeConditions(endingCoordinates);
   }
 
 
@@ -86,21 +94,42 @@ public abstract class PieceMovement {
     return checkIfMoveInBounds(coordinates) &&
            checkThatNoFriendlyPieceInMoveDestination(coordinates, teamName) &&
            checkEnemyPieceLocationConditions(coordinates, teamName) &&
-           checkRestrictions();
+           checkRestrictions(coordinates);
   }
 
 
+  /**
+   * Set the conditions that may be executed after this move
+   * @param conditions The conditions
+   */
+  public void setConditions(List<Condition> conditions) { this.conditions = conditions; }
+
+  /**
+   * Set the restrictions that define whether this move is legal
+   * @param restrictions A list of restrictions
+   */
   public void setRestrictions(List<Restriction> restrictions){
     this.restrictions=restrictions;
   }
 
-  private boolean checkRestrictions(){
+  /**
+   * Executes the conditions. Only does something if the condition is determined to be valid
+   * @param endingCoordinates The ending coordinates of the move
+   */
+  public void executeConditions(Coordinate endingCoordinates){
+    conditions.stream().forEach(condition -> condition.executeCondition(endingCoordinates));
+  }
+
+  private boolean checkRestrictions(Coordinate endingCoordinates){
+    return restrictions.stream().allMatch(restriction -> restriction.checkRestriction(endingCoordinates));
+    /**
     for(Restriction restriction: restrictions){
-      if(!restriction.checkRestriction()){
+      if(!restriction.checkRestriction(endingCoordinates)){
         return false;
       }
     }
     return true;
+     */
   }
 
   /**
