@@ -13,6 +13,19 @@ import ooga.model.engine.action_files.Action;
 public abstract class Engine{
 
 
+  public abstract void setCurrentPlayerTurn(Player player);
+
+  /**
+   * This is the method that is called to run the current turn
+   * must set a currentPlayerTurn before calling
+   * Todo: make sure that a currentPlayerTurn has been set
+   */
+  public abstract void runTurn(int x, int y);
+
+  /**
+   * Sets the gameType associated with this engine
+   * @param gameType is the String of the name of the game to be run
+   */
   public abstract void setGameType(String gameType);
 
   /**
