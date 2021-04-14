@@ -51,7 +51,6 @@ public class ViewController implements FrontEndExternalAPI{
 
   }
 
-
   /**
    * Moves a piece's visual representation on the board. 0,0 is the upper left
    * @param startX The starting x coordinate of the piece
@@ -84,17 +83,24 @@ public class ViewController implements FrontEndExternalAPI{
 
   }
 
+  /**
+   * Gives the possible options that a piece can change to
+   *
+   * @param pieceChangeOptions An iterable of strings that correspond to piece names
+   */
+  @Override
+  public void givePieceChangeOptions(Iterable<String> pieceChangeOptions) {
 
-  // Not implemented yet, everything above this has been implemented in front end
+  }
+
+
+  // Not implemented yet, everything above this has been implemented in back end
 
   @Override
   public void gameEnd(String playerName) {
 
   }
 
-  @Override
-  public void givePieceChangeOptions(Iterable<String> pieceChangeOptions) {
 
-  }
 
 }

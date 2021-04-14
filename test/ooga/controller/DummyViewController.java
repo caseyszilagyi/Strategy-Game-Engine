@@ -1,5 +1,6 @@
 package ooga.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -7,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import javafx.util.Pair;
 import ooga.model.components.Coordinate;
+import org.jetbrains.annotations.NotNull;
 
 public class DummyViewController implements FrontEndExternalAPI {
 
@@ -21,6 +23,7 @@ public class DummyViewController implements FrontEndExternalAPI {
   int startY;
   int endX;
   int endY;
+  Iterator<String> pieceChangeOptions;
 
   Map<Coordinate, String> pieceMap = new HashMap<>();
   Map<Coordinate, String> teamMap = new HashMap<>();
@@ -96,8 +99,10 @@ public class DummyViewController implements FrontEndExternalAPI {
 
   @Override
   public void givePieceChangeOptions(Iterable<String> pieceChangeOptions) {
-
+    this.pieceChangeOptions = pieceChangeOptions.iterator();
   }
+
+
 
 
   // getters for testing
@@ -141,4 +146,7 @@ public class DummyViewController implements FrontEndExternalAPI {
   public int getEndY() {
     return endY;
   }
+
+  public Iterator<String> getPieceChangeOptions(){ return pieceChangeOptions; }
+
 }

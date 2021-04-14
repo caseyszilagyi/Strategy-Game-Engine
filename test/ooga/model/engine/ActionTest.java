@@ -27,7 +27,7 @@ public class ActionTest {
   void setup(){
     board = new GameBoard(8, 8);
     rules = new GameRules("chess");
-    pieceCreator = new PieceCreator("Chess", viewController, board);
+    pieceCreator = new PieceCreator("chess", viewController, board);
     actionCreator = new ActionCreator(viewController, board);
   }
 

@@ -155,6 +155,23 @@ public class GameBoard implements Board {
   }
 
 
+  /**
+   * Gets the height of the board
+   * @return The board height
+   */
+  public int getHeight(){
+    return height;
+  }
+
+  /**
+   * Gets the width of the board
+   * @return The board width
+   */
+  public int getWidth(){
+    return width;
+  }
+
+
   // Movements through actions
 
   @Override
@@ -209,6 +226,7 @@ public class GameBoard implements Board {
     }
     return false;
   }
+
 
 
   // helper methods

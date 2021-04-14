@@ -22,7 +22,7 @@ public class GameRulesTests {
   @BeforeEach
   void setup(){
     board = new GameBoard(8, 8);
-    pieceCreator = new PieceCreator("Chess", viewController, board);
+    pieceCreator = new PieceCreator("chess", viewController, board);
     Coordinate basicTestCoordinate = makeCoordinates(0, 0);
     basicTestPiece = makePiece("pawn", basicTestCoordinate);
   }
@@ -30,13 +30,13 @@ public class GameRulesTests {
 
   @Test
   void testBasicGameRulesCreation(){
-    GameRules gameRules = new GameRules("Chess");
+    GameRules gameRules = new GameRules("chess");
     assertNotNull(gameRules);
   }
 
   @Test
   void testTurnConditionString(){
-    GameRules gameRules = new GameRules("Chess");
+    GameRules gameRules = new GameRules("chess");
     List<String> turnConditionList = gameRules.getTurnConditionsAsStringList();
     assertEquals(1, turnConditionList.size());
     assertEquals("Force", turnConditionList.get(0));
@@ -44,7 +44,7 @@ public class GameRulesTests {
 
   @Test
   void testIsTurnOverWithForce(){
-    GameRules gameRules = new GameRules("Chess");
+    GameRules gameRules = new GameRules("chess");
     assertTrue(gameRules.checkForNextTurn(board, basicTestPiece));
   }
 
