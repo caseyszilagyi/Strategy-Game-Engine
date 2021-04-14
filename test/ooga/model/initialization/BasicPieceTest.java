@@ -29,7 +29,7 @@ public class BasicPieceTest {
   Set<Coordinate> allLegalMoves;
   DummyViewController dummyViewController = new DummyViewController();
   private GameBoard gameBoard= new GameBoard(8,8);
-  private PieceCreator pieceCreator = new PieceCreator("Chess", dummyViewController, gameBoard);
+  private PieceCreator pieceCreator = new PieceCreator("chess", dummyViewController, gameBoard);
 
   @BeforeEach
   private void SetUp(){

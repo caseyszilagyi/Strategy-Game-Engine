@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rules rules="Chess">
+<rules rules="chess">
  <turnConditions>
   <condition>Force</condition>
  </turnConditions>

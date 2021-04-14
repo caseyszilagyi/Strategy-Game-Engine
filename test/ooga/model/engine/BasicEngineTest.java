@@ -29,7 +29,7 @@ public class BasicEngineTest {
     modelController = new ModelController();
     viewController = new DummyViewController();
     modelController.setViewController(viewController);
-    modelController.setGameType("Chess");
+    modelController.setGameType("chess");
     gameBoard = modelController.getEngine().getBoard();
     printBoard();
   }
@@ -41,7 +41,7 @@ public class BasicEngineTest {
   @Test
   void testNormalChessMethodCalls(){
     System.out.println("testNormalChessMethodCalls");
-    modelController.setGameType("Chess");
+    modelController.setGameType("chess");
     assertEquals(8, viewController.getWidth());
     assertEquals(8, viewController.getHeight());
     checkSetBoardSpaceCall(0,0,"rook","opponent");

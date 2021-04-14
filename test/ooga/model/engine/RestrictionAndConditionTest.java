@@ -34,9 +34,9 @@ public class RestrictionAndConditionTest {
     modelController = new ModelController();
     viewController = new DummyViewController();
     modelController.setViewController(viewController);
-    modelController.setGameType("Chess");
+    modelController.setGameType("chess");
     gameBoard = modelController.getEngine().getBoard();
-    pieceCreator = new PieceCreator("Chess", viewController, gameBoard);
+    pieceCreator = new PieceCreator("chess", viewController, gameBoard);
     printBoard();
   }
 

@@ -30,7 +30,7 @@ public class BoardTest {
     }
     @Test
     void testCreator(){
-        boardCreator = new BoardCreator("Chess", dummyViewController);
+        boardCreator = new BoardCreator("chess", dummyViewController);
         boardCreator.makeBoard();
     }
 

@@ -30,7 +30,6 @@ public class BoardCreator extends Creator {
   public static final String USER = "user";
   private static final String FILE_TYPE = "piece";
   private String gameName;
-  private String gameFileName;
   private FrontEndExternalAPI viewController;
   private Map<String, List<Node>> boardNodes;
   private Map<String, List<Node>> pieceSubNodes;
@@ -46,8 +45,7 @@ public class BoardCreator extends Creator {
     this.viewController = viewController;
     super.setComponents(PATH, FILE_TYPE, game);
     gameName = game;
-    gameFileName = game.toLowerCase();
-    initializeMaps(gameFileName);
+    initializeMaps(gameName);
   }
 
   private void initializeMaps(String game) {

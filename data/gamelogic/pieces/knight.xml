@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<piece piece = "Chess">
+<piece piece = "chess">
   <moves>
     <FiniteJump>
       <changeX>1</changeX>
