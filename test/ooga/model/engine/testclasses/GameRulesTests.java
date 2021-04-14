@@ -25,14 +25,26 @@ public class GameRulesTests {
   }
 
   @Test
-  void testIsTurnOver(){
+  void testIsTurnOverWithForce(){
     GameRules gameRules = new GameRules("Chess");
     assertTrue(gameRules.checkForNextTurn());
+  }
+
+  @Test
+  void testIsTurnOverWithConstant(){
+    GameRules gameRules = new GameRules("testConstant");
+    assertFalse(gameRules.checkForNextTurn());
   }
 
   @Test
   void testMultipleForcesTurnCondtions(){
     GameRules gameRules = new GameRules("testMultipleForce");
     assertTrue(gameRules.checkForNextTurn());
+  }
+
+  @Test
+  void testConstantAndForceTurnCondtions(){
+    GameRules gameRules = new GameRules("testConstantAndForce");
+    assertFalse(gameRules.checkForNextTurn());
   }
 }

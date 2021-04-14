@@ -60,8 +60,8 @@ public class GameRules {
       try{
         Class<?> clazz = Class.forName(TURN_CONDITION_FILE_PATH + condition + TURN_CONDITION_NAME_EXTENSION);
         TurnCondition turnConditionClass = (TurnCondition) clazz.getConstructor().newInstance();
-        if(turnConditionClass.isTurnOver()){
-          return true;
+        if(!turnConditionClass.isTurnOver()){
+          return false;
         }
       } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
         System.err.println("No Condition found for condition type: " + condition);
@@ -71,7 +71,7 @@ public class GameRules {
         e.printStackTrace();
       }
     }
-    return false;
+    return true;
   }
 
   /**
