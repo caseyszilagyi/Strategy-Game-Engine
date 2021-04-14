@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rules rules="testMultipleForce">
+  <turnConditions>
+    <condition>Force</condition>
+    <condition>Force</condition>
+  </turnConditions>
+</rules>

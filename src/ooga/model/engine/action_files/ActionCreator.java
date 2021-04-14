@@ -9,8 +9,11 @@ import ooga.model.components.GameBoard;
 
 public class ActionCreator {
 
-  FrontEndExternalAPI viewController;
-  GameBoard gameBoard;
+  private static final String FILE_PATH = "ooga.model.engine.action_files.";
+  private static final String NAME_EXTENSION = "Action";
+
+  private FrontEndExternalAPI viewController;
+  private GameBoard gameBoard;
 
   public ActionCreator(FrontEndExternalAPI viewController, GameBoard gameBoard){
     this.viewController = viewController;
@@ -34,7 +37,7 @@ public class ActionCreator {
 
   public Action createAction(String actionType, List<String> actionParameters){
     try{
-      Class<?> actionClass = Class.forName("ooga.model.engine.action_files." + actionType + "Action");
+      Class<?> actionClass = Class.forName(FILE_PATH + actionType + NAME_EXTENSION);
       return (Action) actionClass.getConstructor(List.class, FrontEndExternalAPI.class, GameBoard.class).newInstance(actionParameters, viewController, gameBoard);
 
     } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
