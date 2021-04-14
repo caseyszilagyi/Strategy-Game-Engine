@@ -40,11 +40,18 @@ public class RunningChessTests {
 
   @Test
   void testBasicTurn(){
+    assertTrue(gameBoard.isPieceAtCoordinate(new Coordinate(4, 1)));
+    assertFalse(gameBoard.isPieceAtCoordinate(new Coordinate(4, 2)));
+    assertEquals(player1, gameEngine.getCurrentPlayerTurn());
     gameEngine.runTurn(4,1);
+    assertTrue(gameBoard.isPieceAtCoordinate(new Coordinate(4, 1)));
+    assertFalse(gameBoard.isPieceAtCoordinate(new Coordinate(4, 2)));
     assertEquals(player1, gameEngine.getCurrentPlayerTurn());
     gameEngine.runTurn(4,2);
-    printBoard();
+    assertFalse(gameBoard.isPieceAtCoordinate(new Coordinate(4, 1)));
+    assertTrue(gameBoard.isPieceAtCoordinate(new Coordinate(4, 2)));
     assertEquals(player2, gameEngine.getCurrentPlayerTurn());
+    printBoard();
   }
 
   @Test
