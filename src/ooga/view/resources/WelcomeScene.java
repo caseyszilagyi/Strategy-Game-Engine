@@ -15,11 +15,24 @@ import javafx.scene.layout.GridPane;
 import javax.imageio.ImageIO;
 import ooga.view.GameScene;
 
+/**
+ * A subclass of {@link GameScene}, this scene is the first one viewers see when starting
+ * the game. This scene allows users to select which game to play, as well as certain
+ * game configurations.
+ *
+ * @author Yi Chen
+ */
 public class WelcomeScene extends GameScene {
   private ResourceBundle resources;
   private GridPane sceneRoot;
 
-
+  /**
+   * Constructs the superclass and sets the {@link GridPane} layout specifically for
+   * this scene. Also sets the {@link javafx.css.StyleClass} for this scene and
+   * loads the CSS stylesheet from the filename given in the properties file.
+   * @param root the {@code Parent} object to act as the root of the scene
+   * @param resources a {@code ResourceBundle} holding scene data files
+   */
   public WelcomeScene(Parent root, ResourceBundle resources) {
     super(root, resources);
     this.resources = resources;
@@ -46,8 +59,6 @@ public class WelcomeScene extends GameScene {
 
     sceneRoot.add(goButton, 0, 1);
   }
-
-
 
 
 }

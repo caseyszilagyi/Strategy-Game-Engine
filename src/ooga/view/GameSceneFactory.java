@@ -23,16 +23,12 @@ public class GameSceneFactory {
 
   /**
    * Creates a {@link GameScene} with a {@code ResourceBundle} that holds information about
-   * the scene being created. The resource bundle must include the filename of an {@code FXML}
-   * file, as the scene is created using the FXML as root.
+   * the scene being created.
    * @param resources a {@code ResourceBundle} for this scene
    */
   public GameScene makeScene(ResourceBundle resources) {
 
     this.resources = resources;
-
-
-
     Parent root = new GridPane();
 
     String sceneType = resources.getString("sceneType");
@@ -47,12 +43,24 @@ public class GameSceneFactory {
     return myScene;
   }
 
+  /**
+   * Creates a {@link GameScene} of type {@link WelcomeScene}.
+   * @param root the {@code Parent} object to act as the root of the scene
+   * @param resources a {@code ResourceBundle} holding scene data files
+   * @return a {@code GameScene} object
+   */
   private GameScene makeWelcomeScene(Parent root, ResourceBundle resources){
     GameScene newScene = new WelcomeScene(root, resources);
 
     return newScene;
   }
 
+  /**
+   * Creates a {@link GameScene} of type {@link BoardScene}.
+   * @param root the {@code Parent} object to act as the root of the scene
+   * @param resources a {@code ResourceBundle} holding scene data files
+   * @return a {@code GameScene} object
+   */
   private GameScene makeBoardScene(Parent root, ResourceBundle resources){
     GameScene newScene = new BoardScene(root, resources);
     return newScene;
@@ -60,12 +68,12 @@ public class GameSceneFactory {
 
   /**
    * Creates a {@link GameScene} using the {@code String} name of a resources file.
-   * @param sceneName name of the {@code GameScene} to instantiate, must match a data file
-   *                  name.
-   * @return a {@code GameScene} subclass
+   * @param sceneFileName name of the {@code GameScene} to instantiate, must match a data file
+   *                      name.
+   * @return a {@code GameScene} object
    */
-  public GameScene makeScene(String sceneName) {
-    ResourceBundle sceneResources = ResourceBundle.getBundle(DEFAULT_RESOURCES_PACKAGE + sceneName);
+  public GameScene makeScene(String sceneFileName) {
+    ResourceBundle sceneResources = ResourceBundle.getBundle(DEFAULT_RESOURCES_PACKAGE + sceneFileName);
     return makeScene(sceneResources);
   }
 
