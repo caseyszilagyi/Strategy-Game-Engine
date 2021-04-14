@@ -10,7 +10,9 @@ import ooga.controller.ModelController;
 import ooga.controller.DummyViewController;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
+import ooga.model.components.GamePiece;
 import ooga.model.engine.Engine;
+import ooga.model.initialization.pieces.PieceCreator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,6 +25,7 @@ public class RestrictionTest {
   DummyViewController viewController;
   Engine gameEngine;
   GameBoard gameBoard;
+  PieceCreator pieceCreator;
 
   @BeforeEach
   private void SetUp() {
@@ -31,15 +34,34 @@ public class RestrictionTest {
     modelController.setViewController(viewController);
     modelController.setGameType("Chess");
     gameBoard = modelController.getEngine().getBoard();
+    pieceCreator = new PieceCreator("Chess", viewController, gameBoard);
     printBoard();
   }
 
   @Test
   void testPawnFirstMoveRestriction(){
-
-
+    print("testPawnFirstMoveRestriction");
+    actOnCoordinates(0,1);
+    testActualExpectedCoordinates("0:2 0:3", viewController.getAllPossibleMoves());
+    actOnCoordinates(0,2);
+    printBoard();
+    actOnCoordinates(0,2);
+    testActualExpectedCoordinates("0:3 0:4", viewController.getAllPossibleMoves());
   }
 
+
+  private void print(String toPrint){
+    System.out.println(toPrint);
+  }
+
+  // piece creator methods
+  private GamePiece makePiece(String pieceName, int xCoord, int yCoord){
+    return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), 1, viewController, "Casey");
+  }
+
+  private GamePiece makeEnemyPiece(String pieceName, int xCoord, int yCoord){
+    return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), -1, viewController, "NotCasey");
+  }
 
   private void checkSetBoardSpaceCall(int x, int y, String identifier, String team) {
     assertEquals(identifier, viewController.getIdentifier(x, y));
