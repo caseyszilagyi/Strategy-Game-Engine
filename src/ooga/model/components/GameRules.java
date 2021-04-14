@@ -3,6 +3,7 @@ package ooga.model.components;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import ooga.controller.FrontEndExternalAPI;
@@ -39,7 +40,12 @@ public class GameRules {
   public List<String> getTurnConditionsAsStringList(){
     List<String> listOfTurnConditions = new ArrayList<>();
     for (Node n : gameFileContents.get(TURN_CONDITION)){
-      listOfTurnConditions.add(n.getTextContent().replaceAll("\\s", ""));
+      for(String condition : n.getTextContent().split("\\s")){
+        if(condition != ""){
+          //System.out.printf("Condition = %s;\n", condition);
+          listOfTurnConditions.add(condition);
+        }
+      }
     }
     return listOfTurnConditions;
   }

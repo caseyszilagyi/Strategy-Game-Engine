@@ -31,4 +31,8 @@ public class GameRulesTests {
   }
 
   @Test
+  void testMultipleForcesTurnCondtions(){
+    GameRules gameRules = new GameRules("testMultipleForce");
+    assertTrue(gameRules.checkForNextTurn());
+  }
 }
