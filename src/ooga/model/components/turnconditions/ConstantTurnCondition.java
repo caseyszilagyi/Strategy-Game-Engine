@@ -6,7 +6,7 @@ import ooga.model.components.GamePiece;
 public class ConstantTurnCondition implements TurnCondition{
 
   @Override
-  public boolean isTurnOver(GameBoard gameBoard, GamePiece gamePiece) {
-    return false;
+  public TurnConditionResult isTurnOver(GameBoard gameBoard, GamePiece gamePiece) {
+    return TurnConditionResult.STAY;
   }
 }
