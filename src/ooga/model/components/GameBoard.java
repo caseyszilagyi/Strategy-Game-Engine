@@ -70,7 +70,7 @@ public class GameBoard implements Board {
    * @return True if there is a piece at the coordinate, false otherwise
    */
   public boolean isPieceAtCoordinate(Coordinate coordinate) {
-    return (isCoordinateOnBoard(coordinate) && pieceCoordMap.keySet().contains(coordinate));
+    return (isCoordinateOnBoard(coordinate) && pieceCoordMap.containsKey(coordinate));
   }
 
   /**
@@ -102,11 +102,8 @@ public class GameBoard implements Board {
    * @return True if it is on the board, false otherwise
    */
   public boolean isCoordinateOnBoard(Coordinate coordinates) {
-    if (coordinates.getX() >= width || coordinates.getY() >= height || coordinates
-        .getX() < 0 || coordinates.getY() < 0) {
-      return false;
-    }
-    return true;
+    return coordinates.getX() < width && coordinates.getY() < height && coordinates
+            .getX() >= 0 && coordinates.getY() >= 0;
   }
 
 
@@ -118,11 +115,8 @@ public class GameBoard implements Board {
    * @return True if there is a friendly piece there, false otherwise
    */
   public boolean checkIfFriendlyPieceInLocation(Coordinate coordinates, String teamName) {
-    if (isPieceAtCoordinate(coordinates) && getPieceAtCoordinate(coordinates).getPieceTeam()
-        .equals(teamName)) {
-      return true;
-    }
-    return false;
+    return isPieceAtCoordinate(coordinates) && getPieceAtCoordinate(coordinates).getPieceTeam()
+            .equals(teamName);
   }
 
   /**
@@ -133,11 +127,8 @@ public class GameBoard implements Board {
    * @return True if there is a enemy piece there, false otherwise
    */
   public boolean checkIfOpponentPieceInLocation(Coordinate coordinates, String teamName) {
-    if (isPieceAtCoordinate(coordinates) && !getPieceAtCoordinate(coordinates).getPieceTeam()
-        .equals(teamName)) {
-      return true;
-    }
-    return false;
+    return isPieceAtCoordinate(coordinates) && !getPieceAtCoordinate(coordinates).getPieceTeam()
+            .equals(teamName);
   }
 
 
@@ -226,13 +217,17 @@ public class GameBoard implements Board {
     }
     return false;
   }
+
   public Coordinate findKing(String team){
     for(GamePiece piece : pieceCoordMap.values()){
-      if(piece.getPieceName() == "king" && piece.getPieceTeam() == team) return piece.getPieceCoordinates();
+      if(piece.getPieceName().equals("king") && piece.getPieceTeam().equals(team)) return piece.getPieceCoordinates();
     }
     return null;
   }
 
+  public Map<Coordinate, GamePiece> getPieceCoordMap(){
+    return pieceCoordMap;
+  }
 
   // helper methods
 
@@ -244,7 +239,7 @@ public class GameBoard implements Board {
 
   // for testing
   public void printBoard() {
-    System.out.println("");
+    System.out.println();
     for (int y = 0; y < height; y++) {
       for (int x = 0; x < width; x++) {
         Coordinate curr = makeCoordinates(x, y);
