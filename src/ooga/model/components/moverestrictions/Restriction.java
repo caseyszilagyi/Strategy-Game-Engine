@@ -34,10 +34,6 @@ public abstract class Restriction {
     this.teamName = piece.getPieceTeam();
   }
 
-  public Restriction(FrontEndExternalAPI viewController, GameBoard gameBoard) {
-
-  }
-
   public abstract boolean checkRestriction(Coordinate endingCoordinates);
 
 }

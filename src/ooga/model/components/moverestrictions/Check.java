@@ -17,10 +17,13 @@ public class Check extends Restriction {
      *
      * @param viewController The controller used to communicate with the front end
      * @param gameBoard      The board that the pieces are on.
+     * @param parameters     The map with parameters, if there are any
+     * @param piece          The piece that the restriction corresponds to
      */
-    public Check(FrontEndExternalAPI viewController, GameBoard gameBoard) {
-        super(viewController, gameBoard);
+    public Check(FrontEndExternalAPI viewController, GameBoard gameBoard, Map<String, String> parameters, GamePiece piece) {
+        super(viewController, gameBoard, parameters, piece);
     }
+
 
     /**
      * Determines if any of the player's pieces can "take" the opponent's king, i.e. if
