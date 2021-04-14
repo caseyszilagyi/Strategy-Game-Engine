@@ -53,14 +53,14 @@ public class GameRules {
   /**
    * Checks the rules to see if it's the players next turn, and moves it along if it is
    */
-  public boolean checkForNextTurn() {
+  public boolean checkForNextTurn(GameBoard gameBoard, GamePiece gamePiece) {
     List<String> listOfTurnConditions = getTurnConditionsAsStringList();
 
     for(String condition : listOfTurnConditions){
       try{
         Class<?> clazz = Class.forName(TURN_CONDITION_FILE_PATH + condition + TURN_CONDITION_NAME_EXTENSION);
         TurnCondition turnConditionClass = (TurnCondition) clazz.getConstructor().newInstance();
-        if(!turnConditionClass.isTurnOver()){
+        if(!turnConditionClass.isTurnOver(gameBoard, gamePiece)){
           return false;
         }
       } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
