@@ -13,6 +13,8 @@ import ooga.model.engine.action_files.Action;
 public abstract class Engine{
 
 
+  public abstract void setGameType(String gameType);
+
   /**
    * Checks if a player has one, and makes the appropriate method calls to front end
    * if so

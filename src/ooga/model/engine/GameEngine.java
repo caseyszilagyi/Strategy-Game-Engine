@@ -44,6 +44,10 @@ public class GameEngine extends Engine {
     actionCreator = new ActionCreator(viewController, curBoard);
   }
 
+  public void setGameType(String gameName){
+    curRules = new GameRules(gameName);
+  }
+
   /**
    * This is the method that is called to run the current turn
    * must set a currentPlayerTurn before calling
