@@ -2,7 +2,7 @@ package ooga.model.initialization.pieces;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
-import ooga.ExceptionHandler;
+import ooga.ClassLoaderException;
 import ooga.controller.FrontEndExternalAPI;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;
@@ -48,8 +48,16 @@ public class PieceComponentClassLoader {
           .getDeclaredConstructor(Map.class, int.class, GameBoard.class, FrontEndExternalAPI.class, GamePiece.class)
           .newInstance(parameters, direction, gameBoard, viewController, correspondingPiece);
       move = (PieceMovement) command;
-    } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException | ClassNotFoundException e) {
-      throw new ExceptionHandler("InvalidPieceMovementType");
+    } catch (InstantiationException e) {
+      throw new ClassLoaderException("PieceMovementInstantiation");
+    } catch (InvocationTargetException e) {
+      throw new ClassLoaderException("PieceMovementInvocation");
+    } catch (NoSuchMethodException e) {
+      throw new ClassLoaderException("PieceMovementNoSuchMethod");
+    } catch (IllegalAccessException e) {
+      throw new ClassLoaderException("PieceMovementIllegalAccess");
+    } catch (ClassNotFoundException e) {
+      throw new ClassLoaderException("PieceMovementClassNotFound");
     }
     return move;
   }
@@ -58,6 +66,7 @@ public class PieceComponentClassLoader {
    * Makes a restriction object that corresponds to the given restriction type
    * @param restrictionName The name of the restriction
    * @param parameters The parameters of the restriction
+   * @param piece The piece that the movement object corresponds to for these restrictions
    * @return The restriction object
    */
   public Restriction makeRestriction(String restrictionName, Map<String, String> parameters, GamePiece piece){
@@ -67,8 +76,16 @@ public class PieceComponentClassLoader {
           .getDeclaredConstructor(FrontEndExternalAPI.class, GameBoard.class, Map.class, GamePiece.class)
           .newInstance(viewController, gameBoard, parameters, piece);
       restriction = (Restriction) command;
-    } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException | ClassNotFoundException e) {
-      throw new ExceptionHandler("InvalidRestrictionType");
+    } catch (InstantiationException e){
+      throw new ClassLoaderException("RestrictionInstantiation");
+    } catch (InvocationTargetException e) {
+      throw new ClassLoaderException("RestrictionInvocation");
+    } catch (NoSuchMethodException e) {
+      throw new ClassLoaderException("RestrictionNoSuchMethod");
+    } catch (IllegalAccessException e) {
+      throw new ClassLoaderException("RestrictionIllegalAccess");
+    } catch (ClassNotFoundException e) {
+      throw new ClassLoaderException("RestrictionClassNotFound");
     }
     return restriction;
   }

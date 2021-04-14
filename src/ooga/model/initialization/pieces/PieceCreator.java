@@ -1,6 +1,7 @@
 package ooga.model.initialization.pieces;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import ooga.controller.FrontEndExternalAPI;
@@ -99,8 +100,13 @@ public class PieceCreator extends Creator {
   private List<Restriction> makeRestrictions(GamePiece correspondingPiece) {
     List<Restriction> currentRestrictions = new ArrayList<>();
     for (String restrictionName : moveRestrictions.keySet()) {
+      Map<String, String> parameters = new HashMap<>();
+      //Only get parameter map if there are any
+      if(getFirstNode(moveRestrictions, restrictionName).getFirstChild()!= null){
+        parameters = makeAttributeMap(getFirstNode(moveRestrictions, restrictionName));
+      }
       Restriction currentRestriction = pieceComponentClassLoader.makeRestriction(restrictionName,
-          makeAttributeMap(getFirstNode(moveRestrictions, restrictionName)), correspondingPiece);
+          parameters, correspondingPiece);
       currentRestrictions.add(currentRestriction);
     }
     return currentRestrictions;
