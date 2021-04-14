@@ -36,7 +36,7 @@ public class ActionTest {
     Coordinate testCoordinate = makeCoordinates(4, 4);
     assertFalse(board.isPieceAtCoordinate(testCoordinate));
     String actionType = "Place";
-    List<String> actionParameters = Arrays.asList("4:4", "Knight");
+    List<String> actionParameters = Arrays.asList("4:4", "knight");
     Action action = actionCreator.createAction(actionType, actionParameters);
     action.executeAction(board, rules);
     assertTrue(board.isPieceAtCoordinate(testCoordinate));

@@ -272,7 +272,7 @@ public class BasicPieceTest {
    */
   @Test
   void TestEmptyBoardPawnMovement(){
-    GamePiece pawn = makePiece("Pawn", 4, 4);
+    GamePiece pawn = makePiece("pawn", 4, 4);
     pawn.setPieceTeam("Casey");
     pawn.determineAllLegalMoves();
     allLegalMoves = dummyViewController.getAllPossibleMoves();
