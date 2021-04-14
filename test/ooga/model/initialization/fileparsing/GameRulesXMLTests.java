@@ -20,6 +20,6 @@ public class GameRulesXMLTests {
   void testTurnConditionString(){
     List<String> turnConditionList = gameRules.getTurnConditionsAsStringList();
     assertEquals(1, turnConditionList.size());
-    assertEquals("force", turnConditionList.get(0));
+    assertEquals("Force", turnConditionList.get(0));
   }
 }
