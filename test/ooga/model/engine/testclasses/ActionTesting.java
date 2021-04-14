@@ -26,7 +26,7 @@ public class ActionTesting {
   @BeforeEach
   void setup(){
     board = new GameBoard(8, 8);
-    rules = new GameRules();
+    rules = new GameRules("chess");
     pieceCreator = new PieceCreator("Chess", viewController, board);
     actionCreator = new ActionCreator(viewController, board);
   }

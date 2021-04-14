@@ -13,6 +13,8 @@ public class ModelController implements BackEndExternalAPI {
   public ModelController(){
   }
 
+
+
   /**
    * Sets the view controller that this modelController is linked to
    * @param newViewController The view controller
