@@ -32,7 +32,7 @@ public class GameRules {
 
   public GameRules(String gameName){
     xmlParser = new XMLParser();
-    ruleFile = new File(RULE_FILE_PATH + gameName + FILE_EXTENSION);
+    ruleFile = new File(RULE_FILE_PATH + gameName.toLowerCase() + FILE_EXTENSION);
     gameFileContents = xmlParser.makeRootNodeMap(ruleFile, FILE_TYPE, gameName);
   }
 
