@@ -1,5 +1,6 @@
 package ooga.model.components;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -24,22 +25,27 @@ public class GamePiece {
 
   private List<PieceMovement> allPossibleMoves;
   private Map<Coordinate, PieceMovement> legalMovementMap = new HashMap<>();
+  private List<Coordinate> locationHistory = new ArrayList<>();
 
   // Needs to be added to constructor in boardCreator
   private String pieceTeam;
 
   /**
    * Makes the piece and passes all the information it needs to be able to move
+   *
    * @param pieceCoordinates The coordinates of the piece, represented by a coordinate object
-   * @param pieceName The name of the piece
-   * @param viewController The controller that this piece can use to make front end method calls
-   * @param gameBoard The board that this piece is on
+   * @param pieceName        The name of the piece
+   * @param viewController   The controller that this piece can use to make front end method calls
+   * @param gameBoard        The board that this piece is on
    */
-  public GamePiece(Coordinate pieceCoordinates, String pieceName, FrontEndExternalAPI viewController, GameBoard gameBoard) {
+  public GamePiece(Coordinate pieceCoordinates, String pieceName,
+      FrontEndExternalAPI viewController, GameBoard gameBoard, String pieceTeam) {
     this.pieceCoordinates = pieceCoordinates;
     this.pieceName = pieceName;
     this.viewController = viewController;
     this.gameBoard = gameBoard;
+    this.pieceTeam = pieceTeam;
+    locationHistory.add(pieceCoordinates);
   }
 
   /**
@@ -65,9 +71,9 @@ public class GamePiece {
   }
 
   // Passes legal movement coordinates to the front end
-  private void passLegalMoves(Set<Coordinate> possibleMoveLocations){
+  private void passLegalMoves(Set<Coordinate> possibleMoveLocations) {
     Set<Pair<Integer, Integer>> coordPairs = new HashSet<>();
-    for(Coordinate coords: possibleMoveLocations){
+    for (Coordinate coords : possibleMoveLocations) {
       coordPairs.add(new Pair(coords.getX(), coords.getY()));
     }
     viewController.giveAllPossibleMoves(coordPairs.iterator());
@@ -79,8 +85,19 @@ public class GamePiece {
    * @param finalCoordinates The final coordinates of the move
    */
   public void executeMove(Coordinate finalCoordinates) {
+    locationHistory.add(finalCoordinates);
     PieceMovement correspondingMove = legalMovementMap.get(finalCoordinates);
     correspondingMove.executeMove(pieceCoordinates, finalCoordinates);
+  }
+
+  /**
+   * Gets all the coordinates that the piece has visited, including the one the piece is currently
+   * on
+   *
+   * @return A list of all the coordinates the piece has visited
+   */
+  public List<Coordinate> getLocationHistory() {
+    return locationHistory;
   }
 
 
@@ -95,17 +112,19 @@ public class GamePiece {
 
   /**
    * Returns the piece's Coordinates
+   *
    * @return A Coordinate which can be used to map this GamePiece on the GameBoard
    */
-  public Coordinate getPieceCoordinates(){
+  public Coordinate getPieceCoordinates() {
     return pieceCoordinates;
   }
 
   /**
    * Sets this piece's Coordinates to the new, given Coordinates
+   *
    * @param newCoordinates the new Coordinates for this piece to be moved to
    */
-  public void setPieceCoordinates(Coordinate newCoordinates){
+  public void setPieceCoordinates(Coordinate newCoordinates) {
     pieceCoordinates = newCoordinates;
   }
 
@@ -130,6 +149,7 @@ public class GamePiece {
 
   /**
    * Gets the name of the piece
+   *
    * @return The name of the piece
    */
   public String getPieceName() {

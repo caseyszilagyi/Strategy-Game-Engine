@@ -7,7 +7,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import ooga.ExceptionHandler;
+import ooga.ClassLoaderException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -36,7 +36,7 @@ public class XMLParser {
   /**
    * Create parser for XML files of given type.
    */
-  public XMLParser() throws ExceptionHandler {
+  public XMLParser() throws ClassLoaderException {
     DOCUMENT_BUILDER = getDocumentBuilder();
   }
 
@@ -49,15 +49,15 @@ public class XMLParser {
    * @param fileType The type of file that is expected (piece, board, etc)
    * @param gameName The name of the game that the file corresponds to
    * @return The map for the child nodes of the document element
-   * @throws ExceptionHandler If the file type and game name aren't correct
+   * @throws ClassLoaderException If the file type and game name aren't correct
    */
   public Map<String, List<Node>> makeRootNodeMap(File dataFile, String fileType, String gameName)
-      throws ExceptionHandler {
+      throws ClassLoaderException {
     this.fileType = fileType;
     this.gameName = gameName;
     Element root = getRootElement(dataFile);
     if (!isValidFile(root)) {
-      throw new ExceptionHandler("InvalidFileType");
+      throw new ClassLoaderException("InvalidFileType");
     }
     return makeNodeMap(root);
   }
@@ -97,14 +97,14 @@ public class XMLParser {
 
 
   // get root element of an XML file
-  private Element getRootElement(File xmlFile) throws ExceptionHandler {
+  private Element getRootElement(File xmlFile) throws ClassLoaderException {
     try {
       DOCUMENT_BUILDER.reset();
       Document xmlDocument = DOCUMENT_BUILDER.parse(xmlFile);
       return xmlDocument.getDocumentElement();
     } catch (SAXException | IOException e) {
       e.printStackTrace();
-      throw new ExceptionHandler("NoRootElement");
+      throw new ClassLoaderException("NoRootElement");
     }
   }
 
@@ -125,11 +125,11 @@ public class XMLParser {
   }
 
   // boilerplate code needed to make a documentBuilder
-  private DocumentBuilder getDocumentBuilder() throws ExceptionHandler {
+  private DocumentBuilder getDocumentBuilder() throws ClassLoaderException {
     try {
       return DocumentBuilderFactory.newInstance().newDocumentBuilder();
     } catch (ParserConfigurationException e) {
-      throw new ExceptionHandler("DocumentBuilderFailure");
+      throw new ClassLoaderException("DocumentBuilderFailure");
     }
   }
 }

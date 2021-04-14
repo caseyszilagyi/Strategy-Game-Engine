@@ -80,9 +80,8 @@ public class BoardCreator extends Creator {
     String pieceType = entry.getValue();
     Coordinate pieceCoordinate = new Coordinate(pieceX, pieceY);
     GamePiece newPiece = pieceCreator
-        .makePiece(pieceType, pieceCoordinate, direction, viewController);
+        .makePiece(pieceType, pieceCoordinate, direction, viewController, team);
     pieceSet.add(newPiece);
-    newPiece.setPieceTeam(team);
     board.addPiece(newPiece);
     viewController.setBoardSpace(pieceX, pieceY, pieceType, team);
   }
