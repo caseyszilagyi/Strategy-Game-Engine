@@ -6,6 +6,7 @@ import ooga.ClassLoaderException;
 import ooga.controller.FrontEndExternalAPI;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;
+import ooga.model.components.moveconditions.Condition;
 import ooga.model.components.moverestrictions.Restriction;
 import ooga.model.components.moves.PieceMovement;
 
@@ -18,6 +19,7 @@ public class PieceComponentClassLoader {
 
   private final String PIECE_MOVE_CLASSES_PACKAGE = PieceMovement.class.getPackageName();
   private final String MOVE_RESTRICTION_CLASSES_PACKAGE = Restriction.class.getPackageName();
+  private final String MOVE_CONDITION_CLASSES_PACKAGE = Condition.class.getPackageName();
   private ClassLoader classLoader;
   private GameBoard gameBoard;
   private FrontEndExternalAPI viewController;
@@ -89,6 +91,35 @@ public class PieceComponentClassLoader {
     }
     return restriction;
   }
+
+  /**
+   * Makes a condition object that corresponds to the given condition type
+   * @param conditionName The name of the condition
+   * @param parameters The parameters of the condition
+   * @param piece The piece that the condition corresponds to
+   * @return The condition object
+   */
+  public Condition makeCondition(String conditionName, Map<String, String> parameters, GamePiece piece){
+    Condition condition = null;
+    try {
+      Object command = classLoader.loadClass(MOVE_CONDITION_CLASSES_PACKAGE + "." + conditionName)
+          .getDeclaredConstructor(FrontEndExternalAPI.class, GameBoard.class, Map.class, GamePiece.class)
+          .newInstance(viewController, gameBoard, parameters, piece);
+      condition = (Condition) command;
+    } catch (InstantiationException e){
+      throw new ClassLoaderException("ConditionInstantiation");
+    } catch (InvocationTargetException e) {
+      throw new ClassLoaderException("ConditionInvocation");
+    } catch (NoSuchMethodException e) {
+      throw new ClassLoaderException("ConditionNoSuchMethod");
+    } catch (IllegalAccessException e) {
+      throw new ClassLoaderException("ConditionIllegalAccess");
+    } catch (ClassNotFoundException e) {
+      throw new ClassLoaderException("ConditionClassNotFound");
+    }
+    return condition;
+  }
+
 
 
 }
