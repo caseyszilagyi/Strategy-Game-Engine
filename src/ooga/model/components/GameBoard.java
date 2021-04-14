@@ -20,7 +20,6 @@ public class GameBoard implements Board {
   private GamePiece activePiece;
 
   private boolean isHeldPiece = false;
-  private GamePiece heldPiece;
 
   /**
    * Initializes this board
@@ -37,7 +36,7 @@ public class GameBoard implements Board {
    * Sets if there is a piece being actively manipulated by the user
    * @param isHeldPiece is whether or not there is a piece being manipulated
    */
-  private void setIsHeldPiece(Boolean isHeldPiece){
+  public void setIsHeldPiece(Boolean isHeldPiece){
     this.isHeldPiece = isHeldPiece;
   }
 
@@ -45,17 +44,10 @@ public class GameBoard implements Board {
    * Returns if there is a piece being actively manipulated by the user
    * @return whether or not there is a piece being manipulated
    */
-  private boolean getIsHeldPiece(){
+  public boolean getIsHeldPiece(){
     return isHeldPiece;
   }
 
-  /**
-   * Sets the piece being manipulated;
-   * @param heldPiece sets piece being manipulated
-   */
-  private void setHeldPiece(GamePiece heldPiece){
-    this.heldPiece = heldPiece;
-  }
 
 
 

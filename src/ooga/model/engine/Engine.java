@@ -12,6 +12,11 @@ import ooga.model.engine.action_files.Action;
  */
 public abstract class Engine{
 
+  /**
+   * Gets the player who's turn it is
+   * @return the Player.java object the current turn is set to
+   */
+  public abstract Player getCurrentPlayerTurn();
 
   public abstract void setCurrentPlayerTurn(Player player);
 

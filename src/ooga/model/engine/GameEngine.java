@@ -38,8 +38,6 @@ public class GameEngine extends Engine {
 
   //Logic flow variables
   boolean isStartOfTurn = true;
-  boolean isPieceSelected = false;
-  GamePiece selectedPiece;
 
   public GameEngine(FrontEndExternalAPI newViewController) {
     viewController = newViewController;
@@ -92,6 +90,14 @@ public class GameEngine extends Engine {
     currentPlayerTurn = player;
   }
 
+  /**
+   * Gets the player who's turn it is
+   * @return the Player.java object the current turn is set to
+   */
+  public Player getCurrentPlayerTurn(){
+    return currentPlayerTurn;
+  }
+
 
 
 
@@ -104,17 +110,16 @@ public class GameEngine extends Engine {
   @Override
   public void actOnCoordinates(int x, int y) {
     // This logic is for move games, only works for chess and not for double jumps in checkers
-    if(isPieceSelected){
+    if(curBoard.getIsHeldPiece()){
       if(curBoard.isLegalMoveLocation(x, y)){
         curBoard.movePiece(x,y);
       }
-      isPieceSelected = false;
+      curBoard.setIsHeldPiece(false);
     }
     else {
       if (curBoard.isPieceAtCoordinate(x, y)) {
-        isPieceSelected = true;
-        selectedPiece = getBoard().getPieceAtCoordinate(new Coordinate(x, y));
         curBoard.determineAllLegalMoves(x, y);
+        curBoard.setIsHeldPiece(true);
       }
     }
   }

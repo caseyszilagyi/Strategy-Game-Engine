@@ -18,6 +18,8 @@ public class RunningChessTests {
   DummyViewController viewController;
   Engine gameEngine;
   GameBoard gameBoard;
+  Player player1 = new Player("White");
+  Player player2 = new Player("Black");
 
   @BeforeEach
   private void SetUp(){
@@ -27,9 +29,6 @@ public class RunningChessTests {
     modelController.setGameType("chess");
     gameEngine = modelController.getEngine();
     gameBoard = gameEngine.getBoard();
-
-    Player player1 = new Player("White");
-    Player player2 = new Player("Black");
 
     gameEngine.addActiveUser(player1);
     gameEngine.addActiveUser(player2);
@@ -41,8 +40,11 @@ public class RunningChessTests {
 
   @Test
   void testBasicTurn(){
-    gameEngine.runTurn(0,1);
+    gameEngine.runTurn(4,1);
+    assertEquals(player1, gameEngine.getCurrentPlayerTurn());
+    gameEngine.runTurn(4,2);
     printBoard();
+    assertEquals(player2, gameEngine.getCurrentPlayerTurn());
   }
 
 
