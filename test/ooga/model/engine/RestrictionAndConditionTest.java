@@ -1,9 +1,11 @@
 package ooga.model.engine;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import ooga.controller.BackEndExternalAPI;
 import ooga.controller.ModelController;
@@ -19,7 +21,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Methods to test the engine and it's interactions with the viewController
  */
-public class RestrictionTest {
+public class RestrictionAndConditionTest {
 
   BackEndExternalAPI modelController;
   DummyViewController viewController;
@@ -32,9 +34,9 @@ public class RestrictionTest {
     modelController = new ModelController();
     viewController = new DummyViewController();
     modelController.setViewController(viewController);
-    modelController.setGameType("Chess");
+    modelController.setGameType("chess");
     gameBoard = modelController.getEngine().getBoard();
-    pieceCreator = new PieceCreator("Chess", viewController, gameBoard);
+    pieceCreator = new PieceCreator("chess", viewController, gameBoard);
     printBoard();
   }
 
@@ -47,6 +49,30 @@ public class RestrictionTest {
     printBoard();
     actOnCoordinates(0,2);
     testActualExpectedCoordinates("0:3 0:4", viewController.getAllPossibleMoves());
+  }
+
+  @Test
+  void testPawnPromotionCondition(){
+    print("TestPawnPromotionCondition");
+    printBoard();
+    actOnCoordinates(2,6);
+    actOnCoordinates(2,5);
+    actOnCoordinates(2,5);
+    actOnCoordinates(2,4);
+    actOnCoordinates(2,4);
+    actOnCoordinates(2,3);
+    actOnCoordinates(2,3);
+    actOnCoordinates(2,2);
+    printBoard();
+    actOnCoordinates(2,2);
+    actOnCoordinates(3,1);
+    printBoard();
+    assertNull(viewController.getPieceChangeOptions());
+    actOnCoordinates(3,1);
+    actOnCoordinates(4,0);
+    printBoard();
+    Iterator<String> pieceIter = viewController.getPieceChangeOptions();
+    assertEquals("queen", pieceIter.next());
   }
 
 
