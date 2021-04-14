@@ -64,7 +64,9 @@ public class GameEngine extends Engine {
     if(isStartOfTurn){
       startPlayerTimer(currentPlayerTurn);
     }
-    actOnCoordinates(x, y);
+    if(!actOnCoordinates(x, y)){
+      return;
+    }
     boolean isTurnOver = curRules.checkForNextTurn(curBoard, curBoard.getPieceAtCoordinate(new Coordinate(x, y)));
     if(isTurnOver){
       stopPlayerTimer(currentPlayerTurn);
@@ -106,20 +108,29 @@ public class GameEngine extends Engine {
    *
    * @param x The x coordinate
    * @param y The y coordinate
+   *
+   * @return whether or not a valid move was made
    */
   @Override
-  public void actOnCoordinates(int x, int y) {
+  public boolean actOnCoordinates(int x, int y) {
     // This logic is for move games, only works for chess and not for double jumps in checkers
     if(curBoard.getIsHeldPiece()){
+      curBoard.setIsHeldPiece(false);
       if(curBoard.isLegalMoveLocation(x, y)){
         curBoard.movePiece(x,y);
+        return true;
+      } else {
+        return false;
       }
-      curBoard.setIsHeldPiece(false);
+
     }
     else {
       if (curBoard.isPieceAtCoordinate(x, y)) {
         curBoard.determineAllLegalMoves(x, y);
         curBoard.setIsHeldPiece(true);
+        return true;
+      } else {
+        return false;
       }
     }
   }

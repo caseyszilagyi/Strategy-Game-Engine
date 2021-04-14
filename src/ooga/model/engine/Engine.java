@@ -83,6 +83,6 @@ public abstract class Engine{
 
   public abstract GameBoard getBoard();
 
-  public abstract void actOnCoordinates(int x, int y);
+  public abstract boolean actOnCoordinates(int x, int y);
 
 }

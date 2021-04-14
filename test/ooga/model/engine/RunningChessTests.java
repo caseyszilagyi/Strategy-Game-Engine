@@ -47,6 +47,27 @@ public class RunningChessTests {
     assertEquals(player2, gameEngine.getCurrentPlayerTurn());
   }
 
+  @Test
+  void testEmptyPieceClick(){
+    gameEngine.runTurn(4,4);
+    assertEquals(player1, gameEngine.getCurrentPlayerTurn());
+  }
+
+  @Test
+  void testIndecisivePlayer(){
+    gameEngine.runTurn(3,1);
+    assertEquals(player1, gameEngine.getCurrentPlayerTurn());
+    gameEngine.runTurn(4,4);
+    //printBoard();
+    assertEquals(player1, gameEngine.getCurrentPlayerTurn());
+    gameEngine.runTurn(4,1);
+    assertEquals(player1, gameEngine.getCurrentPlayerTurn());
+    gameEngine.runTurn(4,2);
+    //printBoard();
+    assertEquals(player2, gameEngine.getCurrentPlayerTurn());
+
+  }
+
 
 
 
