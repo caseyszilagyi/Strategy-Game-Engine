@@ -5,11 +5,13 @@ import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;
 import org.jetbrains.annotations.NotNull;
+
 import java.util.Map;
 
 
-public class Check extends Restriction{
+public class Check extends Restriction {
     private Map<Coordinate, GamePiece> pieces;
+
     /**
      * Constructor used to hold things that many piece movement objects may need
      *
@@ -23,22 +25,24 @@ public class Check extends Restriction{
     /**
      * Determines if any of the player's pieces can "take" the opponent's king, i.e. if
      * the possible moves of a player's piece overlaps with the position of the enemy king
-     * @param board current board
+     *
+     * @param board         current board
      * @param currentPlayer player who is checking the opponent
      * @return boolean to determine if opposing player has been put in check
      */
-    public boolean opponentInCheck(GameBoard board, String currentPlayer){
+    public boolean opponentInCheck(GameBoard board, String currentPlayer) {
         Coordinate kingLocation = board.findKing(getOppositePlayer(currentPlayer));
-        for(GamePiece piece : getPiecesByTeam(board, currentPlayer).values()){
-            for(Coordinate coord : piece.determineAllLegalMoves()){
-                if(coord == kingLocation) return true;
+        for (GamePiece piece : getPiecesByTeam(board, currentPlayer).values()) {
+            for (Coordinate coord : piece.determineAllLegalMoves()) {
+                if (coord == kingLocation) return true;
             }
         }
         return false;
     }
-    private Map<Coordinate, GamePiece> getPiecesByTeam(GameBoard board, String currentPlayer){
-        for(GamePiece piece : board.getPieceCoordMap().values()){
-            if(piece.getPieceTeam().equals(currentPlayer)) pieces.put(piece.getPieceCoordinates(), piece);
+
+    private Map<Coordinate, GamePiece> getPiecesByTeam(GameBoard board, String currentPlayer) {
+        for (GamePiece piece : board.getPieceCoordMap().values()) {
+            if (piece.getPieceTeam().equals(currentPlayer)) pieces.put(piece.getPieceCoordinates(), piece);
         }
         return pieces;
     }
