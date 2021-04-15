@@ -2,6 +2,7 @@ package ooga.view;
 
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.stage.Stage;
 import ooga.controller.BoardController;
 import ooga.controller.ModelController;
 
@@ -31,6 +32,7 @@ public class ViewManager {
     gameWindowFactory = new GameWindowFactory();
     sceneFactory = new GameSceneFactory();
     primaryWindow = gameWindowFactory.makeWindow("Stage");
+    ((Stage) primaryWindow).setOnCloseRequest(e -> new ViewManager(initFile));
     createControllers();
     changeScene("initialWindowScene");
   }
