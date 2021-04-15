@@ -86,11 +86,15 @@ public class FiniteSlide extends PieceMovement {
     while (checkIfValidMove(coordinates, teamName) && Math.abs(currX) <= Math.abs(xLimit) && Math.abs(currY) <= Math.abs(yLimit)) {
       Coordinate newCoordinates = makeCoordinate(coordinates.getX() + xDirection,
           coordinates.getY() + yDirection);
-      possibleMoves.add(newCoordinates);
+      if(checkRestrictions(coordinates)) {
+        possibleMoves.add(newCoordinates);
+      }
       coordinates = newCoordinates;
-      currX+= xDirection;
-      currY+= yDirection;
+      currX += xDirection;
+      currY += yDirection;
     }
+    setChangeX(xLimit);
+    setChangeY(yLimit);
   }
 
   // if this instance of the pieceMovement takes pieces, this method is called
@@ -119,7 +123,7 @@ public class FiniteSlide extends PieceMovement {
 
     while (checkIfMoveInBounds(coordinates) && checkThatNoFriendlyPieceInMoveDestination(
         coordinates, teamName) && Math.abs(currX) <= Math.abs(xLimit) && Math.abs(currY) <= Math.abs(yLimit)) {
-      if (checkEnemyPieceLocationConditions(coordinates, teamName)) {
+      if (checkEnemyPieceLocationConditions(coordinates, teamName) && checkRestrictions(coordinates)) {
         possibleMoves.add(
             makeCoordinate(coordinates.getX() + getChangeX(), coordinates.getY() + getChangeY()));
         break;
@@ -128,6 +132,8 @@ public class FiniteSlide extends PieceMovement {
       currX+= xDirection;
       currY+= yDirection;
     }
+    setChangeX(xLimit);
+    setChangeY(yLimit);
   }
 
 }
