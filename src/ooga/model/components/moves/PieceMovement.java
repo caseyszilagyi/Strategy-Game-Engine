@@ -122,14 +122,6 @@ public abstract class PieceMovement {
 
   private boolean checkRestrictions(Coordinate endingCoordinates){
     return restrictions.stream().allMatch(restriction -> restriction.checkRestriction(endingCoordinates));
-    /**
-    for(Restriction restriction: restrictions){
-      if(!restriction.checkRestriction(endingCoordinates)){
-        return false;
-      }
-    }
-    return true;
-     */
   }
 
   /**

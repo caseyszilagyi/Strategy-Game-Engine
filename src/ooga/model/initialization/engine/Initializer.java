@@ -28,9 +28,9 @@ public interface Initializer {
 
   /**
    * Sets a player that is playing the game
-   * @param playerFileName The string associated with the player name
+   * @param playerFileNames The string associated with the player name
    */
-  public void setPlayer(String playerFileName);
+  public void addPlayers(String... playerFileNames);
 
   /**
    * Gets the engine that is being used to run the back end

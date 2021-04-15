@@ -21,4 +21,23 @@ public class Player{
   }
   public String getName(){ return name; }
 
+  @Override
+  public boolean equals(Object obj){
+    return obj.toString().equals(name);
+  }
+
+  @Override
+  public String toString(){
+    return name;
+  }
+
+  @Override
+  public int hashCode(){
+    int result = 7;
+    for(char c: name.toCharArray()){
+      result = result *43 + c;
+    }
+    return result;
+  }
+
 }
