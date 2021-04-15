@@ -1,4 +1,4 @@
-package ooga.model.components.moves;
+package ooga.model.components.moverestrictions;
 
 public class EnPassant {
 
