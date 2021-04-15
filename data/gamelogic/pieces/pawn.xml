@@ -8,7 +8,7 @@
       <takeX>null</takeX>
       <takeY>null</takeY>
       <restrictions>
-        <PawnFirstMove></PawnFirstMove>
+        <FirstMove></FirstMove>
       </restrictions>
     </FiniteSlide>
     <FiniteSlide>
