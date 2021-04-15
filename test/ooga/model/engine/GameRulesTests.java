@@ -2,6 +2,7 @@ package ooga.model.engine;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
 import ooga.controller.DummyViewController;
 import ooga.model.components.Coordinate;
@@ -65,6 +66,7 @@ public class GameRulesTests {
     GameRules gameRules = new GameRules("testConstantAndForce");
     assertFalse(gameRules.checkForNextTurn(board, basicTestPiece));
   }
+
 
   private GamePiece makePiece(String pieceName, Coordinate coord){
     return pieceCreator.makePiece(pieceName, coord, 1, viewController, "noTeam");

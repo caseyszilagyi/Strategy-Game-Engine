@@ -28,6 +28,7 @@ public class EngineInitializer implements Initializer {
   @Override
   public void initializeGame(String gameName) {
     boardCreator = new BoardCreator(gameName, viewController);
+    gameEngine.setGameType(gameName);
     gameEngine.setBoard(boardCreator.makeBoard());
   }
 

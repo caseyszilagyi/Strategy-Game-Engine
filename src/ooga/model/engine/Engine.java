@@ -12,6 +12,26 @@ import ooga.model.engine.action_files.Action;
  */
 public abstract class Engine{
 
+  /**
+   * Gets the player who's turn it is
+   * @return the Player.java object the current turn is set to
+   */
+  public abstract Player getCurrentPlayerTurn();
+
+  public abstract void setCurrentPlayerTurn(Player player);
+
+  /**
+   * This is the method that is called to run the current turn
+   * must set a currentPlayerTurn before calling
+   * Todo: make sure that a currentPlayerTurn has been set
+   */
+  public abstract void runTurn(int x, int y);
+
+  /**
+   * Sets the gameType associated with this engine
+   * @param gameType is the String of the name of the game to be run
+   */
+  public abstract void setGameType(String gameType);
 
   /**
    * Checks if a player has one, and makes the appropriate method calls to front end
@@ -63,6 +83,6 @@ public abstract class Engine{
 
   public abstract GameBoard getBoard();
 
-  public abstract void actOnCoordinates(int x, int y);
+  public abstract boolean actOnCoordinates(int x, int y);
 
 }

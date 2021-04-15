@@ -19,6 +19,8 @@ public class GameBoard implements Board {
   private Coordinate activeCoordinates;
   private GamePiece activePiece;
 
+  private boolean isHeldPiece = false;
+
   /**
    * Initializes this board
    *
@@ -29,6 +31,25 @@ public class GameBoard implements Board {
     this.width = width;
     this.height = height;
   }
+
+  /**
+   * Sets if there is a piece being actively manipulated by the user
+   * @param isHeldPiece is whether or not there is a piece being manipulated
+   */
+  public void setIsHeldPiece(Boolean isHeldPiece){
+    this.isHeldPiece = isHeldPiece;
+  }
+
+  /**
+   * Returns if there is a piece being actively manipulated by the user
+   * @return whether or not there is a piece being manipulated
+   */
+  public boolean getIsHeldPiece(){
+    return isHeldPiece;
+  }
+
+
+
 
   /**
    * Sets the view controller that the board will use to make method calls to the front end
