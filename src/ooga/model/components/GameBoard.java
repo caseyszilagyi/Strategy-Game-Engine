@@ -49,8 +49,6 @@ public class GameBoard implements Board {
   }
 
 
-
-
   /**
    * Sets the view controller that the board will use to make method calls to the front end
    *
@@ -156,14 +154,32 @@ public class GameBoard implements Board {
   /**
    * Moves a piece by giving it the ending coordinates. Will move the activePiece based
    * on the activeCoordinates
-   * @param x The ending x position
-   * @param y The ending y position
+   * @param endingX The ending x position
+   * @param endingY The ending y position
    */
-  public void movePiece(int x, int y){
-    Coordinate newCoordinates = makeCoordinates(x, y);
+  public void movePiece(int endingX, int endingY){
+    Coordinate newCoordinates = makeCoordinates(endingX, endingY);
     activePiece.executeMove(newCoordinates);
     pieceCoordMap.remove(activeCoordinates);
     pieceCoordMap.put(newCoordinates, activePiece);
+  }
+
+  /**
+   * Moves a piece on the board, but it does not have to be the active piece. Movement
+   * is not done through a piece movement object in this case
+   *
+   * @param startingX The starting x position of the piece
+   * @param startingY The starting y position of the piece
+   * @param endingX The ending x position of the piece
+   * @param endingY The ending y position of the piece
+   */
+  public void movePiece(int startingX, int startingY, int endingX, int endingY){
+    Coordinate oldCoordinates = makeCoordinates(startingX, startingY);
+    Coordinate newCoordinates = makeCoordinates(endingX, endingY);
+    GamePiece currentPiece = pieceCoordMap.get(oldCoordinates);
+    currentPiece.setPieceCoordinates(newCoordinates);
+    pieceCoordMap.remove(oldCoordinates);
+    pieceCoordMap.put(newCoordinates, currentPiece);
   }
 
 
