@@ -8,7 +8,7 @@ public class ModelController implements BackEndExternalAPI {
 
   private Engine gameEngine;
   private Initializer creator;
-  private FrontEndExternalAPI viewController;
+  private FrontEndExternalAPI boardController;
 
   public ModelController(){
   }
@@ -23,9 +23,9 @@ public class ModelController implements BackEndExternalAPI {
    * @param newViewController The view controller
    */
   @Override
-  public void setViewController(FrontEndExternalAPI newViewController) {
-    viewController=newViewController;
-    creator = new EngineInitializer(viewController);
+  public void setBoardController(FrontEndExternalAPI newViewController) {
+    boardController = newViewController;
+    creator = new EngineInitializer(boardController);
     gameEngine = creator.getEngine();
   }
 

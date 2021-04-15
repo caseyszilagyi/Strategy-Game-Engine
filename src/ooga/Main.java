@@ -37,10 +37,10 @@ public class Main extends Application {
    */
   @Override
   public void start(Stage primaryStage) throws Exception {
-    FrontEndExternalAPI viewController = new BoardController();
+    FrontEndExternalAPI boardController = new BoardController();
     BackEndExternalAPI modelController = new ModelController();
-    viewController.setModelController(modelController);
-    modelController.setViewController(viewController);
+    boardController.setModelController(modelController);
+    modelController.setBoardController(boardController);
     initFile = ResourceBundle.getBundle(DEFAULT_RESOURCES_PACKAGE + "init");
     new ViewManager(initFile, (ModelController) modelController);
   }

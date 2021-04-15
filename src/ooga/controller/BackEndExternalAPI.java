@@ -14,7 +14,7 @@ public interface BackEndExternalAPI {
    * Links this half of the controller to the other half that is passed around the back end
    * @param viewController The other half of the controller
    */
-  public void setViewController(FrontEndExternalAPI viewController);
+  public void setBoardController(FrontEndExternalAPI viewController);
 
 
   /**
