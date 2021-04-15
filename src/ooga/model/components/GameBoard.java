@@ -180,6 +180,7 @@ public class GameBoard implements Board {
     currentPiece.setPieceCoordinates(newCoordinates);
     pieceCoordMap.remove(oldCoordinates);
     pieceCoordMap.put(newCoordinates, currentPiece);
+    viewController.movePiece(startingX,startingY,endingX,endingY);
   }
 
 
