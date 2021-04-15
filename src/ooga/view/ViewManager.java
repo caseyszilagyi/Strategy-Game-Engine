@@ -38,7 +38,7 @@ public class ViewManager {
   }
 
   private void onButtonClicked(ActionEvent e){
-
+    onStartClicked();
   }
 
   public void onStartClicked(){

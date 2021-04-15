@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<game>
+    <name>checkers</name>
+    <numrows>8</numrows>
+    <numcols>8</numcols>
+    <board>
+        <opponent>
+
+        </opponent>
+        <user>
+
+        </user>
+    </board>
+</game>
