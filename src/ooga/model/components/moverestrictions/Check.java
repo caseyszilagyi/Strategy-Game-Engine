@@ -37,7 +37,7 @@ public class Check extends Restriction {
         Coordinate kingLocation = board.findKing(getOppositePlayer(currentPlayer));
         for (GamePiece piece : getPiecesByTeam(board, currentPlayer).values()) {
             for (Coordinate coord : piece.determineAllLegalMoves()) {
-                if (coord == kingLocation) return true;
+                return (coord == kingLocation);
             }
         }
         return false;
