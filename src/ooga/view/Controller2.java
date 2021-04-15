@@ -1,10 +1,8 @@
 package ooga.view;
 
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
@@ -39,7 +37,7 @@ public class Controller2 {
   public void handleImageClick(MouseEvent event) {
     System.out.println("Chess pressed");
     Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-    GameScene newScene = sceneFactory.makeScene("BoardScene");//TODO: hardcoded
+    GameScene newScene = sceneFactory.makeScene("BoardScene", null);//TODO: hardcoded
     stage.setScene(newScene);
 //    initialshowScene(newScene);
 //    initialWindow.makeVisible();

@@ -8,21 +8,21 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 /**
- * The top level UI element of the game. The game can have one or more instances of
- * {@code GameWindow}, and each will hold a completely independent instance of the game.
+ * The top level UI element of a view. The game can have one or more instances of
+ * {@code GameWindow} of different subtypes.
  *
- * Within a {@code GameWindow}, multiple {@link GameScene} instances can be created,
- * and any of these can be set as the active view in the window. The windows can be
- * of different subclasses of {@code Window}, each with different behaviors.
- *
+ * The active view of a {@code GameWindow} can be set to any {@link GameScene} instance.
  *
  * @author Yi Chen
  */
 public interface GameWindow {
 
+  /**
+   * Attaches the given {@link GameScene} object to the window and shows it.
+   * @param scene a {@code GameScene} object
+   */
+  public void showScene(GameScene scene);
 
-  public abstract void makeVisible();
 
-  public abstract void showScene(GameScene scene);
 
 }

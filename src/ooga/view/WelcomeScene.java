@@ -1,19 +1,14 @@
-package ooga.view.resources;
+package ooga.view;
 
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javax.imageio.ImageIO;
-import ooga.view.GameScene;
 
 /**
  * A subclass of {@link GameScene}, this scene is the first one viewers see when starting
@@ -24,7 +19,8 @@ import ooga.view.GameScene;
  */
 public class WelcomeScene extends GameScene {
   private ResourceBundle resources;
-  private GridPane sceneRoot;
+  private final GridPane sceneRoot;
+  private final EventHandler<ActionEvent> handler;
 
   /**
    * Constructs the superclass and sets the {@link GridPane} layout specifically for
@@ -32,10 +28,13 @@ public class WelcomeScene extends GameScene {
    * loads the CSS stylesheet from the filename given in the properties file.
    * @param root the {@code Parent} object to act as the root of the scene
    * @param resources a {@code ResourceBundle} holding scene data files
+   * @param handler
    */
-  public WelcomeScene(Parent root, ResourceBundle resources) {
+  public WelcomeScene(Parent root, ResourceBundle resources,
+      EventHandler<ActionEvent> handler) {
     super(root, resources);
     this.resources = resources;
+    this.handler = handler;
     sceneRoot = (GridPane) root;
     sceneRoot.setHgap(10);
     sceneRoot.setVgap(300);
@@ -54,8 +53,7 @@ public class WelcomeScene extends GameScene {
     Label welcomeLabel = makeLabel("title-text");
     sceneRoot.add(welcomeLabel, 0, 0);
 
-    Button goButton = makeButton("goButton",
-        e -> System.out.println("Button clicked"));
+    Button goButton = makeButton("goButton", handler);
 
     sceneRoot.add(goButton, 0, 1);
   }

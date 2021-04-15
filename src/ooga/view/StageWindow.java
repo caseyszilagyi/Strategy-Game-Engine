@@ -10,14 +10,6 @@ import javafx.stage.Stage;
  */
 public class StageWindow extends Stage implements GameWindow {
 
-  /**
-   * Makes the window visible. These windows are non-resizeable.
-   */
-  @Override
-  public void makeVisible() {
-    this.setResizable(false);
-    this.show();
-  }
 
   /**
    * Attaches the given {@link GameScene} object to the window and shows it.
@@ -26,6 +18,8 @@ public class StageWindow extends Stage implements GameWindow {
   @Override
   public void showScene(GameScene scene) {
     setScene(scene);
-    makeVisible();
+    this.sizeToScene();
+    this.setResizable(false);
+    this.show();
   }
 }
