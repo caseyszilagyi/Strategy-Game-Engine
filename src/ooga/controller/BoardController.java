@@ -15,9 +15,12 @@ import ooga.view.GameDisplay;
 public class BoardController implements FrontEndExternalAPI{
 
   private Board board;
-  private Display display;
   private BackEndExternalAPI modelController;
 
+  /**
+   * Obtains a {@link Board} object for this class to control.
+   * @param board a {@code Board} object
+   */
   public void giveBoard(Board board){
     this.board = board;
   }
@@ -60,6 +63,7 @@ public class BoardController implements FrontEndExternalAPI{
    */
   @Override
   public void movePiece(int startX, int startY, int endX, int endY) {
+    board.unhighlightAll();
     board.movePiece(startX, startY, endX, endY);
   }
 
@@ -80,7 +84,7 @@ public class BoardController implements FrontEndExternalAPI{
    */
   @Override
   public void giveAllPossibleMoves(Iterator<Pair<Integer, Integer>> possibleMoves) {
-    System.out.println(possibleMoves);
+    board.showPossibleMoves(possibleMoves);
   }
 
   /**

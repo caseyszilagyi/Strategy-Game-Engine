@@ -7,17 +7,22 @@ import javafx.scene.Parent;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public class Tile extends Parent {
-  Point myPosition;
-  boolean hasPiece;
-  ImageView myPieceImage;
-  EventHandler myEventHandler;
+  private Point myPosition;
+  private boolean hasPiece;
+  private ImageView myPieceImage;
+  private EventHandler myEventHandler;
+  private Rectangle rec;
+  private static final Color HIGHLIGHT_COLOR = Color.LIGHTGREEN;
+  private final Color DEFAULT_COLOR;
 
   public Tile(Color fill, int size, Point position, EventHandler<MouseEvent> e) {
     super();
-    Rectangle rec  = new Rectangle(size, size, fill);
+    DEFAULT_COLOR = fill;
+    rec = new Rectangle(size, size, DEFAULT_COLOR);
     myEventHandler = e;
     rec.setOnMouseClicked(myEventHandler);
     this.getChildren().add(rec);
@@ -47,8 +52,11 @@ public class Tile extends Parent {
   }
 
   public void highLight() {
-    Node i = this.getChildren().get(0);
-    //i.
+    rec.setFill(HIGHLIGHT_COLOR);
+  }
+
+  public void unHighlight() {
+    rec.setFill(DEFAULT_COLOR);
   }
 
 }

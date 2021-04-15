@@ -2,9 +2,7 @@ package ooga.view;
 
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import ooga.controller.BackEndExternalAPI;
 import ooga.controller.BoardController;
-import ooga.controller.FrontEndExternalAPI;
 import ooga.controller.ModelController;
 
 /**
@@ -61,7 +59,7 @@ public class ViewManager {
   }
 
   public void onStartClicked(){
-    ((BoardScene) changeScene("boardScene")).attachBoardController(boardController);
+    ((BoardScene) changeScene("boardScene")).attachBoardControllerToBoard(boardController);
   }
 
 
