@@ -1,5 +1,6 @@
 package ooga.view;
 
+import java.awt.Point;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -9,27 +10,25 @@ public class Board extends GridPane {
   Tile tiles[][];
   private static final int SQUARE_SIZE = 50;
 
-  public Board(int width, int height){
+  public Board(int width, int height) {
     super();
     tiles = new Tile[width][height];
 
     Tile temp;
-    for (int i = 0; i<8; i++){
-      for (int j = 0; j<8; j++){
+    for (int i = 0; i<8; i++) {
+      for (int j = 0; j<8; j++) {
         if((i+j)%2 ==1) {
-          temp = new Tile(Color.TAN, SQUARE_SIZE);
+          temp = new Tile(Color.TAN, SQUARE_SIZE, new Point(i, j));
           tiles[i][j] = temp;
           this.add(temp, i, j);
         } else {
-          temp = new Tile(Color.BEIGE, SQUARE_SIZE);
+          temp = new Tile(Color.BEIGE, SQUARE_SIZE, new Point(i, j));
           tiles[i][j] = temp;
           this.add(temp, i, j);
         }
       }
     }
-    
     populateBoard();
-
   }
   
   private void populateBoard(){
