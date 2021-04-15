@@ -25,7 +25,7 @@ public class RunningChessTests {
   private void SetUp(){
     modelController = new ModelController();
     viewController = new DummyViewController();
-    modelController.setViewController(viewController);
+    modelController.setBoardController(viewController);
     modelController.setGameType("chess");
     gameEngine = modelController.getEngine();
     gameBoard = gameEngine.getBoard();

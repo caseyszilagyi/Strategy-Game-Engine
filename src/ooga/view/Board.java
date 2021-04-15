@@ -1,35 +1,53 @@
 package ooga.view;
 
+import java.awt.Point;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import ooga.controller.ModelController;
 
 public class Board extends GridPane {
   Tile tiles[][];
   private static final int SQUARE_SIZE = 50;
+  private final ModelController modelController;
 
-  public Board(int width, int height){
+  public Board(int width, int height, ModelController modelController) {
     super();
     tiles = new Tile[width][height];
+    this.modelController = modelController;
 
     Tile temp;
-    for (int i = 0; i<8; i++){
-      for (int j = 0; j<8; j++){
+    for (int i = 0; i<8; i++) {
+      for (int j = 0; j<8; j++) {
         if((i+j)%2 ==1) {
-          temp = new Tile(Color.TAN, SQUARE_SIZE);
+          temp = createTile(i, j, Color.TAN);
           tiles[i][j] = temp;
           this.add(temp, i, j);
         } else {
-          temp = new Tile(Color.BEIGE, SQUARE_SIZE);
+          temp = createTile(i, j, Color.BEIGE);
           tiles[i][j] = temp;
           this.add(temp, i, j);
         }
       }
     }
-    
     populateBoard();
+  }
 
+  public void movePiece(int startX, int startY, int endX, int endY){
+    ImageView piece = removePiece(startX, startY);
+    tiles[endX][endY].addPiece(piece);
+  }
+
+  public ImageView removePiece(int x, int y){
+    ImageView piece = tiles[x][y].getPiece();
+    tiles[x][y].removePiece();
+    return piece;
+  }
+
+
+  private Tile createTile(int i, int j, Color color){
+    return new Tile(color, SQUARE_SIZE, new Point(i, j), e -> handleTileClick(i, j));
   }
   
   private void populateBoard(){
@@ -56,6 +74,10 @@ public class Board extends GridPane {
       bishop.setFitWidth(SQUARE_SIZE);
       tiles[i+2][row].addPiece(bishop);
     }
+  }
+
+  private void handleTileClick(int i, int j){
+    modelController.actOnCoordinates(i, j);
   }
 
   private void populateBlackPawns() {

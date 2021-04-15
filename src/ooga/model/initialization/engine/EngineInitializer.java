@@ -7,6 +7,7 @@ import ooga.model.engine.GameEngine;
 import ooga.model.initialization.BoardCreator;
 import ooga.model.initialization.PlayerCreator;
 
+
 /**
  * These methods are designed to initialize parts of the game that the engine needs to run. This
  * includes the players, board state, rules, and pieces.
@@ -15,14 +16,16 @@ import ooga.model.initialization.PlayerCreator;
  */
 public class EngineInitializer implements Initializer {
 
-  private FrontEndExternalAPI viewController;
-  private Engine gameEngine;
-  private BoardCreator boardCreator;
+  public FrontEndExternalAPI boardController;
+
+  public Engine gameEngine;
+  public BoardCreator boardCreator;
   private PlayerCreator playerCreator = new PlayerCreator();
 
-  public EngineInitializer(FrontEndExternalAPI newViewController) {
-    viewController = newViewController;
-    gameEngine = new GameEngine(viewController);
+
+  public EngineInitializer(FrontEndExternalAPI newBoardController){
+    boardController = newBoardController;
+    gameEngine = new GameEngine(boardController);
   }
 
   /**
@@ -31,9 +34,10 @@ public class EngineInitializer implements Initializer {
    * @param gameName The name of the game
    */
   @Override
-  public void initializeGame(String gameName) {
-    boardCreator = new BoardCreator(gameName, viewController);
+  public void initializeGame (String gameName) {
+    boardCreator = new BoardCreator(gameName, boardController);
     gameEngine.setGameType(gameName);
+
     gameEngine.setBoard(boardCreator.makeBoard());
   }
 

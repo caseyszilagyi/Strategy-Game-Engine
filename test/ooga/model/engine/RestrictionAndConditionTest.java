@@ -13,7 +13,6 @@ import ooga.controller.DummyViewController;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;
-import ooga.model.engine.Engine;
 import ooga.model.initialization.pieces.PieceCreator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +32,7 @@ public class RestrictionAndConditionTest {
   private void SetUp() {
     modelController = new ModelController();
     viewController = new DummyViewController();
-    modelController.setViewController(viewController);
+    modelController.setBoardController(viewController);
     modelController.setGameType("chess");
     gameBoard = modelController.getEngine().getBoard();
     pieceCreator = new PieceCreator("chess", viewController, gameBoard);
