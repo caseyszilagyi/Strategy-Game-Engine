@@ -7,7 +7,7 @@ import ooga.model.initialization.engine.EngineInitializer;
 public class ModelController implements BackEndExternalAPI {
 
   private Engine gameEngine;
-  private Initializer creator;
+  private Initializer initializer;
   private FrontEndExternalAPI viewController;
 
   public ModelController(){
@@ -22,8 +22,9 @@ public class ModelController implements BackEndExternalAPI {
   @Override
   public void setViewController(FrontEndExternalAPI newViewController) {
     viewController=newViewController;
-    creator = new EngineInitializer(viewController);
-    gameEngine = creator.getEngine();
+    initializer = new EngineInitializer(viewController);
+    gameEngine = initializer.getEngine();
+    setPlayers("user", "opponent");
   }
 
   /**
@@ -33,7 +34,7 @@ public class ModelController implements BackEndExternalAPI {
    */
   @Override
   public void setGameType(String gameName) {
-    creator.initializeGame(gameName);
+    initializer.initializeGame(gameName);
   }
 
   /**
@@ -43,7 +44,7 @@ public class ModelController implements BackEndExternalAPI {
    */
   @Override
   public void actOnCoordinates(int x, int y) {
-    gameEngine.actOnCoordinates(x, y);
+    gameEngine.runTurn(x, y);
   }
 
 
@@ -51,12 +52,12 @@ public class ModelController implements BackEndExternalAPI {
 
   @Override
   public void modifyGameRules(String rulesFileName) {
-    creator.setGameRules(rulesFileName);
+    initializer.setGameRules(rulesFileName);
   }
 
   @Override
-  public void setPlayers(String player1, String player2) {
-
+  public void setPlayers(String... players) {
+    initializer.addPlayers(players);
   }
 
   @Override
@@ -74,7 +75,7 @@ public class ModelController implements BackEndExternalAPI {
    */
   @Override
   public void setBoardState(String boardFileName) {
-    creator.setBoardState(boardFileName);
+    initializer.setBoardState(boardFileName);
   }
 
   /**
