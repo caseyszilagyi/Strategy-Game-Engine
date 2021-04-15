@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.layout.GridPane;
+import ooga.controller.ModelController;
 
 /**
  * Creates {@link GameScene} subclasses, however returns the general {@code GameScene}
@@ -27,9 +28,10 @@ public class GameSceneFactory {
    * the scene being created.
    * @param resources a {@code ResourceBundle} for this scene
    * @param handler an {@link EventHandler} for all button events from this scene
+   * @param modelController
    */
   public GameScene makeScene(ResourceBundle resources,
-      EventHandler<ActionEvent> handler) {
+      EventHandler<ActionEvent> handler, ModelController modelController) {
     this.handler = handler;
     Parent root = new GridPane();
 
@@ -37,8 +39,9 @@ public class GameSceneFactory {
     GameScene myScene = null;
     try {
       myScene = (GameScene) this.getClass()
-          .getDeclaredMethod("make" + sceneType, Parent.class, ResourceBundle.class)
-          .invoke(this, new Object[]{root, resources});
+          .getDeclaredMethod("make" + sceneType, Parent.class,
+              ResourceBundle.class, ModelController.class)
+          .invoke(this, new Object[]{root, resources, modelController});
     } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
       e.printStackTrace();
     }
@@ -50,22 +53,25 @@ public class GameSceneFactory {
    * @param sceneFileName name of the {@code GameScene} to instantiate, must match a data file
    *                      name.
    * @param handler an {@link EventHandler} for all button events from this scene
+   * @param modelController
    * @return a {@code GameScene} object
    */
   public GameScene makeScene(String sceneFileName,
-      EventHandler<ActionEvent> handler) {
+      EventHandler<ActionEvent> handler, ModelController modelController) {
     ResourceBundle sceneResources = ResourceBundle.getBundle(DEFAULT_RESOURCES_PACKAGE + sceneFileName);
-    return makeScene(sceneResources, handler);
+    return makeScene(sceneResources, handler, modelController);
   }
 
   /**
    * Creates a {@link GameScene} of type {@link WelcomeScene}.
    * @param root the {@code Parent} object to act as the root of the scene
    * @param resources a {@code ResourceBundle} holding scene data files
+   * @param modelController
    * @return a {@code GameScene} object
    */
-  private GameScene makeWelcomeScene(Parent root, ResourceBundle resources){
-    GameScene newScene = new WelcomeScene(root, resources, handler);
+  private GameScene makeWelcomeScene(Parent root, ResourceBundle resources,
+      ModelController modelController){
+    GameScene newScene = new WelcomeScene(root, resources, handler, modelController);
 
     return newScene;
   }
@@ -74,10 +80,12 @@ public class GameSceneFactory {
    * Creates a {@link GameScene} of type {@link BoardScene}.
    * @param root the {@code Parent} object to act as the root of the scene
    * @param resources a {@code ResourceBundle} holding scene data files
+   * @param modelController
    * @return a {@code GameScene} object
    */
-  private GameScene makeBoardScene(Parent root, ResourceBundle resources){
-    GameScene newScene = new BoardScene(root, resources);
+  private GameScene makeBoardScene(Parent root, ResourceBundle resources,
+      ModelController modelController){
+    GameScene newScene = new BoardScene(root, resources, modelController);
     return newScene;
   }
 

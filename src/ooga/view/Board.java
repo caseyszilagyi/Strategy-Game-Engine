@@ -1,24 +1,21 @@
 package ooga.view;
 
 import java.awt.Point;
-import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import ooga.controller.ModelController;
-import org.w3c.dom.ls.LSOutput;
 
 public class Board extends GridPane {
   Tile tiles[][];
   private static final int SQUARE_SIZE = 50;
-  EventHandler myEventHandler;
+  private final ModelController modelController;
 
-  public Board(int width, int height, EventHandler<MouseEvent> eventHandler) {
+  public Board(int width, int height, ModelController modelController) {
     super();
     tiles = new Tile[width][height];
-    myEventHandler = eventHandler;
+    this.modelController = modelController;
 
     Tile temp;
     for (int i = 0; i<8; i++) {
@@ -38,7 +35,7 @@ public class Board extends GridPane {
   }
 
   private Tile createTile(int i, int j, Color color){
-    return new Tile(color, SQUARE_SIZE, new Point(i, j), myEventHandler);
+    return new Tile(color, SQUARE_SIZE, new Point(i, j), e -> handleTileClick(i, j));
   }
   
   private void populateBoard(){
@@ -65,6 +62,10 @@ public class Board extends GridPane {
       bishop.setFitWidth(SQUARE_SIZE);
       tiles[i+2][row].addPiece(bishop);
     }
+  }
+
+  private void handleTileClick(int i, int j){
+    modelController.actOnCoordinates(i, j);
   }
 
   private void populateBlackPawns() {

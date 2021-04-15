@@ -13,7 +13,10 @@ public class ModelController implements BackEndExternalAPI {
   public ModelController(){
   }
 
-
+  @Override
+  public String toString(){
+    return "Valid Model Controller";
+  }
 
   /**
    * Sets the view controller that this modelController is linked to

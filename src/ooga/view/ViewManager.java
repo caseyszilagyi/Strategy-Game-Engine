@@ -2,8 +2,7 @@ package ooga.view;
 
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import ooga.model.engine.action_files.Action;
+import ooga.controller.ModelController;
 
 /**
  * Instantiates and manages all views for a single game instance.
@@ -16,15 +15,18 @@ public class ViewManager {
   private final GameWindowFactory gameWindowFactory;
   private final GameSceneFactory sceneFactory;
   private final GameWindow primaryWindow;
+  private final ModelController modelController;
 
   /**
    * Creates a new instance of {@code ViewManager} with a resource bundle with
    * information about the first window to show. The constructor then shows the
    * first window.
    * @param initFile a {@link ResourceBundle} with specifications for the first window.
+   * @param modelController
    */
-  public ViewManager(ResourceBundle initFile){
+  public ViewManager(ResourceBundle initFile, ModelController modelController){
     this.initFile = initFile;
+    this.modelController = modelController;
     gameWindowFactory = new GameWindowFactory();
     sceneFactory = new GameSceneFactory();
     primaryWindow = gameWindowFactory.makeWindow("Stage");
@@ -33,11 +35,13 @@ public class ViewManager {
 
   public void changeScene(String sceneNameProperty){
     String initSceneName = initFile.getString(sceneNameProperty);
-    GameScene newScene = sceneFactory.makeScene(initSceneName, this::onButtonClicked);
+    GameScene newScene = sceneFactory.makeScene(initSceneName, this::onButtonClicked,
+        modelController);
     primaryWindow.showScene(newScene);
   }
 
   private void onButtonClicked(ActionEvent e){
+    modelController.setGameType("chess");
     onStartClicked();
   }
 

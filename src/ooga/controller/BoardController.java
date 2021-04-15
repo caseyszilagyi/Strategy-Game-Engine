@@ -11,12 +11,12 @@ import ooga.view.GameDisplay;
  *
  * @author Casey Szilagyi
  */
-public class ViewController implements FrontEndExternalAPI{
+public class BoardController implements FrontEndExternalAPI{
 
   private Display display;
   private BackEndExternalAPI modelController;
 
-  public ViewController(){
+  public BoardController(){
 
   }
 
@@ -60,7 +60,8 @@ public class ViewController implements FrontEndExternalAPI{
    */
   @Override
   public void movePiece(int startX, int startY, int endX, int endY) {
-
+    System.out.printf("startX: %d, startY: %d, endX: %d, endY: %d\n",
+        startX, startY, endX, endY);
   }
 
   /**
@@ -80,7 +81,7 @@ public class ViewController implements FrontEndExternalAPI{
    */
   @Override
   public void giveAllPossibleMoves(Iterator<Pair<Integer, Integer>> possibleMoves) {
-
+    System.out.println(possibleMoves);
   }
 
   /**
