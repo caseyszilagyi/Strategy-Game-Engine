@@ -83,7 +83,7 @@ public class PieceCreator extends Creator {
         PieceMovement currentMovement = pieceComponentClassLoader
             .makePieceMove(moveName, makeAttributeMap(moveDetails), direction, correspondingPiece);
         currentMovement.setRestrictions(addRestrictions(moveDetails, correspondingPiece));
-        currentMovement.setConditions(addConditions(moveDetails, correspondingPiece));
+        currentMovement.setConditions(addConditions(moveDetails, correspondingPiece, direction));
         pieceMovements.add(currentMovement);
       }
     }
@@ -94,16 +94,16 @@ public class PieceCreator extends Creator {
   // could refactor this to use generic types & lambdas, just pass the specific class loader
   // call and return a generic list? maybe?
 
-  private List<Condition> addConditions(Node moveDetails, GamePiece correspondingPiece){
+  private List<Condition> addConditions(Node moveDetails, GamePiece correspondingPiece, int direction){
     List<Condition> currentConditions = new ArrayList<>();
     if (moveSubNodeMap.containsKey(CONDITION_TAG)) {
       specificMoveComponent = makeSubNodeMap(moveSubNodeMap.get(CONDITION_TAG).get(0));
-      currentConditions = makeConditions(correspondingPiece);
+      currentConditions = makeConditions(correspondingPiece,direction);
     }
     return currentConditions;
   }
 
-  private List<Condition> makeConditions(GamePiece correspondingPiece) {
+  private List<Condition> makeConditions(GamePiece correspondingPiece, int direction) {
     List<Condition> currentConditions = new ArrayList<>();
     for (String conditionName : specificMoveComponent.keySet()) {
       Map<String, String> parameters = new HashMap<>();
@@ -112,7 +112,7 @@ public class PieceCreator extends Creator {
         parameters = makeAttributeMap(getFirstNode(specificMoveComponent, conditionName));
       }
       Condition currentCondition = pieceComponentClassLoader.makeCondition(conditionName,
-          parameters, correspondingPiece);
+          parameters, correspondingPiece, direction);
       currentConditions.add(currentCondition);
     }
     return currentConditions;

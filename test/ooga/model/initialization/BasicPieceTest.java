@@ -313,6 +313,22 @@ public class BasicPieceTest {
     assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
   }
 
+  /**
+   * Testing the finite slide movement
+   */
+  @Test
+  void TestFiniteSlideBishop(){
+    GamePiece bishop = makePiece("finiteSlideBishop", 4, 4);
+    bishop.setPieceTeam("Casey");
+    makeDummyGamePiece("Casey", 6, 6);
+    makeDummyGamePiece("notCasey", 6, 2);
+    makeDummyGamePiece("Casey", 2, 2);
+    bishop.determineAllLegalMoves();
+    allLegalMoves = dummyViewController.getAllPossibleMoves();
+    String expected = "5:5 5:3 6:2 3:3 3:5 2:6 1:7";
+    assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
+  }
+
 
 
   // piece creator methods

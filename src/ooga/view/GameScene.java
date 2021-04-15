@@ -13,6 +13,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javax.imageio.ImageIO;
 
+/**
+ * A {@code GameScene} object extends {@link Scene} and is given to a {@link GameWindow}
+ * to show.
+ *
+ * @author Yi Chen
+ */
 public abstract class GameScene extends Scene {
 
   public static final String DEFAULT_RESOURCES_PACKAGE = "view.resources.";
@@ -20,6 +26,12 @@ public abstract class GameScene extends Scene {
   private ResourceBundle resources;
   private GridPane sceneRoot;
 
+  /**
+   * Constructor for {@code GameScene} takes a {@link Parent} object and a {@link ResourceBundle}.
+   * The scene root is usually a {@link GridPane} for ease of layout.
+   * @param root the {@code Parent} object to act as the root of the scene
+   * @param resources a {@code ResourceBundle} holding scene data files
+   */
   public GameScene(Parent root, ResourceBundle resources){
     super(root);
     this.resources = resources;
@@ -31,12 +43,24 @@ public abstract class GameScene extends Scene {
 
   }
 
+  /**
+   * Sets the size of a scene. This will force any window displaying the scene to conform
+   * to the size.
+   * @param width desired width of scene
+   * @param height desired height of scene
+   */
   public void setSceneSize(int width, int height){
     GridPane sceneRoot = (GridPane) this.getRoot();
     sceneRoot.setMinWidth(width);
     sceneRoot.setMinHeight(height);
   }
 
+  /**
+   * Creates a text displaying {@link Label} object. This object will search properties
+   * files for keys matching the input, and set the lable to the corresponding string.
+   * @param property a {@code String} key in the resource file for this scene
+   * @return a {@code Label} object
+   */
   public Label makeLabel(String property) {
     Label label = new Label();
     label.setId(property);
@@ -45,6 +69,13 @@ public abstract class GameScene extends Scene {
     return label;
   }
 
+  /**
+   * Creates a {@link Button} in the scene, with text determined by {@code property} and
+   * event handler determined by {@code handler}.
+   * @param property a {@code String} matching a key in the scene source file
+   * @param handler an {@link EventHandler} to perform the action of this button
+   * @return a {@code Button} object
+   */
   public Button makeButton (String property, EventHandler<ActionEvent> handler) {
     // represent all supported image suffixes
     final String IMAGE_FILE_SUFFIXES = String.format(".*\\.(%s)", String.join("|", ImageIO.getReaderFileSuffixes()));
@@ -60,6 +91,10 @@ public abstract class GameScene extends Scene {
     return result;
   }
 
+  /**
+   * Populates the scene with the correct layout panels and view elements depending
+   * on the subclass of {@code GameScene}.
+   */
   public abstract void populateScene();
 
 }

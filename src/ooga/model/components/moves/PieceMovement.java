@@ -93,8 +93,7 @@ public abstract class PieceMovement {
   protected boolean checkIfValidMove(Coordinate coordinates, String teamName){
     return checkIfMoveInBounds(coordinates) &&
            checkThatNoFriendlyPieceInMoveDestination(coordinates, teamName) &&
-           checkEnemyPieceLocationConditions(coordinates, teamName) &&
-           checkRestrictions(coordinates);
+           checkEnemyPieceLocationConditions(coordinates, teamName);
   }
 
 
@@ -120,16 +119,8 @@ public abstract class PieceMovement {
     conditions.stream().forEach(condition -> condition.executeCondition(endingCoordinates));
   }
 
-  private boolean checkRestrictions(Coordinate endingCoordinates){
-    return restrictions.stream().allMatch(restriction -> restriction.checkRestriction(endingCoordinates));
-    /**
-    for(Restriction restriction: restrictions){
-      if(!restriction.checkRestriction(endingCoordinates)){
-        return false;
-      }
-    }
-    return true;
-     */
+  public boolean checkRestrictions(Coordinate startingCoordinates){
+    return restrictions.stream().allMatch(restriction -> restriction.checkRestriction(new Coordinate(startingCoordinates, changeX, changeY)));
   }
 
   /**

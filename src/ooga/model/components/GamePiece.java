@@ -100,6 +100,13 @@ public class GamePiece {
     return locationHistory;
   }
 
+  /**
+   * Returns whether the piece has moved or not
+   * @return True if it has, false if it hasn't
+   */
+  public boolean hasMoved(){
+    return locationHistory.size() != 1;
+  }
 
   /**
    * Sets the piece's possible moves

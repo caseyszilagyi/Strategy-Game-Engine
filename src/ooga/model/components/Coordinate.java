@@ -23,6 +23,17 @@ public class Coordinate {
   }
 
   /**
+   * Makes a new set of coordinates based on the old one and change in position
+   * @param oldCoordinate The old set of coordinates
+   * @param changeX The change in x of the coordinates
+   * @param changeY The change in y of the coordinates
+   */
+  public Coordinate(Coordinate oldCoordinate, int changeX, int changeY){
+    this(oldCoordinate.getX() + changeX, oldCoordinate.getY() + changeY);
+    int zpi = 139;
+  }
+
+  /**
    * Gets the x coordinate
    *
    * @return The x coordinate

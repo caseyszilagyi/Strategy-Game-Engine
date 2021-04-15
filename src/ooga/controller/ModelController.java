@@ -7,23 +7,29 @@ import ooga.model.initialization.engine.EngineInitializer;
 public class ModelController implements BackEndExternalAPI {
 
   private Engine gameEngine;
+
   private Initializer creator;
-  private FrontEndExternalAPI viewController;
+  private FrontEndExternalAPI boardController;
 
   public ModelController(){
   }
 
-
+  @Override
+  public String toString(){
+    return "Valid Model Controller";
+  }
 
   /**
    * Sets the view controller that this modelController is linked to
    * @param newViewController The view controller
    */
   @Override
-  public void setViewController(FrontEndExternalAPI newViewController) {
-    viewController=newViewController;
-    creator = new EngineInitializer(viewController);
+  public void setBoardController(FrontEndExternalAPI newViewController) {
+    boardController = newViewController;
+    creator = new EngineInitializer(boardController);
     gameEngine = creator.getEngine();
+    setPlayers("user", "opponent");
+
   }
 
   /**
@@ -43,7 +49,7 @@ public class ModelController implements BackEndExternalAPI {
    */
   @Override
   public void actOnCoordinates(int x, int y) {
-    gameEngine.actOnCoordinates(x, y);
+    gameEngine.runTurn(x, y);
   }
 
 
@@ -55,8 +61,8 @@ public class ModelController implements BackEndExternalAPI {
   }
 
   @Override
-  public void setPlayers(String player1, String player2) {
-
+  public void setPlayers(String... players) {
+    creator.addPlayers(players);
   }
 
   @Override

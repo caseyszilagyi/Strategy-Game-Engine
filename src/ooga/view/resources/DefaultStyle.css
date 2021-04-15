@@ -28,6 +28,20 @@
   -fx-text-alignment: center;
 }
 
+.boardScene {
+  -fx-border-color: #000000;
+  -fx-background-color: #a56300;
+  -fx-background-image: url("boardSceneBackground.jpg");
+  -fx-background-radius: 5.0;
+  -fx-padding: 8;
+  -fx-background-repeat: no-repeat;
+  -fx-font-size: 25pt;
+  -fx-font-family: "Silom";
+  -fx-text-fill: #000000;
+  -fx-font-weight: bold;
+  -fx-text-alignment: center;
+}
+
 .hbox {
   -fx-background-radius: 5.0;
   -fx-padding: 8;

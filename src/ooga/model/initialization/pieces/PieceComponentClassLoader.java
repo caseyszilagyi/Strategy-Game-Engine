@@ -99,12 +99,12 @@ public class PieceComponentClassLoader {
    * @param piece The piece that the condition corresponds to
    * @return The condition object
    */
-  public Condition makeCondition(String conditionName, Map<String, String> parameters, GamePiece piece){
+  public Condition makeCondition(String conditionName, Map<String, String> parameters, GamePiece piece, int direction){
     Condition condition = null;
     try {
       Object command = classLoader.loadClass(MOVE_CONDITION_CLASSES_PACKAGE + "." + conditionName)
-          .getDeclaredConstructor(FrontEndExternalAPI.class, GameBoard.class, Map.class, GamePiece.class)
-          .newInstance(viewController, gameBoard, parameters, piece);
+          .getDeclaredConstructor(FrontEndExternalAPI.class, GameBoard.class, Map.class, GamePiece.class, int.class)
+          .newInstance(viewController, gameBoard, parameters, piece, direction);
       condition = (Condition) command;
     } catch (InstantiationException e){
       throw new ClassLoaderException("ConditionInstantiation");

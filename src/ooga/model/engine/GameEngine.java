@@ -3,7 +3,9 @@ package ooga.model.engine;
 import java.util.ArrayList;
 import java.util.List;
 import ooga.controller.FrontEndExternalAPI;
+import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
+import ooga.model.components.GamePiece;
 import ooga.model.components.GameRules;
 import ooga.model.components.Player;
 import ooga.model.engine.action_files.Action;
@@ -35,13 +37,18 @@ public class GameEngine extends Engine {
   private ActionCreator actionCreator;
 
   //Logic flow variables
-  boolean pieceSelected = false;
+  boolean isStartOfTurn = true;
 
   public GameEngine(FrontEndExternalAPI newViewController) {
     viewController = newViewController;
     activePlayers = new ArrayList<>();
     priorActions = new ArrayList<>();
+    playerTimes = new ArrayList<>();
     actionCreator = new ActionCreator(viewController, curBoard);
+  }
+
+  public void setGameType(String gameName){
+    curRules = new GameRules(gameName);
   }
 
   /**
@@ -49,16 +56,31 @@ public class GameEngine extends Engine {
    * must set a currentPlayerTurn before calling
    * Todo: make sure that a currentPlayerTurn has been set
    */
-  public void runTurn(){
+  public void runTurn(int x, int y){
     if(currentPlayerTurn == null){
       System.err.println("No player turn set");
       return;
     }
-    startPlayerTimer(currentPlayerTurn);
-    boolean isTurnOver = true;
-    do {
+    if(isStartOfTurn){
+      startPlayerTimer(currentPlayerTurn);
+    }
+    if(!actOnCoordinates(x, y)){
+      return;
+    }
+    boolean isTurnOver = curRules.checkForNextTurn(curBoard, curBoard.getPieceAtCoordinate(new Coordinate(x, y)));
+    if(isTurnOver){
+      stopPlayerTimer(currentPlayerTurn);
+      swapTurn();
+      isStartOfTurn = true;
+    } else {
+      isStartOfTurn = false;
+    }
+  }
 
-    } while (!isTurnOver);
+  private void swapTurn(){
+    int currentPlayerIndex = activePlayers.indexOf(currentPlayerTurn);
+    int nextPlayerIndex = (currentPlayerIndex + 1) % activePlayers.size();
+    currentPlayerTurn = activePlayers.get(nextPlayerIndex);
   }
 
   /**
@@ -67,8 +89,18 @@ public class GameEngine extends Engine {
    * @param player is the Player.java object to set the current turn to
    */
   public void setCurrentPlayerTurn(Player player){
-
+    currentPlayerTurn = player;
   }
+
+  /**
+   * Gets the player who's turn it is
+   * @return the Player.java object the current turn is set to
+   */
+  public Player getCurrentPlayerTurn(){
+    return currentPlayerTurn;
+  }
+
+
 
 
   /**
@@ -76,23 +108,34 @@ public class GameEngine extends Engine {
    *
    * @param x The x coordinate
    * @param y The y coordinate
+   *
+   * @return whether or not a valid move was made
    */
   @Override
-  public void actOnCoordinates(int x, int y) {
+  public boolean actOnCoordinates(int x, int y) {
     // This logic is for move games, only works for chess and not for double jumps in checkers
-    if(pieceSelected){
+    if(curBoard.getIsHeldPiece()){
+      curBoard.setIsHeldPiece(false);
       if(curBoard.isLegalMoveLocation(x, y)){
         curBoard.movePiece(x,y);
+        return true;
+      } else {
+        return false;
       }
-      pieceSelected = false;
+
     }
     else {
       if (curBoard.isPieceAtCoordinate(x, y)) {
         curBoard.determineAllLegalMoves(x, y);
-        pieceSelected = true;
+        curBoard.setIsHeldPiece(true);
+        return true;
+      } else {
+        return false;
       }
     }
   }
+
+
 
   /**
    * Executes an action. An action can be something that has to do with a piece
@@ -130,6 +173,7 @@ public class GameEngine extends Engine {
   public void addActiveUser(Player player) {
     activePlayers.add(player);
     playerTimes.add(Long.valueOf(0));
+    setCurrentPlayerTurn(player);
   }
 
   @Override

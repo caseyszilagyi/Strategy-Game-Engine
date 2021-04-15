@@ -2,6 +2,24 @@
 <piece piece = "chess">
   <moves>
     <FiniteSlide>
+      <changeX>-2</changeX>
+      <changeY>0</changeY>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
+      <restrictions>
+        <KingSideCastle></KingSideCastle>
+      </restrictions>
+      <conditions>
+        <MoveOtherPiece>
+          <relativeStartX>-1</relativeStartX>
+          <relativeStartY>0</relativeStartY>
+          <relativeEndX>1</relativeEndX>
+          <relativeEndY>0</relativeEndY>
+        </MoveOtherPiece>
+      </conditions>
+    </FiniteSlide>
+    <FiniteSlide>
       <changeX>1</changeX>
       <changeY>1</changeY>
       <mustTake>False</mustTake>
@@ -114,7 +132,6 @@
       <takeY>0</takeY>
     </FiniteSlide>
   </moves>
-
 
   <changeTurns>True</changeTurns>
   <changeSelf>False (will be true for pawns because they move to end, but how to know?)</changeSelf>

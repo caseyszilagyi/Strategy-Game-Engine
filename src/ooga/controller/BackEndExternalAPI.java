@@ -14,7 +14,7 @@ public interface BackEndExternalAPI {
    * Links this half of the controller to the other half that is passed around the back end
    * @param viewController The other half of the controller
    */
-  public void setViewController(FrontEndExternalAPI viewController);
+  public void setBoardController(FrontEndExternalAPI viewController);
 
 
   /**
@@ -32,10 +32,9 @@ public interface BackEndExternalAPI {
 
   /**
    * Sets a player that is playing the game
-   * @param player1 The string associated with the player name
-   * @param player2 The string associated with the player name
+   * @param players A list of strings that correspond to all the players
    */
-  public void setPlayers(String player1, String player2);
+  public void setPlayers(String... players);
 
   /**
    * Sets the initial state of the board
