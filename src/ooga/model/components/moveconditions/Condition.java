@@ -27,7 +27,7 @@ public abstract class Condition {
    * @param parameters The map with parameters, if there are any
    * @param piece The piece that the restriction corresponds to
    */
-  public Condition(FrontEndExternalAPI viewController, GameBoard gameBoard, Map<String, String> parameters, GamePiece piece){
+  public Condition(FrontEndExternalAPI viewController, GameBoard gameBoard, Map<String, String> parameters, GamePiece piece, int direction){
     this.gameBoard = gameBoard;
     this.viewController = viewController;
     this.correspondingPiece = piece;

@@ -24,8 +24,8 @@ public class PawnPromotion extends Condition {
    * @param piece          The piece that the restriction corresponds to
    */
   public PawnPromotion(FrontEndExternalAPI viewController,
-      GameBoard gameBoard, Map<String, String> parameters, GamePiece piece) {
-    super(viewController, gameBoard, parameters, piece);
+      GameBoard gameBoard, Map<String, String> parameters, GamePiece piece, int direction) {
+    super(viewController, gameBoard, parameters, piece, direction);
     this.gameBoard = gameBoard;
     this.viewController = viewController;
   }
