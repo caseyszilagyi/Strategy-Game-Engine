@@ -173,6 +173,7 @@ public class GameEngine extends Engine {
   public void addActiveUser(Player player) {
     activePlayers.add(player);
     playerTimes.add(Long.valueOf(0));
+    setCurrentPlayerTurn(player);
   }
 
   @Override
