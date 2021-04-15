@@ -74,7 +74,7 @@ public class BoardController implements FrontEndExternalAPI{
    */
   @Override
   public void removePiece(int x, int y) {
-
+    board.removePiece(x, y);
   }
 
   /**
