@@ -1,5 +1,6 @@
 package ooga.view;
 
+import java.beans.EventHandler;
 import java.util.ResourceBundle;
 import javafx.geometry.HPos;
 import javafx.scene.Parent;
@@ -9,11 +10,13 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import ooga.controller.ModelController;
 
 public class BoardScene extends GameScene {
 
   private ResourceBundle resources;
   private GridPane sceneRoot;
+  private ModelController myModelControlller;
 
   public BoardScene(Parent root, ResourceBundle resources) {
     super(root, resources);
@@ -22,6 +25,7 @@ public class BoardScene extends GameScene {
     sceneRoot.getStyleClass().add("title");
     this.getStylesheets().add(DEFAULT_RESOURCES_PATH + resources.getString("CSS"));
     populateScene();
+    //myModelControlller = modelController;
   }
 
   @Override
@@ -45,6 +49,6 @@ public class BoardScene extends GameScene {
     sceneRoot.add(pauseButton, 0, 1);
     sceneRoot.add(settingsButton, 1, 1);
     sceneRoot.add(helpButton, 2, 1);
-    sceneRoot.add(new Board(8, 8), 0, 3);
+    sceneRoot.add(new Board(8, 8, e -> System.out.println("Tile clicked")), 0, 3);
   }
 }

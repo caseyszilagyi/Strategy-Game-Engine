@@ -1,35 +1,44 @@
 package ooga.view;
 
+import java.awt.Point;
+import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import ooga.controller.ModelController;
+import org.w3c.dom.ls.LSOutput;
 
 public class Board extends GridPane {
   Tile tiles[][];
   private static final int SQUARE_SIZE = 50;
+  EventHandler myEventHandler;
 
-  public Board(int width, int height){
+  public Board(int width, int height, EventHandler<MouseEvent> eventHandler) {
     super();
     tiles = new Tile[width][height];
+    myEventHandler = eventHandler;
 
     Tile temp;
-    for (int i = 0; i<8; i++){
-      for (int j = 0; j<8; j++){
+    for (int i = 0; i<8; i++) {
+      for (int j = 0; j<8; j++) {
         if((i+j)%2 ==1) {
-          temp = new Tile(Color.TAN, SQUARE_SIZE);
+          temp = createTile(i, j, Color.TAN);
           tiles[i][j] = temp;
           this.add(temp, i, j);
         } else {
-          temp = new Tile(Color.BEIGE, SQUARE_SIZE);
+          temp = createTile(i, j, Color.BEIGE);
           tiles[i][j] = temp;
           this.add(temp, i, j);
         }
       }
     }
-    
     populateBoard();
+  }
 
+  private Tile createTile(int i, int j, Color color){
+    return new Tile(color, SQUARE_SIZE, new Point(i, j), myEventHandler);
   }
   
   private void populateBoard(){
