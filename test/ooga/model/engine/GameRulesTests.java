@@ -40,7 +40,7 @@ public class GameRulesTests {
     GameRules gameRules = new GameRules("chess");
     List<String> turnConditionList = gameRules.getTurnConditionsAsStringList();
     assertEquals(1, turnConditionList.size());
-    assertEquals("Force", turnConditionList.get(0));
+    assertEquals("NoHeldPiece", turnConditionList.get(0));
   }
 
   @Test
