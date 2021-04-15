@@ -112,29 +112,39 @@ public class Board extends GridPane {
   }
   
   private void populateBoard(){
-    populateBlackPieces();
+    populatePieces();
   }
 
-  private void populateBlackPieces() {
+  private void populatePieces() {
     populateBlackPawns();
     populateSpecialPieces("Black", 0);
+    populateWhitePawns();
   }
 
   private void populateSpecialPieces(String color, int row) {
-    for(int i = 0; i<6; i+=5) {
-      ImageView rook = new ImageView(new Image("BasicChessPieces/" + color + "Rook.png"));
-      rook.setFitHeight(SQUARE_SIZE);
-      rook.setFitWidth(SQUARE_SIZE);
-      tiles[i][row].addPiece(rook);
-      ImageView knight = new ImageView(new Image("BasicChessPieces/" + color + "Knight.png"));
-      knight.setFitHeight(SQUARE_SIZE);
-      knight.setFitWidth(SQUARE_SIZE);
-      tiles[i+1][row].addPiece(knight);
-      ImageView bishop = new ImageView(new Image("BasicChessPieces/" + color + "Bishop.png"));
-      bishop.setFitHeight(SQUARE_SIZE);
-      bishop.setFitWidth(SQUARE_SIZE);
-      tiles[i+2][row].addPiece(bishop);
-    }
+    addPiece(0, 0, "Black", "Rook.png");
+    addPiece(1, 0, "Black", "Knight.png");
+    addPiece(2, 0, "Black", "Bishop.png");
+    addPiece(3, 0, "Black", "Queen.png");
+    addPiece(4, 0, "Black", "King.png");
+    addPiece(5, 0, "Black", "Bishop.png");
+    addPiece(6, 0, "Black", "Knight.png");
+    addPiece(7, 0, "Black", "Rook.png");
+    addPiece(0, 7, "White", "Rook.png");
+    addPiece(1, 7, "White", "Knight.png");
+    addPiece(2, 7, "White", "Bishop.png");
+    addPiece(3, 7, "White", "Queen.png");
+    addPiece(4, 7, "White", "King.png");
+    addPiece(5, 7, "White", "Bishop.png");
+    addPiece(6, 7, "White", "Knight.png");
+    addPiece(7, 7, "White", "Rook.png");
+  }
+
+  private void addPiece(int x, int y, String color, String fileName){
+    ImageView bishop = new ImageView(new Image("BasicChessPieces/" + color + fileName));
+    bishop.setFitHeight(SQUARE_SIZE);
+    bishop.setFitWidth(SQUARE_SIZE);
+    tiles[x][y].addPiece(bishop);
   }
 
   private void handleTileClick(int i, int j){
@@ -149,6 +159,17 @@ public class Board extends GridPane {
       tempBlackPawn.setFitHeight(SQUARE_SIZE);
       tempBlackPawn.setFitWidth(SQUARE_SIZE);
       tiles[i][1].addPiece(tempBlackPawn);
+    }
+  }
+
+  private void populateWhitePawns() {
+    Image blackPawn = new Image("BasicChessPieces/WhitePawn.png");
+    ImageView tempBlackPawn;
+    for (int i = 0; i<8; i++) {
+      tempBlackPawn = new ImageView(blackPawn);
+      tempBlackPawn.setFitHeight(SQUARE_SIZE);
+      tempBlackPawn.setFitWidth(SQUARE_SIZE);
+      tiles[i][6].addPiece(tempBlackPawn);
     }
   }
 }
