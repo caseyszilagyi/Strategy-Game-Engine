@@ -54,7 +54,7 @@ public class GameSceneFactory {
   }
 
   private GameScene makeBoardScene(Parent root, ResourceBundle resources){
-    GameScene newScene = new BoardScene(root, resources);
+    GameScene newScene = new BoardScene(root, resources, modelController);
     return newScene;
   }
 
