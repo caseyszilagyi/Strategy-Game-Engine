@@ -34,6 +34,18 @@ public class Board extends GridPane {
     populateBoard();
   }
 
+  public void movePiece(int startX, int startY, int endX, int endY){
+    ImageView piece = removePiece(startX, startY);
+    tiles[endX][endY].addPiece(piece);
+  }
+
+  public ImageView removePiece(int x, int y){
+    ImageView piece = tiles[x][y].getPiece();
+    tiles[x][y].removePiece();
+    return piece;
+  }
+
+
   private Tile createTile(int i, int j, Color color){
     return new Tile(color, SQUARE_SIZE, new Point(i, j), e -> handleTileClick(i, j));
   }

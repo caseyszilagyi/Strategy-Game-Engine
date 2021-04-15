@@ -25,6 +25,10 @@ public class Tile extends Parent {
     hasPiece = false;
   }
 
+  public ImageView getPiece(){
+    return myPieceImage;
+  }
+
   public void addPiece(ImageView piece) {
     piece.setOnMouseClicked(myEventHandler);
     this.getChildren().add(piece);
@@ -33,7 +37,7 @@ public class Tile extends Parent {
   }
 
   public void removePiece() {
-    this.getChildren().remove(1);//does this work
+    this.getChildren().remove(myPieceImage);//does this work
     hasPiece = false;
     myPieceImage = null;
   }

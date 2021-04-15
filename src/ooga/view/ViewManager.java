@@ -2,6 +2,9 @@ package ooga.view;
 
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import ooga.controller.BackEndExternalAPI;
+import ooga.controller.BoardController;
+import ooga.controller.FrontEndExternalAPI;
 import ooga.controller.ModelController;
 
 /**
@@ -15,29 +18,41 @@ public class ViewManager {
   private final GameWindowFactory gameWindowFactory;
   private final GameSceneFactory sceneFactory;
   private final GameWindow primaryWindow;
-  private final ModelController modelController;
+  private ModelController modelController;
+  private BoardController boardController;
 
   /**
    * Creates a new instance of {@code ViewManager} with a resource bundle with
    * information about the first window to show. The constructor then shows the
    * first window.
    * @param initFile a {@link ResourceBundle} with specifications for the first window.
-   * @param modelController
+   *
    */
-  public ViewManager(ResourceBundle initFile, ModelController modelController){
+  public ViewManager(ResourceBundle initFile){
     this.initFile = initFile;
-    this.modelController = modelController;
     gameWindowFactory = new GameWindowFactory();
     sceneFactory = new GameSceneFactory();
     primaryWindow = gameWindowFactory.makeWindow("Stage");
+    createControllers();
     changeScene("initialWindowScene");
   }
 
-  public void changeScene(String sceneNameProperty){
+  /**
+   * Creates the necessary {@link BoardController} and {@link ModelController} objects.
+   */
+  private void createControllers(){
+    boardController = new BoardController();
+    modelController = new ModelController();
+    boardController.setModelController(modelController);
+    modelController.setBoardController(boardController);
+  }
+
+  public GameScene changeScene(String sceneNameProperty){
     String initSceneName = initFile.getString(sceneNameProperty);
     GameScene newScene = sceneFactory.makeScene(initSceneName, this::onButtonClicked,
         modelController);
     primaryWindow.showScene(newScene);
+    return newScene;
   }
 
   private void onButtonClicked(ActionEvent e){
@@ -46,7 +61,7 @@ public class ViewManager {
   }
 
   public void onStartClicked(){
-    changeScene("boardScene");
+    ((BoardScene) changeScene("boardScene")).attachBoardController(boardController);
   }
 
 

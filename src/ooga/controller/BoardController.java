@@ -2,6 +2,7 @@ package ooga.controller;
 
 import java.util.Iterator;
 import javafx.util.Pair;
+import ooga.view.Board;
 import ooga.view.Display;
 import ooga.view.GameDisplay;
 
@@ -13,18 +14,17 @@ import ooga.view.GameDisplay;
  */
 public class BoardController implements FrontEndExternalAPI{
 
+  private Board board;
   private Display display;
   private BackEndExternalAPI modelController;
 
-  public BoardController(){
-
+  public void giveBoard(Board board){
+    this.board = board;
   }
 
   @Override
   public void setModelController(BackEndExternalAPI newModelController) {
-    display = new GameDisplay();
     modelController = newModelController;
-    display.setModelController(modelController);
   }
 
   /**
@@ -60,8 +60,7 @@ public class BoardController implements FrontEndExternalAPI{
    */
   @Override
   public void movePiece(int startX, int startY, int endX, int endY) {
-    System.out.printf("startX: %d, startY: %d, endX: %d, endY: %d\n",
-        startX, startY, endX, endY);
+    board.movePiece(startX, startY, endX, endY);
   }
 
   /**

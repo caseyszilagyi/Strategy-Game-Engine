@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import ooga.controller.BoardController;
 import ooga.controller.ModelController;
 
 public class BoardScene extends GameScene {
@@ -16,6 +17,8 @@ public class BoardScene extends GameScene {
   private ResourceBundle resources;
   private GridPane sceneRoot;
   private ModelController modelController;
+  private BoardController boardController;
+  private Board board;
 
   public BoardScene(Parent root, ResourceBundle resources,
       ModelController modelController) {
@@ -27,6 +30,11 @@ public class BoardScene extends GameScene {
     sceneRoot.setVgap(30);
     this.getStylesheets().add(DEFAULT_RESOURCES_PATH + resources.getString("CSS"));
     populateScene();
+  }
+
+  public void attachBoardController(BoardController boardController){
+    this.boardController = boardController;
+    boardController.giveBoard(board);
   }
 
   @Override
@@ -53,6 +61,7 @@ public class BoardScene extends GameScene {
     topBar.getChildren().addAll(pauseButton, settingsButton, helpButton);
 
     sceneRoot.add(topBar, 0, 1);
-    sceneRoot.add(new Board(8, 8, modelController), 0, 3);
+    board = new Board(8, 8, modelController);
+    sceneRoot.add(board, 0, 3);
   }
 }

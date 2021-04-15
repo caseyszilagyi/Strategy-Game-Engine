@@ -3,10 +3,6 @@ package ooga;
 import java.util.ResourceBundle;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import ooga.controller.BackEndExternalAPI;
-import ooga.controller.BoardController;
-import ooga.controller.FrontEndExternalAPI;
-import ooga.controller.ModelController;
 import ooga.view.GameWindow;
 import ooga.view.*;
 
@@ -37,12 +33,9 @@ public class Main extends Application {
    */
   @Override
   public void start(Stage primaryStage) throws Exception {
-    FrontEndExternalAPI boardController = new BoardController();
-    BackEndExternalAPI modelController = new ModelController();
-    boardController.setModelController(modelController);
-    modelController.setBoardController(boardController);
+
     initFile = ResourceBundle.getBundle(DEFAULT_RESOURCES_PACKAGE + "init");
-    new ViewManager(initFile, (ModelController) modelController);
+    new ViewManager(initFile);
   }
 
 
