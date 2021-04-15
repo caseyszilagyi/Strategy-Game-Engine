@@ -13,7 +13,7 @@ import ooga.model.components.GamePiece;
  */
 public class FirstMove extends Restriction{
 
-  GamePiece pawn;
+  GamePiece piece;
 
   /**
    * Gives all the components that may be used for a restriction
@@ -25,7 +25,7 @@ public class FirstMove extends Restriction{
   public FirstMove(
       FrontEndExternalAPI viewController, GameBoard gameBoard, Map<String, String> parameters, GamePiece piece){
     super(viewController, gameBoard, parameters, piece);
-    pawn = piece;
+    this.piece = piece;
   }
 
   /**
@@ -35,7 +35,7 @@ public class FirstMove extends Restriction{
    */
   @Override
   public boolean checkRestriction(Coordinate endingCoordinates) {
-    if(pawn.getLocationHistory().size() == 1){
+    if(piece.getLocationHistory().size() == 1){
       return true;
     }
     return false;

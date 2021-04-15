@@ -148,6 +148,7 @@ public class Board extends GridPane {
   }
 
   private void handleTileClick(int i, int j){
+    unhighlightAll();
     modelController.actOnCoordinates(i, j);
   }
 
