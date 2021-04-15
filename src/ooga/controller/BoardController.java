@@ -94,7 +94,10 @@ public class BoardController implements FrontEndExternalAPI{
    */
   @Override
   public void givePieceChangeOptions(Iterable<String> pieceChangeOptions) {
-
+    Iterator iterator = pieceChangeOptions.iterator();
+    while(iterator.hasNext()){
+      System.out.println(iterator.next());
+    }
   }
 
 
