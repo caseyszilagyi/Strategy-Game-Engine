@@ -62,7 +62,7 @@ public class BasicEngineTest {
     actOnCoordinates(0,3);
     //clicks knight with moves
     actOnCoordinates(1, 0);
-    testActualExpectedCoordinates("", getMoves());
+    testActualExpectedCoordinates("0:2 2:2", getMoves());
     //unselects piece
     actOnCoordinates(3,3);
   }
@@ -146,8 +146,8 @@ public class BasicEngineTest {
   }
 
   // Compares a string of expected coordinates to a list of actual coordinates
-  private boolean testActualExpectedCoordinates(String expected, Set<Coordinate> actual){
-    return testExpectedCoordinatesList(makeManyCoordinateList(expected), actual);
+  private void testActualExpectedCoordinates(String expected, Set<Coordinate> actual){
+    assertTrue(testExpectedCoordinatesList(makeManyCoordinateList(expected), actual));
   }
 
 

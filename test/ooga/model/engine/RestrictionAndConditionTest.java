@@ -48,7 +48,7 @@ public class RestrictionAndConditionTest {
     actOnCoordinates(0,2);
     printBoard();
     actOnCoordinates(0,2);
-    testActualExpectedCoordinates("0:3 0:4", viewController.getAllPossibleMoves());
+    testActualExpectedCoordinates("0:3", viewController.getAllPossibleMoves());
   }
 
   @Test
@@ -119,8 +119,8 @@ public class RestrictionAndConditionTest {
   }
 
   // Compares a string of expected coordinates to a list of actual coordinates
-  private boolean testActualExpectedCoordinates(String expected, Set<Coordinate> actual) {
-    return testExpectedCoordinatesList(makeManyCoordinateList(expected), actual);
+  private void testActualExpectedCoordinates(String expected, Set<Coordinate> actual) {
+    assertTrue(testExpectedCoordinatesList(makeManyCoordinateList(expected), actual));
   }
 
 
