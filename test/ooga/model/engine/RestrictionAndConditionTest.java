@@ -43,11 +43,11 @@ public class RestrictionAndConditionTest {
   void testPawnFirstMoveRestriction(){
     print("testPawnFirstMoveRestriction");
     actOnCoordinates(0,1);
-    testActualExpectedCoordinates("0:2 0:3", viewController.getAllPossibleMoves());
+    testActualExpectedCoordinates("0:2 0:3");
     actOnCoordinates(0,2);
     printBoard();
     actOnCoordinates(0,2);
-    testActualExpectedCoordinates("0:3", viewController.getAllPossibleMoves());
+    testActualExpectedCoordinates("0:3");
   }
 
   @Test
@@ -72,6 +72,30 @@ public class RestrictionAndConditionTest {
     printBoard();
     Iterator<String> pieceIter = viewController.getPieceChangeOptions();
     assertEquals("queen", pieceIter.next());
+  }
+
+  @Test
+  void testKingSideCastle(){
+    //move bishop out of way
+    actOnCoordinates(6, 6);
+    actOnCoordinates(6,5);
+    actOnCoordinates(5,7);
+    actOnCoordinates(7,5);
+    //test king click
+    actOnCoordinates(4, 7);
+    testActualExpectedCoordinates("5:7");
+    actOnCoordinates(4,7);
+    //move knight
+    actOnCoordinates(6, 7);
+    actOnCoordinates(5, 5);
+    printBoard();
+    //test king click
+    actOnCoordinates(4, 7);
+    testActualExpectedCoordinates("5:7 6:7");
+    printBoard();
+    //actual castle
+    actOnCoordinates(6,7);
+    printBoard();
   }
 
 
@@ -118,8 +142,8 @@ public class RestrictionAndConditionTest {
   }
 
   // Compares a string of expected coordinates to a list of actual coordinates
-  private void testActualExpectedCoordinates(String expected, Set<Coordinate> actual) {
-    assertTrue(testExpectedCoordinatesList(makeManyCoordinateList(expected), actual));
+  private void testActualExpectedCoordinates(String expected) {
+    assertTrue(testExpectedCoordinatesList(makeManyCoordinateList(expected), viewController.getAllPossibleMoves()));
   }
 
 
