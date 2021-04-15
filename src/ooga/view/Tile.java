@@ -3,9 +3,7 @@ package ooga.view;
 import java.awt.Point;
 import javafx.scene.Parent;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public class Tile extends Parent {
@@ -30,5 +28,9 @@ public class Tile extends Parent {
     this.getChildren().remove(1);//does this work
     hasPiece = false;
     pieceImage = null;
+  }
+
+  public Point getPosition() {
+    return new Point(myPosition);
   }
 }
