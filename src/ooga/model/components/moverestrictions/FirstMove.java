@@ -11,7 +11,7 @@ import ooga.model.components.GamePiece;
  *
  * @author Casey Szilagyi
  */
-public class PawnFirstMove extends Restriction{
+public class FirstMove extends Restriction{
 
   GamePiece pawn;
 
@@ -22,7 +22,7 @@ public class PawnFirstMove extends Restriction{
    * @param parameters Not used
    * @param piece The pawn in question
    */
-  public PawnFirstMove(
+  public FirstMove(
       FrontEndExternalAPI viewController, GameBoard gameBoard, Map<String, String> parameters, GamePiece piece){
     super(viewController, gameBoard, parameters, piece);
     pawn = piece;
