@@ -18,14 +18,14 @@ public class BoardScene extends GameScene {
   private GridPane sceneRoot;
   private ModelController myModelControlller;
 
-  public BoardScene(Parent root, ResourceBundle resources, ModelController modelController) {
+  public BoardScene(Parent root, ResourceBundle resources) {
     super(root, resources);
     this.resources = resources;
     sceneRoot = (GridPane) root;
     sceneRoot.getStyleClass().add("title");
     this.getStylesheets().add(DEFAULT_RESOURCES_PATH + resources.getString("CSS"));
     populateScene();
-    myModelControlller = modelController;
+    //myModelControlller = modelController;
   }
 
   @Override
@@ -49,6 +49,6 @@ public class BoardScene extends GameScene {
     sceneRoot.add(pauseButton, 0, 1);
     sceneRoot.add(settingsButton, 1, 1);
     sceneRoot.add(helpButton, 2, 1);
-    sceneRoot.add(new Board(8, 8, e -> System.out.println("Button clicked")), 0, 3);
+    sceneRoot.add(new Board(8, 8, e -> System.out.println("Tile clicked")), 0, 3);
   }
 }
