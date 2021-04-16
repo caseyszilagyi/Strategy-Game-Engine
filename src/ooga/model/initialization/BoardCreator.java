@@ -48,8 +48,8 @@ public class BoardCreator extends Creator {
     initializeMaps(gameName);
   }
 
-  private void initializeMaps(String game) {
-    boardNodes = super.makeRootNodeMap(game);
+  public void initializeMaps(String fileName) {
+    boardNodes = super.makeRootNodeMap(fileName);
     pieceSubNodes = super.makeSubNodeMap(boardNodes.get(BOARD).get(0));
     numRows = Integer.parseInt(super.makeAttributeMap(boardNodes.get(PARAMS).get(0)).get(NUMROWS));
     numCols = Integer.parseInt(super.makeAttributeMap(boardNodes.get(PARAMS).get(0)).get(NUMCOLS));
