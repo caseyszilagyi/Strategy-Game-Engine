@@ -9,6 +9,7 @@
       <takeY>null</takeY>
       <restrictions>
         <KingSideCastle></KingSideCastle>
+        <Check></Check>
       </restrictions>
       <conditions>
         <MoveOtherPiece>
@@ -25,6 +26,9 @@
       <mustTake>False</mustTake>
       <takeX>null</takeX>
       <takeY>null</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </FiniteSlide>
     <FiniteSlide>
       <changeX>-1</changeX>
@@ -32,6 +36,9 @@
       <mustTake>False</mustTake>
       <takeX>null</takeX>
       <takeY>null</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </FiniteSlide>
     <FiniteSlide>
       <changeX>1</changeX>
@@ -39,6 +46,9 @@
       <mustTake>False</mustTake>
       <takeX>null</takeX>
       <takeY>null</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </FiniteSlide>
     <FiniteSlide>
       <changeX>-1</changeX>
@@ -46,6 +56,9 @@
       <mustTake>False</mustTake>
       <takeX>null</takeX>
       <takeY>null</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </FiniteSlide>
     <FiniteSlide>
       <changeX>1</changeX>
@@ -53,6 +66,9 @@
       <mustTake>False</mustTake>
       <takeX>null</takeX>
       <takeY>null</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </FiniteSlide>
     <FiniteSlide>
       <changeX>0</changeX>
@@ -60,6 +76,9 @@
       <mustTake>False</mustTake>
       <takeX>null</takeX>
       <takeY>null</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </FiniteSlide>
     <FiniteSlide>
       <changeX>-1</changeX>
@@ -67,6 +86,9 @@
       <mustTake>False</mustTake>
       <takeX>null</takeX>
       <takeY>null</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </FiniteSlide>
     <FiniteSlide>
       <changeX>0</changeX>
@@ -74,6 +96,9 @@
       <mustTake>False</mustTake>
       <takeX>null</takeX>
       <takeY>null</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </FiniteSlide>
     <FiniteSlide>
       <changeX>1</changeX>
@@ -81,6 +106,9 @@
       <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </FiniteSlide>
     <FiniteSlide>
       <changeX>1</changeX>
@@ -88,6 +116,9 @@
       <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </FiniteSlide>
     <FiniteSlide>
       <changeX>-1</changeX>
@@ -95,6 +126,9 @@
       <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </FiniteSlide>
     <FiniteSlide>
       <changeX>-1</changeX>
@@ -102,6 +136,9 @@
       <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </FiniteSlide>
     <FiniteSlide>
       <changeX>1</changeX>
@@ -109,6 +146,9 @@
       <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </FiniteSlide>
     <FiniteSlide>
       <changeX>0</changeX>
@@ -116,6 +156,9 @@
       <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </FiniteSlide>
     <FiniteSlide>
       <changeX>-1</changeX>
@@ -123,6 +166,9 @@
       <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </FiniteSlide>
     <FiniteSlide>
       <changeX>0</changeX>
@@ -130,6 +176,9 @@
       <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </FiniteSlide>
   </moves>
 

@@ -7,7 +7,7 @@ import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;
 
-public class KingSideCastle extends Restriction {
+public class Castle extends Restriction {
 
   private GamePiece king;
   private GameBoard board;
@@ -20,7 +20,7 @@ public class KingSideCastle extends Restriction {
    * @param parameters     The map with parameters, if there are any
    * @param piece          The piece that the restriction corresponds to
    */
-  public KingSideCastle(FrontEndExternalAPI viewController, GameBoard gameBoard,
+  public Castle(FrontEndExternalAPI viewController, GameBoard gameBoard,
       Map<String, String> parameters, GamePiece piece) {
     super(viewController, gameBoard, parameters, piece);
     king = piece;

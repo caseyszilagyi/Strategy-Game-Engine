@@ -7,6 +7,9 @@
       <mustTake>False</mustTake>
       <takeX>null</takeX>
       <takeY>null</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </InfiniteSlide>
     <InfiniteSlide>
       <changeX>0</changeX>
@@ -14,6 +17,9 @@
       <mustTake>False</mustTake>
       <takeX>null</takeX>
       <takeY>null</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </InfiniteSlide>
     <InfiniteSlide>
       <changeX>-1</changeX>
@@ -21,6 +27,9 @@
       <mustTake>False</mustTake>
       <takeX>null</takeX>
       <takeY>null</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </InfiniteSlide>
     <InfiniteSlide>
       <changeX>0</changeX>
@@ -28,6 +37,9 @@
       <mustTake>False</mustTake>
       <takeX>null</takeX>
       <takeY>null</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </InfiniteSlide>
     <InfiniteSlide>
       <changeX>1</changeX>
@@ -35,6 +47,9 @@
       <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </InfiniteSlide>
     <InfiniteSlide>
       <changeX>0</changeX>
@@ -42,6 +57,9 @@
       <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </InfiniteSlide>
     <InfiniteSlide>
       <changeX>-1</changeX>
@@ -49,6 +67,9 @@
       <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </InfiniteSlide>
     <InfiniteSlide>
       <changeX>0</changeX>
@@ -56,6 +77,9 @@
       <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </InfiniteSlide>
   </moves>
 
