@@ -2,6 +2,7 @@ package ooga.view;
 
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.stage.Stage;
 import ooga.controller.BoardController;
 import ooga.controller.ModelController;
 
@@ -31,8 +32,20 @@ public class ViewManager {
     gameWindowFactory = new GameWindowFactory();
     sceneFactory = new GameSceneFactory();
     primaryWindow = gameWindowFactory.makeWindow("Stage");
+    ((Stage) primaryWindow).setOnCloseRequest(e -> handleStageClose());
     createControllers();
     changeScene("initialWindowScene");
+  }
+
+  /**
+   * All methods in here are run when the user closes the window. Do any saving operations
+   * here.
+   */
+  private void handleStageClose(){
+    String sceneType = ((GameScene)((Stage) primaryWindow).getScene()).getSceneType();
+    if (sceneType.equals("BoardScene")) {
+      new ViewManager(initFile);
+    }
   }
 
   /**

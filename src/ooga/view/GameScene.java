@@ -44,6 +44,14 @@ public abstract class GameScene extends Scene {
   }
 
   /**
+   * Returns the {@code String} scene type of this {@code GameScene}.
+   * @return a {@code String} representing the scene type
+   */
+  public String getSceneType(){
+    return resources.getString("sceneType");
+  }
+
+  /**
    * Sets the size of a scene. This will force any window displaying the scene to conform
    * to the size.
    * @param width desired width of scene
