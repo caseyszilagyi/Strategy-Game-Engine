@@ -97,6 +97,7 @@ public class RestrictionAndConditionTest {
     //actual castle
     actOnCoordinates(6,7);
     printBoard();
+    assertEquals(gameBoard.getPieceAtCoordinate(makeCoordinates(5,7)).getPieceName(), "rook");
   }
 
   @Test
@@ -136,6 +137,29 @@ public class RestrictionAndConditionTest {
     actOnCoordinates(0,0);
     actOnCoordinates(0,5);
     testActualExpectedCoordinates("4:5");
+  }
+
+  @Test
+  void fixBrokenTest(){
+    modelController.setBoardState("testing");
+    gameBoard = gameEngine.getBoard();
+    printBoard();
+    actOnCoordinates(4,2);
+    testActualExpectedCoordinates("3:3");
+  }
+
+  @Test
+  void testOppositeSideCastle(){
+    //moving pieces
+    actOnCoordinates(6,0);
+    actOnCoordinates(5,2);
+    actOnCoordinates(6,1);
+    actOnCoordinates(6,3);
+    actOnCoordinates(5,0);
+    actOnCoordinates(7,2);
+    printBoard();
+    actOnCoordinates(4,0);
+    testActualExpectedCoordinates("0:5 0:6");
   }
 
 
