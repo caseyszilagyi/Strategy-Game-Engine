@@ -61,6 +61,7 @@ public class GameBoard implements Board {
   }
 
 
+
   /**
    * Determines all legal moves for a piece at a given coordinate. Automatically sets this piece as
    * the active piece when this is done.
@@ -117,6 +118,9 @@ public class GameBoard implements Board {
     return isPieceAtCoordinate(makeCoordinates(x, y));
   }
 
+  public GamePiece getPieceAtCoordinate(int x, int y){
+    return getPieceAtCoordinate(new Coordinate(x,y));
+  }
 
 
   /**
@@ -165,6 +169,11 @@ public class GameBoard implements Board {
             .equals(teamName);
   }
 
+
+  public boolean movePiece(Coordinate start, Coordinate end){
+    movePiece(start.getX(), start.getY(), end.getX(), end.getY());
+    return true;
+  }
 
   /**
    * Moves a piece by giving it the ending coordinates. Will move the activePiece based
@@ -236,6 +245,7 @@ public class GameBoard implements Board {
 
   // Movements through actions
 
+  /**
   @Override
   public boolean movePiece(Coordinate startingCoordinate, Coordinate endingCoordinate) {
     if (!isPieceAtCoordinate(startingCoordinate) || !isCoordinateOnBoard(startingCoordinate)) {
@@ -256,10 +266,12 @@ public class GameBoard implements Board {
     pieceCoordMap.remove(startingCoordinate);
     return true;
   }
+   */
 
   @Override
   public void removePiece(Coordinate coordinate) {
     pieceCoordMap.remove(coordinate);
+    viewController.removePiece(coordinate.getX(), coordinate.getY());
   }
 
   @Override
