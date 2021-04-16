@@ -41,9 +41,11 @@ public abstract class PieceMovement {
    * @param correspondingPiece The piece that this move corresponds to
    */
   public PieceMovement(Map<String, String> parameters, int direction, GameBoard gameBoard, FrontEndExternalAPI viewController, GamePiece correspondingPiece) {
-    changeX = Integer.parseInt(parameters.get("changeX")) * direction;
-    changeY = Integer.parseInt(parameters.get("changeY")) * direction;
-    mustTake = Boolean.parseBoolean(parameters.get("mustTake"));
+    if(!parameters.get("changeX").equals("null")){
+      changeX = Integer.parseInt(parameters.get("changeX")) * direction;
+      changeY = Integer.parseInt(parameters.get("changeY")) * direction;
+      mustTake = Boolean.parseBoolean(parameters.get("mustTake"));
+    }
     if (mustTake) {
       takeX = Integer.parseInt(parameters.get("takeX")) * direction;
       takeY = Integer.parseInt(parameters.get("takeY")) * direction;
@@ -83,11 +85,11 @@ public abstract class PieceMovement {
       int removeX = endingCoordinates.getX() + takeX;
       int removeY = endingCoordinates.getY() + takeY;
       gameBoard.removePiece(makeCoordinate(removeX, removeY));
-      viewController.removePiece(removeX, removeY);
+      //viewController.removePiece(removeX, removeY);
     }
     gameBoard.movePiece(startingCoordinates, endingCoordinates);
-    viewController.movePiece(startingCoordinates.getX(), startingCoordinates.getY(),
-        endingCoordinates.getX(), endingCoordinates.getY());
+    //viewController.movePiece(startingCoordinates.getX(), startingCoordinates.getY(),
+        //endingCoordinates.getX(), endingCoordinates.getY());
     executeConditions(endingCoordinates);
   }
 
