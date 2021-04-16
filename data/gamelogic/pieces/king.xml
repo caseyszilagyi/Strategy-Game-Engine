@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <piece piece = "chess">
   <moves>
-    <KingSide>
+    <KingSideCastle>
       <changeX>null</changeX>
       <changeY>null</changeY>
       <mustTake>False</mustTake>
       <takeX>null</takeX>
       <takeY>null</takeY>
-    </KingSide>
+    </KingSideCastle>
+    <QueenSideCastle>
+      <changeX>null</changeX>
+      <changeY>null</changeY>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
+    </QueenSideCastle>
     <FiniteSlide>
       <changeX>1</changeX>
       <changeY>1</changeY>
