@@ -34,7 +34,8 @@ public class RestrictionAndConditionTest {
     viewController = new DummyViewController();
     modelController.setBoardController(viewController);
     modelController.setGameType("chess");
-    gameBoard = modelController.getEngine().getBoard();
+    gameEngine= modelController.getEngine();
+    gameBoard = gameEngine.getBoard();
     pieceCreator = new PieceCreator("chess", viewController, gameBoard);
     printBoard();
   }
@@ -96,6 +97,45 @@ public class RestrictionAndConditionTest {
     //actual castle
     actOnCoordinates(6,7);
     printBoard();
+  }
+
+  @Test
+  void testUnblockCheck(){
+    modelController.setBoardState("unblockCheck");
+    gameBoard = gameEngine.getBoard();
+    printBoard();
+    actOnCoordinates(4, 6);
+    testActualExpectedCoordinates("");
+  }
+
+  @Test
+  void testTakePieceCausingCheck(){
+    modelController.setBoardState("takePieceCheck");
+    gameBoard = gameEngine.getBoard();
+    printBoard();
+    actOnCoordinates(4, 6);
+    testActualExpectedCoordinates("5:5");
+    actOnCoordinates(0,0);
+    actOnCoordinates(6, 6);
+    testActualExpectedCoordinates("5:5");
+    actOnCoordinates(0,0);
+    actOnCoordinates(7,6);
+    testActualExpectedCoordinates("");
+    actOnCoordinates(0,0);
+    actOnCoordinates(4,7);
+    testActualExpectedCoordinates("3:7 5:7 5:6");
+  }
+
+  @Test
+  void testBlockCheck(){
+    modelController.setBoardState("blockCheck");
+    gameBoard = gameEngine.getBoard();
+    printBoard();
+    actOnCoordinates(2,3);
+    testActualExpectedCoordinates("4:5");
+    actOnCoordinates(0,0);
+    actOnCoordinates(0,5);
+    testActualExpectedCoordinates("4:5");
   }
 
 
