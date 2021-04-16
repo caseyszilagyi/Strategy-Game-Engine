@@ -19,6 +19,7 @@ public class GameBoardTest {
   @BeforeEach
   void setup(){
     board = new GameBoard(8, 8);
+    board.setViewController(new DummyViewController());
     pieceCreator = new PieceCreator("chess", viewController, board);
   }
 

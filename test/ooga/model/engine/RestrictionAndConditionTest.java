@@ -159,9 +159,54 @@ public class RestrictionAndConditionTest {
     actOnCoordinates(7,2);
     printBoard();
     actOnCoordinates(4,0);
-    testActualExpectedCoordinates("0:5 0:6");
+    testActualExpectedCoordinates("5:0 6:0");
   }
 
+  @Test
+  void setUpQueenSideCastle(){
+    actOnCoordinates(1, 6);
+    actOnCoordinates(1,4);
+    actOnCoordinates(2,6);
+    actOnCoordinates(2,4);
+    actOnCoordinates(1,7);
+    actOnCoordinates(0,5);
+    actOnCoordinates(2,7);
+    actOnCoordinates(1,6);
+    actOnCoordinates(3,7);
+    actOnCoordinates(2,6);
+    printBoard();
+  }
+
+  @Test
+  void testValidQueenSideCastle(){
+    setUpQueenSideCastle();
+    actOnCoordinates(4,7);
+    testActualExpectedCoordinates("3:7 2:7");
+    actOnCoordinates(2, 7);
+    isPieceAtCoordinates("rook", 3,7);
+    isPieceAtCoordinates("king", 2, 7);
+    printBoard();
+  }
+
+  @Test
+  void testInvalidQueenSideCastle(){
+    setUpQueenSideCastle();
+    actOnCoordinates(4,7);
+    actOnCoordinates(3,7);
+    actOnCoordinates(3,7);
+    actOnCoordinates(4,7);
+    actOnCoordinates(4,7);
+    testActualExpectedCoordinates("3:7");
+    actOnCoordinates(3,7);
+    isPieceAtCoordinates("rook", 0,7);
+    isPieceAtCoordinates("king", 3, 7);
+    printBoard();
+  }
+
+
+  private void isPieceAtCoordinates(String pieceName, int x, int y){
+    assertEquals(gameBoard.getPieceAtCoordinate(x, y).getPieceName(), pieceName);
+  }
 
   private void print(String toPrint){
     System.out.println(toPrint);
