@@ -171,6 +171,9 @@ public class GameBoard implements Board {
 
 
   public boolean movePiece(Coordinate start, Coordinate end){
+    if(pieceCoordMap.get(start) == null || !isCoordinateOnBoard(end)){
+      return false;
+    }
     movePiece(start.getX(), start.getY(), end.getX(), end.getY());
     return true;
   }
@@ -278,6 +281,7 @@ public class GameBoard implements Board {
   public boolean changePiece(Coordinate coordinate, GamePiece newPieceType) {
     return false;
   }
+
 
   @Override
   public boolean addPiece(GamePiece newPieceType) {
