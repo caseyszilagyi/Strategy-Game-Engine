@@ -64,6 +64,14 @@ public abstract class PieceMovement {
   public abstract List<Coordinate> getAllPossibleMoves(Coordinate coordinates, GameBoard board,
       String pieceTeam);
 
+  public List<Coordinate> getAllPossibleRestrictionlessTakeMoves(Coordinate coordinate, GameBoard board, String pieceTeam){
+    List<Restriction> tempHolder = new ArrayList<>();
+    tempHolder.addAll(restrictions);
+    restrictions.clear();
+    List<Coordinate> moves = getAllPossibleMoves(coordinate, board, pieceTeam);
+    restrictions.addAll(tempHolder);
+    return moves;
+  }
 
   /**
    * Executes a move when given the final coordinates
