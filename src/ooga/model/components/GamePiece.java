@@ -70,6 +70,17 @@ public class GamePiece {
     return possibleMoveLocations;
   }
 
+  public Set<Coordinate> determineAllPossibleRestrictionlessTakeMoves(){
+    Set<Coordinate> possibleMoveLocations = new HashSet<>();
+    for (PieceMovement move : allPossibleMoves) {
+      List<Coordinate> currentPossibilities = move
+          .getAllPossibleRestrictionlessTakeMoves(pieceCoordinates, gameBoard, pieceTeam);
+      possibleMoveLocations
+          .addAll(currentPossibilities);
+    }
+    return possibleMoveLocations;
+  }
+
   // Passes legal movement coordinates to the front end
   private void passLegalMoves(Set<Coordinate> possibleMoveLocations) {
     Set<Pair<Integer, Integer>> coordPairs = new HashSet<>();
