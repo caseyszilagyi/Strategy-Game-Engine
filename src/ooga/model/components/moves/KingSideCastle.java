@@ -8,11 +8,11 @@ import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;
 
-public class KingSide extends PieceMovement{
+public class KingSideCastle extends PieceMovement{
 
-  GamePiece king;
-  GamePiece rook;
-  GameBoard board;
+  private GamePiece king;
+  private GamePiece rook;
+  private GameBoard board;
 
   /**
    * The constructor takes the parameters of the move. This includes the change in position of the
@@ -24,7 +24,7 @@ public class KingSide extends PieceMovement{
    * @param viewController     The view controller used to make front-end method calls
    * @param correspondingPiece The piece that this move corresponds to
    */
-  public KingSide(Map<String, String> parameters, int direction,
+  public KingSideCastle(Map<String, String> parameters, int direction,
       GameBoard gameBoard, FrontEndExternalAPI viewController,
       GamePiece correspondingPiece) {
     super(parameters, direction, gameBoard, viewController, correspondingPiece);
@@ -39,7 +39,7 @@ public class KingSide extends PieceMovement{
       int kingY = coordinates.getY();
       rook = board.getPieceAtCoordinate(kingX+3, kingY);
       List<Coordinate> moves = new ArrayList<>();
-      if(!king.hasMoved() && rook != null && !rook.hasMoved() && !rook.hasMoved() &&
+      if(!king.hasMoved() && rook != null && !rook.hasMoved() &&
       !board.isPieceAtCoordinate(kingX+1, kingY) && !board.isPieceAtCoordinate(kingX+2, kingY)){
         moves.add(new Coordinate(kingX + 2, kingY));
       }
