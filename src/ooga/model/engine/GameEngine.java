@@ -125,7 +125,7 @@ public class GameEngine extends Engine {
 
     }
     else {
-      if (curBoard.isPieceAtCoordinate(x, y)) {
+      if (curBoard.isPieceAtCoordinate(x, y) && curBoard.getPieceAtCoordinate(x, y).getPieceTeam().equals(currentPlayerTurn.getName())) {
         curBoard.determineAllLegalMoves(x, y);
         curBoard.setIsHeldPiece(true);
         return true;
