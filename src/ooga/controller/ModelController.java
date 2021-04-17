@@ -28,8 +28,6 @@ public class ModelController implements BackEndExternalAPI {
     boardController = newViewController;
     creator = new EngineInitializer(boardController);
     gameEngine = creator.getEngine();
-    setPlayers("user", "opponent");
-
   }
 
   /**
@@ -40,6 +38,7 @@ public class ModelController implements BackEndExternalAPI {
   @Override
   public void setGameType(String gameName) {
     creator.initializeGame(gameName);
+    setPlayers("user", "opponent");
   }
 
   /**
@@ -50,6 +49,16 @@ public class ModelController implements BackEndExternalAPI {
   @Override
   public void actOnCoordinates(int x, int y) {
     gameEngine.runTurn(x, y);
+  }
+
+  /**
+   * Sets the board state to a different one than the default
+   * @param boardFileName The file name that contains the board
+   */
+  @Override
+  public void setBoardState(String boardFileName) {
+    creator.setBoardState(boardFileName);
+
   }
 
 
@@ -73,14 +82,6 @@ public class ModelController implements BackEndExternalAPI {
   @Override
   public void resumeGame() {
 
-  }
-  /**
-   * Sets the board state to a different one than the default
-   * @param boardFileName The file name that contains the board
-   */
-  @Override
-  public void setBoardState(String boardFileName) {
-    creator.setBoardState(boardFileName);
   }
 
   /**
