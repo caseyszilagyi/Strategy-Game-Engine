@@ -28,6 +28,7 @@ public class ModelController implements BackEndExternalAPI {
     boardController = newViewController;
     creator = new EngineInitializer(boardController);
     gameEngine = creator.getEngine();
+    gameEngine.setIfTurnRules(false);
   }
 
   /**
