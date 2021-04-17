@@ -11,13 +11,13 @@ import ooga.model.components.Player;
 import ooga.model.engine.action_files.Action;
 import ooga.model.engine.action_files.ActionCreator;
 
+/**
+ * This is the engine used for running a game. It extends the regular engine. The engine
+ * takes care of the logic of switching turns and making appropriate method calls to the board
+ *
+ * @author Casey Szilagyi
+ */
 public class GameEngine extends Engine {
-
-
-  //Final index values
-  private static final int ACTION_TYPE_INDEX = 0;
-  private static final int STARTING_COORDINATE_INDEX = 1;
-  private static final int ENDING_COORDINATE_INDEX = 2;
 
   //Controller variables
   private FrontEndExternalAPI viewController;
@@ -25,12 +25,12 @@ public class GameEngine extends Engine {
   //Game variables
   private GameBoard curBoard;
   private GameRules curRules;
-  private List<Action> priorActions;
+  private List<Action> priorActions = new ArrayList<>();
 
   //Player variables
   private Player currentPlayerTurn;
-  private List<Player> activePlayers;
-  private List<Long> playerTimes;
+  private List<Player> activePlayers = new ArrayList<>();
+  private List<Long> playerTimes = new ArrayList<>();
   private Long playerStartTime;
 
   //Action creator
@@ -40,35 +40,50 @@ public class GameEngine extends Engine {
   boolean isStartOfTurn = true;
   boolean noTurnRules = true;
 
-  public GameEngine(FrontEndExternalAPI newViewController) {
-    viewController = newViewController;
-    activePlayers = new ArrayList<>();
-    priorActions = new ArrayList<>();
-    playerTimes = new ArrayList<>();
+  /**
+   * Makes an instance of this game engine, and gives it the view controller
+   * to make calls to the front end
+   * @param viewController The view controller linked to the front end
+   */
+  public GameEngine(FrontEndExternalAPI viewController) {
+    this.viewController = viewController;
     actionCreator = new ActionCreator(viewController, curBoard);
   }
 
+  /**
+   * Sets the rules of the game based on the name of the game
+   * @param gameName the name of the game
+   */
   public void setGameType(String gameName){
     curRules = new GameRules(gameName);
   }
 
+
   /**
-   * This is the method that is called to run the current turn
-   * must set a currentPlayerTurn before calling
-   * Todo: make sure that a currentPlayerTurn has been set
+   * Called to process any click from the front end. Has to run through logic in order
+   * to determine what method calls to make
+   *
+   * @param x The x position of the click
+   * @param y The y position of the click
    */
   public void runTurn(int x, int y){
-    if(currentPlayerTurn == null){
-      System.err.println("No player turn set");
-      return;
-    }
-    if(isStartOfTurn){
-      startPlayerTimer(currentPlayerTurn);
-    }
-    if(!actOnCoordinates(x, y)){
+    if (executeClick(x, y)) {
       return;
     }
     boolean isTurnOver = curRules.checkForNextTurn(curBoard, curBoard.getPieceAtCoordinate(new Coordinate(x, y)));
+    swapTurnIfOver(isTurnOver);
+  }
+
+  // Executes the logic for a click based on the click position
+  private boolean executeClick(int xClickPosition, int yClickPosition) {
+    if(isStartOfTurn){
+      startPlayerTimer(currentPlayerTurn);
+    }
+    return !actOnCoordinates(xClickPosition, yClickPosition);
+  }
+
+  // Swaps the turns if the player's turn is over
+  private void swapTurnIfOver(boolean isTurnOver) {
     if(isTurnOver){
       stopPlayerTimer(currentPlayerTurn);
       swapTurn();
@@ -78,6 +93,7 @@ public class GameEngine extends Engine {
     }
   }
 
+  // Swaps the player's turns
   private void swapTurn(){
     int currentPlayerIndex = activePlayers.indexOf(currentPlayerTurn);
     int nextPlayerIndex = (currentPlayerIndex + 1) % activePlayers.size();
@@ -102,39 +118,45 @@ public class GameEngine extends Engine {
   }
 
 
-
-
   /**
    * The method that actually decides what to do and acts on coordinates passed from the front end
    *
-   * @param x The x coordinate
-   * @param y The y coordinate
+   * @param xClickPosition The x coordinate
+   * @param yClickPosition The y coordinate
    *
    * @return whether or not a valid move was made
    */
   @Override
-  public boolean actOnCoordinates(int x, int y) {
-    // This logic is for move games, only works for chess and not for double jumps in checkers
+  public boolean actOnCoordinates(int xClickPosition, int yClickPosition) {
     if(curBoard.getIsHeldPiece()){
-      curBoard.setIsHeldPiece(false);
-      if(curBoard.isLegalMoveLocation(x, y)){
-        curBoard.movePiece(x,y);
-        return true;
-      } else {
-        return false;
-      }
-
+      return executePieceHoldingClick(xClickPosition, yClickPosition);
     }
-    else {
-      if (curBoard.isPieceAtCoordinate(x, y) && checkProperTeamTurn(x, y)) {
-        curBoard.determineAllLegalMoves(x, y);
-        curBoard.setIsHeldPiece(true);
-        return true;
-      } else {
-        return false;
-      }
+    return executeNonPieceHoldingClick(xClickPosition, yClickPosition);
+  }
+
+  // Executes a click when a piece is currently being held
+  private boolean executePieceHoldingClick(int xClickPosition, int yClickPosition) {
+    curBoard.setIsHeldPiece(false);
+    if(curBoard.isLegalMoveLocation(xClickPosition, yClickPosition)){
+      curBoard.movePiece(xClickPosition, yClickPosition);
+      return true;
+    } else {
+      return false;
     }
   }
+
+  // Executes a click when a piece is not currently being held
+  private boolean executeNonPieceHoldingClick(int xClickPosition, int yClickPosition) {
+    if (curBoard.isPieceAtCoordinate(xClickPosition, yClickPosition) && checkProperTeamTurn(xClickPosition, yClickPosition)) {
+      curBoard.determineAllLegalMoves(xClickPosition, yClickPosition);
+      curBoard.setIsHeldPiece(true);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
 
   public void setIfTurnRules(Boolean turnRules){
     noTurnRules = turnRules;
