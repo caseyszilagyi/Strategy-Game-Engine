@@ -30,6 +30,8 @@ public class BasicEngineTest {
     modelController.setBoardController(viewController);
     modelController.setGameType("chess");
     gameBoard = modelController.getEngine().getBoard();
+    gameEngine = modelController.getEngine();
+    gameEngine.setIfTurnRules(true);
     printBoard();
   }
 
