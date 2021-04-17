@@ -6,6 +6,7 @@ import ooga.model.engine.Engine;
 import ooga.model.engine.GameEngine;
 import ooga.model.initialization.BoardCreator;
 import ooga.model.initialization.PlayerCreator;
+import ooga.view.Board;
 
 
 /**
@@ -37,13 +38,13 @@ public class EngineInitializer implements Initializer {
   public void initializeGame (String gameName) {
     boardCreator = new BoardCreator(gameName, boardController);
     gameEngine.setGameType(gameName);
-
     gameEngine.setBoard(boardCreator.makeBoard());
   }
 
   @Override
   public void setBoardState(String boardFileName) {
-
+    boardCreator.initializeMaps(boardFileName);
+    gameEngine.setBoard(boardCreator.makeBoard());
   }
 
   @Override

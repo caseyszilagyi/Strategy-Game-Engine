@@ -34,7 +34,8 @@ public class RestrictionAndConditionTest {
     viewController = new DummyViewController();
     modelController.setBoardController(viewController);
     modelController.setGameType("chess");
-    gameBoard = modelController.getEngine().getBoard();
+    gameEngine= modelController.getEngine();
+    gameBoard = gameEngine.getBoard();
     pieceCreator = new PieceCreator("chess", viewController, gameBoard);
     printBoard();
   }
@@ -96,8 +97,116 @@ public class RestrictionAndConditionTest {
     //actual castle
     actOnCoordinates(6,7);
     printBoard();
+    assertEquals(gameBoard.getPieceAtCoordinate(makeCoordinates(5,7)).getPieceName(), "rook");
   }
 
+  @Test
+  void testUnblockCheck(){
+    modelController.setBoardState("unblockCheck");
+    gameBoard = gameEngine.getBoard();
+    printBoard();
+    actOnCoordinates(4, 6);
+    testActualExpectedCoordinates("");
+  }
+
+  @Test
+  void testTakePieceCausingCheck(){
+    modelController.setBoardState("takePieceCheck");
+    gameBoard = gameEngine.getBoard();
+    printBoard();
+    actOnCoordinates(4, 6);
+    testActualExpectedCoordinates("5:5");
+    actOnCoordinates(0,0);
+    actOnCoordinates(6, 6);
+    testActualExpectedCoordinates("5:5");
+    actOnCoordinates(0,0);
+    actOnCoordinates(7,6);
+    testActualExpectedCoordinates("");
+    actOnCoordinates(0,0);
+    actOnCoordinates(4,7);
+    testActualExpectedCoordinates("3:7 5:7 5:6");
+  }
+
+  @Test
+  void testBlockCheck(){
+    modelController.setBoardState("blockCheck");
+    gameBoard = gameEngine.getBoard();
+    printBoard();
+    actOnCoordinates(2,3);
+    testActualExpectedCoordinates("4:5");
+    actOnCoordinates(0,0);
+    actOnCoordinates(0,5);
+    testActualExpectedCoordinates("4:5");
+  }
+
+  @Test
+  void fixBrokenTest(){
+    modelController.setBoardState("testing");
+    gameBoard = gameEngine.getBoard();
+    printBoard();
+    actOnCoordinates(4,2);
+    testActualExpectedCoordinates("3:3");
+  }
+
+  @Test
+  void testOppositeSideCastle(){
+    //moving pieces
+    actOnCoordinates(6,0);
+    actOnCoordinates(5,2);
+    actOnCoordinates(6,1);
+    actOnCoordinates(6,3);
+    actOnCoordinates(5,0);
+    actOnCoordinates(7,2);
+    printBoard();
+    actOnCoordinates(4,0);
+    testActualExpectedCoordinates("5:0 6:0");
+  }
+
+  @Test
+  void setUpQueenSideCastle(){
+    actOnCoordinates(1, 6);
+    actOnCoordinates(1,4);
+    actOnCoordinates(2,6);
+    actOnCoordinates(2,4);
+    actOnCoordinates(1,7);
+    actOnCoordinates(0,5);
+    actOnCoordinates(2,7);
+    actOnCoordinates(1,6);
+    actOnCoordinates(3,7);
+    actOnCoordinates(2,6);
+    printBoard();
+  }
+
+  @Test
+  void testValidQueenSideCastle(){
+    setUpQueenSideCastle();
+    actOnCoordinates(4,7);
+    testActualExpectedCoordinates("3:7 2:7");
+    actOnCoordinates(2, 7);
+    isPieceAtCoordinates("rook", 3,7);
+    isPieceAtCoordinates("king", 2, 7);
+    printBoard();
+  }
+
+  @Test
+  void testInvalidQueenSideCastle(){
+    setUpQueenSideCastle();
+    actOnCoordinates(4,7);
+    actOnCoordinates(3,7);
+    actOnCoordinates(3,7);
+    actOnCoordinates(4,7);
+    actOnCoordinates(4,7);
+    testActualExpectedCoordinates("3:7");
+    actOnCoordinates(3,7);
+    isPieceAtCoordinates("rook", 0,7);
+    isPieceAtCoordinates("king", 3, 7);
+    printBoard();
+  }
+
+
+  private void isPieceAtCoordinates(String pieceName, int x, int y){
+    assertEquals(gameBoard.getPieceAtCoordinate(x, y).getPieceName(), pieceName);
+  }
 
   private void print(String toPrint){
     System.out.println(toPrint);
