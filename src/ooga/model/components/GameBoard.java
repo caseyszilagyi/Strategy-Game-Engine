@@ -273,7 +273,7 @@ public class GameBoard implements Board {
   public void moveBackendPiece(Coordinate start, Coordinate end) {
     GamePiece currentPiece = pieceCoordMap.get(start);
     currentPiece.setPieceCoordinates(end);
-    removePiece(start);
+    pieceCoordMap.remove(start);
     pieceCoordMap.put(end, currentPiece);
   }
 
