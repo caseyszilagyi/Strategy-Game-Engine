@@ -70,8 +70,8 @@ public class ModelController implements BackEndExternalAPI {
   }
 
   @Override
-  public void setPlayers(String... players) {
-    creator.addPlayers(players);
+  public void setPlayers(String user, String opponent) {
+    creator.addPlayers(user, opponent);
   }
 
   @Override
