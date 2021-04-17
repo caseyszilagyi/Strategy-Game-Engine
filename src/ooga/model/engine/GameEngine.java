@@ -38,6 +38,7 @@ public class GameEngine extends Engine {
 
   //Logic flow variables
   boolean isStartOfTurn = true;
+  boolean noTurnRules = true;
 
   public GameEngine(FrontEndExternalAPI newViewController) {
     viewController = newViewController;
@@ -125,7 +126,7 @@ public class GameEngine extends Engine {
 
     }
     else {
-      if (curBoard.isPieceAtCoordinate(x, y) && curBoard.getPieceAtCoordinate(x, y).getPieceTeam().equals(currentPlayerTurn.getName())) {
+      if (curBoard.isPieceAtCoordinate(x, y) && checkProperTeamTurn(x, y)) {
         curBoard.determineAllLegalMoves(x, y);
         curBoard.setIsHeldPiece(true);
         return true;
@@ -133,6 +134,14 @@ public class GameEngine extends Engine {
         return false;
       }
     }
+  }
+
+  public void setIfTurnRules(Boolean turnRules){
+    noTurnRules = turnRules;
+  }
+
+  private boolean checkProperTeamTurn(int x, int y){
+    return noTurnRules || curBoard.getPieceAtCoordinate(x, y).getPieceTeam().equals(currentPlayerTurn.getName());
   }
 
 
