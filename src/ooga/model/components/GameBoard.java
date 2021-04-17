@@ -8,9 +8,9 @@ import ooga.controller.FrontEndExternalAPI;
 
 /**
  * This is the representation of the board. It holds all of the GamePiece objects, and has the
- * coordinates corresponding to each of these objects. It also has some information about
- * the state of the game, such as which piece is currently considered active and the coordinates
- * of that piece.
+ * coordinates corresponding to each of these objects. It also has some information about the state
+ * of the game, such as which piece is currently considered active and the coordinates of that
+ * piece.
  *
  * @author Casey Szilagyi
  */
@@ -49,33 +49,37 @@ public class GameBoard implements Board {
 
   /**
    * Sets if there is a piece being actively manipulated by the user
+   *
    * @param isHeldPiece is whether or not there is a piece being manipulated
    */
-  public void setIsHeldPiece(Boolean isHeldPiece){
+  public void setIsHeldPiece(Boolean isHeldPiece) {
     this.isHeldPiece = isHeldPiece;
   }
 
   /**
    * Returns if there is a piece being actively manipulated by the user
+   *
    * @return whether or not there is a piece being manipulated
    */
-  public boolean getIsHeldPiece(){
+  public boolean getIsHeldPiece() {
     return isHeldPiece;
   }
 
   /**
    * Gets the height of the board
+   *
    * @return The board height
    */
-  public int getHeight(){
+  public int getHeight() {
     return height;
   }
 
   /**
    * Gets the width of the board
+   *
    * @return The board width
    */
-  public int getWidth(){
+  public int getWidth() {
     return width;
   }
 
@@ -96,13 +100,14 @@ public class GameBoard implements Board {
 
   /**
    * Determines the take moves of an opposing team, without restrictions
+   *
    * @param teamName The name of the friendly team
    * @return All of the coordinates of the possible take moves
    */
-  public Set<Coordinate> determineOppositeTeamTakeMovesWithoutRestrictions(String teamName){
+  public Set<Coordinate> determineOppositeTeamTakeMovesWithoutRestrictions(String teamName) {
     Set<Coordinate> opponentTeamLegalMoves = new HashSet<>();
-    for(GamePiece piece: pieceCoordMap.values()){
-      if(!piece.getPieceTeam().equals(teamName)){
+    for (GamePiece piece : pieceCoordMap.values()) {
+      if (!piece.getPieceTeam().equals(teamName)) {
         opponentTeamLegalMoves.addAll(piece.determineAllPossibleRestrictionlessTakeMoves());
       }
     }
@@ -111,12 +116,13 @@ public class GameBoard implements Board {
 
   /**
    * Determines if the coordinates given are listed as a legal move for the active piece
+   *
    * @param x The x coordinate
    * @param y The y coordinate
    * @return True if the move is legal, false otherwise
    */
-  public boolean isLegalMoveLocation(int x, int y){
-    return currentLegalMoveCoordinates.contains(makeCoordinates(x,y));
+  public boolean isLegalMoveLocation(int x, int y) {
+    return currentLegalMoveCoordinates.contains(makeCoordinates(x, y));
   }
 
   /**
@@ -137,7 +143,7 @@ public class GameBoard implements Board {
    * @param y The y coordinate value
    * @return True if there is a piece at the coordinate, false otherwise
    */
-  public boolean isPieceAtCoordinate(int x, int y){
+  public boolean isPieceAtCoordinate(int x, int y) {
     return isPieceAtCoordinate(makeCoordinates(x, y));
   }
 
@@ -153,11 +159,12 @@ public class GameBoard implements Board {
 
   /**
    * Returns the piece at a given set of coordinates
+   *
    * @param x The x coordinate
    * @param y the y coordinate
    * @return
    */
-  public GamePiece getPieceAtCoordinate(int x, int y){
+  public GamePiece getPieceAtCoordinate(int x, int y) {
     return getPieceAtCoordinate(makeCoordinates(x, y));
   }
 
@@ -180,7 +187,7 @@ public class GameBoard implements Board {
    */
   public boolean checkIfFriendlyPieceInLocation(Coordinate coordinates, String teamName) {
     return isPieceAtCoordinate(coordinates) && getPieceAtCoordinate(coordinates).getPieceTeam()
-            .equals(teamName);
+        .equals(teamName);
   }
 
   /**
@@ -192,17 +199,18 @@ public class GameBoard implements Board {
    */
   public boolean checkIfOpponentPieceInLocation(Coordinate coordinates, String teamName) {
     return isPieceAtCoordinate(coordinates) && !getPieceAtCoordinate(coordinates).getPieceTeam()
-            .equals(teamName);
+        .equals(teamName);
   }
 
 
   /**
-   * Moves a piece by giving it the ending coordinates. Will move the activePiece based
-   * on the activeCoordinates
+   * Moves a piece by giving it the ending coordinates. Will move the activePiece based on the
+   * activeCoordinates
+   *
    * @param endingX The ending x position
    * @param endingY The ending y position
    */
-  public void movePiece(int endingX, int endingY){
+  public void movePiece(int endingX, int endingY) {
     Coordinate newCoordinates = makeCoordinates(endingX, endingY);
     activePiece.executeMove(newCoordinates);
     removePiece(activeCoordinates);
@@ -212,13 +220,14 @@ public class GameBoard implements Board {
 
   /**
    * Moves a piece from one set of coordinates to another
+   *
    * @param start The starting coordinates of the piece
-   * @param end The ending coordinates of the piece
+   * @param end   The ending coordinates of the piece
    * @return True if it was able to be moved, false otherwise
    */
   @Override
-  public boolean movePiece(Coordinate start, Coordinate end){
-    if(pieceCoordMap.get(start) == null || !isCoordinateOnBoard(end)){
+  public boolean movePiece(Coordinate start, Coordinate end) {
+    if (pieceCoordMap.get(start) == null || !isCoordinateOnBoard(end)) {
       return false;
     }
     movePiece(start.getX(), start.getY(), end.getX(), end.getY());
@@ -226,42 +235,42 @@ public class GameBoard implements Board {
   }
 
   /**
-   * Moves a piece on the board, but it does not have to be the active piece. Movement
-   * is not done through a piece movement object in this case, and also doesn't
-   * refer to the active piece at all
+   * Moves a piece on the board, but it does not have to be the active piece. Movement is not done
+   * through a piece movement object in this case, and also doesn't refer to the active piece at
+   * all
    *
    * @param startingX The starting x position of the piece
    * @param startingY The starting y position of the piece
-   * @param endingX The ending x position of the piece
-   * @param endingY The ending y position of the piece
+   * @param endingX   The ending x position of the piece
+   * @param endingY   The ending y position of the piece
    */
-  public void movePiece(int startingX, int startingY, int endingX, int endingY){
+  public void movePiece(int startingX, int startingY, int endingX, int endingY) {
     moveBackendPiece(startingX, startingY, endingX, endingY);
     viewController.movePiece(startingX, startingY, endingX, endingY);
   }
 
   /**
-   * Moves a piece only in the back end, but does not send the info to the front end. Useful
-   * for scenarios where a piece needs to be moved in order to check something
+   * Moves a piece only in the back end, but does not send the info to the front end. Useful for
+   * scenarios where a piece needs to be moved in order to check something
    *
    * @param startingX The starting x position of the piece
    * @param startingY The starting y position of the piece
-   * @param endingX The ending x position of the piece
-   * @param endingY The ending y position of the piece
+   * @param endingX   The ending x position of the piece
+   * @param endingY   The ending y position of the piece
    */
-  public void moveBackendPiece(int startingX, int startingY, int endingX, int endingY){
+  public void moveBackendPiece(int startingX, int startingY, int endingX, int endingY) {
     moveBackendPiece(makeCoordinates(startingX, startingY), makeCoordinates(endingX, endingY));
   }
 
 
   /**
-   * Moves a piece only in the back end, but does not send the info to the front end. Useful
-   * for scenarios where a piece needs to be moved in order to check something
+   * Moves a piece only in the back end, but does not send the info to the front end. Useful for
+   * scenarios where a piece needs to be moved in order to check something
    *
    * @param start The starting coordinates of the piece
-   * @param end The ending coordinates of the piece
+   * @param end   The ending coordinates of the piece
    */
-  public void moveBackendPiece(Coordinate start, Coordinate end){
+  public void moveBackendPiece(Coordinate start, Coordinate end) {
     GamePiece currentPiece = pieceCoordMap.get(start);
     currentPiece.setPieceCoordinates(end);
     removePiece(start);
@@ -271,6 +280,7 @@ public class GameBoard implements Board {
 
   /**
    * Takes a piece off the board
+   *
    * @param coordinate The coordinate object corresponding to the piece to remove
    */
   @Override
@@ -282,6 +292,7 @@ public class GameBoard implements Board {
 
   /**
    * Adds a piece to the board
+   *
    * @param newPieceType The new piece to add
    * @return The location on the board that it is placed at
    */
@@ -294,8 +305,6 @@ public class GameBoard implements Board {
     pieceCoordMap.put(newPieceCoordinates, newPieceType);
     return true;
   }
-
-
 
 
   private boolean isAnyCoordinateConflicts(Coordinate coordinates) {
@@ -311,24 +320,18 @@ public class GameBoard implements Board {
   }
 
 
-
-
-
-  public Coordinate findPieceCoordinates(String teamName, String pieceName){
-    for(GamePiece piece : pieceCoordMap.values()){
-      if(piece.getPieceName().equals(pieceName) && piece.getPieceTeam().equals(teamName))
+  public Coordinate findPieceCoordinates(String teamName, String pieceName) {
+    for (GamePiece piece : pieceCoordMap.values()) {
+      if (piece.getPieceName().equals(pieceName) && piece.getPieceTeam().equals(teamName)) {
         return piece.getPieceCoordinates();
+      }
     }
     return null;
   }
 
-  public Map<Coordinate, GamePiece> getPieceCoordMap(){
+  public Map<Coordinate, GamePiece> getPieceCoordMap() {
     return pieceCoordMap;
   }
-
-
-
-
 
   // helper methods
 
