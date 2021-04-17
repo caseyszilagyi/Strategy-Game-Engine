@@ -56,6 +56,7 @@ public class EngineInitializer implements Initializer {
   public void addPlayers(String... playerFileNames) {
     Arrays.stream(playerFileNames)
         .forEach(s -> gameEngine.addActiveUser(playerCreator.makePlayer(s)));
+    boardCreator.setTeams(playerFileNames[0], playerFileNames[1]);
   }
 
   @Override

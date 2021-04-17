@@ -20,8 +20,9 @@ import java.util.Map;
  */
 public class BoardCreator extends Creator {
 
-  private static final String dictionary = "abcdefghijklmnopqrstuvwxyz"; //max supported board size is 26x26
+  private static final String DICTIONARY = "abcdefghijklmnopqrstuvwxyz"; //max supported board size is 26x26
   private static final String PATH = "data/gamelogic/starting_states/";
+  // Tags for parsing
   public static final String BOARD = "board";
   public static final String PARAMS = "params";
   public static final String NUMROWS = "numrows";
@@ -29,16 +30,21 @@ public class BoardCreator extends Creator {
   public static final String OPPONENT = "opponent";
   public static final String USER = "user";
   private static final String FILE_TYPE = "piece";
-  private String gameName;
-  private FrontEndExternalAPI viewController;
+
+  // Maps and sets used for storage of information
   private Map<String, List<Node>> boardNodes;
   private Map<String, List<Node>> pieceSubNodes;
   private Map<String, String> userPieces;
   private Map<String, String> opponentPieces;
+  private Set<GamePiece> userPieceSet = new HashSet<>();
+  private Set<GamePiece> opponentPieceSet = new HashSet<>();
+
+
+  private FrontEndExternalAPI viewController;
+  private String gameName;
   private int numRows;
   private int numCols;
   private PieceCreator pieceCreator;
-  private Set<GamePiece> pieceSet = new HashSet<>();
   private GameBoard board;
 
   public BoardCreator(String game, FrontEndExternalAPI viewController) {
@@ -63,29 +69,39 @@ public class BoardCreator extends Creator {
     pieceCreator = new PieceCreator(gameName, viewController, board);
 
     for (Map.Entry<String, String> entry : userPieces.entrySet()) {
-      buildPiece(numRows, entry, -1, USER);
+      buildPiece(numRows, entry, -1, USER, userPieceSet);
     }
     for (Map.Entry<String, String> entry : opponentPieces.entrySet()) {
-      buildPiece(numRows, entry, 1, OPPONENT);
+      buildPiece(numRows, entry, 1, OPPONENT, opponentPieceSet);
     }
     return board;
   }
 
   private void buildPiece(int numRows, Map.Entry<String, String> entry, int direction,
-      String team) {
+      String team, Set<GamePiece> setToAdd) {
     int pieceX = translateX(entry.getKey());
     int pieceY = translateY(entry.getKey(), numRows);
     String pieceType = entry.getValue();
     Coordinate pieceCoordinate = new Coordinate(pieceX, pieceY);
     GamePiece newPiece = pieceCreator
         .makePiece(pieceType, pieceCoordinate, direction, viewController, team);
-    pieceSet.add(newPiece);
+    setToAdd.add(newPiece);
     board.addPiece(newPiece);
     viewController.setBoardSpace(pieceX, pieceY, pieceType, team);
   }
 
+
+  public void setTeams(String userTeamName, String opponentTeamName){
+    for(GamePiece piece: userPieceSet){
+      piece.setPieceTeam(userTeamName);
+    }
+    for(GamePiece piece: opponentPieceSet){
+      piece.setPieceTeam(opponentTeamName);
+    }
+  }
+
   private int translateX(String coordinate) {
-    return dictionary.indexOf(coordinate.charAt(0));
+    return DICTIONARY.indexOf(coordinate.charAt(0));
   }
 
   private int translateY(String coordinate, int numRows) {
