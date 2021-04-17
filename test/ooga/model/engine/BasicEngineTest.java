@@ -99,17 +99,12 @@ public class BasicEngineTest {
 
   @Test
   void testTaking(){
-    System.out.println("testTaking");
     testMoving();
+    System.out.println("testTaking");
     actOnCoordinates(6,4);
     actOnCoordinates(4,6);
     checkRemoveCall(4,6);
     checkMoveCall(6,4,4,6);
-    printBoard();
-    actOnCoordinates(3,7);
-    actOnCoordinates(4,6);
-    checkRemoveCall(4,6);
-    checkMoveCall(3,7,4,6);
     printBoard();
   }
 
@@ -130,8 +125,8 @@ public class BasicEngineTest {
   }
 
   private void checkRemoveCall(int x, int y){
-    assertEquals(x, viewController.getRemY());
-    assertEquals(y, viewController.getRemX());
+    assertEquals(x, viewController.getRemX());
+    assertEquals(y, viewController.getRemY());
   }
 
   private Set<Coordinate> getMoves(){
