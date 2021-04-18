@@ -57,7 +57,7 @@ public class WelcomeScene extends GameScene {
     Label welcomeLabel = makeLabel("title-text");
     sceneRoot.add(welcomeLabel, 0, 0);
 
-    Button goButton = makeButton("goButton", handler);
+    Button goButton = makeButton("startGame", handler);
 
     sceneRoot.add(goButton, 0, 1);
   }

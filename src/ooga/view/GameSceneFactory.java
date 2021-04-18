@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.layout.GridPane;
 import ooga.controller.ModelController;
+import ooga.view.board.BoardScene;
 
 /**
  * Creates {@link GameScene} subclasses, however returns the general {@code GameScene}

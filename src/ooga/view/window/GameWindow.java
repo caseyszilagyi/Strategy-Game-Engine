@@ -1,4 +1,4 @@
-package ooga.view;
+package ooga.view.window;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import ooga.view.GameScene;
 
 /**
  * The top level UI element of a view. The game can have one or more instances of

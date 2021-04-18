@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javax.imageio.ImageIO;
+import ooga.view.window.GameWindow;
 
 /**
  * A {@code GameScene} object extends {@link Scene} and is given to a {@link GameWindow}
@@ -89,6 +90,7 @@ public abstract class GameScene extends Scene {
     final String IMAGE_FILE_SUFFIXES = String.format(".*\\.(%s)", String.join("|", ImageIO.getReaderFileSuffixes()));
     Button result = new Button();
     String label = resources.getString(property);
+    result.setId(property);
     if (label.matches(IMAGE_FILE_SUFFIXES)) {
       result.setGraphic(new ImageView(new Image(DEFAULT_RESOURCES_PATH + label)));
     }

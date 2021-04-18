@@ -1,4 +1,4 @@
-package ooga.view;
+package ooga.view.board;
 
 import java.util.ResourceBundle;
 import javafx.geometry.HPos;
@@ -9,9 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.util.Pair;
 import ooga.controller.BoardController;
 import ooga.controller.ModelController;
+import ooga.view.GameScene;
 
 /**
  * This scene holds the view representation of the main game board. The scene has a top

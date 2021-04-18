@@ -1,7 +1,7 @@
 package ooga.view;
 
-import org.assertj.core.api.Assert;
-import org.junit.jupiter.api.BeforeEach;
+import ooga.view.window.GameWindowFactory;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
