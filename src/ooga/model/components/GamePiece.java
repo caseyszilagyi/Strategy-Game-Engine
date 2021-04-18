@@ -18,8 +18,6 @@ import ooga.model.components.moves.PieceMovement;
  */
 public class GamePiece {
 
-  private FrontEndExternalAPI viewController;
-  private GameBoard gameBoard;
   private Coordinate pieceCoordinates;
   private String pieceName;
 
@@ -35,15 +33,11 @@ public class GamePiece {
    *
    * @param pieceCoordinates The coordinates of the piece, represented by a coordinate object
    * @param pieceName        The name of the piece
-   * @param viewController   The controller that this piece can use to make front end method calls
-   * @param gameBoard        The board that this piece is on
+   * @param pieceTeam        The team that the piece is on
    */
-  public GamePiece(Coordinate pieceCoordinates, String pieceName,
-      FrontEndExternalAPI viewController, GameBoard gameBoard, String pieceTeam) {
+  public GamePiece(Coordinate pieceCoordinates, String pieceName, String pieceTeam) {
     this.pieceCoordinates = pieceCoordinates;
     this.pieceName = pieceName;
-    this.viewController = viewController;
-    this.gameBoard = gameBoard;
     this.pieceTeam = pieceTeam;
     locationHistory.add(pieceCoordinates);
   }
@@ -59,35 +53,25 @@ public class GamePiece {
     Set<Coordinate> possibleMoveLocations = new HashSet<>();
     for (PieceMovement move : allPossibleMoves) {
       List<Coordinate> currentPossibilities = move
-          .getAllPossibleMoves(pieceCoordinates, gameBoard, pieceTeam);
+          .getAllPossibleMoves(pieceCoordinates, pieceTeam);
       possibleMoveLocations
           .addAll(currentPossibilities);
       for (Coordinate coord : currentPossibilities) {
         legalMovementMap.put(coord, move);
       }
     }
-    passLegalMoves(possibleMoveLocations);
     return possibleMoveLocations;
   }
 
-  public Set<Coordinate> determineAllPossibleRestrictionlessTakeMoves(){
+  public Set<Coordinate> determineAllPossibleRestrictionlessTakeMoves() {
     Set<Coordinate> possibleMoveLocations = new HashSet<>();
     for (PieceMovement move : allPossibleMoves) {
       List<Coordinate> currentPossibilities = move
-          .getAllPossibleRestrictionlessTakeMoves(pieceCoordinates, gameBoard, pieceTeam);
+          .getAllPossibleRestrictionlessTakeMoves(pieceCoordinates, pieceTeam);
       possibleMoveLocations
           .addAll(currentPossibilities);
     }
     return possibleMoveLocations;
-  }
-
-  // Passes legal movement coordinates to the front end
-  private void passLegalMoves(Set<Coordinate> possibleMoveLocations) {
-    Set<Pair<Integer, Integer>> coordPairs = new HashSet<>();
-    for (Coordinate coords : possibleMoveLocations) {
-      coordPairs.add(new Pair(coords.getX(), coords.getY()));
-    }
-    viewController.giveAllPossibleMoves(coordPairs.iterator());
   }
 
   /**
@@ -113,9 +97,10 @@ public class GamePiece {
 
   /**
    * Returns whether the piece has moved or not
+   *
    * @return True if it has, false if it hasn't
    */
-  public boolean hasMoved(){
+  public boolean hasMoved() {
     return locationHistory.size() != 1;
   }
 

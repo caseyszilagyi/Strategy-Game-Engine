@@ -1,9 +1,13 @@
 package ooga.model.components;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javafx.util.Pair;
 import ooga.controller.FrontEndExternalAPI;
 
 /**
@@ -20,6 +24,9 @@ public class GameBoard implements Board {
   private int width, height;
   private Map<Coordinate, GamePiece> pieceCoordMap = new HashMap<>();
   private Set<Coordinate> currentLegalMoveCoordinates;
+  //: TODO: make this not hard coded
+  private List<String> chessPieceList = new ArrayList<>(
+      Arrays.asList("queen", "rook", "bishop", "knight"));
 
   private Coordinate activeCoordinates;
   private GamePiece activePiece;
@@ -95,6 +102,16 @@ public class GameBoard implements Board {
     activeCoordinates = makeCoordinates(x, y);
     currentLegalMoveCoordinates = pieceCoordMap.get(activeCoordinates).determineAllLegalMoves();
     activePiece = pieceCoordMap.get(activeCoordinates);
+    passLegalMoves(currentLegalMoveCoordinates);
+  }
+
+  // Passes legal movement coordinates to the front end
+  private void passLegalMoves(Set<Coordinate> possibleMoveLocations) {
+    Set<Pair<Integer, Integer>> coordPairs = new HashSet<>();
+    for (Coordinate coords : possibleMoveLocations) {
+      coordPairs.add(new Pair(coords.getX(), coords.getY()));
+    }
+    viewController.giveAllPossibleMoves(coordPairs.iterator());
   }
 
 
@@ -331,6 +348,10 @@ public class GameBoard implements Board {
 
   public Map<Coordinate, GamePiece> getPieceCoordMap() {
     return pieceCoordMap;
+  }
+
+  public void passPieceChangeOptions() {
+    viewController.givePieceChangeOptions(chessPieceList);
   }
 
   // helper methods
