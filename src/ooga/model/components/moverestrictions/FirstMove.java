@@ -17,14 +17,11 @@ public class FirstMove extends Restriction{
 
   /**
    * Gives all the components that may be used for a restriction
-   * @param viewController Not used
    * @param gameBoard The board that the pawn is on
    * @param parameters Not used
    * @param piece The pawn in question
    */
-  public FirstMove(
-      FrontEndExternalAPI viewController, GameBoard gameBoard, Map<String, String> parameters, GamePiece piece){
-    super(viewController, gameBoard, parameters, piece);
+  public FirstMove(GameBoard gameBoard, Map<String, String> parameters, GamePiece piece){
     this.piece = piece;
   }
 
