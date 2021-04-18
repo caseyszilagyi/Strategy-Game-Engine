@@ -22,16 +22,14 @@ public class PieceComponentClassLoader {
   private final String MOVE_CONDITION_CLASSES_PACKAGE = Condition.class.getPackageName();
   private ClassLoader classLoader;
   private GameBoard gameBoard;
-  private FrontEndExternalAPI viewController;
 
   /**
    * Instantiates the ClassLoader
    */
-  public PieceComponentClassLoader(GameBoard gameBoard, FrontEndExternalAPI viewController) {
+  public PieceComponentClassLoader(GameBoard gameBoard) {
     classLoader = new ClassLoader() {
     };
     this.gameBoard = gameBoard;
-    this.viewController = viewController;
   }
 
   /**
@@ -47,8 +45,8 @@ public class PieceComponentClassLoader {
     PieceMovement move = null;
     try {
       Object command = classLoader.loadClass(PIECE_MOVE_CLASSES_PACKAGE + "." + moveType)
-          .getDeclaredConstructor(Map.class, int.class, GameBoard.class, FrontEndExternalAPI.class, GamePiece.class)
-          .newInstance(parameters, direction, gameBoard, viewController, correspondingPiece);
+          .getDeclaredConstructor(Map.class, int.class, GameBoard.class, GamePiece.class)
+          .newInstance(parameters, direction, gameBoard, correspondingPiece);
       move = (PieceMovement) command;
     } catch (InstantiationException e) {
       throw new ClassLoaderException("PieceMovementInstantiation");
@@ -75,8 +73,8 @@ public class PieceComponentClassLoader {
     Restriction restriction = null;
     try {
       Object command = classLoader.loadClass(MOVE_RESTRICTION_CLASSES_PACKAGE + "." + restrictionName)
-          .getDeclaredConstructor(FrontEndExternalAPI.class, GameBoard.class, Map.class, GamePiece.class)
-          .newInstance(viewController, gameBoard, parameters, piece);
+          .getDeclaredConstructor(GameBoard.class, Map.class, GamePiece.class)
+          .newInstance(gameBoard, parameters, piece);
       restriction = (Restriction) command;
     } catch (InstantiationException e){
       throw new ClassLoaderException("RestrictionInstantiation");
@@ -103,8 +101,8 @@ public class PieceComponentClassLoader {
     Condition condition = null;
     try {
       Object command = classLoader.loadClass(MOVE_CONDITION_CLASSES_PACKAGE + "." + conditionName)
-          .getDeclaredConstructor(FrontEndExternalAPI.class, GameBoard.class, Map.class, GamePiece.class, int.class)
-          .newInstance(viewController, gameBoard, parameters, piece, direction);
+          .getDeclaredConstructor(GameBoard.class, Map.class, GamePiece.class, int.class)
+          .newInstance(gameBoard, parameters, piece, direction);
       condition = (Condition) command;
     } catch (InstantiationException e){
       throw new ClassLoaderException("ConditionInstantiation");

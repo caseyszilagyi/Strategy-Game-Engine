@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<piece piece="chess">
+  <params>
+    <numrows>8</numrows>
+    <numcols>8</numcols>
+  </params>
+  <board>
+    <opponent>
+      <e8>rook</e8>
+    </opponent>
+    <user>
+      <e1>king</e1>
+      <e2>bishop</e2>
+    </user>
+  </board>
+</piece>

@@ -21,6 +21,8 @@ import ooga.model.components.GamePiece;
  */
 public class FiniteSlide extends PieceMovement {
 
+  private GameBoard board;
+
   /**
    * Initializes with the parameters of the move, as well as the direction that the piece should be
    * going
@@ -29,8 +31,9 @@ public class FiniteSlide extends PieceMovement {
    * @param direction  1 if going up, -1 if going down. Used to adjust parameters for different
    *                   sides of the board
    */
-  public FiniteSlide(Map<String, String> parameters, int direction, GameBoard gameBoard, FrontEndExternalAPI viewController, GamePiece piece) {
-    super(parameters, direction, gameBoard, viewController, piece);
+  public FiniteSlide(Map<String, String> parameters, int direction, GameBoard gameBoard, GamePiece piece) {
+    super(parameters, direction, gameBoard);
+    board = gameBoard;
   }
 
   /**
@@ -42,12 +45,11 @@ public class FiniteSlide extends PieceMovement {
    * it should be passed from the front end but not used for anything else besides this method
    *
    * @param coordinates The coordinates of the piece that this move is acting on
-   * @param board       The board that this piece is on
    * @param teamName    The name of the team of this piece
    * @return A list of the coordinates of possible moves
    */
   @Override
-  public List<Coordinate> getAllPossibleMoves(Coordinate coordinates, GameBoard board,
+  public List<Coordinate> getAllPossibleMoves(Coordinate coordinates,
       String teamName) {
     List<Coordinate> possibleMoves = new ArrayList<>();
     if (isMustTake()) {
@@ -60,21 +62,20 @@ public class FiniteSlide extends PieceMovement {
 
 
   // if this instance of the pieceMovement doesn't take pieces, this method is called
-  private void getNonTakeMoves(Coordinate coordinates, String teamName, List<Coordinate> possibleMoves) {
+  private void getNonTakeMoves(Coordinate coordinates, String teamName,
+      List<Coordinate> possibleMoves) {
     int xLimit = getChangeX();
     int yLimit = getChangeY();
     int xDirection;
     int yDirection;
-    if(xLimit != 0){
-      xDirection = xLimit/Math.abs(xLimit);
-    }
-    else{
+    if (xLimit != 0) {
+      xDirection = xLimit / Math.abs(xLimit);
+    } else {
       xDirection = 0;
     }
-    if(yLimit != 0){
-      yDirection = yLimit/Math.abs(yLimit);
-    }
-    else{
+    if (yLimit != 0) {
+      yDirection = yLimit / Math.abs(yLimit);
+    } else {
       yDirection = 0;
     }
 
@@ -83,10 +84,11 @@ public class FiniteSlide extends PieceMovement {
     setChangeX(xDirection);
     setChangeY(yDirection);
 
-    while (checkIfValidMove(coordinates, teamName) && Math.abs(currX) <= Math.abs(xLimit) && Math.abs(currY) <= Math.abs(yLimit)) {
+    while (checkIfValidMove(coordinates, teamName) && Math.abs(currX) <= Math.abs(xLimit)
+        && Math.abs(currY) <= Math.abs(yLimit)) {
       Coordinate newCoordinates = makeCoordinate(coordinates.getX() + xDirection,
           coordinates.getY() + yDirection);
-      if(checkRestrictions(coordinates)) {
+      if (checkRestrictions(coordinates)) {
         possibleMoves.add(newCoordinates);
       }
       coordinates = newCoordinates;
@@ -98,21 +100,20 @@ public class FiniteSlide extends PieceMovement {
   }
 
   // if this instance of the pieceMovement takes pieces, this method is called
-  private void getTakeMoves(Coordinate coordinates, String teamName, List<Coordinate> possibleMoves) {
+  private void getTakeMoves(Coordinate coordinates, String teamName,
+      List<Coordinate> possibleMoves) {
     int xLimit = getChangeX();
     int yLimit = getChangeY();
     int xDirection;
     int yDirection;
-    if(xLimit != 0){
-      xDirection = xLimit/Math.abs(xLimit);
-    }
-    else{
+    if (xLimit != 0) {
+      xDirection = xLimit / Math.abs(xLimit);
+    } else {
       xDirection = 0;
     }
-    if(yLimit != 0){
-      yDirection = yLimit/Math.abs(yLimit);
-    }
-    else{
+    if (yLimit != 0) {
+      yDirection = yLimit / Math.abs(yLimit);
+    } else {
       yDirection = 0;
     }
 
@@ -122,15 +123,18 @@ public class FiniteSlide extends PieceMovement {
     setChangeY(yDirection);
 
     while (checkIfMoveInBounds(coordinates) && checkThatNoFriendlyPieceInMoveDestination(
-        coordinates, teamName) && Math.abs(currX) <= Math.abs(xLimit) && Math.abs(currY) <= Math.abs(yLimit)) {
-      if (checkEnemyPieceLocationConditions(coordinates, teamName) && checkRestrictions(coordinates)) {
+        coordinates, teamName) && Math.abs(currX) <= Math.abs(xLimit) && Math.abs(currY) <= Math
+        .abs(yLimit)) {
+      if (checkEnemyPieceLocationConditions(coordinates, teamName) && checkRestrictions(
+          coordinates)) {
         possibleMoves.add(
             makeCoordinate(coordinates.getX() + getChangeX(), coordinates.getY() + getChangeY()));
         break;
       }
-      coordinates = makeCoordinate(coordinates.getX() + xDirection, coordinates.getY()+yDirection);
-      currX+= xDirection;
-      currY+= yDirection;
+      coordinates = makeCoordinate(coordinates.getX() + xDirection,
+          coordinates.getY() + yDirection);
+      currX += xDirection;
+      currY += yDirection;
     }
     setChangeX(xLimit);
     setChangeY(yLimit);

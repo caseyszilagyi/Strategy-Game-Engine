@@ -18,11 +18,9 @@ import ooga.model.components.moverestrictions.Restriction;
  */
 public abstract class PieceMovement {
 
-  FrontEndExternalAPI viewController;
   private List<Restriction> restrictions = new ArrayList<>();
   private List<Condition> conditions = new ArrayList<>();
   private GameBoard gameBoard;
-  private GamePiece correspondingPiece;
 
   private int changeX;
   private int changeY;
@@ -37,20 +35,18 @@ public abstract class PieceMovement {
    * @param parameters The map of parameters
    * @param direction The multiplier used to change the direction that the piece uses
    * @param gameBoard The board that the piece moves on
-   * @param viewController The view controller used to make front-end method calls
-   * @param correspondingPiece The piece that this move corresponds to
    */
-  public PieceMovement(Map<String, String> parameters, int direction, GameBoard gameBoard, FrontEndExternalAPI viewController, GamePiece correspondingPiece) {
-    changeX = Integer.parseInt(parameters.get("changeX")) * direction;
-    changeY = Integer.parseInt(parameters.get("changeY")) * direction;
-    mustTake = Boolean.parseBoolean(parameters.get("mustTake"));
+  public PieceMovement(Map<String, String> parameters, int direction, GameBoard gameBoard) {
+    if(!parameters.get("changeX").equals("null")){
+      changeX = Integer.parseInt(parameters.get("changeX")) * direction;
+      changeY = Integer.parseInt(parameters.get("changeY")) * direction;
+      mustTake = Boolean.parseBoolean(parameters.get("mustTake"));
+    }
     if (mustTake) {
       takeX = Integer.parseInt(parameters.get("takeX")) * direction;
       takeY = Integer.parseInt(parameters.get("takeY")) * direction;
     }
     this.gameBoard = gameBoard;
-    this.viewController = viewController;
-    this.correspondingPiece = correspondingPiece;
   }
 
   /**
@@ -58,12 +54,19 @@ public abstract class PieceMovement {
    * This must be implemented differently for each subclass so therefore it is abstract
    *
    * @param coordinates The coordinates of  the piece that this move is acting on
-   * @param board       The board that this piece is on
+   * @param pieceTeam The team that the piece is on
    * @return A list of all the coordinates of the possible move locations
    */
-  public abstract List<Coordinate> getAllPossibleMoves(Coordinate coordinates, GameBoard board,
-      String pieceTeam);
+  public abstract List<Coordinate> getAllPossibleMoves(Coordinate coordinates, String pieceTeam);
 
+  public List<Coordinate> getAllPossibleRestrictionlessTakeMoves(Coordinate coordinate, String pieceTeam){
+    List<Restriction> tempHolder = new ArrayList<>();
+    tempHolder.addAll(restrictions);
+    restrictions.clear();
+    List<Coordinate> moves = getAllPossibleMoves(coordinate, pieceTeam);
+    restrictions.addAll(tempHolder);
+    return moves;
+  }
 
   /**
    * Executes a move when given the final coordinates
@@ -75,11 +78,11 @@ public abstract class PieceMovement {
       int removeX = endingCoordinates.getX() + takeX;
       int removeY = endingCoordinates.getY() + takeY;
       gameBoard.removePiece(makeCoordinate(removeX, removeY));
-      viewController.removePiece(removeX, removeY);
+      //viewController.removePiece(removeX, removeY);
     }
     gameBoard.movePiece(startingCoordinates, endingCoordinates);
-    viewController.movePiece(startingCoordinates.getX(), startingCoordinates.getY(),
-        endingCoordinates.getX(), endingCoordinates.getY());
+    //viewController.movePiece(startingCoordinates.getX(), startingCoordinates.getY(),
+        //endingCoordinates.getX(), endingCoordinates.getY());
     executeConditions(endingCoordinates);
   }
 

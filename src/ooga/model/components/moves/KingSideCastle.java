@@ -8,7 +8,7 @@ import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;
 
-public class QueenSideCastle extends PieceMovement{
+public class KingSideCastle extends PieceMovement{
 
   private GamePiece king;
   private GamePiece rook;
@@ -23,8 +23,8 @@ public class QueenSideCastle extends PieceMovement{
    * @param gameBoard          The board that the piece moves on
    * @param correspondingPiece The piece that this move corresponds to
    */
-  public QueenSideCastle(Map<String, String> parameters, int direction,
-      GameBoard gameBoard, GamePiece correspondingPiece) {
+  public KingSideCastle(Map<String, String> parameters, int direction, GameBoard gameBoard,
+      GamePiece correspondingPiece) {
     super(parameters, direction, gameBoard);
     king = correspondingPiece;
     board = gameBoard;
@@ -32,22 +32,21 @@ public class QueenSideCastle extends PieceMovement{
 
   @Override
   public List<Coordinate> getAllPossibleMoves(Coordinate coordinates, String pieceTeam) {
-    int kingX = coordinates.getX();
-    int kingY = coordinates.getY();
-    rook = board.getPieceAtCoordinate(kingX-4, kingY);
-    List<Coordinate> moves = new ArrayList<>();
-    if(!king.hasMoved() && rook != null && !rook.hasMoved() &&
-        !board.isPieceAtCoordinate(kingX-1, kingY) && !board.isPieceAtCoordinate(kingX+-2, kingY)
-        && !board.isPieceAtCoordinate(kingX+-3, kingY)){
-      moves.add(new Coordinate(kingX -2, kingY));
-    }
-    return moves;
+      int kingX = coordinates.getX();
+      int kingY = coordinates.getY();
+      rook = board.getPieceAtCoordinate(kingX+3, kingY);
+      List<Coordinate> moves = new ArrayList<>();
+      if(!king.hasMoved() && rook != null && !rook.hasMoved() &&
+      !board.isPieceAtCoordinate(kingX+1, kingY) && !board.isPieceAtCoordinate(kingX+2, kingY)){
+        moves.add(new Coordinate(kingX + 2, kingY));
+      }
+      return moves;
   }
 
   @Override
   public void executeMove(Coordinate startingCoordinates, Coordinate endingCoordinates){
     board.movePiece(startingCoordinates, endingCoordinates);
-    board.movePiece(new Coordinate(endingCoordinates, -2, 0),
-        new Coordinate(endingCoordinates, 1, 0));
+    board.movePiece(new Coordinate(endingCoordinates, 1, 0),
+        new Coordinate(endingCoordinates, -1, 0));
   }
 }

@@ -32,9 +32,10 @@ public interface BackEndExternalAPI {
 
   /**
    * Sets a player that is playing the game
-   * @param players A list of strings that correspond to all the players
+   * @param user The first player, who has the bottom of the board
+   * @param opponent The second player, who has the top of the board
    */
-  public void setPlayers(String... players);
+  public void setPlayers(String user, String opponent);
 
   /**
    * Sets the initial state of the board
