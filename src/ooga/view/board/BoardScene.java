@@ -1,6 +1,8 @@
 package ooga.view.board;
 
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -20,23 +22,27 @@ import ooga.view.GameScene;
  */
 public class BoardScene extends GameScene {
 
-  private ResourceBundle resources;
-  private GridPane sceneRoot;
-  private ModelController modelController;
+  private final ResourceBundle resources;
+  private final GridPane sceneRoot;
+  private final ModelController modelController;
   private Board board;
+  private final EventHandler<ActionEvent> handler;
 
   /**
    * Creates a scene that contains a top control bar and a {@link Board} object. The scene
    * constructs with a {@link ResourceBundle} so that it can be modified and styled.
    * @param root root of the scene, usually a {@link GridPane}
    * @param resources {@code ResourceBundle} for this scene
+   * @param handler
    * @param modelController the {@link ModelController} for this game
    */
   public BoardScene(Parent root, ResourceBundle resources,
-      ModelController modelController) {
+      EventHandler<ActionEvent> handler, ModelController modelController) {
     super(root, resources);
     this.modelController = modelController;
     this.resources = resources;
+    this.handler = handler;
+    board = new Board(8, 8, modelController);
     sceneRoot = (GridPane) root;
     sceneRoot.getStyleClass().add("boardScene");
     sceneRoot.setVgap(30);
@@ -66,19 +72,12 @@ public class BoardScene extends GameScene {
     Label welcomeLabel = makeLabel("title-text");
     sceneRoot.add(welcomeLabel, 0, 0);
 
-    Button pauseButton = makeButton("pauseButton",
-        e -> System.out.println("Pause Button clicked"));
+    Button[] buttons = makeButtons(new String[]{"pauseButton", "settingsButton", "helpButton"},
+        handler);
 
-    Button settingsButton = makeButton("settingsButton",
-        e -> System.out.println("Settings Button clicked"));
-
-    Button helpButton = makeButton("helpButton",
-        e -> System.out.println("Help Button clicked"));
-
-    topBar.getChildren().addAll(pauseButton, settingsButton, helpButton);
+    topBar.getChildren().addAll(buttons);
 
     sceneRoot.add(topBar, 0, 1);
-    board = new Board(8, 8, modelController);
     sceneRoot.add(board, 0, 3);
   }
 }

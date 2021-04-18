@@ -1,5 +1,6 @@
 package ooga.view;
 
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -99,6 +100,14 @@ public abstract class GameScene extends Scene {
     }
     result.setOnAction(handler);
     return result;
+  }
+
+  public Button[] makeButtons(String[] buttonProperties, EventHandler<ActionEvent> handler){
+    Button[] buttons = new Button[buttonProperties.length];
+    for (int i = 0; i < buttonProperties.length; i++) {
+      buttons[i] = (makeButton(buttonProperties[i], handler));
+    }
+    return buttons;
   }
 
   /**
