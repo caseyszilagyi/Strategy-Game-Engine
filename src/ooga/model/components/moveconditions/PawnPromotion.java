@@ -13,7 +13,8 @@ public class PawnPromotion extends Condition {
 
   private GameBoard gameBoard;
   private FrontEndExternalAPI viewController;
-
+  private List<String> chessPieceList = new ArrayList<>(
+      Arrays.asList("queen", "rook", "bishop", "knight"));
 
   /**
    * Constructor used to hold things that many piece movement objects may need
@@ -31,7 +32,7 @@ public class PawnPromotion extends Condition {
   public void executeCondition(Coordinate endingCoordinates) {
     int yPos = endingCoordinates.getY();
     if (yPos == gameBoard.getHeight() || yPos == 0) {
-      gameBoard.passPieceChangeOptions();
+      gameBoard.passPieceChangeOptions(chessPieceList);
     }
   }
 }

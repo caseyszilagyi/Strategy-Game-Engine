@@ -24,9 +24,6 @@ public class GameBoard implements Board {
   private int width, height;
   private Map<Coordinate, GamePiece> pieceCoordMap = new HashMap<>();
   private Set<Coordinate> currentLegalMoveCoordinates;
-  //: TODO: make this not hard coded
-  private List<String> chessPieceList = new ArrayList<>(
-      Arrays.asList("queen", "rook", "bishop", "knight"));
 
   private Coordinate activeCoordinates;
   private GamePiece activePiece;
@@ -350,8 +347,8 @@ public class GameBoard implements Board {
     return pieceCoordMap;
   }
 
-  public void passPieceChangeOptions() {
-    viewController.givePieceChangeOptions(chessPieceList);
+  public void passPieceChangeOptions(Iterable<String> pieceList) {
+    viewController.givePieceChangeOptions(pieceList);
   }
 
   // helper methods
