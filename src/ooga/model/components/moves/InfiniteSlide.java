@@ -16,6 +16,8 @@ import ooga.model.components.GamePiece;
  */
 public class InfiniteSlide extends PieceMovement {
 
+  private GameBoard board;
+
   /**
    * Initializes with the parameters of the move, as well as the direction that the piece should be
    * going
@@ -24,8 +26,9 @@ public class InfiniteSlide extends PieceMovement {
    * @param direction  1 if going up, -1 if going down. Used to adjust parameters for different
    *                   sides of the board
    */
-  public InfiniteSlide(Map<String, String> parameters, int direction, GameBoard gameBoard, FrontEndExternalAPI viewController, GamePiece piece) {
-    super(parameters, direction, gameBoard, viewController, piece);
+  public InfiniteSlide(Map<String, String> parameters, int direction, GameBoard gameBoard, GamePiece piece) {
+    super(parameters, direction, gameBoard);
+    board = gameBoard;
   }
 
   /**
@@ -38,12 +41,11 @@ public class InfiniteSlide extends PieceMovement {
    * method
    *
    * @param coordinates The coordinates of the piece that this move is acting on
-   * @param board       The board that this piece is on
    * @param teamName    The name of the team of this piece
    * @return A list of the coordinates of possible moves
    */
   @Override
-  public List<Coordinate> getAllPossibleMoves(Coordinate coordinates, GameBoard board,
+  public List<Coordinate> getAllPossibleMoves(Coordinate coordinates,
       String teamName) {
     List<Coordinate> possibleMoves = new ArrayList<>();
     if (isMustTake()) {
@@ -56,11 +58,12 @@ public class InfiniteSlide extends PieceMovement {
   }
 
   // if this instance of the pieceMovement doesn't take pieces, this method is called
-  private void getNonTakeMoves(Coordinate coordinates, String teamName, List<Coordinate> possibleMoves) {
+  private void getNonTakeMoves(Coordinate coordinates, String teamName,
+      List<Coordinate> possibleMoves) {
     while (checkIfValidMove(coordinates, teamName)) {
       Coordinate newCoord = makeCoordinate(coordinates.getX() + getChangeX(),
           coordinates.getY() + getChangeY());
-      if(checkRestrictions(coordinates)) {
+      if (checkRestrictions(coordinates)) {
         possibleMoves.add(newCoord);
       }
       coordinates = newCoord;
@@ -68,10 +71,12 @@ public class InfiniteSlide extends PieceMovement {
   }
 
   // if this instance of the pieceMovement takes pieces, this method is called
-  private void getTakeMoves(Coordinate coordinates, String teamName, List<Coordinate> possibleMoves) {
+  private void getTakeMoves(Coordinate coordinates, String teamName,
+      List<Coordinate> possibleMoves) {
     while (checkIfMoveInBounds(coordinates) && checkThatNoFriendlyPieceInMoveDestination(
         coordinates, teamName)) {
-      if (checkEnemyPieceLocationConditions(coordinates, teamName) && checkRestrictions(coordinates)) {
+      if (checkEnemyPieceLocationConditions(coordinates, teamName) && checkRestrictions(
+          coordinates)) {
         possibleMoves.add(
             makeCoordinate(coordinates.getX() + getChangeX(), coordinates.getY() + getChangeY()));
         break;
