@@ -39,7 +39,7 @@ public class GameRules {
 
   /**
    * Gets a List of the turn conditions for the current game as a List of Strings
-    * @return a List<String> of the current game's turn conditions
+    * @return a {@code List<String>} of the current game's turn conditions
    */
   public List<String> getTurnConditionsAsStringList(){
     List<String> listOfTurnConditions = new ArrayList<>();
