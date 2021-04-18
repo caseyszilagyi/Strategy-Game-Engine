@@ -1,9 +1,13 @@
 package ooga.model.components;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javafx.util.Pair;
 import ooga.controller.FrontEndExternalAPI;
 
 /**
@@ -95,6 +99,16 @@ public class GameBoard implements Board {
     activeCoordinates = makeCoordinates(x, y);
     currentLegalMoveCoordinates = pieceCoordMap.get(activeCoordinates).determineAllLegalMoves();
     activePiece = pieceCoordMap.get(activeCoordinates);
+    passLegalMoves(currentLegalMoveCoordinates);
+  }
+
+  // Passes legal movement coordinates to the front end
+  private void passLegalMoves(Set<Coordinate> possibleMoveLocations) {
+    Set<Pair<Integer, Integer>> coordPairs = new HashSet<>();
+    for (Coordinate coords : possibleMoveLocations) {
+      coordPairs.add(new Pair(coords.getX(), coords.getY()));
+    }
+    viewController.giveAllPossibleMoves(coordPairs.iterator());
   }
 
 
@@ -331,6 +345,10 @@ public class GameBoard implements Board {
 
   public Map<Coordinate, GamePiece> getPieceCoordMap() {
     return pieceCoordMap;
+  }
+
+  public void passPieceChangeOptions(Iterable<String> pieceList) {
+    viewController.givePieceChangeOptions(pieceList);
   }
 
   // helper methods

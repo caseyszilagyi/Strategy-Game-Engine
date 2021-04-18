@@ -21,20 +21,17 @@ public class QueenSideCastle extends PieceMovement{
    * @param parameters         The map of parameters
    * @param direction          The multiplier used to change the direction that the piece uses
    * @param gameBoard          The board that the piece moves on
-   * @param viewController     The view controller used to make front-end method calls
    * @param correspondingPiece The piece that this move corresponds to
    */
   public QueenSideCastle(Map<String, String> parameters, int direction,
-      GameBoard gameBoard, FrontEndExternalAPI viewController,
-      GamePiece correspondingPiece) {
-    super(parameters, direction, gameBoard, viewController, correspondingPiece);
+      GameBoard gameBoard, GamePiece correspondingPiece) {
+    super(parameters, direction, gameBoard);
     king = correspondingPiece;
     board = gameBoard;
   }
 
   @Override
-  public List<Coordinate> getAllPossibleMoves(Coordinate coordinates, GameBoard board,
-      String pieceTeam) {
+  public List<Coordinate> getAllPossibleMoves(Coordinate coordinates, String pieceTeam) {
     int kingX = coordinates.getX();
     int kingY = coordinates.getY();
     rook = board.getPieceAtCoordinate(kingX-4, kingY);

@@ -81,7 +81,7 @@ public class BasicPieceTest {
   void testBasicKnightGetMoves(){
     GamePiece knight = makePiece("knight", 4, 4);
     knight.setPieceTeam("Casey");
-    knight.determineAllLegalMoves();
+    gameBoard.determineAllLegalMoves(4,4);
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "5:6 5:2: 6:5 6:3 3:6 3:2 2:5 2:3";
     assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
@@ -94,7 +94,7 @@ public class BasicPieceTest {
   void testKnightEdgeGetMoves(){
     GamePiece knight = makePiece("knight", 7, 4);
     knight.setPieceTeam("Casey");
-    knight.determineAllLegalMoves();
+    gameBoard.determineAllLegalMoves(7,4);
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "5:5 5:3 6:6 6:2";
     assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
@@ -107,7 +107,7 @@ public class BasicPieceTest {
   void testKnightCornerGetMoves(){
     GamePiece knight = makePiece("knight", 7, 7);
     knight.setPieceTeam("Casey");
-    knight.determineAllLegalMoves();
+    gameBoard.determineAllLegalMoves(7,7);
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "6:5 5:6";
     assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
@@ -125,7 +125,7 @@ public class BasicPieceTest {
     knight.setPieceTeam("Casey");
     makeDummyGamePiece("notCasey", 6, 5);
     makeDummyGamePiece("Casey", 5, 6);
-    knight.determineAllLegalMoves();
+    gameBoard.determineAllLegalMoves(7,7);
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "6:5";
     assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
@@ -138,7 +138,7 @@ public class BasicPieceTest {
   void TestEmptyBoardBishopMovement(){
     GamePiece bishop = makePiece("bishop", 6, 5);
     bishop.setPieceTeam("Casey");
-    bishop.determineAllLegalMoves();
+    gameBoard.determineAllLegalMoves(6,5);
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "7:6 5:4 4:3 3:2 2:1 1:0 5:6 4:7 7:4";
     assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
@@ -156,7 +156,7 @@ public class BasicPieceTest {
     makeDummyGamePiece("notCasey", 1, 1);
     makeDummyGamePiece("Casey",2 ,6);
     makeDummyGamePiece("Casey", 6, 2);
-    bishop.determineAllLegalMoves();
+    gameBoard.determineAllLegalMoves(4,4);
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "2:2 3:3 5:5 6:6 5:3 3:5";
     assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
@@ -169,7 +169,7 @@ public class BasicPieceTest {
   void TestEmptyBoardRookMovement(){
     GamePiece rook = makePiece("rook", 6, 5);
     rook.setPieceTeam("Casey");
-    rook.determineAllLegalMoves();
+    gameBoard.determineAllLegalMoves(6,5);
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "6:6 6:7 6:4 6:3 6:2 6:1 6:0 0:5 1:5 2:5 3:5 4:5 5:5 7:5";
     assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
@@ -186,7 +186,7 @@ public class BasicPieceTest {
     makeDummyGamePiece("notCasey", 2, 4);
     makeDummyGamePiece("Casey", 4, 6);
     makeDummyGamePiece("Casey", 4, 2);
-    rook.determineAllLegalMoves();
+    gameBoard.determineAllLegalMoves(4,4);
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "2:4 3:4 5:4 6:4 4:5 4:3";
     assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
@@ -199,7 +199,7 @@ public class BasicPieceTest {
   void TestEmptyBoardQueenMovement(){
     GamePiece queen = makePiece("queen", 6, 5);
     queen.setPieceTeam("Casey");
-    queen.determineAllLegalMoves();
+    gameBoard.determineAllLegalMoves(6,5);
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "6:6 6:7 6:4 6:3 6:2 6:1 6:0 0:5 1:5 2:5 3:5 4:5 5:5 7:5 7:6 5:4 4:3 3:2 2:1 1:0 5:6 4:7 7:4";
     assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
@@ -220,7 +220,7 @@ public class BasicPieceTest {
     makeDummyGamePiece("notCasey", 2, 2);
     makeDummyGamePiece("Casey", 2, 6);
     makeDummyGamePiece("Casey", 6, 2);
-    queen.determineAllLegalMoves();
+    gameBoard.determineAllLegalMoves(4,4);
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "2:4 3:4 5:4 6:4 4:5 4:3 2:2 3:3 5:5 6:6 5:3 3:5";
     assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
@@ -233,7 +233,7 @@ public class BasicPieceTest {
   void TestEmptyBoardKingMovement(){
     GamePiece king = makePiece("king", 4, 4);
     king.setPieceTeam("Casey");
-    king.determineAllLegalMoves();
+    gameBoard.determineAllLegalMoves(4,4);
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "4:5 4:3 5:3 5:4 5:5 3:3 3:4 3:5";
     assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
@@ -248,7 +248,7 @@ public class BasicPieceTest {
     king.setPieceTeam("Casey");
     makeDummyGamePiece("Casey", 5, 4);
     makeDummyGamePiece("notCasey", 4, 5);
-    king.determineAllLegalMoves();
+    gameBoard.determineAllLegalMoves(4,4);
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "4:5 4:3 5:3 5:5 3:3 3:4 3:5";
     assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
@@ -261,7 +261,7 @@ public class BasicPieceTest {
   void TestEdgeBoardKingMovement(){
     GamePiece king = makePiece("king", 7, 4);
     king.setPieceTeam("Casey");
-    king.determineAllLegalMoves();
+    gameBoard.determineAllLegalMoves(7,4);
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "7:5 7:3 6:3 6:4 6:5";
     assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
@@ -275,7 +275,7 @@ public class BasicPieceTest {
   void TestEmptyBoardPawnMovement(){
     GamePiece pawn = makePiece("pawn", 4, 4);
     pawn.setPieceTeam("Casey");
-    pawn.determineAllLegalMoves();
+    gameBoard.determineAllLegalMoves(4,4);
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "4:5 4:6";
     assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
@@ -292,7 +292,7 @@ public class BasicPieceTest {
     makeDummyGamePiece("Casey", 5, 5);
     makeDummyGamePiece("notCasey", 3, 5);
     makeDummyGamePiece("Casey", 4, 5);
-    pawn.determineAllLegalMoves();
+    gameBoard.determineAllLegalMoves(4,4);
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "3:5";
     assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
@@ -326,7 +326,7 @@ public class BasicPieceTest {
     makeDummyGamePiece("Casey", 6, 6);
     makeDummyGamePiece("notCasey", 6, 2);
     makeDummyGamePiece("Casey", 2, 2);
-    bishop.determineAllLegalMoves();
+    gameBoard.determineAllLegalMoves(4,4);
     allLegalMoves = dummyViewController.getAllPossibleMoves();
     String expected = "5:5 5:3 6:2 3:3 3:5 2:6 1:7";
     assertTrue(testActualExpectedCoordinates(expected, allLegalMoves));
