@@ -33,6 +33,7 @@ public class BasicPieceTest {
 
   @BeforeEach
   private void SetUp(){
+    gameBoard.setViewController(dummyViewController);
   }
 
 

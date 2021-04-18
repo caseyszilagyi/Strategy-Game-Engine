@@ -85,4 +85,6 @@ public abstract class Engine{
 
   public abstract boolean actOnCoordinates(int x, int y);
 
+  public abstract void setIfTurnRules(Boolean rules);
+
 }
