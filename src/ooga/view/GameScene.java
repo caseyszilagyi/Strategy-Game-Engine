@@ -132,7 +132,7 @@ public abstract class GameScene extends Scene {
   /**
    * Creates a {@link Node} of type {@link HBox} with one or more {@link Button} objects that are usually
    * centered and evenly distributed. This element is usually placed at the top of a scene.
-   * @return a {@code Node} instance
+   * @return a {@code Node} instance.
    */
   public Node makeTopBar(){
     HBox topBar = new HBox();
