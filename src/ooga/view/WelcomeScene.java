@@ -35,7 +35,7 @@ public class WelcomeScene extends GameScene {
    */
   public WelcomeScene(Parent root, ResourceBundle resources,
       EventHandler<ActionEvent> handler, ModelController modelController) {
-    super(root, resources);
+    super(root, handler, resources);
     this.resources = resources;
     this.handler = handler;
     this.modelController = modelController;
@@ -57,7 +57,7 @@ public class WelcomeScene extends GameScene {
     Label welcomeLabel = makeLabel("title-text");
     sceneRoot.add(welcomeLabel, 0, 0);
 
-    Button goButton = makeButton("startGame", handler);
+    Button goButton = makeButton("startGame");
 
     sceneRoot.add(goButton, 0, 1);
   }

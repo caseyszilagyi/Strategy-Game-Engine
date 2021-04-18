@@ -24,6 +24,7 @@ public class ViewManager {
   private final GameWindow primaryWindow;
   private ModelController modelController;
   private BoardController boardController;
+  private static final String DEFAULT_GAMETYPE = "chess";
 
   /**
    * Creates a new instance of {@code ViewManager} with a resource bundle with
@@ -67,7 +68,7 @@ public class ViewManager {
   /**
    * Changes the scene of the primary {@link GameWindow} to the desired scene. The
    * scene name is specified by an input {@code String} that corresponds to a property
-   * in the {@code init.properties} file that corresponds to the name of an existing
+   * in the {@code init.properties} file that points to the name of an existing
    * {@code GameScene} class.
    *
    * @param sceneNameProperty the property key corresponding to the name of an existing
@@ -104,8 +105,11 @@ public class ViewManager {
    * instance.
    */
   public void startGame(){
-    modelController.setGameType("chess");
-    ((BoardScene) changeScene("boardScene")).attachBoardControllerToBoard(boardController);
+    modelController.setGameType(DEFAULT_GAMETYPE);
+    ((BoardScene) changeScene("boardScene"))
+        .attachBoardControllerToBoard(boardController);
+    ((Stage) primaryWindow).setResizable(true);
+
   }
 
 

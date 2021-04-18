@@ -4,9 +4,8 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
-import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -26,22 +25,19 @@ public class BoardScene extends GameScene {
   private final GridPane sceneRoot;
   private final ModelController modelController;
   private Board board;
-  private final EventHandler<ActionEvent> handler;
 
   /**
    * Creates a scene that contains a top control bar and a {@link Board} object. The scene
    * constructs with a {@link ResourceBundle} so that it can be modified and styled.
    * @param root root of the scene, usually a {@link GridPane}
    * @param resources {@code ResourceBundle} for this scene
-   * @param handler
    * @param modelController the {@link ModelController} for this game
    */
   public BoardScene(Parent root, ResourceBundle resources,
       EventHandler<ActionEvent> handler, ModelController modelController) {
-    super(root, resources);
+    super(root, handler, resources);
     this.modelController = modelController;
     this.resources = resources;
-    this.handler = handler;
     board = new Board(8, 8, modelController);
     sceneRoot = (GridPane) root;
     sceneRoot.getStyleClass().add("boardScene");
@@ -66,16 +62,12 @@ public class BoardScene extends GameScene {
     col1.setHalignment(HPos.CENTER);
     sceneRoot.getColumnConstraints().add(col1);
 
-    HBox topBar = new HBox();
-    topBar.setAlignment(Pos.CENTER);
+
 
     Label welcomeLabel = makeLabel("title-text");
     sceneRoot.add(welcomeLabel, 0, 0);
 
-    Button[] buttons = makeButtons(new String[]{"pauseButton", "settingsButton", "helpButton"},
-        handler);
-
-    topBar.getChildren().addAll(buttons);
+    Node topBar = makeTopBar();
 
     sceneRoot.add(topBar, 0, 1);
     sceneRoot.add(board, 0, 3);
