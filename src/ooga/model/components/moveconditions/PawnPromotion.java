@@ -13,28 +13,25 @@ public class PawnPromotion extends Condition {
 
   private GameBoard gameBoard;
   private FrontEndExternalAPI viewController;
-  private List<String> chessPieceList = new ArrayList<>(Arrays.asList("queen", "rook", "bishop", "knight"));
+
 
   /**
    * Constructor used to hold things that many piece movement objects may need
    *
-   * @param viewController The controller used to communicate with the front end
-   * @param gameBoard      The board that the pieces are on.
-   * @param parameters     The map with parameters, if there are any
-   * @param piece          The piece that the restriction corresponds to
+   * @param gameBoard  The board that the pieces are on.
+   * @param parameters The map with parameters, if there are any
+   * @param piece      The piece that the restriction corresponds to
    */
-  public PawnPromotion(FrontEndExternalAPI viewController,
-      GameBoard gameBoard, Map<String, String> parameters, GamePiece piece, int direction) {
-    super(viewController, gameBoard, parameters, piece, direction);
+  public PawnPromotion(GameBoard gameBoard, Map<String, String> parameters, GamePiece piece,
+      int direction) {
     this.gameBoard = gameBoard;
-    this.viewController = viewController;
   }
 
   @Override
   public void executeCondition(Coordinate endingCoordinates) {
     int yPos = endingCoordinates.getY();
-    if(yPos == gameBoard.getHeight()|| yPos == 0){
-      viewController.givePieceChangeOptions(chessPieceList);
+    if (yPos == gameBoard.getHeight() || yPos == 0) {
+      gameBoard.passPieceChangeOptions();
     }
   }
 }
