@@ -1,4 +1,4 @@
-package ooga.model.engine;
+package ooga.model.engine.running;
 
 import ooga.model.components.GameBoard;
 
