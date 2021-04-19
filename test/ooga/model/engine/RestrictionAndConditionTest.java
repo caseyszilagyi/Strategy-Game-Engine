@@ -50,6 +50,12 @@ public class RestrictionAndConditionTest {
     printBoard();
     actOnCoordinates(0,2);
     testActualExpectedCoordinates("0:3");
+    actOnCoordinates(0,3);
+    actOnCoordinates(1,1);
+    testActualExpectedCoordinates("1:2 1:3");
+    actOnCoordinates(4,4);
+    actOnCoordinates(0,6);
+    testActualExpectedCoordinates("0:5 0:4");
   }
 
   @Test

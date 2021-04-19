@@ -30,14 +30,7 @@ public class RunningChessTests {
     gameEngine = modelController.getEngine();
     gameBoard = gameEngine.getBoard();
     gameEngine.setIfTurnRules(true);
-
-
     modelController.setPlayers("user", "opponent");
-    //gameEngine.addActiveUser(player1);
-    //gameEngine.addActiveUser(player2);
-
-    gameEngine.setCurrentPlayerTurn(player1);
-
     printBoard();
   }
 
@@ -45,36 +38,36 @@ public class RunningChessTests {
   void testBasicTurn(){
     assertTrue(gameBoard.isPieceAtCoordinate(new Coordinate(4, 1)));
     assertFalse(gameBoard.isPieceAtCoordinate(new Coordinate(4, 2)));
-    assertEquals(player1, gameEngine.getCurrentPlayerTurn());
+    assertEquals(player1.getName(), gameEngine.getCurrentPlayerTurn());
     gameEngine.runTurn(4,1);
     assertTrue(gameBoard.isPieceAtCoordinate(new Coordinate(4, 1)));
     assertFalse(gameBoard.isPieceAtCoordinate(new Coordinate(4, 2)));
-    assertEquals(player1, gameEngine.getCurrentPlayerTurn());
+    assertEquals(player1.getName(), gameEngine.getCurrentPlayerTurn());
     gameEngine.runTurn(4,2);
     assertFalse(gameBoard.isPieceAtCoordinate(new Coordinate(4, 1)));
     assertTrue(gameBoard.isPieceAtCoordinate(new Coordinate(4, 2)));
-    assertEquals(player2, gameEngine.getCurrentPlayerTurn());
+    assertEquals(player2.getName(), gameEngine.getCurrentPlayerTurn());
     printBoard();
   }
 
   @Test
   void testEmptyPieceClick(){
     gameEngine.runTurn(4,4);
-    assertEquals(player1, gameEngine.getCurrentPlayerTurn());
+    assertEquals(player1.getName(), gameEngine.getCurrentPlayerTurn());
   }
 
   @Test
   void testIndecisivePlayer(){
     gameEngine.runTurn(3,1);
-    assertEquals(player1, gameEngine.getCurrentPlayerTurn());
+    assertEquals(player1.getName(), gameEngine.getCurrentPlayerTurn());
     gameEngine.runTurn(4,4);
     //printBoard();
-    assertEquals(player1, gameEngine.getCurrentPlayerTurn());
+    assertEquals(player1.getName(), gameEngine.getCurrentPlayerTurn());
     gameEngine.runTurn(4,1);
-    assertEquals(player1, gameEngine.getCurrentPlayerTurn());
+    assertEquals(player1.getName(), gameEngine.getCurrentPlayerTurn());
     gameEngine.runTurn(4,2);
     //printBoard();
-    assertEquals(player2, gameEngine.getCurrentPlayerTurn());
+    assertEquals(player2.getName(), gameEngine.getCurrentPlayerTurn());
 
   }
 
