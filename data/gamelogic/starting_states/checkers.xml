@@ -7,32 +7,32 @@
     </params>
     <board>
         <opponent>
-            <b8>checker</b8>
-            <d8>checker</d8>
-            <f8>checker</f8>
-            <h8>checker</h8>
-            <a7>checker</a7>
-            <c7>checker</c7>
-            <e7>checker</e7>
-            <g7>checker</g7>
-            <b6>checker</b6>
-            <d6>checker</d6>
-            <f6>checker</f6>
-            <h6>checker</h6>
+            <b8>normalChecker</b8>
+            <d8>normalChecker</d8>
+            <f8>normalChecker</f8>
+            <h8>normalChecker</h8>
+            <a7>normalChecker</a7>
+            <c7>normalChecker</c7>
+            <e7>normalChecker</e7>
+            <g7>normalChecker</g7>
+            <b6>normalChecker</b6>
+            <d6>normalChecker</d6>
+            <f6>normalChecker</f6>
+            <h6>normalChecker</h6>
         </opponent>
         <user>
-            <a3>checker</a3>
-            <c3>checker</c3>
-            <e3>checker</e3>
-            <g3>checker</g3>
-            <b2>checker</b2>
-            <d2>checker</d2>
-            <f2>checker</f2>
-            <h2>checker</h2>
-            <a1>checker</a1>
-            <c1>checker</c1>
-            <e1>checker</e1>
-            <g1>checker</g1>
+            <a3>normalChecker</a3>
+            <c3>normalChecker</c3>
+            <e3>normalChecker</e3>
+            <g3>normalChecker</g3>
+            <b2>normalChecker</b2>
+            <d2>normalChecker</d2>
+            <f2>normalChecker</f2>
+            <h2>normalChecker</h2>
+            <a1>normalChecker</a1>
+            <c1>normalChecker</c1>
+            <e1>normalChecker</e1>
+            <g1>normalChecker</g1>
         </user>
     </board>
 </piece>
