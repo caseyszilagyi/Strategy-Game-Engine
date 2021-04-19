@@ -1,4 +1,4 @@
-package ooga;
+package ooga.exceptions;
 
 /**
  * Make exceptions related to XML parsing

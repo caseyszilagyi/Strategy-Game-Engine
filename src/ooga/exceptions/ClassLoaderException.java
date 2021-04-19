@@ -1,4 +1,4 @@
-package ooga;
+package ooga.exceptions;
 
 /**
  * Used to make exceptions relating to reflection and class loading
