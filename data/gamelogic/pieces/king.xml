@@ -7,6 +7,9 @@
       <mustTake>False</mustTake>
       <takeX>null</takeX>
       <takeY>null</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </KingSideCastle>
     <QueenSideCastle>
       <changeX>null</changeX>
@@ -14,6 +17,9 @@
       <mustTake>False</mustTake>
       <takeX>null</takeX>
       <takeY>null</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
     </QueenSideCastle>
     <FiniteSlide>
       <changeX>1</changeX>

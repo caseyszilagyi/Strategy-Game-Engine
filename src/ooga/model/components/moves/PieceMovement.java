@@ -127,9 +127,10 @@ public abstract class PieceMovement {
     conditions.stream().forEach(condition -> condition.executeCondition(endingCoordinates));
   }
 
-  public boolean checkRestrictions(Coordinate startingCoordinates) {
-    return restrictions.stream().allMatch(restriction -> restriction
-        .checkRestriction(new Coordinate(startingCoordinates, changeX, changeY)));
+  public boolean checkRestrictions(Coordinate endingCoordinates) {
+    ArrayList<Restriction> copy = new ArrayList<>(restrictions);
+    return copy.stream().allMatch(restriction -> restriction
+        .checkRestriction(endingCoordinates));
   }
 
   /**

@@ -100,7 +100,7 @@ public class FiniteSlide extends PieceMovement {
         && Math.abs(currY) <= Math.abs(yLimit)) {
       Coordinate newCoordinates = makeCoordinate(coordinates.getX() + xDirection,
           coordinates.getY() + yDirection);
-      if (checkRestrictions(coordinates)) {
+      if (checkRestrictions(newCoordinates)) {
         possibleMoves.add(newCoordinates);
       }
       coordinates = newCoordinates;
@@ -117,10 +117,10 @@ public class FiniteSlide extends PieceMovement {
     while (checkIfMoveInBounds(coordinates) && checkThatNoFriendlyPieceInMoveDestination(
         coordinates, teamName) && Math.abs(currX) <= Math.abs(xLimit) && Math.abs(currY) <= Math
         .abs(yLimit)) {
+      Coordinate newCoordinate = new Coordinate(coordinates, getChangeX(), getChangeY());
       if (checkEnemyPieceLocationConditions(coordinates, teamName) && checkRestrictions(
-          coordinates)) {
-        possibleMoves.add(
-            makeCoordinate(coordinates.getX() + getChangeX(), coordinates.getY() + getChangeY()));
+          newCoordinate)) {
+        possibleMoves.add(newCoordinate);
         break;
       }
       coordinates = makeCoordinate(coordinates.getX() + xDirection,

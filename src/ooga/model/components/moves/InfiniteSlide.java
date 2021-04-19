@@ -62,7 +62,7 @@ public class InfiniteSlide extends PieceMovement {
       List<Coordinate> possibleMoves) {
     while (checkIfValidMove(coordinates, teamName)) {
       Coordinate newCoordinate = new Coordinate(coordinates, getChangeX(), getChangeY());
-      if (checkRestrictions(coordinates)) {
+      if (checkRestrictions(newCoordinate)) {
         possibleMoves.add(newCoordinate);
       }
       coordinates = newCoordinate;
@@ -76,7 +76,7 @@ public class InfiniteSlide extends PieceMovement {
         coordinates, teamName)) {
       Coordinate newCoordinate = new Coordinate(coordinates, getChangeX(), getChangeY());
       if (checkEnemyPieceLocationConditions(coordinates, teamName) && checkRestrictions(
-          coordinates)) {
+          newCoordinate)) {
         possibleMoves.add(newCoordinate);
         break;
       }
