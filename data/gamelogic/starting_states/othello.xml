@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<piece piece="othello">
+    <params>
+        <name>othello</name>
+        <numrows>8</numrows>
+        <numcols>8</numcols>
+    </params>
+    <board>
+        <opponent>
+            <e5>othelloPiece</e5>
+            <d4>othelloPiece</d4>
+        </opponent>
+        <user>
+            <d5>othelloPiece</d5>
+            <e4>othelloPiece</e4>
+        </user>
+    </board>
+</piece>
