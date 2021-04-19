@@ -10,6 +10,7 @@ import ooga.controller.ModelController;
 import ooga.controller.DummyViewController;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
+import ooga.model.engine.running.Engine;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

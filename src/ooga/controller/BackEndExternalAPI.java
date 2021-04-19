@@ -1,6 +1,6 @@
 package ooga.controller;
 
-import ooga.model.engine.Engine;
+import ooga.model.engine.running.Engine;
 
 /**
  * Classes that implement this interface are meant to be passed around the front end in

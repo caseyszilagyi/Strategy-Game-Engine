@@ -1,8 +1,8 @@
 package ooga.model.initialization.engine;
 
 import ooga.controller.FrontEndExternalAPI;
-import ooga.model.engine.Engine;
-import ooga.model.engine.GameEngine;
+import ooga.model.engine.running.Engine;
+import ooga.model.engine.running.GameEngine;
 import ooga.model.initialization.BoardCreator;
 import ooga.model.initialization.PlayerCreator;
 

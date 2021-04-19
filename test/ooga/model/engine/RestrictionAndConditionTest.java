@@ -13,6 +13,7 @@ import ooga.controller.DummyViewController;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;
+import ooga.model.engine.running.Engine;
 import ooga.model.initialization.pieces.PieceCreator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -50,6 +51,12 @@ public class RestrictionAndConditionTest {
     printBoard();
     actOnCoordinates(0,2);
     testActualExpectedCoordinates("0:3");
+    actOnCoordinates(0,3);
+    actOnCoordinates(1,1);
+    testActualExpectedCoordinates("1:2 1:3");
+    actOnCoordinates(4,4);
+    actOnCoordinates(0,6);
+    testActualExpectedCoordinates("0:5 0:4");
   }
 
   @Test

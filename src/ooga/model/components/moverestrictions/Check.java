@@ -37,7 +37,7 @@ public class Check extends Restriction {
   }
 
   /**
-   * Checks if any of the opponent's pieces can take the user's piece after it is moved
+   * Checks if any of the opponent's pieces can take the user's king after it is moved
    * @param endingCoordinates The ending coordinates of the move
    * @return True if the move is not violated by check, false otherwise
    */
@@ -47,15 +47,22 @@ public class Check extends Restriction {
     if(board.isPieceAtCoordinate(endingCoordinates)){
        tempRemoval = board.getPieceAtCoordinate(endingCoordinates);
     }
+    Boolean result = determineIfInCheck(endingCoordinates);
+    if(tempRemoval != null){
+      board.addPiece(tempRemoval);
+    }
+
+    return result;
+  }
+
+  // Returns true if not in check after move, false otherwise
+  private boolean determineIfInCheck(Coordinate endingCoordinates){
     Coordinate startingCoordinates = piece.getPieceCoordinates();
     board.moveBackendPiece(startingCoordinates, endingCoordinates);
     Coordinate friendlyKingLocation = board.findPieceCoordinates(thisTeamName, "king");
     Set<Coordinate> opponentTakeMoves = board.determineOppositeTeamTakeMovesWithoutRestrictions(thisTeamName);
     board.moveBackendPiece(endingCoordinates, startingCoordinates);
-    if(tempRemoval != null){
-      board.addPiece(tempRemoval);
-    }
-
     return !opponentTakeMoves.contains(friendlyKingLocation);
   }
+
 }

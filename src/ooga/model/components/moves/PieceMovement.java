@@ -33,11 +33,11 @@ public abstract class PieceMovement {
    * move, as well as the information about whether this move can take a piece
    *
    * @param parameters The map of parameters
-   * @param direction The multiplier used to change the direction that the piece uses
-   * @param gameBoard The board that the piece moves on
+   * @param direction  The multiplier used to change the direction that the piece uses
+   * @param gameBoard  The board that the piece moves on
    */
   public PieceMovement(Map<String, String> parameters, int direction, GameBoard gameBoard) {
-    if(!parameters.get("changeX").equals("null")){
+    if (!parameters.get("changeX").equals("null")) {
       changeX = Integer.parseInt(parameters.get("changeX")) * direction;
       changeY = Integer.parseInt(parameters.get("changeY")) * direction;
       mustTake = Boolean.parseBoolean(parameters.get("mustTake"));
@@ -54,12 +54,13 @@ public abstract class PieceMovement {
    * This must be implemented differently for each subclass so therefore it is abstract
    *
    * @param coordinates The coordinates of  the piece that this move is acting on
-   * @param pieceTeam The team that the piece is on
+   * @param pieceTeam   The team that the piece is on
    * @return A list of all the coordinates of the possible move locations
    */
   public abstract List<Coordinate> getAllPossibleMoves(Coordinate coordinates, String pieceTeam);
 
-  public List<Coordinate> getAllPossibleRestrictionlessTakeMoves(Coordinate coordinate, String pieceTeam){
+  public List<Coordinate> getAllPossibleRestrictionlessTakeMoves(Coordinate coordinate,
+      String pieceTeam) {
     List<Restriction> tempHolder = new ArrayList<>();
     tempHolder.addAll(restrictions);
     restrictions.clear();
@@ -70,60 +71,65 @@ public abstract class PieceMovement {
 
   /**
    * Executes a move when given the final coordinates
+   *
    * @param startingCoordinates The coordinates that the piece starts at
-   * @param endingCoordinates The ending coordinates of the move
+   * @param endingCoordinates   The ending coordinates of the move
    */
-  public void executeMove(Coordinate startingCoordinates, Coordinate endingCoordinates){
-    if(mustTake){
+  public void executeMove(Coordinate startingCoordinates, Coordinate endingCoordinates) {
+    if (mustTake) {
       int removeX = endingCoordinates.getX() + takeX;
       int removeY = endingCoordinates.getY() + takeY;
       gameBoard.removePiece(makeCoordinate(removeX, removeY));
-      //viewController.removePiece(removeX, removeY);
     }
     gameBoard.movePiece(startingCoordinates, endingCoordinates);
-    //viewController.movePiece(startingCoordinates.getX(), startingCoordinates.getY(),
-        //endingCoordinates.getX(), endingCoordinates.getY());
     executeConditions(endingCoordinates);
   }
 
 
   /**
    * Checks if a move is valid based on the ending coordinates and name of the team
+   *
    * @param coordinates The ending coordinates of the move
-   * @param teamName The name of the team of the piece being moved
+   * @param teamName    The name of the team of the piece being moved
    * @return True if the move is valid, false if not
    */
-  protected boolean checkIfValidMove(Coordinate coordinates, String teamName){
+  protected boolean checkIfValidMove(Coordinate coordinates, String teamName) {
     return checkIfMoveInBounds(coordinates) &&
-           checkThatNoFriendlyPieceInMoveDestination(coordinates, teamName) &&
-           checkEnemyPieceLocationConditions(coordinates, teamName);
+        checkThatNoFriendlyPieceInMoveDestination(coordinates, teamName) &&
+        checkEnemyPieceLocationConditions(coordinates, teamName);
   }
 
 
   /**
    * Set the conditions that may be executed after this move
+   *
    * @param conditions The conditions
    */
-  public void setConditions(List<Condition> conditions) { this.conditions = conditions; }
+  public void setConditions(List<Condition> conditions) {
+    this.conditions = conditions;
+  }
 
   /**
    * Set the restrictions that define whether this move is legal
+   *
    * @param restrictions A list of restrictions
    */
-  public void setRestrictions(List<Restriction> restrictions){
-    this.restrictions=restrictions;
+  public void setRestrictions(List<Restriction> restrictions) {
+    this.restrictions = restrictions;
   }
 
   /**
    * Executes the conditions. Only does something if the condition is determined to be valid
+   *
    * @param endingCoordinates The ending coordinates of the move
    */
-  public void executeConditions(Coordinate endingCoordinates){
+  public void executeConditions(Coordinate endingCoordinates) {
     conditions.stream().forEach(condition -> condition.executeCondition(endingCoordinates));
   }
 
-  public boolean checkRestrictions(Coordinate startingCoordinates){
-    return restrictions.stream().allMatch(restriction -> restriction.checkRestriction(new Coordinate(startingCoordinates, changeX, changeY)));
+  public boolean checkRestrictions(Coordinate startingCoordinates) {
+    return restrictions.stream().allMatch(restriction -> restriction
+        .checkRestriction(new Coordinate(startingCoordinates, changeX, changeY)));
   }
 
   /**
@@ -134,7 +140,7 @@ public abstract class PieceMovement {
    * @return A boolean representing if the move is in bounds or not
    */
   protected boolean checkIfMoveInBounds(Coordinate coordinates) {
-    return gameBoard.isCoordinateOnBoard(makeCoordinate(coordinates.getX() + changeX, coordinates.getY() + changeY));
+    return gameBoard.isCoordinateOnBoard(new Coordinate(coordinates, changeX, changeY));
   }
 
   /**
@@ -152,31 +158,24 @@ public abstract class PieceMovement {
     }
 
     // if piece can't take, need to make sure landing spot doesn't have opponent's piece
-    if (gameBoard.checkIfOpponentPieceInLocation(makeCoordinate(coordinates.getX() + changeX, coordinates.getY() + changeY),
-        teamName)) {
-      return false;
-    }
-
-    return true;
+    return !gameBoard
+        .checkIfOpponentPieceInLocation(new Coordinate(coordinates, changeX, changeY), teamName);
   }
 
   // Checks the locations of enemy pieces for a take move to see if conditions are met
-  private boolean checkEnemyPieceLocationConditionsForTakeMove(Coordinate coordinates, String teamName) {
+  private boolean checkEnemyPieceLocationConditionsForTakeMove(Coordinate coordinates,
+      String teamName) {
     //checks to see if piece is where it needs to be in order for it to be taken. If not, move invalid
-    if (!gameBoard.checkIfOpponentPieceInLocation(makeCoordinate(coordinates.getX() + changeX + takeX,
-        coordinates.getY() + changeY + takeY), teamName)) {
+    if (!gameBoard.checkIfOpponentPieceInLocation(
+        new Coordinate(coordinates, changeX + takeX, changeY + takeY), teamName)) {
       return false;
     }
     // checks to make sure there is an empty space where the piece lands, if the take location
     // is different from the landing location of the piece. If no empty space, move invalid
-    if (takeX != 0 || takeY != 0) {
-      if (gameBoard.checkIfOpponentPieceInLocation(makeCoordinate(coordinates.getX() + changeX, coordinates.getY() + changeY),
-          teamName)) {
-        return false;
-      }
-    }
-    // if piece in take location and not in landing location
-    return true;
+
+    return !((takeX != 0 || takeY != 0) && gameBoard
+        .checkIfOpponentPieceInLocation(new Coordinate(coordinates, changeX, changeY),
+            teamName));
   }
 
   /**
@@ -189,21 +188,19 @@ public abstract class PieceMovement {
    */
   protected boolean checkThatNoFriendlyPieceInMoveDestination(Coordinate coordinates,
       String teamName) {
-    Coordinate moveCoords = makeCoordinate(coordinates.getX() + changeX, coordinates.getY() + changeY);
-    if (gameBoard.checkIfFriendlyPieceInLocation(moveCoords, teamName)){
-      return false;
-    }
-    return true;
+    Coordinate moveCoords = new Coordinate(coordinates, changeX, changeY);
+    return !gameBoard.checkIfFriendlyPieceInLocation(moveCoords, teamName);
   }
 
 
   /**
    * Makes a coordinate object
+   *
    * @param xPos The x position of the coordinate
    * @param yPos The y position of the coordinate
    * @return The coordinate object
    */
-  protected Coordinate makeCoordinate(int xPos, int yPos){
+  protected Coordinate makeCoordinate(int xPos, int yPos) {
     return new Coordinate(xPos, yPos);
   }
 
@@ -239,18 +236,20 @@ public abstract class PieceMovement {
   /**
    * Allows a subclass to set the change in the x direction that this move has. Useful for
    * manipulating the implementation of different move types.
+   *
    * @param changeX The change in X direction for the move
    */
-  protected void setChangeX(int changeX){
+  protected void setChangeX(int changeX) {
     this.changeX = changeX;
   }
 
   /**
    * Allows a subclass to set the change in the x direction that this move has. Useful for
    * manipulating the implementation of different move types.
+   *
    * @param changeY The change in X direction for the move
    */
-  protected void setChangeY(int changeY){
+  protected void setChangeY(int changeY) {
     this.changeY = changeY;
   }
 

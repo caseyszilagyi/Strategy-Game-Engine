@@ -61,12 +61,11 @@ public class InfiniteSlide extends PieceMovement {
   private void getNonTakeMoves(Coordinate coordinates, String teamName,
       List<Coordinate> possibleMoves) {
     while (checkIfValidMove(coordinates, teamName)) {
-      Coordinate newCoord = makeCoordinate(coordinates.getX() + getChangeX(),
-          coordinates.getY() + getChangeY());
+      Coordinate newCoordinate = new Coordinate(coordinates, getChangeX(), getChangeY());
       if (checkRestrictions(coordinates)) {
-        possibleMoves.add(newCoord);
+        possibleMoves.add(newCoordinate);
       }
-      coordinates = newCoord;
+      coordinates = newCoordinate;
     }
   }
 
@@ -75,14 +74,13 @@ public class InfiniteSlide extends PieceMovement {
       List<Coordinate> possibleMoves) {
     while (checkIfMoveInBounds(coordinates) && checkThatNoFriendlyPieceInMoveDestination(
         coordinates, teamName)) {
+      Coordinate newCoordinate = new Coordinate(coordinates, getChangeX(), getChangeY());
       if (checkEnemyPieceLocationConditions(coordinates, teamName) && checkRestrictions(
           coordinates)) {
-        possibleMoves.add(
-            makeCoordinate(coordinates.getX() + getChangeX(), coordinates.getY() + getChangeY()));
+        possibleMoves.add(newCoordinate);
         break;
       }
-      coordinates = makeCoordinate(coordinates.getX() + getChangeX(),
-          coordinates.getY() + getChangeY());
+      coordinates = newCoordinate;
     }
   }
 }

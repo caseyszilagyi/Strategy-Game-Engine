@@ -10,6 +10,11 @@ import ooga.model.components.Coordinate;
  */
 public abstract class Restriction {
 
+  /**
+   * Checks the given restriction. If the restriction is not violated, it will return true
+   * @param endingCoordinates The ending coordinates of the move
+   * @return True if the restriction is not violated, false otherwise
+   */
   public abstract boolean checkRestriction(Coordinate endingCoordinates);
 
 }
