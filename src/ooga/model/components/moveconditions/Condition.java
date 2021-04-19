@@ -10,6 +10,10 @@ import ooga.model.components.Coordinate;
  */
 public abstract class Condition {
 
+  /**
+   * This is called for each condition of a piece movement after the movement is executed
+   * @param endingCoordinates The ending coordinates of the move
+   */
   public abstract void executeCondition(Coordinate endingCoordinates);
 
 }
