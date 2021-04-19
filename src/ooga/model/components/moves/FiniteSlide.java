@@ -22,6 +22,12 @@ import ooga.model.components.GamePiece;
 public class FiniteSlide extends PieceMovement {
 
   private GameBoard board;
+  int xLimit;
+  int yLimit;
+  int xDirection;
+  int yDirection;
+  int currX;
+  int currY;
 
   /**
    * Initializes with the parameters of the move, as well as the direction that the piece should be
@@ -60,14 +66,9 @@ public class FiniteSlide extends PieceMovement {
     return possibleMoves;
   }
 
-
-  // if this instance of the pieceMovement doesn't take pieces, this method is called
-  private void getNonTakeMoves(Coordinate coordinates, String teamName,
-      List<Coordinate> possibleMoves) {
-    int xLimit = getChangeX();
-    int yLimit = getChangeY();
-    int xDirection;
-    int yDirection;
+  private void defineParameters(){
+    xLimit = getChangeX();
+    yLimit = getChangeY();
     if (xLimit != 0) {
       xDirection = xLimit / Math.abs(xLimit);
     } else {
@@ -79,11 +80,22 @@ public class FiniteSlide extends PieceMovement {
       yDirection = 0;
     }
 
-    int currX = xDirection;
-    int currY = yDirection;
+    currX = xDirection;
+    currY = yDirection;
     setChangeX(xDirection);
     setChangeY(yDirection);
+  }
 
+  private void revertParameters(){
+    setChangeX(xLimit);
+    setChangeY(yLimit);
+  }
+
+
+  // if this instance of the pieceMovement doesn't take pieces, this method is called
+  private void getNonTakeMoves(Coordinate coordinates, String teamName,
+      List<Coordinate> possibleMoves) {
+    defineParameters();
     while (checkIfValidMove(coordinates, teamName) && Math.abs(currX) <= Math.abs(xLimit)
         && Math.abs(currY) <= Math.abs(yLimit)) {
       Coordinate newCoordinates = makeCoordinate(coordinates.getX() + xDirection,
@@ -95,33 +107,13 @@ public class FiniteSlide extends PieceMovement {
       currX += xDirection;
       currY += yDirection;
     }
-    setChangeX(xLimit);
-    setChangeY(yLimit);
+
   }
 
   // if this instance of the pieceMovement takes pieces, this method is called
   private void getTakeMoves(Coordinate coordinates, String teamName,
       List<Coordinate> possibleMoves) {
-    int xLimit = getChangeX();
-    int yLimit = getChangeY();
-    int xDirection;
-    int yDirection;
-    if (xLimit != 0) {
-      xDirection = xLimit / Math.abs(xLimit);
-    } else {
-      xDirection = 0;
-    }
-    if (yLimit != 0) {
-      yDirection = yLimit / Math.abs(yLimit);
-    } else {
-      yDirection = 0;
-    }
-
-    int currX = xDirection;
-    int currY = yDirection;
-    setChangeX(xDirection);
-    setChangeY(yDirection);
-
+    defineParameters();
     while (checkIfMoveInBounds(coordinates) && checkThatNoFriendlyPieceInMoveDestination(
         coordinates, teamName) && Math.abs(currX) <= Math.abs(xLimit) && Math.abs(currY) <= Math
         .abs(yLimit)) {
@@ -136,8 +128,7 @@ public class FiniteSlide extends PieceMovement {
       currX += xDirection;
       currY += yDirection;
     }
-    setChangeX(xLimit);
-    setChangeY(yLimit);
+    revertParameters();
   }
 
 }
