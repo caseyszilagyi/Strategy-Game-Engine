@@ -7,7 +7,7 @@ ooga.model.components.moverestrictions
 ooga.model.components.moves
 ooga.model.components.turnconditions
 ooga.model.engine
-ooga.model.engine.action_files
+ooga.model.engine.actions
 ooga.model.initialization
 ooga.model.initialization.engine
 ooga.model.initialization.fileparsing

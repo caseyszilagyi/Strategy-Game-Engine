@@ -1,6 +1,6 @@
 package ooga.controller;
 
-import ooga.model.engine.Engine;
+import ooga.model.engine.running.Engine;
 import ooga.model.initialization.engine.Initializer;
 import ooga.model.initialization.engine.EngineInitializer;
 

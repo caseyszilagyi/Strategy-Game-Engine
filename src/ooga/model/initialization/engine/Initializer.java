@@ -1,6 +1,6 @@
 package ooga.model.initialization.engine;
 
-import ooga.model.engine.Engine;
+import ooga.model.engine.running.Engine;
 
 /**
  * This interface will be used to initialize all types of games. This means choosing the game

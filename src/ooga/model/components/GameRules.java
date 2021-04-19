@@ -1,18 +1,13 @@
 package ooga.model.components;
 
-import static java.lang.System.exit;
-
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import ooga.controller.FrontEndExternalAPI;
 import ooga.model.components.turnconditions.TurnCondition;
 import ooga.model.components.turnconditions.TurnConditionResult;
-import ooga.model.engine.action_files.Action;
 import ooga.model.initialization.fileparsing.XMLParser;
 import org.w3c.dom.Node;
 

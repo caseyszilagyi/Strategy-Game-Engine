@@ -1,4 +1,4 @@
-package ooga.model.engine.action_files;
+package ooga.model.engine.actions;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import ooga.model.components.GameBoard;
 
 public class ActionCreator {
 
-  private static final String FILE_PATH = "ooga.model.engine.action_files.";
+  private static final String FILE_PATH = "ooga.model.engine.actions.";
   private static final String NAME_EXTENSION = "Action";
 
   private FrontEndExternalAPI viewController;

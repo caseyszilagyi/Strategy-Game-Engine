@@ -77,8 +77,8 @@ loadScripts(document, 'script');</script>
 <h1 title="Class GameEngine" class="title">Class GameEngine</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree">java.lang.Object
-<div class="inheritance"><a href="Engine.html" title="class in ooga.model.engine">ooga.model.engine.Engine</a>
-<div class="inheritance">ooga.model.engine.GameEngine</div>
+<div class="inheritance"><a href="Engine.html" title="class in ooga.model.engine">ooga.model.engine.running.Engine</a>
+<div class="inheritance">ooga.model.engine.running.GameEngine</div>
 </div>
 </div>
 <section class="description">
@@ -109,7 +109,7 @@ extends <a href="Engine.html" title="class in ooga.model.engine">Engine</a></pre
 <td class="col-last">&nbsp;</td>
 </tr>
 <tr class="row-color">
-<td class="col-first"><code>private <a href="action_files/ActionCreator.html" title="class in ooga.model.engine.action_files">ActionCreator</a></code></td>
+<td class="col-first"><code>private <a href="action_files/ActionCreator.html" title="class in ooga.model.engine.actions">ActionCreator</a></code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#actionCreator">actionCreator</a></span></code></th>
 <td class="col-last">&nbsp;</td>
 </tr>
@@ -154,7 +154,7 @@ extends <a href="Engine.html" title="class in ooga.model.engine">Engine</a></pre
 <td class="col-last">&nbsp;</td>
 </tr>
 <tr class="alt-color">
-<td class="col-first"><code>private java.util.List&lt;<a href="action_files/Action.html" title="class in ooga.model.engine.action_files">Action</a>&gt;</code></td>
+<td class="col-first"><code>private java.util.List&lt;<a href="action_files/Action.html" title="class in ooga.model.engine.actions">Action</a>&gt;</code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#priorActions">priorActions</a></span></code></th>
 <td class="col-last">&nbsp;</td>
 </tr>
@@ -252,7 +252,7 @@ int&nbsp;y)</code></th>
 </tr>
 <tr class="row-color" id="i5">
 <td class="col-first"><code>void</code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#executeAction(ooga.model.engine.action_files.Action)">executeAction</a></span>&#8203;(<a href="action_files/Action.html" title="class in ooga.model.engine.action_files">Action</a>&nbsp;action)</code></th>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#executeAction(ooga.model.engine.action_files.Action)">executeAction</a></span>&#8203;(<a href="action_files/Action.html" title="class in ooga.model.engine.actions">Action</a>&nbsp;action)</code></th>
 <td class="col-last">
 <div class="block">Executes an action.</div>
 </td>
@@ -400,7 +400,7 @@ int&nbsp;y)</code></th>
 <li>
 <section class="detail" id="priorActions">
 <h3>priorActions</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">java.util.List&lt;<a href="action_files/Action.html" title="class in ooga.model.engine.action_files">Action</a>&gt;</span>&nbsp;<span class="member-name">priorActions</span></div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">java.util.List&lt;<a href="action_files/Action.html" title="class in ooga.model.engine.actions">Action</a>&gt;</span>&nbsp;<span class="member-name">priorActions</span></div>
 </section>
 </li>
 <li>
@@ -430,7 +430,7 @@ int&nbsp;y)</code></th>
 <li>
 <section class="detail" id="actionCreator">
 <h3>actionCreator</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="action_files/ActionCreator.html" title="class in ooga.model.engine.action_files">ActionCreator</a></span>&nbsp;<span class="member-name">actionCreator</span></div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="action_files/ActionCreator.html" title="class in ooga.model.engine.actions">ActionCreator</a></span>&nbsp;<span class="member-name">actionCreator</span></div>
 </section>
 </li>
 <li>
@@ -541,7 +541,7 @@ int&nbsp;y)</span></div>
 <li>
 <section class="detail" id="executeAction(ooga.model.engine.action_files.Action)">
 <h3>executeAction</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">executeAction</span>&#8203;(<span class="parameters"><a href="action_files/Action.html" title="class in ooga.model.engine.action_files">Action</a>&nbsp;action)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">executeAction</span>&#8203;(<span class="parameters"><a href="action_files/Action.html" title="class in ooga.model.engine.actions">Action</a>&nbsp;action)</span></div>
 <div class="block">Executes an action. An action can be something that has to do with a piece</div>
 <dl class="notes">
 <dt>Specified by:</dt>

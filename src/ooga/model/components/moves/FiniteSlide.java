@@ -107,7 +107,7 @@ public class FiniteSlide extends PieceMovement {
       currX += xDirection;
       currY += yDirection;
     }
-
+    revertParameters();
   }
 
   // if this instance of the pieceMovement takes pieces, this method is called
