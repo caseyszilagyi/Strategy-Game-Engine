@@ -2,8 +2,7 @@ package ooga.model.initialization.pieces;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
-import ooga.ClassLoaderException;
-import ooga.controller.FrontEndExternalAPI;
+import ooga.exceptions.ClassLoaderException;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;
 import ooga.model.components.moveconditions.Condition;
