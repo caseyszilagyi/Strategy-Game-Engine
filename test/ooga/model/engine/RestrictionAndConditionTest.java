@@ -211,6 +211,15 @@ public class RestrictionAndConditionTest {
     printBoard();
   }
 
+  @Test
+  void testCastleThroughCheck(){
+    modelController.setBoardState("castleThroughCheck");
+    gameBoard=gameEngine.getBoard();
+    printBoard();
+    actOnCoordinates(4,7);
+    testActualExpectedCoordinates("4:6");
+  }
+
 
   private void isPieceAtCoordinates(String pieceName, int x, int y){
     assertEquals(gameBoard.getPieceAtCoordinate(x, y).getPieceName(), pieceName);
