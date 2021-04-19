@@ -1,4 +1,4 @@
-package ooga.view;
+package ooga.view.window;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -18,7 +18,7 @@ public class GameWindowFactory {
   public GameWindow makeWindow (String windowType){
     GameWindow newWindow;
     try {
-      Class c = Class.forName("ooga.view." + windowType + "Window");
+      Class c = Class.forName("ooga.view.window." + windowType + "Window");
       newWindow = (GameWindow) c.getConstructor().newInstance();
     } catch (ClassNotFoundException | NoSuchMethodException |
         InstantiationException | IllegalAccessException | InvocationTargetException e) {

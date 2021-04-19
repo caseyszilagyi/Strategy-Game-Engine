@@ -45,6 +45,7 @@
 .hbox {
   -fx-background-radius: 5.0;
   -fx-padding: 8;
+  -fx-spacing: 40;
 }
 
 #hbox-custom {

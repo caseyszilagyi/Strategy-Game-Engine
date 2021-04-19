@@ -2,9 +2,7 @@ package ooga.controller;
 
 import java.util.Iterator;
 import javafx.util.Pair;
-import ooga.view.Board;
-import ooga.view.Display;
-import ooga.view.GameDisplay;
+import ooga.view.board.Board;
 
 /**
  * This is a concrete implementation of what is passed around in the back end to

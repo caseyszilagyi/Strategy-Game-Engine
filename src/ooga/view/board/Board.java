@@ -1,4 +1,4 @@
-package ooga.view;
+package ooga.view.board;
 
 import java.awt.Point;
 import java.util.Iterator;
@@ -148,6 +148,7 @@ public class Board extends GridPane {
   }
 
   private void handleTileClick(int i, int j){
+    unhighlightAll();
     modelController.actOnCoordinates(i, j);
   }
 

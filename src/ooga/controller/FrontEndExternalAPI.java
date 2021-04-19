@@ -45,8 +45,7 @@ public interface FrontEndExternalAPI {
 
   /**
    * Gives all of the possible moves that were requested
-   * @return An iterable of pairs that represent the possible moves
-   */
+\   */
   public void giveAllPossibleMoves(Iterator<Pair<Integer, Integer>> possibleMoves);
 
 
@@ -59,7 +58,6 @@ public interface FrontEndExternalAPI {
 
   /**
    * Gives the pieces that a selected piece can be changed to
-   * @return The pieces it can be changed to
    */
   public void givePieceChangeOptions(Iterable<String> pieceChangeOptions);
 }

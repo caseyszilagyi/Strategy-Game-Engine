@@ -1,12 +1,10 @@
 package ooga.model.initialization.engine;
 
-import java.util.Arrays;
 import ooga.controller.FrontEndExternalAPI;
 import ooga.model.engine.Engine;
 import ooga.model.engine.GameEngine;
 import ooga.model.initialization.BoardCreator;
 import ooga.model.initialization.PlayerCreator;
-import ooga.view.Board;
 
 
 /**

@@ -1,6 +1,7 @@
-package ooga.view;
+package ooga.view.window;
 
 import javafx.stage.Stage;
+import ooga.view.GameScene;
 
 /**
  * A subclass of {@link GameWindow} that extends {@link Stage}. This is the most common

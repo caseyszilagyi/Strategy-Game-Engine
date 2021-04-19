@@ -3,7 +3,7 @@ package ooga;
 import java.util.ResourceBundle;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import ooga.view.GameWindow;
+import ooga.view.window.GameWindow;
 import ooga.view.*;
 
 /**

@@ -1,17 +1,18 @@
-package ooga.view;
+package ooga.view.board;
 
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
-import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.util.Pair;
 import ooga.controller.BoardController;
 import ooga.controller.ModelController;
+import ooga.view.GameScene;
 
 /**
  * This scene holds the view representation of the main game board. The scene has a top
@@ -20,9 +21,9 @@ import ooga.controller.ModelController;
  */
 public class BoardScene extends GameScene {
 
-  private ResourceBundle resources;
-  private GridPane sceneRoot;
-  private ModelController modelController;
+  private final ResourceBundle resources;
+  private final GridPane sceneRoot;
+  private final ModelController modelController;
   private Board board;
 
   /**
@@ -33,10 +34,11 @@ public class BoardScene extends GameScene {
    * @param modelController the {@link ModelController} for this game
    */
   public BoardScene(Parent root, ResourceBundle resources,
-      ModelController modelController) {
-    super(root, resources);
+      EventHandler<ActionEvent> handler, ModelController modelController) {
+    super(root, handler, resources);
     this.modelController = modelController;
     this.resources = resources;
+    board = new Board(8, 8, modelController);
     sceneRoot = (GridPane) root;
     sceneRoot.getStyleClass().add("boardScene");
     sceneRoot.setVgap(30);
@@ -60,25 +62,14 @@ public class BoardScene extends GameScene {
     col1.setHalignment(HPos.CENTER);
     sceneRoot.getColumnConstraints().add(col1);
 
-    HBox topBar = new HBox();
-    topBar.setAlignment(Pos.CENTER);
+
 
     Label welcomeLabel = makeLabel("title-text");
     sceneRoot.add(welcomeLabel, 0, 0);
 
-    Button pauseButton = makeButton("pauseButton",
-        e -> System.out.println("Pause Button clicked"));
-
-    Button settingsButton = makeButton("settingsButton",
-        e -> System.out.println("Settings Button clicked"));
-
-    Button helpButton = makeButton("helpButton",
-        e -> System.out.println("Help Button clicked"));
-
-    topBar.getChildren().addAll(pauseButton, settingsButton, helpButton);
+    Node topBar = makeTopBar();
 
     sceneRoot.add(topBar, 0, 1);
-    board = new Board(8, 8, modelController);
     sceneRoot.add(board, 0, 3);
   }
 }

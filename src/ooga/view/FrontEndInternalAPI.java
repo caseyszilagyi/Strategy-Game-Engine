@@ -10,6 +10,7 @@ package ooga.view;
  *
  * @author Casey Szilagyi
  */
+@Deprecated
 public interface FrontEndInternalAPI {
   
 }
