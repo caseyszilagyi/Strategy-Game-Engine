@@ -9,6 +9,7 @@
       <takeY>null</takeY>
       <restrictions>
         <FirstMove></FirstMove>
+        <Check></Check>
       </restrictions>
     </FiniteSlide>
     <FiniteSlide>
@@ -17,6 +18,9 @@
       <mustTake>False</mustTake>
       <takeX>null</takeX>
       <takeY>null</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
       <conditions>
         <PawnPromotion></PawnPromotion>
       </conditions>
@@ -27,6 +31,9 @@
       <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
       <conditions>
         <PawnPromotion></PawnPromotion>
       </conditions>
@@ -37,6 +44,9 @@
       <mustTake>True</mustTake>
       <takeX>0</takeX>
       <takeY>0</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
       <conditions>
         <PawnPromotion></PawnPromotion>
       </conditions>

@@ -2,10 +2,14 @@ ooga
 ooga.controller
 ooga.model
 ooga.model.components
-ooga.model.components.moves
+ooga.model.components.moveconditions
 ooga.model.components.moverestrictions
+ooga.model.components.moves
+ooga.model.components.turnconditions
 ooga.model.engine
+ooga.model.engine.action_files
 ooga.model.initialization
+ooga.model.initialization.engine
 ooga.model.initialization.fileparsing
 ooga.model.initialization.pieces
 ooga.view

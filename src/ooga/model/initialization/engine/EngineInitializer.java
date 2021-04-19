@@ -1,6 +1,5 @@
 package ooga.model.initialization.engine;
 
-import java.util.Arrays;
 import ooga.controller.FrontEndExternalAPI;
 import ooga.model.engine.Engine;
 import ooga.model.engine.GameEngine;
@@ -37,13 +36,13 @@ public class EngineInitializer implements Initializer {
   public void initializeGame (String gameName) {
     boardCreator = new BoardCreator(gameName, boardController);
     gameEngine.setGameType(gameName);
-
     gameEngine.setBoard(boardCreator.makeBoard());
   }
 
   @Override
   public void setBoardState(String boardFileName) {
-
+    boardCreator.initializeMaps(boardFileName);
+    gameEngine.setBoard(boardCreator.makeBoard());
   }
 
   @Override
@@ -52,9 +51,10 @@ public class EngineInitializer implements Initializer {
   }
 
   @Override
-  public void addPlayers(String... playerFileNames) {
-    Arrays.stream(playerFileNames)
-        .forEach(s -> gameEngine.addActiveUser(playerCreator.makePlayer(s)));
+  public void addPlayers(String user, String opponent) {
+    gameEngine.addActiveUser(playerCreator.makePlayer(opponent));
+    gameEngine.addActiveUser(playerCreator.makePlayer(user));
+    boardCreator.setTeams(user, opponent);
   }
 
   @Override

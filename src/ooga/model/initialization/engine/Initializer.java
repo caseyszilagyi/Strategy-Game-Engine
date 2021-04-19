@@ -28,9 +28,10 @@ public interface Initializer {
 
   /**
    * Sets a player that is playing the game
-   * @param playerFileNames The string associated with the player name
+   * @param user The string associated with the person playing on the bottom of the board
+   * @param opponent The string associated with the person pplaying on the top of the board
    */
-  public void addPlayers(String... playerFileNames);
+  public void addPlayers(String user, String opponent);
 
   /**
    * Gets the engine that is being used to run the back end

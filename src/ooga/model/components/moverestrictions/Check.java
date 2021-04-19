@@ -1,5 +1,7 @@
 package ooga.model.components.moverestrictions;
 
+import java.util.List;
+import java.util.Set;
 import ooga.controller.FrontEndExternalAPI;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
@@ -9,54 +11,51 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Map;
 
 
+/**
+ * Checks if the user will be in check after the move in question is made
+ *
+ * @author Casey Szilagyi
+ */
 public class Check extends Restriction {
-    private Map<Coordinate, GamePiece> pieces;
 
-    /**
-     * Constructor used to hold things that many piece movement objects may need
-     *
-     * @param viewController The controller used to communicate with the front end
-     * @param gameBoard      The board that the pieces are on.
-     * @param parameters     The map with parameters, if there are any
-     * @param piece          The piece that the restriction corresponds to
-     */
-    public Check(FrontEndExternalAPI viewController, GameBoard gameBoard, Map<String, String> parameters, GamePiece piece) {
-        super(viewController, gameBoard, parameters, piece);
+  private Map<Coordinate, GamePiece> pieces;
+  GamePiece piece;
+  GameBoard board;
+  String thisTeamName;
+
+  /**
+   * Constructor used to hold things that many piece movement objects may need
+   *
+   * @param gameBoard      The board that the pieces are on.
+   * @param parameters     The map with parameters, if there are any
+   * @param piece          The piece that the restriction corresponds to
+   */
+  public Check(GameBoard gameBoard, Map<String, String> parameters, GamePiece piece) {
+    this.piece = piece;
+    this.board = gameBoard;
+    thisTeamName = piece.getPieceTeam();
+  }
+
+  /**
+   * Checks if any of the opponent's pieces can take the user's piece after it is moved
+   * @param endingCoordinates The ending coordinates of the move
+   * @return True if the move is not violated by check, false otherwise
+   */
+  @Override
+  public boolean checkRestriction(Coordinate endingCoordinates) {
+    GamePiece tempRemoval = null;
+    if(board.isPieceAtCoordinate(endingCoordinates)){
+       tempRemoval = board.getPieceAtCoordinate(endingCoordinates);
+    }
+    Coordinate startingCoordinates = piece.getPieceCoordinates();
+    board.moveBackendPiece(startingCoordinates, endingCoordinates);
+    Coordinate friendlyKingLocation = board.findPieceCoordinates(thisTeamName, "king");
+    Set<Coordinate> opponentTakeMoves = board.determineOppositeTeamTakeMovesWithoutRestrictions(thisTeamName);
+    board.moveBackendPiece(endingCoordinates, startingCoordinates);
+    if(tempRemoval != null){
+      board.addPiece(tempRemoval);
     }
 
-
-    /**
-     * Determines if any of the player's pieces can "take" the opponent's king, i.e. if
-     * the possible moves of a player's piece overlaps with the position of the enemy king
-     *
-     * @param board         current board
-     * @param currentPlayer player who is checking the opponent
-     * @return boolean to determine if opposing player has been put in check
-     */
-    public boolean opponentInCheck(GameBoard board, String currentPlayer) {
-        Coordinate kingLocation = board.findKing(getOppositePlayer(currentPlayer));
-        for (GamePiece piece : getPiecesByTeam(board, currentPlayer).values()) {
-            for (Coordinate coord : piece.determineAllLegalMoves()) {
-                return (coord == kingLocation);
-            }
-        }
-        return false;
-    }
-
-    private Map<Coordinate, GamePiece> getPiecesByTeam(GameBoard board, String currentPlayer) {
-        for (GamePiece piece : board.getPieceCoordMap().values()) {
-            if (piece.getPieceTeam().equals(currentPlayer)) pieces.put(piece.getPieceCoordinates(), piece);
-        }
-        return pieces;
-    }
-
-    @NotNull
-    private String getOppositePlayer(String currentPlayer) {
-        return (currentPlayer.equals("user")) ? "opponent" : "user";
-    }
-
-    @Override
-    public boolean checkRestriction(Coordinate endingCoordinates) {
-        return false;
-    }
+    return !opponentTakeMoves.contains(friendlyKingLocation);
+  }
 }

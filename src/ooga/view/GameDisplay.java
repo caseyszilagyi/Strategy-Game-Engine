@@ -1,7 +1,7 @@
 package ooga.view;
 
 import ooga.controller.BackEndExternalAPI;
-
+@Deprecated
 public class GameDisplay implements Display{
 
   BackEndExternalAPI modelController;

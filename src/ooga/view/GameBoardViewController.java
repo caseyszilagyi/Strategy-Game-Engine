@@ -4,6 +4,7 @@ import java.util.Iterator;
 import javafx.util.Pair;
 import ooga.controller.BackEndExternalAPI;
 import ooga.controller.FrontEndExternalAPI;
+import ooga.view.board.BoardScene;
 
 /**
  * The controller class for any {@link BoardScene}. This class implements
@@ -11,6 +12,7 @@ import ooga.controller.FrontEndExternalAPI;
  *
  * @author Yi Chen
  */
+@Deprecated
 public class GameBoardViewController implements FrontEndExternalAPI {
 
 

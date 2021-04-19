@@ -1,4 +1,4 @@
-package ooga.view;
+package ooga.view.board;
 
 import java.awt.Point;
 import javafx.event.EventHandler;

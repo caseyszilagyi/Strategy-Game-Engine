@@ -53,7 +53,7 @@ public class PieceCreator extends Creator {
     super.setComponents(PIECE_FILE_PATH, FILE_TYPE, this.gameType);
     this.viewController = viewController;
     this.gameBoard = gameBoard;
-    pieceComponentClassLoader = new PieceComponentClassLoader(gameBoard, viewController);
+    pieceComponentClassLoader = new PieceComponentClassLoader(gameBoard);
   }
 
   /**
@@ -68,7 +68,7 @@ public class PieceCreator extends Creator {
    */
   public GamePiece makePiece(String pieceName, Coordinate coordinates, int direction,
       FrontEndExternalAPI viewController, String team) {
-    GamePiece gamePiece = new GamePiece(coordinates, pieceName, viewController, gameBoard, team);
+    GamePiece gamePiece = new GamePiece(coordinates, pieceName, team);
     pieceFileNodes = super.makeRootNodeMap(pieceName);
     gamePiece.setPossibleMoves(makePieceMovements(direction, gamePiece));
     return gamePiece;
