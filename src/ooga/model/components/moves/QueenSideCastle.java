@@ -3,6 +3,7 @@ package ooga.model.components.moves;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;
@@ -19,6 +20,7 @@ public class QueenSideCastle extends PieceMovement{
   private GamePiece king;
   private GamePiece rook;
   private GameBoard board;
+  private String teamName;
 
   /**
    * The constructor takes the parameters of the move. This includes the change in position of the
@@ -33,6 +35,7 @@ public class QueenSideCastle extends PieceMovement{
       GameBoard gameBoard, GamePiece correspondingPiece) {
     super(parameters, direction, gameBoard);
     king = correspondingPiece;
+    teamName = king.getPieceTeam();
     board = gameBoard;
   }
 
@@ -63,8 +66,22 @@ public class QueenSideCastle extends PieceMovement{
     return moves;
   }
 
-  // Checks that we have the right pieces, that they haven't moved, and that there are the appropriate empty spaces
+  // Checks that we have the right pieces, they haven't moved, there are empty spaces,
+  // and the king doesn't move through check
   private boolean checkCastlingConditions(int kingX, int kingY) {
+    return checkPieceLocations(kingX, kingY) && checkMoveThroughCheck(kingX, kingY);
+  }
+
+  // Checks that the king doesn't move through check
+  private boolean checkMoveThroughCheck(int kingX, int kingY) {
+    return checkRestrictions(new Coordinate(kingX -1, kingY)) &&
+        checkRestrictions(new Coordinate(kingX-2, kingY));
+  }
+
+
+
+  // Checks that board spaces are correct and pieces haven't moved
+  private boolean checkPieceLocations(int kingX, int kingY) {
     return !king.hasMoved() && rook != null && !rook.hasMoved() &&
         !board.isPieceAtCoordinate(kingX - 1, kingY) && !board
         .isPieceAtCoordinate(kingX + -2, kingY)

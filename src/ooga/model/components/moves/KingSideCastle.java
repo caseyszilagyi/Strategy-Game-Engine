@@ -3,7 +3,7 @@ package ooga.model.components.moves;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import ooga.controller.FrontEndExternalAPI;
+import java.util.Set;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;
@@ -15,11 +15,13 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Casey Szilagyi
  */
-public class KingSideCastle extends PieceMovement {
+public class KingSideCastle extends FiniteSlide {
 
   private GamePiece king;
   private GamePiece rook;
   private GameBoard board;
+  private String teamName;
+  private List<Coordinate> possibleMoves;
 
   /**
    * The constructor takes the parameters of the move. This includes the change in position of the
@@ -32,8 +34,9 @@ public class KingSideCastle extends PieceMovement {
    */
   public KingSideCastle(Map<String, String> parameters, int direction, GameBoard gameBoard,
       GamePiece correspondingPiece) {
-    super(parameters, direction, gameBoard);
+    super(parameters, direction, gameBoard, correspondingPiece);
     king = correspondingPiece;
+    teamName = king.getPieceTeam();
     board = gameBoard;
   }
 
@@ -66,6 +69,17 @@ public class KingSideCastle extends PieceMovement {
 
   // Checks that we have the right pieces, that they haven't moved, and that there are the appropriate empty spaces
   private boolean checkCastlingConditions(int kingX, int kingY) {
+    return checkPieceLocations(kingX, kingY) && checkMoveThroughCheck(kingX, kingY);
+  }
+
+  // Checks that the king doesn't move through check
+  private boolean checkMoveThroughCheck(int kingX, int kingY){
+    return checkRestrictions(new Coordinate(kingX +1, kingY)) &&
+        checkRestrictions(new Coordinate(kingX+2, kingY));
+  }
+
+  // Checks that pieces are in the correct locations, and that there are empty spaces
+  private boolean checkPieceLocations(int kingX, int kingY) {
     return !king.hasMoved() && rook != null && !rook.hasMoved() &&
         !board.isPieceAtCoordinate(kingX + 1, kingY) && !board
         .isPieceAtCoordinate(kingX + 2, kingY);
