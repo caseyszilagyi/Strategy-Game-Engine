@@ -41,8 +41,8 @@ public class FiniteJump extends PieceMovement {
   public List<Coordinate> getAllPossibleMoves(Coordinate coordinates,
       String teamName) {
     List<Coordinate> possibleMoves = new ArrayList<>();
-    if (checkIfValidMove(coordinates, teamName) && checkRestrictions(coordinates)) {
-      Coordinate result = new Coordinate(coordinates, getChangeX(), getChangeY());
+    Coordinate result = new Coordinate(coordinates, getChangeX(), getChangeY());
+    if (checkIfValidMove(coordinates, teamName) && checkRestrictions(result)) {
       possibleMoves.add(result);
     }
     return possibleMoves;
