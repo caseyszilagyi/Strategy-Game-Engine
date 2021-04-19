@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import javafx.util.Pair;
 import ooga.controller.FrontEndExternalAPI;
 import ooga.model.components.moves.PieceMovement;
@@ -64,14 +66,9 @@ public class GamePiece {
   }
 
   public Set<Coordinate> determineAllPossibleRestrictionlessTakeMoves() {
-    Set<Coordinate> possibleMoveLocations = new HashSet<>();
-    for (PieceMovement move : allPossibleMoves) {
-      List<Coordinate> currentPossibilities = move
-          .getAllPossibleRestrictionlessTakeMoves(pieceCoordinates, pieceTeam);
-      possibleMoveLocations
-          .addAll(currentPossibilities);
-    }
-    return possibleMoveLocations;
+    return allPossibleMoves.stream()
+        .flatMap(move -> move.getAllPossibleRestrictionlessTakeMoves(pieceCoordinates,pieceTeam).stream())
+        .collect(Collectors.toSet());
   }
 
   /**
