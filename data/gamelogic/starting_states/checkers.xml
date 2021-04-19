@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<game>
-    <name>checkers</name>
-    <numrows>8</numrows>
-    <numcols>8</numcols>
+<piece piece="checkers">
+    <params>
+        <name>checkers</name>
+        <numrows>8</numrows>
+        <numcols>8</numcols>
+    </params>
     <board>
         <opponent>
-
+            <b8>normalChecker</b8>
+            <d8>normalChecker</d8>
+            <f8>normalChecker</f8>
+            <h8>normalChecker</h8>
+            <a7>normalChecker</a7>
+            <c7>normalChecker</c7>
+            <e7>normalChecker</e7>
+            <g7>normalChecker</g7>
+            <b6>normalChecker</b6>
+            <d6>normalChecker</d6>
+            <f6>normalChecker</f6>
+            <h6>normalChecker</h6>
         </opponent>
         <user>
-
+            <a3>normalChecker</a3>
+            <c3>normalChecker</c3>
+            <e3>normalChecker</e3>
+            <g3>normalChecker</g3>
+            <b2>normalChecker</b2>
+            <d2>normalChecker</d2>
+            <f2>normalChecker</f2>
+            <h2>normalChecker</h2>
+            <a1>normalChecker</a1>
+            <c1>normalChecker</c1>
+            <e1>normalChecker</e1>
+            <g1>normalChecker</g1>
         </user>
     </board>
-</game>
+</piece>
