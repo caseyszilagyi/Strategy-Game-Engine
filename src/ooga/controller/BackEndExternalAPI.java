@@ -23,13 +23,6 @@ public interface BackEndExternalAPI {
    */
   public void setGameType(String gameName);
 
-
-  /**
-   * Sets the rules that the game will follow
-   * @param rulesFileName The name of the file with all the rules
-   */
-  public void modifyGameRules(String rulesFileName);
-
   /**
    * Sets a player that is playing the game
    * @param user The first player, who has the bottom of the board
@@ -51,13 +44,6 @@ public interface BackEndExternalAPI {
 
 
   /**
-   * Makes the engine execute an action
-   * @param actionString The action to execute
-   */
-  public void executeAction(String actionString);
-
-
-  /**
    * Acts on this set of coordinates. May include showing all possible moves, placing
    * a piece, or doing nothing
    * @param x The x coordinate
@@ -65,6 +51,9 @@ public interface BackEndExternalAPI {
    */
   public void actOnCoordinates(int x, int y);
 
+  public void undoTurn();
+
+  public void changePiece(String pieceName);
 
   /**
    * Used to pause the game
