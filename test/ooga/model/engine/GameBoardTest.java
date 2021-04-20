@@ -149,11 +149,11 @@ public class GameBoardTest {
 
 
   private GamePiece makePiece(String pieceName, Coordinate coord){
-    return pieceCreator.makePiece(pieceName, coord, 1, viewController, "noTeam");
+    return pieceCreator.makePiece(pieceName, coord, 1, "noTeam");
   }
 
   private GamePiece makePiece(String pieceName, int xCoord, int yCoord){
-    return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), 1, viewController, "noTeam");
+    return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), 1, "noTeam");
   }
 
   private Coordinate makeCoordinates(int x, int y){

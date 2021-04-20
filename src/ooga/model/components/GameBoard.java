@@ -358,6 +358,9 @@ public class GameBoard implements Board {
     viewController.givePieceChangeOptions(pieceList);
   }
 
+  public CompletedAction getMostRecentAction(){
+    return history.get(history.size()-1);
+  }
 
   public void undoTurn(){
     if(history.size() == 0){ return; }

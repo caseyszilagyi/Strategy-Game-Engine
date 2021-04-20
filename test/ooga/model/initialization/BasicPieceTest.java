@@ -336,20 +336,20 @@ public class BasicPieceTest {
 
   // piece creator methods
   private GamePiece makePiece(String pieceName, int xCoord, int yCoord){
-    GamePiece piece = pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), 1, dummyViewController, "Casey");
+    GamePiece piece = pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), 1, "Casey");
     gameBoard.addPiece(piece);
     return piece;
   }
 
   private GamePiece makeEnemyPiece(String pieceName, int xCoord, int yCoord){
-    GamePiece piece = pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), -1, dummyViewController, "NotCasey");
+    GamePiece piece = pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), -1, "NotCasey");
     gameBoard.addPiece(piece);
     return piece;
   }
 
 
   private GamePiece makeDummyGamePiece(String teamName, int x, int y){
-    GamePiece piece = pieceCreator.makePiece("dummyChessPiece", makeCoordinates(x, y), 1, dummyViewController, teamName);
+    GamePiece piece = pieceCreator.makePiece("dummyChessPiece", makeCoordinates(x, y), 1, teamName);
     piece.setPieceTeam(teamName);
     gameBoard.addPiece(piece);
     return piece;

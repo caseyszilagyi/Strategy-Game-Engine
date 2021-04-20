@@ -84,7 +84,7 @@ public class ModelController implements BackEndExternalAPI {
 
   @Override
   public void offerDraw(){
-    
+
   }
 
 
