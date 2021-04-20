@@ -123,6 +123,10 @@ public class GameEngine extends Engine {
   }
 
 
+  public void undoTurn(){
+    curBoard.undoTurn();
+  }
+
   @Override
   public void saveCurrentState(String fileName) {
     //TODO: add saving capabilities for the board and moves

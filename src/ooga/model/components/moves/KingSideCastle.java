@@ -74,7 +74,8 @@ public class KingSideCastle extends FiniteSlide {
 
   // Checks that the king doesn't move through check
   private boolean checkMoveThroughCheck(int kingX, int kingY){
-    return checkRestrictions(new Coordinate(kingX +1, kingY)) &&
+    return checkRestrictions(new Coordinate(kingX, kingY)) &&
+        checkRestrictions(new Coordinate(kingX +1, kingY)) &&
         checkRestrictions(new Coordinate(kingX+2, kingY));
   }
 

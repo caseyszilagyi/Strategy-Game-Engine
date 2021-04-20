@@ -1,7 +1,7 @@
 package ooga.model.components;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -22,14 +22,19 @@ public class GameBoard implements Board {
 
   private FrontEndExternalAPI viewController;
   private int width, height;
-  private Map<Coordinate, GamePiece> pieceCoordMap = new HashMap<>();
+  private Map<Coordinate, GamePiece> pieceCoordinateMap = new HashMap<>();
   private Set<Coordinate> currentLegalMoveCoordinates;
 
+  // For executing moves
   private Coordinate activeCoordinates;
   private GamePiece activePiece;
-  private GamePiece tempStoragePiece;
 
   private boolean isHeldPiece = false;
+
+  //History logging
+  private List<CompletedAction> history = new ArrayList<>();
+  int moveNumber = 0;
+
 
   /**
    * Initializes this board
@@ -87,7 +92,6 @@ public class GameBoard implements Board {
     return width;
   }
 
-
   /**
    * Determines all legal moves for a piece at a given coordinate. Automatically sets this piece as
    * the active piece when this is done.
@@ -97,8 +101,8 @@ public class GameBoard implements Board {
    */
   public void determineAllLegalMoves(int x, int y) {
     activeCoordinates = makeCoordinates(x, y);
-    currentLegalMoveCoordinates = pieceCoordMap.get(activeCoordinates).determineAllLegalMoves();
-    activePiece = pieceCoordMap.get(activeCoordinates);
+    currentLegalMoveCoordinates = pieceCoordinateMap.get(activeCoordinates).determineAllLegalMoves();
+    activePiece = pieceCoordinateMap.get(activeCoordinates);
     passLegalMoves(currentLegalMoveCoordinates);
   }
 
@@ -120,7 +124,7 @@ public class GameBoard implements Board {
    */
   public Set<Coordinate> determineOppositeTeamTakeMovesWithoutRestrictions(String teamName) {
     Set<Coordinate> opponentTeamLegalMoves = new HashSet<>();
-    for (GamePiece piece : pieceCoordMap.values()) {
+    for (GamePiece piece : pieceCoordinateMap.values()) {
       if (!piece.getPieceTeam().equals(teamName)) {
         opponentTeamLegalMoves.addAll(piece.determineAllPossibleRestrictionlessTakeMoves());
       }
@@ -168,7 +172,7 @@ public class GameBoard implements Board {
    * @return True if there is a piece at the coordinate, false otherwise
    */
   public boolean isPieceAtCoordinate(Coordinate coordinate) {
-    return (isCoordinateOnBoard(coordinate) && pieceCoordMap.containsKey(coordinate));
+    return (isCoordinateOnBoard(coordinate) && pieceCoordinateMap.containsKey(coordinate));
   }
 
   /**
@@ -189,7 +193,7 @@ public class GameBoard implements Board {
    * @return The piece object
    */
   public GamePiece getPieceAtCoordinate(Coordinate coordinate) {
-    return pieceCoordMap.get(coordinate);
+    return pieceCoordinateMap.get(coordinate);
   }
 
   /**
@@ -227,8 +231,7 @@ public class GameBoard implements Board {
   public void movePiece(int endingX, int endingY) {
     Coordinate newCoordinates = makeCoordinates(endingX, endingY);
     activePiece.executeMove(newCoordinates);
-    removePiece(activeCoordinates);
-    pieceCoordMap.put(newCoordinates, activePiece);
+    pieceCoordinateMap.put(newCoordinates, activePiece);
   }
 
 
@@ -241,10 +244,12 @@ public class GameBoard implements Board {
    */
   @Override
   public boolean movePiece(Coordinate start, Coordinate end) {
-    if (pieceCoordMap.get(start) == null || !isCoordinateOnBoard(end)) {
+    if (pieceCoordinateMap.get(start) == null || !isCoordinateOnBoard(end)) {
       return false;
     }
-    movePiece(start.getX(), start.getY(), end.getX(), end.getY());
+    addCompletedAction(ActionType.MOVE, pieceCoordinateMap.get(start), start, end);
+    moveBackendPiece(start, end);
+    viewController.movePiece(start.getX(), start.getY(), end.getX(), end.getY());
     return true;
   }
 
@@ -259,8 +264,9 @@ public class GameBoard implements Board {
    * @param endingY   The ending y position of the piece
    */
   public void movePiece(int startingX, int startingY, int endingX, int endingY) {
-    moveBackendPiece(startingX, startingY, endingX, endingY);
-    viewController.movePiece(startingX, startingY, endingX, endingY);
+    Coordinate starting = makeCoordinates(startingX, startingY);
+    Coordinate ending = makeCoordinates(endingX, endingY);
+    movePiece(starting, ending);
   }
 
   /**
@@ -285,10 +291,10 @@ public class GameBoard implements Board {
    * @param end   The ending coordinates of the piece
    */
   public void moveBackendPiece(Coordinate start, Coordinate end) {
-    GamePiece currentPiece = pieceCoordMap.get(start);
+    GamePiece currentPiece = pieceCoordinateMap.get(start);
     currentPiece.setPieceCoordinates(end);
-    pieceCoordMap.remove(start);
-    pieceCoordMap.put(end, currentPiece);
+    pieceCoordinateMap.remove(start);
+    pieceCoordinateMap.put(end, currentPiece);
   }
 
 
@@ -299,43 +305,44 @@ public class GameBoard implements Board {
    */
   @Override
   public void removePiece(Coordinate coordinate) {
-    pieceCoordMap.remove(coordinate);
+    addCompletedAction(ActionType.REMOVE, pieceCoordinateMap.get(coordinate), coordinate);
+    pieceCoordinateMap.remove(coordinate);
     viewController.removePiece(coordinate.getX(), coordinate.getY());
   }
 
 
-  /**
-   * Adds a piece to the board
-   *
-   * @param newPieceType The new piece to add
-   * @return The location on the board that it is placed at
-   */
-  @Override
-  public boolean addPiece(GamePiece newPieceType) {
-    Coordinate newPieceCoordinates = newPieceType.getPieceCoordinates();
+  public boolean addBackendPiece(GamePiece newPiece){
+    Coordinate newPieceCoordinates = newPiece.getPieceCoordinates();
     if (isAnyCoordinateConflicts(newPieceCoordinates)) {
       return false;
     }
-    pieceCoordMap.put(newPieceCoordinates, newPieceType);
+    pieceCoordinateMap.put(newPieceCoordinates, newPiece);
     return true;
   }
 
+  /**
+   * Adds a piece to the board
+   *
+   * @param newPiece The new piece to add
+   * @return The location on the board that it is placed at
+   */
+  @Override
+  public boolean addPiece(GamePiece newPiece) {
+    addCompletedAction(ActionType.ADD, newPiece, newPiece.getPieceCoordinates());
+    Coordinate coords = newPiece.getPieceCoordinates();
+    viewController.setBoardSpace(coords.getX(), coords.getY(), newPiece.getPieceName(),
+        newPiece.getPieceTeam());
+    return addBackendPiece(newPiece);
+  }
 
+  // Checks if there are conflicts for a piece moving to the given coordinates
   private boolean isAnyCoordinateConflicts(Coordinate coordinates) {
-    if (!isCoordinateOnBoard(coordinates)) {
-      System.err.println("Coordinate outside of the board");
-      return true;
-    }
-    if (isPieceAtCoordinate(coordinates)) {
-      System.err.println("Coordinate is occupied");
-      return true;
-    }
-    return false;
+    return (!isCoordinateOnBoard(coordinates) || isPieceAtCoordinate(coordinates));
   }
 
 
   public Coordinate findPieceCoordinates(String teamName, String pieceName) {
-    for (GamePiece piece : pieceCoordMap.values()) {
+    for (GamePiece piece : pieceCoordinateMap.values()) {
       if (piece.getPieceName().equals(pieceName) && piece.getPieceTeam().equals(teamName)) {
         return piece.getPieceCoordinates();
       }
@@ -343,15 +350,40 @@ public class GameBoard implements Board {
     return null;
   }
 
-  public Map<Coordinate, GamePiece> getPieceCoordMap() {
-    return pieceCoordMap;
+  public Map<Coordinate, GamePiece> getPieceCoordinateMap() {
+    return pieceCoordinateMap;
   }
 
   public void passPieceChangeOptions(Iterable<String> pieceList) {
     viewController.givePieceChangeOptions(pieceList);
   }
 
-  // helper methods
+
+  public void undoTurn(){
+    if(history.size() == 0){ return; }
+    List<CompletedAction> actionsToRevert = new ArrayList<>();
+    int size = history.size();
+    CompletedAction currentElement = history.get(size-1);
+    while(currentElement.turnNumber() == moveNumber-1){
+      actionsToRevert.add(currentElement);
+      history.remove(size-1);
+      size--;
+      currentElement = history.get(size-1);
+    }
+    moveNumber--;
+    actionsToRevert.stream().forEach(action -> action.revert(this));
+  }
+
+  public void nextTurn(){
+    moveNumber++;
+  }
+
+  //
+  private void addCompletedAction(ActionType type, GamePiece piece, Coordinate... coordinates){
+    history.add(new CompletedAction(moveNumber, type, piece, coordinates));
+  }
+
+
 
   // makes a set of coordinates
   private Coordinate makeCoordinates(int x, int y) {

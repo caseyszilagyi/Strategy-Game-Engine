@@ -6,13 +6,10 @@ import ooga.model.initialization.engine.EngineInitializer;
 
 public class ModelController implements BackEndExternalAPI {
 
+  private Initializer engineInitializer;
   private Engine gameEngine;
-
-  private Initializer creator;
   private FrontEndExternalAPI boardController;
 
-  public ModelController(){
-  }
 
   @Override
   public String toString(){
@@ -26,20 +23,9 @@ public class ModelController implements BackEndExternalAPI {
   @Override
   public void setBoardController(FrontEndExternalAPI newViewController) {
     boardController = newViewController;
-    creator = new EngineInitializer(boardController);
-    gameEngine = creator.getEngine();
+    engineInitializer = new EngineInitializer(boardController);
+    gameEngine = engineInitializer.getEngine();
     gameEngine.setIfTurnRules(false);
-  }
-
-  /**
-   * Sets the game that the engine initializer will start. By default, this initializes
-   * the normal version of the game
-   * @param gameName The name of the game
-   */
-  @Override
-  public void setGameType(String gameName) {
-    creator.initializeGame(gameName);
-    setPlayers("user", "opponent");
   }
 
   /**
@@ -53,27 +39,60 @@ public class ModelController implements BackEndExternalAPI {
   }
 
   /**
+   * Sets the game that the engine initializer will start. By default, this initializes
+   * the normal version of the game
+   * @param gameName The name of the game
+   */
+  @Override
+  public void setGameType(String gameName) {
+    engineInitializer.initializeGame(gameName);
+    setPlayers("user", "opponent");
+  }
+
+  /**
    * Sets the board state to a different one than the default
    * @param boardFileName The file name that contains the board
    */
   @Override
   public void setBoardState(String boardFileName) {
-    creator.setBoardState(boardFileName);
+    engineInitializer.setBoardState(boardFileName);
 
+  }
+
+  /**
+   * Sets the players that will be playing the game
+   * @param user The first player, who has the bottom of the board
+   * @param opponent The second player, who has the top of the board
+   */
+  @Override
+  public void setPlayers(String user, String opponent) {
+    engineInitializer.addPlayers(user, opponent);
+  }
+
+  @Override
+  public void undoTurn(){
+    gameEngine.undoTurn();
   }
 
 
   //Everything below has not yet been implemented
 
   @Override
-  public void modifyGameRules(String rulesFileName) {
-    creator.setGameRules(rulesFileName);
+  public void forfeitGame(){
+
   }
 
   @Override
-  public void setPlayers(String user, String opponent) {
-    creator.addPlayers(user, opponent);
+  public void offerDraw(){
+    
   }
+
+
+  @Override
+  public void changePiece(String pieceName){
+
+  }
+
 
   @Override
   public void pauseGame() {
@@ -94,10 +113,7 @@ public class ModelController implements BackEndExternalAPI {
 
   }
 
-  @Override
-  public void executeAction(String actionString) {
-    gameEngine.executeAction(actionString);
-  }
+
 
   //for testing
   public Engine getEngine(){
