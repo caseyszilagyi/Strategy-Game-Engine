@@ -55,6 +55,10 @@ public interface BackEndExternalAPI {
 
   public void changePiece(String pieceName);
 
+  public void forfeitGame();
+
+  public void offerDraw();
+
   /**
    * Used to pause the game
    */

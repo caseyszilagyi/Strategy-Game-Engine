@@ -78,6 +78,17 @@ public class ModelController implements BackEndExternalAPI {
   //Everything below has not yet been implemented
 
   @Override
+  public void forfeitGame(){
+
+  }
+
+  @Override
+  public void offerDraw(){
+    
+  }
+
+
+  @Override
   public void changePiece(String pieceName){
 
   }
