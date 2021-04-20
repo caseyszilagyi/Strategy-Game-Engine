@@ -1,2 +1,7 @@
-package ooga.model.components;public class TurnType {
+package ooga.model.components;
+
+public enum ActionType {
+  MOVE,
+  REMOVE,
+  ADD
 }
