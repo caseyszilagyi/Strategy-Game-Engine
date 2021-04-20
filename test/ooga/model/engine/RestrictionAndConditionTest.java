@@ -220,6 +220,32 @@ public class RestrictionAndConditionTest {
     testActualExpectedCoordinates("4:6");
   }
 
+  @Test
+  void testMoveHistoryAndUndoBasicMove(){
+    actOnCoordinates(1,0);
+    actOnCoordinates(2,2);
+    printBoard();
+    gameBoard.undoTurn();
+    printBoard();
+    assertEquals("knight", gameBoard.getPieceAtCoordinate(1,0).getPieceName());
+    assertNull(gameBoard.getPieceAtCoordinate(2,2));
+  }
+
+  @Test
+  void testUndoTakeMove(){
+    actOnCoordinates(1,1);
+    actOnCoordinates(1,2);
+    actOnCoordinates(2,0);
+    actOnCoordinates(0,2);
+    actOnCoordinates(0,2);
+    actOnCoordinates(4,6);
+    printBoard();
+    modelController.undoTurn();
+    printBoard();
+    assertEquals("bishop", gameBoard.getPieceAtCoordinate(0,2).getPieceName());
+    assertEquals("pawn", gameBoard.getPieceAtCoordinate(4,6).getPieceName());
+  }
+
 
   private void isPieceAtCoordinates(String pieceName, int x, int y){
     assertEquals(gameBoard.getPieceAtCoordinate(x, y).getPieceName(), pieceName);
