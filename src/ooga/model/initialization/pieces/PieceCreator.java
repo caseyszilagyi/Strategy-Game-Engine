@@ -12,7 +12,6 @@ import ooga.model.components.moveconditions.Condition;
 import ooga.model.components.moverestrictions.Restriction;
 import ooga.model.components.moves.PieceMovement;
 import ooga.model.initialization.Creator;
-import ooga.model.initialization.fileparsing.XMLParser;
 import org.w3c.dom.Node;
 
 /**
@@ -30,7 +29,6 @@ public class PieceCreator extends Creator {
   private final String CONDITION_TAG = "conditions";
   private String gameType;
 
-  private XMLParser xmlParser = new XMLParser();
   private PieceComponentClassLoader pieceComponentClassLoader;
 
   // Intermediate node maps to keep track of things
@@ -40,7 +38,6 @@ public class PieceCreator extends Creator {
   private Map<String, List<Node>> specificMoveComponent;
 
   private FrontEndExternalAPI viewController;
-  private GameBoard gameBoard;
 
 
   /**
@@ -52,7 +49,6 @@ public class PieceCreator extends Creator {
     this.gameType = gameType;
     super.setComponents(PIECE_FILE_PATH, FILE_TYPE, this.gameType);
     this.viewController = viewController;
-    this.gameBoard = gameBoard;
     pieceComponentClassLoader = new PieceComponentClassLoader(gameBoard);
   }
 
@@ -63,11 +59,9 @@ public class PieceCreator extends Creator {
    * @param coordinates    The coordinates that the piece is at
    * @param direction      The direction that the piece can move, relative to the data file
    *                       information
-   * @param viewController The view controller, used to pass movement information to the front end
    * @return The GamePiece that has been instantiated.
    */
-  public GamePiece makePiece(String pieceName, Coordinate coordinates, int direction,
-      FrontEndExternalAPI viewController, String team) {
+  public GamePiece makePiece(String pieceName, Coordinate coordinates, int direction, String team) {
     GamePiece gamePiece = new GamePiece(coordinates, pieceName, team);
     pieceFileNodes = super.makeRootNodeMap(pieceName);
     gamePiece.setPossibleMoves(makePieceMovements(direction, gamePiece));
