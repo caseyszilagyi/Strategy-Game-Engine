@@ -175,6 +175,13 @@ public class Board extends GridPane {
     tiles[(int) p.getX()][(int) p.getY()].addPiece(piece);
   }
 
+  public void addPiece(int x, int y, String color, String fileName) {
+    ImageView piece = new ImageView(new Image("BasicChessPieces/" + color + fileName));
+    piece.setFitHeight(SQUARE_SIZE);
+    piece.setFitWidth(SQUARE_SIZE);
+    tiles[x][y].addPiece(piece);
+  }
+
   private void handleTileClick(int i, int j) {
     unhighlightAll();
     modelController.actOnCoordinates(i, j);
