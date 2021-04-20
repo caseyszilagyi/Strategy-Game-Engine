@@ -89,7 +89,6 @@ public class BoardCreator extends Creator {
         .makePiece(pieceType, pieceCoordinate, direction, viewController, team);
     setToAdd.add(newPiece);
     board.addPiece(newPiece);
-    viewController.setBoardSpace(pieceX, pieceY, pieceType, team);
   }
 
 
