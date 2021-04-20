@@ -49,7 +49,7 @@ public class Check extends Restriction {
     }
     Boolean result = determineIfInCheck(endingCoordinates);
     if(tempRemoval != null){
-      board.addPiece(tempRemoval);
+      board.addBackendPiece(tempRemoval);
     }
 
     return result;
