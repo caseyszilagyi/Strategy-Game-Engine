@@ -106,6 +106,16 @@ public class Board extends GridPane {
     return piece;
   }
 
+  /**
+   * Determines whether the queried tile is empty.
+   * @param x x coordinate
+   * @param y y coordinate
+   * @return a boolean
+   */
+  public boolean spaceIsEmpty(int x, int y){
+    return tiles[x][y].getPiece() == null;
+  }
+
 
   private Tile createTile(int i, int j, Color color){
     return new Tile(color, SQUARE_SIZE, new Point(i, j), e -> handleTileClick(i, j));
@@ -140,7 +150,7 @@ public class Board extends GridPane {
     addPiece(7, 7, "White", "Rook.png");
   }
 
-  private void addPiece(int x, int y, String color, String fileName){
+  public void addPiece(int x, int y, String color, String fileName){
     ImageView bishop = new ImageView(new Image("BasicChessPieces/" + color + fileName));
     bishop.setFitHeight(SQUARE_SIZE);
     bishop.setFitWidth(SQUARE_SIZE);
