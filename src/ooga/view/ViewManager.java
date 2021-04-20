@@ -105,9 +105,9 @@ public class ViewManager {
    * instance.
    */
   public void startGame(){
-    modelController.setGameType(DEFAULT_GAMETYPE);
     ((BoardScene) changeScene("boardScene"))
         .attachBoardControllerToBoard(boardController);
+    modelController.setGameType(DEFAULT_GAMETYPE);
     ((Stage) primaryWindow).setResizable(true);
 
   }

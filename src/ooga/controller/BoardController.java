@@ -40,15 +40,22 @@ public class BoardController implements FrontEndExternalAPI{
   }
 
   /**
-   * Sets a certain space on the board to a certain piece
+   * Sets a certain space on the board to a certain piece. This removes any piece that
+   * is already on that space.
    *
    * @param x The row of the space
    * @param y The column of the space
    * @param identifier The identifier of the piece
    * @param teamName The name of the team that the piece is playing on
    */
+  // TODO: Rename files so that this method works
   @Override
   public void setBoardSpace(int x, int y, String identifier, String teamName) {
+    if (!board.spaceIsEmpty(x, y)) {
+      board.removePiece(x, y);
+    }
+
+    board.addPiece(x, y, teamName, identifier);
 
   }
 

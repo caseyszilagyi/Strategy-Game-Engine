@@ -104,7 +104,6 @@ public class BasicEngineTest {
     System.out.println("testTaking");
     actOnCoordinates(6,4);
     actOnCoordinates(4,6);
-    checkRemoveCall(4,6);
     checkMoveCall(6,4,4,6);
     printBoard();
   }

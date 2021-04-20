@@ -14,8 +14,8 @@ import ooga.model.components.Player;
  */
 public class TurnManager {
 
-  private GameRules curRules;
-  private GameBoard curBoard;
+  private GameRules gameRules;
+  private GameBoard gameBoard;
 
   private Player currentPlayerTurn;
   private List<Player> activePlayers = new ArrayList<>();
@@ -41,8 +41,8 @@ public class TurnManager {
    * @param y The y coordinate of the turn click
    */
   protected void endTurn(int x, int y){
-    boolean isTurnOver = curRules
-        .checkForNextTurn(curBoard, curBoard.getPieceAtCoordinate(new Coordinate(x, y)));
+    boolean isTurnOver = gameRules
+        .checkForNextTurn(gameBoard, gameBoard.getPieceAtCoordinate(new Coordinate(x, y)));
     swapTurnIfOver(isTurnOver);
   }
 
@@ -62,6 +62,7 @@ public class TurnManager {
     int currentPlayerIndex = activePlayers.indexOf(currentPlayerTurn);
     int nextPlayerIndex = (currentPlayerIndex + 1) % activePlayers.size();
     currentPlayerTurn = activePlayers.get(nextPlayerIndex);
+    gameBoard.nextTurn();
   }
 
   //Starts the active player's timer
@@ -115,7 +116,7 @@ public class TurnManager {
    * @param board The board
    */
   protected void setBoard(GameBoard board){
-    curBoard = board;
+    gameBoard = board;
   }
 
   /**
@@ -134,7 +135,7 @@ public class TurnManager {
    * @param rules The GameRules class representing the rules
    */
   public void setRules(GameRules rules) {
-    curRules = rules;
+    gameRules = rules;
   }
 
 
