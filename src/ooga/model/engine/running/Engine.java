@@ -56,4 +56,6 @@ public abstract class Engine{
    */
   public abstract void saveCurrentState(String fileName);
 
+  public abstract void undoTurn();
+
 }
