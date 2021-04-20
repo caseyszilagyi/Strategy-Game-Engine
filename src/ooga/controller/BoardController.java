@@ -51,13 +51,12 @@ public class BoardController implements FrontEndExternalAPI{
   // TODO: Rename files so that this method works
   @Override
   public void setBoardSpace(int x, int y, String identifier, String teamName) {
-    /*
     if (!board.spaceIsEmpty(x, y)) {
       board.removePiece(x, y);
     }
 
     board.addPiece(x, y, teamName, identifier);
-  */
+
   }
 
   /**

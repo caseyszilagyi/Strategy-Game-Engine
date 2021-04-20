@@ -66,9 +66,15 @@ public class GamePiece {
   }
 
   public Set<Coordinate> determineAllPossibleRestrictionlessTakeMoves() {
-    return allPossibleMoves.stream()
+    return allPossibleMoves.stream().filter(move-> move.isMustTake())
         .flatMap(move -> move.getAllPossibleRestrictionlessTakeMoves(pieceCoordinates,pieceTeam).stream())
         .collect(Collectors.toSet());
+  }
+
+  public boolean hasTakeMove(){
+    return allPossibleMoves.stream().filter(move-> move.isMustTake())
+        .flatMap(move-> move.getAllPossibleMoves(pieceCoordinates, pieceTeam).stream())
+        .count() != 0;
   }
 
   /**
