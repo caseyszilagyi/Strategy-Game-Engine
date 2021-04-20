@@ -115,6 +115,16 @@ public class Board extends GridPane {
     return piece;
   }
 
+  /**
+   * Determines whether the queried tile is empty.
+   * @param x x coordinate
+   * @param y y coordinate
+   * @return a boolean
+   */
+  public boolean spaceIsEmpty(int x, int y){
+    return tiles[x][y].getPiece() == null;
+  }
+
 
   private Tile createTile(int i, int j, Color color) {
     return new Tile(color, SQUARE_SIZE, new Point(i, j), e -> handleTileClick(i, j));
@@ -147,6 +157,7 @@ public class Board extends GridPane {
   private String capitalizeFirstLetterOfWord(String s) {
     String returned = s.substring(0, 1).toUpperCase() + s.substring(1);
     return returned;
+
   }
 
   private Point getPointFromChessString(String s) {
