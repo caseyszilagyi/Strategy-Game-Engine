@@ -52,27 +52,4 @@
       </conditions>
     </FiniteSlide>
   </moves>
-
-  <regMoveType>FiniteSlide</regMoveType>
-  <takeMoveType>FiniteSlide</takeMoveType>
-  <changeTurns>True</changeTurns>
-  <changeSelf>True</changeSelf>
-
-
-  <regRestrictions>
-    <regRestriction>
-      <type>PieceRestriction</type>
-      <piece>King</piece>
-      <information>isTakeable</information>
-    </regRestriction>
-  </regRestrictions>
-
-  <takeRestrictions>
-    <takeRestriction>
-      <type>PieceRestriction</type>
-      <piece>King</piece>
-      <information>isTakeable</information>
-    </takeRestriction>
-  </takeRestrictions>
-
 </piece>
