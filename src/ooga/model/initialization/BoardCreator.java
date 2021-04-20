@@ -65,6 +65,7 @@ public class BoardCreator extends Creator {
 
   public GameBoard makeBoard() {
     board = new GameBoard(numCols, numRows);
+    board.setViewController(viewController);
     viewController.setBoardDimensions(numCols, numRows);
     pieceCreator = new PieceCreator(gameName, viewController, board);
 
@@ -74,6 +75,7 @@ public class BoardCreator extends Creator {
     for (Map.Entry<String, String> entry : opponentPieces.entrySet()) {
       buildPiece(numRows, entry, 1, OPPONENT, opponentPieceSet);
     }
+    board.nextTurn();
     return board;
   }
 
