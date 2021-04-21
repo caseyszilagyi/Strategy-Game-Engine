@@ -31,13 +31,13 @@ public class GameRulesTest {
 
   @Test
   void testBasicGameRulesCreation(){
-    GameRules gameRules = new GameRules("chess");
+    GameRules gameRules = new GameRules("chess", viewController, board);
     assertNotNull(gameRules);
   }
 
   @Test
   void testTurnConditionString(){
-    GameRules gameRules = new GameRules("chess");
+    GameRules gameRules = new GameRules("chess", viewController, board);
     List<String> turnConditionList = gameRules.getTurnConditionsAsStringList();
     assertEquals(1, turnConditionList.size());
     assertEquals("NoHeldPiece", turnConditionList.get(0));
@@ -45,25 +45,25 @@ public class GameRulesTest {
 
   @Test
   void testIsTurnOverWithForce(){
-    GameRules gameRules = new GameRules("chess");
+    GameRules gameRules = new GameRules("chess", viewController, board);
     assertTrue(gameRules.checkForNextTurn(board, basicTestPiece));
   }
 
   @Test
   void testIsTurnOverWithConstant(){
-    GameRules gameRules = new GameRules("testConstant");
+    GameRules gameRules = new GameRules("testConstant", viewController, board);
     assertFalse(gameRules.checkForNextTurn(board, basicTestPiece));
   }
 
   @Test
   void testMultipleForcesTurnCondtions(){
-    GameRules gameRules = new GameRules("testMultipleForce");
+    GameRules gameRules = new GameRules("testMultipleForce", viewController, board);
     assertTrue(gameRules.checkForNextTurn(board, basicTestPiece));
   }
 
   @Test
   void testConstantAndForceTurnCondtions(){
-    GameRules gameRules = new GameRules("testConstantAndForce");
+    GameRules gameRules = new GameRules("testConstantAndForce", viewController, board);
     assertFalse(gameRules.checkForNextTurn(board, basicTestPiece));
   }
 
