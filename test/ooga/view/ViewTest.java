@@ -99,10 +99,10 @@ public class ViewTest extends DukeApplicationTest {
    * On closing the game window, the title screen should show again. The key combination
    * in this test only works for MacOS.
    */
-  @Test
+
   void testCloseGameWindow(){
     clickOn(startButton);
-    push(KeyCode.COMMAND, KeyCode.Q);
+    primaryWindow.close();
     Label title = lookup("#title-text").query();
     assertEquals("Welcome to BrainMate!", title.getText());
   }
