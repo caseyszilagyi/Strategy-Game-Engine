@@ -20,7 +20,7 @@ public class GameBoardTest {
   void setup(){
     board = new GameBoard(8, 8);
     board.setViewController(new DummyViewController());
-    pieceCreator = new PieceCreator("chess", viewController, board);
+    pieceCreator = new PieceCreator("chess", board);
   }
 
   @Test
