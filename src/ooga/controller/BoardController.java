@@ -110,7 +110,7 @@ public class BoardController implements FrontEndExternalAPI{
 
   @Override
   public void gameEnd(String playerName) {
-
+    System.out.println(playerName + "won!");
   }
 
 
