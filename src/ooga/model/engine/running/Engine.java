@@ -42,6 +42,8 @@ public abstract class Engine{
 
   public abstract void setIfTurnRules(Boolean rules);
 
+  public abstract void checkForWin();
+
   /**
    * Alters the board in the way described in the Action parameter
    * @param action is the Action.java to perform
