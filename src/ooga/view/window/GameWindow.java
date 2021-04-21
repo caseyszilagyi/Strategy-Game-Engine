@@ -24,6 +24,12 @@ public interface GameWindow {
    */
   public void showScene(GameScene scene);
 
+  /**
+   * Closes this window
+   */
+  public void close();
+
+
 
 
 }
