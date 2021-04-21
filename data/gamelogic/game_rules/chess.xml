@@ -3,4 +3,7 @@
  <turnConditions>
   <condition>NoHeldPiece</condition>
  </turnConditions>
+ <winConditions>
+  <condition>NoMoves</condition>
+ </winConditions>
 </rules>

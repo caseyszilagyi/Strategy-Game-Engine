@@ -3,4 +3,7 @@
   <turnConditions>
     <condition>Checkers</condition>
   </turnConditions>
+  <winConditions>
+    <condition>NoMoves</condition>
+  </winConditions>
 </rules>
