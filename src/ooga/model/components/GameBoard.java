@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 import javafx.util.Pair;
 import ooga.controller.FrontEndExternalAPI;
+import ooga.model.initialization.pieces.PieceCreator;
 
 /**
  * This is the representation of the board. It holds all of the GamePiece objects, and has the
@@ -45,6 +46,7 @@ public class GameBoard implements Board {
   public GameBoard(int width, int height) {
     this.width = width;
     this.height = height;
+
   }
 
   /**
@@ -102,6 +104,13 @@ public class GameBoard implements Board {
   public void determineAllLegalMoves(int x, int y) {
     activeCoordinates = makeCoordinates(x, y);
     currentLegalMoveCoordinates = pieceCoordinateMap.get(activeCoordinates).determineAllLegalMoves();
+    activePiece = pieceCoordinateMap.get(activeCoordinates);
+    passLegalMoves(currentLegalMoveCoordinates);
+  }
+
+  public void determineAllLegalTakeMoves(int x, int y){
+    activeCoordinates = makeCoordinates(x, y);
+    currentLegalMoveCoordinates = pieceCoordinateMap.get(activeCoordinates).determineAllLegalTakeMoves();
     activePiece = pieceCoordinateMap.get(activeCoordinates);
     passLegalMoves(currentLegalMoveCoordinates);
   }
@@ -231,7 +240,6 @@ public class GameBoard implements Board {
   public void movePiece(int endingX, int endingY) {
     Coordinate newCoordinates = makeCoordinates(endingX, endingY);
     activePiece.executeMove(newCoordinates);
-    pieceCoordinateMap.put(newCoordinates, activePiece);
   }
 
 

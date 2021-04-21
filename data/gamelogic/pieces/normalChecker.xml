@@ -7,6 +7,9 @@
       <mustTake>False</mustTake>
       <takeX>null</takeX>
       <takeY>null</takeY>
+      <conditions>
+        <CheckerPromotion></CheckerPromotion>
+      </conditions>
     </FiniteSlide>
     <FiniteSlide>
       <changeX>-1</changeX>
@@ -14,6 +17,9 @@
       <mustTake>False</mustTake>
       <takeX>null</takeX>
       <takeY>null</takeY>
+      <conditions>
+        <CheckerPromotion></CheckerPromotion>
+      </conditions>
     </FiniteSlide>
     <FiniteJump>
       <changeX>2</changeX>
@@ -21,6 +27,9 @@
       <mustTake>True</mustTake>
       <takeX>-1</takeX>
       <takeY>-1</takeY>
+      <conditions>
+        <CheckerPromotion></CheckerPromotion>
+      </conditions>
     </FiniteJump>
     <FiniteJump>
       <changeX>-2</changeX>
@@ -28,6 +37,9 @@
       <mustTake>True</mustTake>
       <takeX>1</takeX>
       <takeY>-1</takeY>
+      <conditions>
+        <CheckerPromotion></CheckerPromotion>
+      </conditions>
     </FiniteJump>
   </moves>
 </piece>

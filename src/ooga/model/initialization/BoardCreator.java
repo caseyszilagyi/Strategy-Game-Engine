@@ -67,7 +67,7 @@ public class BoardCreator extends Creator {
     board = new GameBoard(numCols, numRows);
     board.setViewController(viewController);
     viewController.setBoardDimensions(numCols, numRows);
-    pieceCreator = new PieceCreator(gameName, viewController, board);
+    pieceCreator = new PieceCreator(gameName, board);
 
     for (Map.Entry<String, String> entry : userPieces.entrySet()) {
       buildPiece(numRows, entry, -1, USER, userPieceSet);

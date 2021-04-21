@@ -46,6 +46,7 @@ public class ModelController implements BackEndExternalAPI {
   @Override
   public void setGameType(String gameName) {
     engineInitializer.initializeGame(gameName);
+    //engineInitializer.initializeGame("checkers");
     setPlayers("user", "opponent");
   }
 

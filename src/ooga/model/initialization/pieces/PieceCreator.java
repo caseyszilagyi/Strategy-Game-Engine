@@ -37,18 +37,14 @@ public class PieceCreator extends Creator {
   private Map<String, List<Node>> moveSubNodeMap;
   private Map<String, List<Node>> specificMoveComponent;
 
-  private FrontEndExternalAPI viewController;
-
-
   /**
    * Initializes this piece creator which will be used to make pieces for the given game
    *
    * @param gameType The type of game that will be played
    */
-  public PieceCreator(String gameType, FrontEndExternalAPI viewController, GameBoard gameBoard) {
+  public PieceCreator(String gameType, GameBoard gameBoard) {
     this.gameType = gameType;
     super.setComponents(PIECE_FILE_PATH, FILE_TYPE, this.gameType);
-    this.viewController = viewController;
     pieceComponentClassLoader = new PieceComponentClassLoader(gameBoard);
   }
 

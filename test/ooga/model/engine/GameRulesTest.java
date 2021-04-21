@@ -23,7 +23,7 @@ public class GameRulesTest {
   @BeforeEach
   void setup(){
     board = new GameBoard(8, 8);
-    pieceCreator = new PieceCreator("chess", viewController, board);
+    pieceCreator = new PieceCreator("chess", board);
     Coordinate basicTestCoordinate = makeCoordinates(0, 0);
     basicTestPiece = makePiece("pawn", basicTestCoordinate);
   }
