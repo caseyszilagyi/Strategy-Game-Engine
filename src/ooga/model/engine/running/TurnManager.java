@@ -41,6 +41,7 @@ public class TurnManager {
    * @param y The y coordinate of the turn click
    */
   protected void endTurn(int x, int y){
+    //Fix end turn to not get called when a move hasn't even been made
     boolean isTurnOver = gameRules
         .checkForNextTurn(gameBoard, gameBoard.getPieceAtCoordinate(new Coordinate(x, y)));
     swapTurnIfOver(isTurnOver);
