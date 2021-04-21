@@ -8,7 +8,7 @@ import ooga.model.components.GameBoard;
  *
  * @author Casey Szilagyi
  */
-public interface WinCondition {
+public interface EndGameConditioin {
 
   public abstract boolean checkForWin(String teamName);
 }
