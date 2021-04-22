@@ -65,8 +65,6 @@ public class ViewTest extends DukeApplicationTest {
     }
   }
 
-  private
-
   @Test
   void testGameStarted(){
     assertNotNull(viewManager);
