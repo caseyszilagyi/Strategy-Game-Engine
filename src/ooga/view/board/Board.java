@@ -3,6 +3,7 @@ package ooga.view.board;
 import java.awt.Point;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.Set;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,6 +18,7 @@ public class Board extends GridPane {
   Tile tiles[][];
   private static final int SQUARE_SIZE = 50;
   private final ModelController modelController;
+  private final ResourceBundle pieceBundle = ResourceBundle.getBundle("ooga.view.resources.chessPieces");
 
   /**
    * Constructs a {@link Board} of the desired width and height. Also obtains a reference to a
@@ -31,7 +33,7 @@ public class Board extends GridPane {
     tiles = new Tile[width][height];
     this.modelController = modelController;
     makeGrid(); // TODO: Make this flexible
-    populateBoard();
+    //populateBoard();
   }
 
   /**
@@ -176,7 +178,7 @@ public class Board extends GridPane {
   }
 
   public void addPiece(int x, int y, String color, String fileName) {
-    ImageView piece = new ImageView(new Image("BasicChessPieces/" + color + fileName));
+    ImageView piece = new ImageView(new Image("BasicChessPieces/" + pieceBundle.getString(color+fileName)));
     piece.setFitHeight(SQUARE_SIZE);
     piece.setFitWidth(SQUARE_SIZE);
     tiles[x][y].addPiece(piece);

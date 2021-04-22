@@ -55,6 +55,7 @@ public class GameEngine extends Engine {
     if(!clickExecutor.executeClick(x, y, turnManager.getCurrentPlayerTurnName())){
       return;
     }
+    checkForWin();
     turnManager.endTurn(x, y);
   }
 
@@ -64,7 +65,7 @@ public class GameEngine extends Engine {
    * @param gameName the name of the game
    */
   public void setGameType(String gameName) {
-    curRules = new GameRules(gameName);
+    curRules = new GameRules(gameName, viewController, curBoard);
     turnManager.setRules(curRules);
   }
 
@@ -77,6 +78,11 @@ public class GameEngine extends Engine {
   public void setIfTurnRules(Boolean turnRules) {
     turnManager.setIfTurnRules(turnRules);
     clickExecutor.setIfTurnRules(turnRules);
+  }
+
+  @Override
+  public void checkForWin() {
+    curRules.checkWinConditions(getCurrentPlayerTurn());
   }
 
   /**

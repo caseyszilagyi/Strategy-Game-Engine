@@ -2,6 +2,30 @@
 <piece piece = "chess">
   <moves>
     <FiniteSlide>
+      <changeX>1</changeX>
+      <changeY>1</changeY>
+      <mustTake>True</mustTake>
+      <takeX>0</takeX>
+      <takeY>-1</takeY>
+      <restrictions>
+        <EnPassant>
+          <direction>1</direction>
+        </EnPassant>
+      </restrictions>
+    </FiniteSlide>
+    <FiniteSlide>
+      <changeX>-1</changeX>
+      <changeY>1</changeY>
+      <mustTake>True</mustTake>
+      <takeX>0</takeX>
+      <takeY>-1</takeY>
+      <restrictions>
+        <EnPassant>
+          <direction>-1</direction>
+        </EnPassant>
+      </restrictions>
+    </FiniteSlide>
+    <FiniteSlide>
       <changeX>0</changeX>
       <changeY>2</changeY>
       <mustTake>False</mustTake>
@@ -52,27 +76,4 @@
       </conditions>
     </FiniteSlide>
   </moves>
-
-  <regMoveType>FiniteSlide</regMoveType>
-  <takeMoveType>FiniteSlide</takeMoveType>
-  <changeTurns>True</changeTurns>
-  <changeSelf>True</changeSelf>
-
-
-  <regRestrictions>
-    <regRestriction>
-      <type>PieceRestriction</type>
-      <piece>King</piece>
-      <information>isTakeable</information>
-    </regRestriction>
-  </regRestrictions>
-
-  <takeRestrictions>
-    <takeRestriction>
-      <type>PieceRestriction</type>
-      <piece>King</piece>
-      <information>isTakeable</information>
-    </takeRestriction>
-  </takeRestrictions>
-
 </piece>

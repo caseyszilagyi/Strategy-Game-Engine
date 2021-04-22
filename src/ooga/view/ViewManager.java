@@ -65,6 +65,12 @@ public class ViewManager {
     modelController.setBoardController(boardController);
   }
 
+
+  private void positionWindow(Stage window, int x, int y){
+    window.setX(x);
+    window.setY(y);
+  }
+
   /**
    * Changes the scene of the primary {@link GameWindow} to the desired scene. The
    * scene name is specified by an input {@code String} that corresponds to a property
@@ -109,7 +115,7 @@ public class ViewManager {
         .attachBoardControllerToBoard(boardController);
     modelController.setGameType(DEFAULT_GAMETYPE);
     ((Stage) primaryWindow).setResizable(true);
-
+    positionWindow((Stage) primaryWindow, 500, 200);
   }
 
 

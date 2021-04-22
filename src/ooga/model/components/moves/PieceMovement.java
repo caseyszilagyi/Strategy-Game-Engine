@@ -230,7 +230,7 @@ public abstract class PieceMovement {
    *
    * @return True if this move must take another piece, false if not
    */
-  protected boolean isMustTake() {
+  public boolean isMustTake() {
     return mustTake;
   }
 

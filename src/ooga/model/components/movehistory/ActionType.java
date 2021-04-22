@@ -1,4 +1,4 @@
-package ooga.model.components;
+package ooga.model.components.movehistory;
 
 public enum ActionType {
   MOVE,

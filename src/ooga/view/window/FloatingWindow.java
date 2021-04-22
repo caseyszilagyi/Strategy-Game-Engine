@@ -9,4 +9,9 @@ public class FloatingWindow extends PopupWindow implements GameWindow{
   public void showScene(GameScene scene) {
 
   }
+
+  @Override
+  public void close() {
+
+  }
 }
