@@ -2,16 +2,13 @@ package ooga.view.board;
 
 import java.awt.Point;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.Set;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.util.Pair;
 import ooga.controller.ModelController;
-import ooga.view.Configuration;
 
 public class Board extends GridPane {
 
