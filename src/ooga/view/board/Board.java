@@ -131,20 +131,20 @@ public class Board extends GridPane {
   }
 
   private void populateBoard() {
-    populatePieces("data/gamelogic/starting_states/chess.xml");
+    //populatePieces("data/gamelogic/starting_states/chess.xml");
   }
 
-  private void populatePieces(String file) {
-    try {
-      Configuration c = new Configuration(file);
-      Map<String, String> opponentPositionMap = c.getOpponentPositionMap();
-      Map<String, String> userPositionMap = c.getUserPositionMap();
-      populatePiecesFromMap(opponentPositionMap, "Black");
-      populatePiecesFromMap(userPositionMap, "White");
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
+//  private void populatePieces(String file) {
+//    try {
+//      Configuration c = new Configuration(file);
+//      Map<String, String> opponentPositionMap = c.getOpponentPositionMap();
+//      Map<String, String> userPositionMap = c.getUserPositionMap();
+//      populatePiecesFromMap(opponentPositionMap, "Black");
+//      populatePiecesFromMap(userPositionMap, "White");
+//    } catch (Exception e) {
+//      e.printStackTrace();
+//    }
+//  }
 
   private void populatePiecesFromMap(Map<String, String> positionMap, String color) {
     Set<String> keys = positionMap.keySet();
