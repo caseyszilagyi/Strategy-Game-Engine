@@ -44,7 +44,7 @@ public class ClickExecutor {
         xClickPosition, yClickPosition, currentPlayerTurn)) {
       curBoard.determineAllLegalMoves(xClickPosition, yClickPosition);
       curBoard.setIsHeldPiece(true);
-      return true;
+      return false;
     } else {
       return false;
     }

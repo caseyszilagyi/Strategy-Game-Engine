@@ -203,16 +203,4 @@
       </MoveOtherPiece>
     </conditions>
   </FiniteSlide>
-
-  <changeTurns>True</changeTurns>
-  <changeSelf>False (will be true for pawns because they move to end, but how to know?)</changeSelf>
-
-  <Restrictions>
-    <regRestriction>
-      <type>PieceRestriction</type>
-      <piece>King</piece>
-      <information>isTakeable</information>
-    </regRestriction>
-  </Restrictions>
-
 </piece>

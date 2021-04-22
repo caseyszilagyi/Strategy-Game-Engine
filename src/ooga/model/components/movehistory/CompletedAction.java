@@ -1,4 +1,8 @@
-package ooga.model.components;
+package ooga.model.components.movehistory;
+
+import ooga.model.components.Coordinate;
+import ooga.model.components.GameBoard;
+import ooga.model.components.GamePiece;
 
 public record CompletedAction(int turnNumber, ActionType actionType, GamePiece correspondingPiece, Coordinate... coords) {
 
