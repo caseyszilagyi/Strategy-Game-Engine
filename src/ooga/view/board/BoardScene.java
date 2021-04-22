@@ -51,7 +51,7 @@ public class BoardScene extends GameScene {
    * holds.
    * @param boardController a {@code BoardController} instance
    */
-  public void attachBoardControllerToBoard(BoardController boardController){
+  public void attachBoardControllerToBoard(BoardController boardController) {
     boardController.giveBoard(board);
   }
 
@@ -61,8 +61,6 @@ public class BoardScene extends GameScene {
     ColumnConstraints col1 = new ColumnConstraints();
     col1.setHalignment(HPos.CENTER);
     sceneRoot.getColumnConstraints().add(col1);
-
-
 
     Label welcomeLabel = makeLabel("title-text");
     sceneRoot.add(welcomeLabel, 0, 0);
