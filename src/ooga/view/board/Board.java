@@ -171,10 +171,7 @@ public class Board extends GridPane {
   }
 
   private void addPiece(Point p, String color, String fileName) {
-    ImageView piece = new ImageView(new Image("BasicChessPieces/" + color + fileName));
-    piece.setFitHeight(SQUARE_SIZE);
-    piece.setFitWidth(SQUARE_SIZE);
-    tiles[(int) p.getX()][(int) p.getY()].addPiece(piece);
+    addPiece((int) p.getX(), (int) p.getY(), color, fileName);
   }
 
   public void addPiece(int x, int y, String color, String fileName) {
