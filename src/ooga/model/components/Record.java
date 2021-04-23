@@ -1,9 +1,16 @@
 package ooga.model.components;
 
-public class GameRecord {
+public class Record {
 
   String gameName;
-  int wins;
+
+  public Record(){};
+  public Record(String gameName, int wins, int losses, int draws) {
+    this.gameName = gameName;
+    this.wins = wins;
+    this.losses = losses;
+    this.draws = draws;
+  }
 
   public String getGameName() {
     return gameName;
@@ -37,6 +44,7 @@ public class GameRecord {
     this.draws = draws;
   }
 
+  int wins;
   int losses;
   int draws;
 
