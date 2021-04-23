@@ -38,7 +38,7 @@ public abstract class GameScene extends Scene {
    * @param resources a {@code ResourceBundle} holding scene data files
    */
   public GameScene(Parent root, EventHandler<ActionEvent> handler,
-      ResourceBundle resources){
+      ResourceBundle resources) {
     super(root);
     this.resources = resources;
     this.handler = handler;
@@ -64,7 +64,7 @@ public abstract class GameScene extends Scene {
    * @param width desired width of scene
    * @param height desired height of scene
    */
-  public void setSceneSize(int width, int height){
+  public void setSceneSize(int width, int height) {
     GridPane sceneRoot = (GridPane) this.getRoot();
     sceneRoot.setMinWidth(width);
     sceneRoot.setMinHeight(height);
@@ -98,8 +98,7 @@ public abstract class GameScene extends Scene {
     result.setId(property);
     if (label.matches(IMAGE_FILE_SUFFIXES)) {
       result.setGraphic(new ImageView(new Image(DEFAULT_RESOURCES_PATH + label)));
-    }
-    else {
+    } else {
       result.setText(label);
     }
     result.setOnAction(handler);
@@ -120,7 +119,7 @@ public abstract class GameScene extends Scene {
    *                         bundle of this scene.
    * @return a list of {@code Button}s.
    */
-  public Button[] makeButtons(String buttonProperties){
+  public Button[] makeButtons(String buttonProperties) {
     String[] buttonNames = resources.getString(buttonProperties).split(",");
     Button[] buttons = new Button[buttonNames.length];
     for (int i = 0; i < buttonNames.length; i++) {
@@ -134,7 +133,7 @@ public abstract class GameScene extends Scene {
    * centered and evenly distributed. This element is usually placed at the top of a scene.
    * @return a {@code Node} instance.
    */
-  public Node makeTopBar(){
+  public Node makeTopBar() {
     HBox topBar = new HBox();
     topBar.setAlignment(Pos.CENTER);
     topBar.getStyleClass().add("hbox");
