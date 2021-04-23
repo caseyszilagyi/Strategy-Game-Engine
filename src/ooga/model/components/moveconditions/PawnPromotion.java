@@ -36,7 +36,7 @@ public class PawnPromotion extends Condition {
   @Override
   public void executeCondition(Coordinate endingCoordinates) {
     int yPos = endingCoordinates.getY();
-    if (yPos == gameBoard.getHeight() || yPos == 0) {
+    if (yPos == gameBoard.getHeight()-1 || yPos == 0) {
       gameBoard.passPieceChangeOptions(chessPieceList);
     }
   }
