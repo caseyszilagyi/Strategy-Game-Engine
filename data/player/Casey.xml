@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<player>
+  <firstName>Casey</firstName>
+  <lastName>Szilagyi</lastName>
+  <records>
+    <record>
+      <gameName>chess</gameName>
+      <wins>0</wins>
+      <losses>1</losses>
+      <draws>0</draws>
+    </record>
+    <record>
+      <gameName>checkers</gameName>
+      <wins>0</wins>
+      <losses>0</losses>
+      <draws>0</draws>
+    </record>
+  </records>
+</player>
