@@ -1,4 +1,4 @@
-<GamePlayer>
+<Player>
   <firstName>dummy</firstName>
   <lastName>person</lastName>
   <records>
@@ -15,4 +15,6 @@
       <draws>5</draws>
     </records>
   </records>
-</GamePlayer>
+  <name/>
+  <winLoss>0:0:0</winLoss>
+</Player>

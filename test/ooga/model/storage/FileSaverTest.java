@@ -3,7 +3,7 @@ package ooga.model.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import ooga.model.components.GamePlayer;
+import ooga.model.components.Player;
 import ooga.model.components.Record;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ public class FileSaverTest {
 
   @Test
   void testReadInPlayer(){
-    GamePlayer player = playerFileSaver.makePlayerObject("Casey");
+    Player player = playerFileSaver.makePlayerObject("Casey");
     assertEquals("Casey", player.getFirstName());
     assertEquals("Szilagyi", player.getLastName());
     Record chessRecord = player.getRecords()[0];
@@ -28,7 +28,7 @@ public class FileSaverTest {
     Record[] records = new Record[2];
     records[0] = makeRecord("chess", 1, 3, 4);
     records[1] = makeRecord("checkers", 3, 4, 5);
-    GamePlayer player = new GamePlayer("dummy", "person", records);
+    Player player = new Player("dummy", "person", records);
     playerFileSaver.storePlayerFile(player);
   }
 
