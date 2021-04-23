@@ -117,6 +117,10 @@ public class ViewManager {
     positionWindow((Stage) primaryWindow, 500, 200);
   }
 
+  public void undoButton() {
+    modelController.undoTurn();
+  }
+
 
   /**
    * Gets the correct subclass of {@link GameWindow} to show the initial window of the
