@@ -9,8 +9,6 @@ import ooga.model.components.GameBoard;
  */
 public class MoveClickExecutor extends ClickExecutor {
 
-  private GameBoard curBoard;
-  private Boolean noTurnRules;
 
   /**
    * Executes a click based on the position of the click and the name of the player

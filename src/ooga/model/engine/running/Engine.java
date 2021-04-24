@@ -24,6 +24,8 @@ public abstract class Engine{
    */
   public abstract void setGameType(String gameType);
 
+  public abstract void setClickExecutor(ClickExecutor clickExecutor);
+
   public abstract void setBoard(GameBoard board);
 
   public abstract GameBoard getBoard();

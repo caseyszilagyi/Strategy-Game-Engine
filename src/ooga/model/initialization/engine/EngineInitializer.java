@@ -36,10 +36,12 @@ public class EngineInitializer implements Initializer {
    */
   @Override
   public void initializeGame (String gameName) {
+
+    ClickExecutorInitializer clickExecutorInitializer = new ClickExecutorInitializer();
+    gameEngine.setClickExecutor(clickExecutorInitializer.getProperClickExecutor(gameName));
     boardCreator = new BoardCreator(gameName, boardController);
     gameEngine.setBoard(boardCreator.makeBoard());
     gameEngine.setGameType(gameName);
-    ClickExecutorInitializer clickExecutorInitializer = new ClickExecutorInitializer();
 
   }
 

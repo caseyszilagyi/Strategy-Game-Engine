@@ -17,7 +17,7 @@ public class ClickExecutorInitializer {
   private static final String FILE_EXTENSION = ".xml";
   private static final String FILE_TYPE = "rules";
   private static final String GAME_TYPE = "gameType";
-  private static final String CLICK_EXECUTOR_FILE_PATH = "ooga.model.engine.actions.";
+  private static final String CLICK_EXECUTOR_FILE_PATH = "ooga.model.engine.running.";
   private static final String CLICK_EXECUTOR_NAME_EXTENSION = "ClickExecutor";
 
 
@@ -26,7 +26,7 @@ public class ClickExecutorInitializer {
     final Map<String, List<Node>> gameFileContents = xmlParser
         .makeRootNodeMap(ruleFile, FILE_TYPE, gameName);
     String gameType = gameFileContents.get(GAME_TYPE).get(0).getTextContent();
-    System.out.println(gameType);
+    System.out.printf("gameType = %s", gameType);
     try {
       Class<?> clazz = Class
           .forName(CLICK_EXECUTOR_FILE_PATH + gameType + CLICK_EXECUTOR_NAME_EXTENSION);
