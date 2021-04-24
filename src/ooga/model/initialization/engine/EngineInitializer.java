@@ -1,10 +1,12 @@
 package ooga.model.initialization.engine;
 
 import ooga.controller.FrontEndExternalAPI;
+import ooga.model.engine.running.ClickExecutor;
 import ooga.model.engine.running.Engine;
 import ooga.model.engine.running.GameEngine;
 import ooga.model.initialization.BoardCreator;
 import ooga.model.initialization.PlayerCreator;
+import ooga.model.initialization.clickexecutor.ClickExecutorInitializer;
 
 
 /**
@@ -37,6 +39,8 @@ public class EngineInitializer implements Initializer {
     boardCreator = new BoardCreator(gameName, boardController);
     gameEngine.setBoard(boardCreator.makeBoard());
     gameEngine.setGameType(gameName);
+    ClickExecutorInitializer clickExecutorInitializer = new ClickExecutorInitializer();
+
   }
 
   @Override
