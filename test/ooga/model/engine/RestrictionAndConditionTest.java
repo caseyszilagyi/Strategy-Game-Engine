@@ -1,6 +1,7 @@
 package ooga.model.engine;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -38,7 +39,7 @@ public class RestrictionAndConditionTest {
     gameEngine= modelController.getEngine();
     gameBoard = gameEngine.getBoard();
     gameEngine.setIfTurnRules(true);
-    pieceCreator = new PieceCreator("chess", viewController, gameBoard);
+    pieceCreator = new PieceCreator("chess", gameBoard);
     printBoard();
   }
 
@@ -246,6 +247,43 @@ public class RestrictionAndConditionTest {
     assertEquals("pawn", gameBoard.getPieceAtCoordinate(4,6).getPieceName());
   }
 
+  void enPassantSetup(){
+    actOnCoordinates(0,6);
+    actOnCoordinates(0,4);
+    actOnCoordinates(0,4);
+    actOnCoordinates(0,3);
+    actOnCoordinates(1,1);
+    actOnCoordinates(1,3);
+    printBoard();
+  }
+
+  @Test
+  void testEnPassantTake(){
+    enPassantSetup();
+    actOnCoordinates(0,3);
+    testActualExpectedCoordinates("0:2 1:2");
+    actOnCoordinates(1, 2);
+    isPieceAtCoordinates("pawn", 1, 2);
+    isCoordinateEmpty(1, 3);
+  }
+
+  @Test
+  void testEnPassantNoTake(){
+    enPassantSetup();
+    //move another piece, en passant now illegal
+    actOnCoordinates(5,6);
+    actOnCoordinates(5,5);
+    actOnCoordinates(0,3);
+    testActualExpectedCoordinates("0:2");
+    actOnCoordinates(0,2);
+    isPieceAtCoordinates("pawn", 1, 3);
+    isPieceAtCoordinates("pawn", 0, 2);
+  }
+
+
+  private void isCoordinateEmpty(int x, int y){
+    assertFalse(gameBoard.isPieceAtCoordinate(x,y));
+  }
 
   private void isPieceAtCoordinates(String pieceName, int x, int y){
     assertEquals(gameBoard.getPieceAtCoordinate(x, y).getPieceName(), pieceName);
@@ -257,11 +295,11 @@ public class RestrictionAndConditionTest {
 
   // piece creator methods
   private GamePiece makePiece(String pieceName, int xCoord, int yCoord){
-    return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), 1, viewController, "Casey");
+    return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), 1, "Casey");
   }
 
   private GamePiece makeEnemyPiece(String pieceName, int xCoord, int yCoord){
-    return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), -1, viewController, "NotCasey");
+    return pieceCreator.makePiece(pieceName, makeCoordinates(xCoord, yCoord), -1, "NotCasey");
   }
 
   private void checkSetBoardSpaceCall(int x, int y, String identifier, String team) {

@@ -65,10 +65,35 @@ public class GamePiece {
     return possibleMoveLocations;
   }
 
+  public Set<Coordinate> determineAllLegalTakeMoves(){
+    Set<Coordinate> possibleMoveLocations = new HashSet<>();
+    for (PieceMovement move : allPossibleMoves) {
+      if(move.isMustTake()) {
+        List<Coordinate> currentPossibilities = move
+            .getAllPossibleMoves(pieceCoordinates, pieceTeam);
+        possibleMoveLocations
+            .addAll(currentPossibilities);
+        for (Coordinate coord : currentPossibilities) {
+          legalMovementMap.put(coord, move);
+        }
+      }
+    }
+    return possibleMoveLocations;
+  }
+
+
+
+
   public Set<Coordinate> determineAllPossibleRestrictionlessTakeMoves() {
-    return allPossibleMoves.stream()
+    return allPossibleMoves.stream().filter(move-> move.isMustTake())
         .flatMap(move -> move.getAllPossibleRestrictionlessTakeMoves(pieceCoordinates,pieceTeam).stream())
         .collect(Collectors.toSet());
+  }
+
+  public boolean hasTakeMove(){
+    return allPossibleMoves.stream().filter(move-> move.isMustTake())
+        .flatMap(move-> move.getAllPossibleMoves(pieceCoordinates, pieceTeam).stream())
+        .count() != 0;
   }
 
   /**

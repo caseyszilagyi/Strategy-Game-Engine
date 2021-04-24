@@ -34,7 +34,7 @@ public class ViewManager {
    * @param initFile a {@link ResourceBundle} with specifications for the first window.
    *
    */
-  public ViewManager(ResourceBundle initFile){
+  public ViewManager(ResourceBundle initFile) {
     this.initFile = initFile;
     gameWindowFactory = new GameWindowFactory();
     sceneFactory = new GameSceneFactory();
@@ -48,7 +48,7 @@ public class ViewManager {
    * All methods in here are run when the user closes the window. Do any saving operations
    * here.
    */
-  private void handleStageClose(){
+  private void handleStageClose() {
     String sceneType = ((GameScene)((Stage) primaryWindow).getScene()).getSceneType();
     if (sceneType.equals("BoardScene")) {
       new ViewManager(initFile);
@@ -58,11 +58,17 @@ public class ViewManager {
   /**
    * Creates the necessary {@link BoardController} and {@link ModelController} objects.
    */
-  private void createControllers(){
+  private void createControllers() {
     boardController = new BoardController();
     modelController = new ModelController();
     boardController.setModelController(modelController);
     modelController.setBoardController(boardController);
+  }
+
+
+  private void positionWindow(Stage window, int x, int y) {
+    window.setX(x);
+    window.setY(y);
   }
 
   /**
@@ -75,7 +81,7 @@ public class ViewManager {
    *                          {@code GameScene} class.
    * @return a {@link GameScene} subclass of the desired type.
    */
-  private GameScene changeScene(String sceneNameProperty){
+  private GameScene changeScene(String sceneNameProperty) {
     String initSceneName = initFile.getString(sceneNameProperty);
     GameScene newScene = sceneFactory.makeScene(initSceneName, this::onButtonClicked,
         modelController);
@@ -89,13 +95,12 @@ public class ViewManager {
    * methods in this class based on the ID of the button pressed.
    * @param e
    */
-  private void onButtonClicked(ActionEvent e){
+  private void onButtonClicked(ActionEvent e) {
     Button buttonPressed = (Button) e.getSource();
     String buttonID = buttonPressed.getId();
     try {
       this.getClass().getDeclaredMethod(buttonID).invoke(this);
-    } catch (NoSuchMethodException | IllegalAccessException |
-        InvocationTargetException exception) {
+    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException exception) {
       exception.printStackTrace();
     }
   }
@@ -104,12 +109,16 @@ public class ViewManager {
    * Starts the game by changing the scene of the current window to a {@link BoardScene}
    * instance.
    */
-  public void startGame(){
+  public void startGame() {
     ((BoardScene) changeScene("boardScene"))
         .attachBoardControllerToBoard(boardController);
     modelController.setGameType(DEFAULT_GAMETYPE);
     ((Stage) primaryWindow).setResizable(true);
+    positionWindow((Stage) primaryWindow, 500, 200);
+  }
 
+  public void undoButton() {
+    modelController.undoTurn();
   }
 
 
@@ -120,7 +129,7 @@ public class ViewManager {
    * fails.
    * @return a {@code GameWindow} instance.
    */
-  private GameWindow getInitialWindow(){
+  private GameWindow getInitialWindow() {
     String windowType = initFile.getString("initialWindowType");
     return gameWindowFactory.makeWindow(windowType);
   }

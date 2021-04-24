@@ -13,7 +13,7 @@ import ooga.model.engine.running.Engine;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class RunningChessTests {
+public class RunningChessTest {
   BackEndExternalAPI modelController;
   DummyViewController viewController;
   Engine gameEngine;

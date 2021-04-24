@@ -1,5 +1,8 @@
 package ooga.view.window;
 
+import javafx.geometry.Rectangle2D;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import ooga.view.GameScene;
 
@@ -22,5 +25,11 @@ public class StageWindow extends Stage implements GameWindow {
     this.sizeToScene();
     this.setResizable(false);
     this.show();
+  }
+
+
+  @Override
+  public void close(){
+    super.close();
   }
 }

@@ -9,6 +9,11 @@ import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;
 
+/**
+ * Sends a list of possible pieces to the front end when the pawn reaches the last rank
+ *
+ * @author Casey Szilagyi
+ */
 public class PawnPromotion extends Condition {
 
   private GameBoard gameBoard;
@@ -31,7 +36,7 @@ public class PawnPromotion extends Condition {
   @Override
   public void executeCondition(Coordinate endingCoordinates) {
     int yPos = endingCoordinates.getY();
-    if (yPos == gameBoard.getHeight() || yPos == 0) {
+    if (yPos == gameBoard.getHeight()-1 || yPos == 0) {
       gameBoard.passPieceChangeOptions(chessPieceList);
     }
   }

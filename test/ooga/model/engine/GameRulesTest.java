@@ -13,7 +13,7 @@ import ooga.model.initialization.pieces.PieceCreator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class GameRulesTests {
+public class GameRulesTest {
 
   private GameBoard board;
   private PieceCreator pieceCreator;
@@ -23,7 +23,7 @@ public class GameRulesTests {
   @BeforeEach
   void setup(){
     board = new GameBoard(8, 8);
-    pieceCreator = new PieceCreator("chess", viewController, board);
+    pieceCreator = new PieceCreator("chess", board);
     Coordinate basicTestCoordinate = makeCoordinates(0, 0);
     basicTestPiece = makePiece("pawn", basicTestCoordinate);
   }
@@ -31,13 +31,13 @@ public class GameRulesTests {
 
   @Test
   void testBasicGameRulesCreation(){
-    GameRules gameRules = new GameRules("chess");
+    GameRules gameRules = new GameRules("chess", viewController, board);
     assertNotNull(gameRules);
   }
 
   @Test
   void testTurnConditionString(){
-    GameRules gameRules = new GameRules("chess");
+    GameRules gameRules = new GameRules("chess", viewController, board);
     List<String> turnConditionList = gameRules.getTurnConditionsAsStringList();
     assertEquals(1, turnConditionList.size());
     assertEquals("NoHeldPiece", turnConditionList.get(0));
@@ -45,31 +45,31 @@ public class GameRulesTests {
 
   @Test
   void testIsTurnOverWithForce(){
-    GameRules gameRules = new GameRules("chess");
+    GameRules gameRules = new GameRules("chess", viewController, board);
     assertTrue(gameRules.checkForNextTurn(board, basicTestPiece));
   }
 
   @Test
   void testIsTurnOverWithConstant(){
-    GameRules gameRules = new GameRules("testConstant");
+    GameRules gameRules = new GameRules("testConstant", viewController, board);
     assertFalse(gameRules.checkForNextTurn(board, basicTestPiece));
   }
 
   @Test
   void testMultipleForcesTurnCondtions(){
-    GameRules gameRules = new GameRules("testMultipleForce");
+    GameRules gameRules = new GameRules("testMultipleForce", viewController, board);
     assertTrue(gameRules.checkForNextTurn(board, basicTestPiece));
   }
 
   @Test
   void testConstantAndForceTurnCondtions(){
-    GameRules gameRules = new GameRules("testConstantAndForce");
+    GameRules gameRules = new GameRules("testConstantAndForce", viewController, board);
     assertFalse(gameRules.checkForNextTurn(board, basicTestPiece));
   }
 
 
   private GamePiece makePiece(String pieceName, Coordinate coord){
-    return pieceCreator.makePiece(pieceName, coord, 1, viewController, "noTeam");
+    return pieceCreator.makePiece(pieceName, coord, 1, "noTeam");
   }
 
   private Coordinate makeCoordinates(int x, int y){

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<piece piece="checkers">
+  <params>
+    <name>checkers</name>
+    <numrows>8</numrows>
+    <numcols>8</numcols>
+  </params>
+  <board>
+    <opponent>
+      <c7>normalChecker</c7>
+      <c5>normalChecker</c5>
+      <g2>normalChecker</g2>
+    </opponent>
+    <user>
+      <d4>normalChecker</d4>
+    </user>
+  </board>
+</piece>
