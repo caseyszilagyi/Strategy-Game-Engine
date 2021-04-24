@@ -29,25 +29,37 @@ public class Board extends GridPane {
     super();
     tiles = new Tile[width][height];
     this.modelController = modelController;
-    makeGrid(); // TODO: Make this flexible
-    //populateBoard();
+    makeGrid(width, height);
+    colorGrid(Color.TAN, Color.BEIGE);
   }
 
   /**
    * Creates the grid structure of the board, styling with patterns.
    */
-  public void makeGrid() {
-    for (int i = 0; i < 8; i++) {
-      for (int j = 0; j < 8; j++) {
+  private void makeGrid(int width, int height) {
+    for (int i = 0; i < width; i++) {
+      for (int j = 0; j < height; j++) {
         Tile temp;
         if ((i + j) % 2 == 1) {
-          temp = createTile(i, j, Color.TAN);
+          temp = createTile(i, j);
           tiles[i][j] = temp;
           this.add(temp, i, j);
         } else {
-          temp = createTile(i, j, Color.BEIGE);
+          temp = createTile(i, j);
           tiles[i][j] = temp;
           this.add(temp, i, j);
+        }
+      }
+    }
+  }
+
+  public void colorGrid(Color firstColor, Color secondColor) {
+    for (int i = 0; i < tiles.length; i++) {
+      for (int j = 0; j < tiles[i].length; j++) {
+        if ((i + j) % 2 == 1) {
+          tiles[i][j].setColor(firstColor);
+        } else {
+          tiles[i][j].setColor(secondColor);
         }
       }
     }
@@ -125,8 +137,8 @@ public class Board extends GridPane {
   }
 
 
-  private Tile createTile(int i, int j, Color color) {
-    return new Tile(color, SQUARE_SIZE, new Point(i, j), e -> handleTileClick(i, j));
+  private Tile createTile(int i, int j) {
+    return new Tile(SQUARE_SIZE, new Point(i, j), e -> handleTileClick(i, j));
   }
 
   private void addPiece(Point p, String color, String fileName) {

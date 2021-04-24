@@ -57,7 +57,6 @@ public class ModelController implements BackEndExternalAPI {
   @Override
   public void setBoardState(String boardFileName) {
     engineInitializer.setBoardState(boardFileName);
-
   }
 
   /**
