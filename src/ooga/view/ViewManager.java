@@ -24,13 +24,8 @@ public class ViewManager {
   private final GameWindow primaryWindow;
   private ModelController modelController;
   private BoardController boardController;
-<<<<<<< HEAD
-  private static final String CHESS_GAMETYPE = "chess";
-  private static final String CHECKERS_GAMETYPE = "checkers";
-  private static final String CONNECT4_GAMETYPE = "connectfour";
-=======
+
   private String DEFAULT_GAMETYPE = "chess";
->>>>>>> master
 
   /**
    * Creates a new instance of {@code ViewManager} with a resource bundle with
