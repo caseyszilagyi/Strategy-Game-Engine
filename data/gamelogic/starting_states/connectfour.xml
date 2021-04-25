@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<piece piece="connectfour">
+  <params>
+    <numrows>6</numrows>
+    <numcols>7</numcols>
+  </params>
+  <board>
+    <opponent>
+    </opponent>
+    <user>
+    </user>
+  </board>
+</piece>
