@@ -21,7 +21,7 @@ public class GameEngine extends Engine {
   private FrontEndExternalAPI viewController;
 
   //Components for game flow
-  private ClickExecutor clickExecutor = new ClickExecutor();
+  private ClickExecutor clickExecutor;
   private TurnManager turnManager = new TurnManager();
 
   //Game variables
@@ -55,17 +55,23 @@ public class GameEngine extends Engine {
     if(!clickExecutor.executeClick(x, y, turnManager.getCurrentPlayerTurnName())){
       return;
     }
+    checkForWin();
     turnManager.endTurn(x, y);
   }
 
+  public void setClickExecutor(ClickExecutor clickExecutor){
+    this.clickExecutor = clickExecutor;
+  }
   /**
    * Sets the rules of the game based on the name of the game
    *
    * @param gameName the name of the game
    */
   public void setGameType(String gameName) {
-    curRules = new GameRules(gameName);
+    curRules = new GameRules(gameName, viewController, curBoard);
     turnManager.setRules(curRules);
+    clickExecutor.setGameRules(curRules);
+    setIfTurnRules(false);
   }
 
   /**
@@ -77,6 +83,16 @@ public class GameEngine extends Engine {
   public void setIfTurnRules(Boolean turnRules) {
     turnManager.setIfTurnRules(turnRules);
     clickExecutor.setIfTurnRules(turnRules);
+  }
+
+  @Override
+  public void checkForWin() {
+    curRules.checkWinConditions(getCurrentPlayerTurn());
+  }
+
+  @Override
+  public boolean isGameOver() {
+    return curRules.checkWinConditions("user") || curRules.checkWinConditions("opponent")  ;
   }
 
   /**

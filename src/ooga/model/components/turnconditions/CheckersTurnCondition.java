@@ -1,7 +1,7 @@
 package ooga.model.components.turnconditions;
 
-import ooga.model.components.ActionType;
-import ooga.model.components.CompletedAction;
+import ooga.model.components.movehistory.ActionType;
+import ooga.model.components.movehistory.CompletedAction;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;
 

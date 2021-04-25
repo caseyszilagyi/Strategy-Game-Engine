@@ -2,8 +2,8 @@ package ooga.model.components.moverestrictions;
 
 import java.util.List;
 import java.util.Map;
-import ooga.model.components.ActionType;
-import ooga.model.components.CompletedAction;
+import ooga.model.components.movehistory.ActionType;
+import ooga.model.components.movehistory.CompletedAction;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;

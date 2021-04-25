@@ -10,7 +10,7 @@ import ooga.view.board.Board;
  *
  * @author Casey Szilagyi
  */
-public class BoardController implements FrontEndExternalAPI{
+public class BoardController implements FrontEndExternalAPI {
 
   private Board board;
   private BackEndExternalAPI modelController;
@@ -19,7 +19,7 @@ public class BoardController implements FrontEndExternalAPI{
    * Obtains a {@link Board} object for this class to control.
    * @param board a {@code Board} object
    */
-  public void giveBoard(Board board){
+  public void giveBoard(Board board) {
     this.board = board;
   }
 
@@ -36,7 +36,7 @@ public class BoardController implements FrontEndExternalAPI{
    */
   @Override
   public void setBoardDimensions(int width, int height) {
-
+    board.setBoardDimensions(width, height);
   }
 
   /**
@@ -54,9 +54,7 @@ public class BoardController implements FrontEndExternalAPI{
     if (!board.spaceIsEmpty(x, y)) {
       board.removePiece(x, y);
     }
-
     board.addPiece(x, y, teamName, identifier);
-
   }
 
   /**
@@ -110,7 +108,7 @@ public class BoardController implements FrontEndExternalAPI{
 
   @Override
   public void gameEnd(String playerName) {
-
+    System.out.println(playerName + "won!");
   }
 
 

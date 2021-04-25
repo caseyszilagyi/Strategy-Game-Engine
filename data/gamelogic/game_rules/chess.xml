@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rules rules="chess">
+ <gameType>Move</gameType>
  <turnConditions>
   <condition>NoHeldPiece</condition>
  </turnConditions>
+ <winConditions>
+  <condition>NoMoves</condition>
+ </winConditions>
 </rules>

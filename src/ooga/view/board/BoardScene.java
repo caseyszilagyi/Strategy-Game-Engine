@@ -2,14 +2,17 @@ package ooga.view.board;
 
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import ooga.controller.BoardController;
 import ooga.controller.ModelController;
 import ooga.view.GameScene;
@@ -38,7 +41,7 @@ public class BoardScene extends GameScene {
     super(root, handler, resources);
     this.modelController = modelController;
     this.resources = resources;
-    board = new Board(8, 8, modelController);
+    board = new Board(modelController);
     sceneRoot = (GridPane) root;
     sceneRoot.getStyleClass().add("boardScene");
     sceneRoot.setVgap(30);
@@ -51,7 +54,7 @@ public class BoardScene extends GameScene {
    * holds.
    * @param boardController a {@code BoardController} instance
    */
-  public void attachBoardControllerToBoard(BoardController boardController){
+  public void attachBoardControllerToBoard(BoardController boardController) {
     boardController.giveBoard(board);
   }
 
@@ -62,8 +65,6 @@ public class BoardScene extends GameScene {
     col1.setHalignment(HPos.CENTER);
     sceneRoot.getColumnConstraints().add(col1);
 
-
-
     Label welcomeLabel = makeLabel("title-text");
     sceneRoot.add(welcomeLabel, 0, 0);
 
@@ -71,5 +72,11 @@ public class BoardScene extends GameScene {
 
     sceneRoot.add(topBar, 0, 1);
     sceneRoot.add(board, 0, 3);
+
+    //https://docs.oracle.com/javafx/2/ui_controls/color-picker.htm
+    ColorPicker colorPicker = new ColorPicker();
+    sceneRoot.add(new Text("Highlight Color:"), 0, 4);
+    sceneRoot.add(colorPicker, 1 , 4);
+    colorPicker.setOnAction((EventHandler) t -> board.setHighlightColor((colorPicker.getValue())));
   }
 }

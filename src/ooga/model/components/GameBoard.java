@@ -1,15 +1,16 @@
 package ooga.model.components;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import javafx.util.Pair;
 import ooga.controller.FrontEndExternalAPI;
-import ooga.model.initialization.pieces.PieceCreator;
+import ooga.model.components.movehistory.ActionType;
+import ooga.model.components.movehistory.CompletedAction;
 
 /**
  * This is the representation of the board. It holds all of the GamePiece objects, and has the
@@ -124,7 +125,6 @@ public class GameBoard implements Board {
     viewController.giveAllPossibleMoves(coordPairs.iterator());
   }
 
-
   /**
    * Determines the take moves of an opposing team, without restrictions
    *
@@ -140,6 +140,15 @@ public class GameBoard implements Board {
     }
     return opponentTeamLegalMoves;
   }
+
+  public boolean determineIfOppositeTeamHasMove(String teamName){
+    List<GamePiece> piecesCopy = new ArrayList<>(pieceCoordinateMap.values());
+    return !piecesCopy.stream()
+        .filter(piece -> !piece.getPieceTeam().equals(teamName))
+        .flatMap(piece -> piece.determineAllLegalMoves().stream())
+        .collect(Collectors.toSet()).isEmpty();
+  }
+
 
   /**
    * Determines if the coordinates given are listed as a legal move for the active piece

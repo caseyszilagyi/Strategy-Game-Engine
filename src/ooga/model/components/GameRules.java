@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import ooga.controller.FrontEndExternalAPI;
 import ooga.model.components.turnconditions.TurnCondition;
 import ooga.model.components.turnconditions.TurnConditionResult;
+import ooga.model.components.winconditions.EndGameConditioin;
 import ooga.model.initialization.fileparsing.XMLParser;
+import ooga.model.initialization.gameflow.ConditionClassLoader;
 import org.w3c.dom.Node;
 
 public class GameRules {
@@ -19,18 +22,50 @@ public class GameRules {
   private static final String TURN_CONDITION_NAME_EXTENSION = "TurnCondition";
   private static final String FILE_TYPE = "rules";
   private static final String TURN_CONDITION = "turnConditions";
+  private static final String WIN_CONDITION = "winConditions";
+  private static final String WIN_CONDITION_FILE_PATH = EndGameConditioin.class.getPackageName() + ".";
+  private static final String ADD_PIECE_TYPE = "addPieceType";
 
   private final Map<String, List<Node>> gameFileContents;
   private final File ruleFile;
+  private List<EndGameConditioin> winConditions;
+  private String gameName;
 
   private XMLParser xmlParser;
+  private ConditionClassLoader classLoader;
+  private GameBoard board;
+  private FrontEndExternalAPI viewController;
 
-  public GameRules(String gameName){
+  public GameRules(String gameName, FrontEndExternalAPI viewController, GameBoard board){
+    this.gameName = gameName;
     xmlParser = new XMLParser();
     ruleFile = new File(RULE_FILE_PATH + gameName + FILE_EXTENSION);
     gameFileContents = xmlParser.makeRootNodeMap(ruleFile, FILE_TYPE, gameName);
+    this.board = board;
+    this.viewController = viewController;
+    classLoader = new ConditionClassLoader(board, viewController);
+    makeWinConditions();
   }
 
+  public void makeWinConditions(){
+    winConditions = new ArrayList<>();
+    if(gameFileContents.get(WIN_CONDITION) == null){ return;}
+    for (Node n : gameFileContents.get(WIN_CONDITION)){
+      for(String condition : n.getTextContent().split("\\s")){
+        if(condition != ""){
+          winConditions.add(makeCondition(condition));
+        }
+      }
+    }
+  }
+
+  private EndGameConditioin makeCondition(String condition){
+    return classLoader.makeWinCondition(condition);
+  }
+
+  public boolean checkWinConditions(String teamName){
+    return winConditions.stream().allMatch(winCondition -> winCondition.checkForWin(teamName));
+  }
 
   /**
    * Gets a List of the turn conditions for the current game as a List of Strings
@@ -47,6 +82,27 @@ public class GameRules {
       }
     }
     return listOfTurnConditions;
+  }
+
+  /**
+   * gets the piece type which can be added to the board for a game
+   * @return the name of the piece type which can be added to the board
+   */
+  public String getAddPieceType(){
+    if(gameFileContents.containsKey(ADD_PIECE_TYPE)){
+      return gameFileContents.get(ADD_PIECE_TYPE).get(0).getTextContent();
+    }
+    //Todo: throw error
+    System.err.println("No addPieceType defined in xml file");
+    return null;
+  }
+
+  /**
+   * Returns the name of the game which the rulefile is based off of
+   * @return the name of the rulefile
+   */
+  public String getGameName(){
+    return gameName;
   }
 
   /**

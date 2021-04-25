@@ -1,6 +1,43 @@
 package ooga.model.components;
 
 public class Player{
+
+  public Player() {};
+  public Player(String firstName, String lastName, Record[] records) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.records = records;
+  }
+
+  String firstName;
+  String lastName;
+  Record[] records;
+
+  public Record[] getRecords() {
+    return records;
+  }
+
+  public void setRecords(Record[] records) {
+    this.records = records;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+
   int numWins;
   int numLosses;
   int numTies;
