@@ -1,6 +1,7 @@
 package ooga.model.engine.running;
 
 import ooga.model.components.GameBoard;
+import ooga.model.components.GameRules;
 
 /**
  * Meant to process clicks from the front end and execute the proper actions on the board
@@ -10,6 +11,7 @@ import ooga.model.components.GameBoard;
 public abstract class ClickExecutor {
 
   protected GameBoard curBoard;
+  protected GameRules curRules;
   protected Boolean noTurnRules = true;
 
   /**
@@ -22,8 +24,14 @@ public abstract class ClickExecutor {
    */
   protected abstract boolean executeClick(int xClickPosition, int yClickPosition, String currentPlayerTurn);
 
-  // Executes a click when a piece is currently being held
-
+  /**
+   * Sets the game rules associated with the current game
+   *
+   * @param gameRules the GameRules.java object associated with the currect game
+   */
+  public void setGameRules(GameRules gameRules){
+    curRules = gameRules;
+  }
 
   protected boolean checkProperTeamTurn(int x, int y, String currentPlayerTurn) {
     return noTurnRules || curBoard.getPieceAtCoordinate(x, y).getPieceTeam()

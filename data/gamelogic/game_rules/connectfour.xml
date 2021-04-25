@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rules rules="connectfour">
+  <gameType>Place</gameType>
+  <addPieceType>normalConnectFour</addPieceType>
+  <turnConditions>
+    <condition>Force</condition>
+  </turnConditions>
+</rules>

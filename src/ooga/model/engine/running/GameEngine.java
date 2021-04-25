@@ -70,6 +70,7 @@ public class GameEngine extends Engine {
   public void setGameType(String gameName) {
     curRules = new GameRules(gameName, viewController, curBoard);
     turnManager.setRules(curRules);
+    clickExecutor.setGameRules(curRules);
     setIfTurnRules(false);
   }
 
