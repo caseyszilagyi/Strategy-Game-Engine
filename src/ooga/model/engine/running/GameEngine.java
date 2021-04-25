@@ -87,7 +87,10 @@ public class GameEngine extends Engine {
 
   @Override
   public void checkForWin() {
-    curRules.checkWinConditions(getCurrentPlayerTurn());
+    if(curRules.checkWinConditions(getCurrentPlayerTurn())){
+      viewController.gameEnd(getCurrentPlayerTurn());
+    }
+
   }
 
   @Override
@@ -106,6 +109,7 @@ public class GameEngine extends Engine {
     curBoard.setViewController(viewController);
     clickExecutor.setBoard(curBoard);
     turnManager.setBoard(curBoard);
+    curRules = new GameRules(curRules.getGameName(), viewController, board);
   }
 
   /**
