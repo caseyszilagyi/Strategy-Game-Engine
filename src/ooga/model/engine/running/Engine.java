@@ -24,6 +24,8 @@ public abstract class Engine{
    */
   public abstract void setGameType(String gameType);
 
+  public abstract void setClickExecutor(ClickExecutor clickExecutor);
+
   public abstract void setBoard(GameBoard board);
 
   public abstract GameBoard getBoard();
@@ -43,6 +45,12 @@ public abstract class Engine{
   public abstract void setIfTurnRules(Boolean rules);
 
   public abstract void checkForWin();
+
+  /**
+   * Checks to see if the winConidition is hit.  This method is mostly used for testing
+   * @return whether or not the game is over
+   */
+  public abstract boolean isGameOver();
 
   /**
    * Alters the board in the way described in the Action parameter
