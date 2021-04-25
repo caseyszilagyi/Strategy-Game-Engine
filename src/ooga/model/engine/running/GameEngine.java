@@ -110,6 +110,7 @@ public class GameEngine extends Engine {
     clickExecutor.setBoard(curBoard);
     turnManager.setBoard(curBoard);
     curRules = new GameRules(curRules.getGameName(), viewController, board);
+    board.setTurnManager(turnManager);
   }
 
   /**
