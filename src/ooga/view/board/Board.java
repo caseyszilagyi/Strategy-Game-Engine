@@ -100,8 +100,8 @@ public class Board extends GridPane {
    * Unhighlights all {@link Tile} on the board
    */
   public void unhighlightAll() {
-    for (int i = 0; i < 8; i++) {
-      for (int j = 0; j < 8; j++) {
+    for (int i = 0; i < tiles.length; i++) {
+      for (int j = 0; j < tiles[i].length; j++) {
         tiles[i][j].unHighlight();
       }
     }
