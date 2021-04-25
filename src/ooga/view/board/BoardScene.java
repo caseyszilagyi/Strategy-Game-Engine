@@ -2,7 +2,6 @@ package ooga.view.board;
 
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.scene.Node;
@@ -11,7 +10,6 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import ooga.controller.BoardController;
 import ooga.controller.ModelController;
@@ -50,6 +48,16 @@ public class BoardScene extends GameScene {
   }
 
   /**
+   * Sets the title text of this scene, based on the given property that can be found in
+   * the resource bundle for this scene.
+   * @param property a {@code String} property key for the scene title.
+   */
+  public void setTitle(String property){
+    Label titleLabel = makeLabel(property);
+    sceneRoot.add(titleLabel, 0, 0);
+  }
+
+  /**
    * Attaches a {@link BoardController} object to the {@code Board} object this scene
    * holds.
    * @param boardController a {@code BoardController} instance
@@ -65,10 +73,10 @@ public class BoardScene extends GameScene {
     col1.setHalignment(HPos.CENTER);
     sceneRoot.getColumnConstraints().add(col1);
 
-    Label welcomeLabel = makeLabel("title-text");
-    sceneRoot.add(welcomeLabel, 0, 0);
+    // TODO: Make this flexible
+    setTitle("chess");
 
-    Node topBar = makeTopBar();
+    Node topBar = makeButtonBar("topBarButtons");
 
     sceneRoot.add(topBar, 0, 1);
     sceneRoot.add(board, 0, 3);

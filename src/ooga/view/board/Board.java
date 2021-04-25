@@ -122,11 +122,12 @@ public class Board extends GridPane {
   }
 
   /**
-   * Removes a game piece from the board.
+   * Removes a game piece from the board. This works similar to a {@code pop()} method
+   * and will return the piece that was just removed.
    *
    * @param x x coordinate of piece
    * @param y y coordinate of piece
-   * @return
+   * @return the {@code ImageView} of the piece that was just removed.
    */
   public ImageView removePiece(int x, int y) {
     ImageView piece = tiles[x][y].getPiece();

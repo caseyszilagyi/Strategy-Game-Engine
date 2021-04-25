@@ -3,6 +3,7 @@ package ooga.model.engine.running;
 import java.util.ArrayList;
 import java.util.List;
 import ooga.controller.FrontEndExternalAPI;
+import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GameRules;
 import ooga.model.components.Player;
@@ -33,6 +34,10 @@ public class GameEngine extends Engine {
   //Action creator
   private ActionCreator actionCreator;
 
+  private boolean isAIPlaying = false;
+  private AI computer;
+  private boolean ifTurnRules = true;
+
   /**
    * Makes an instance of this game engine, and gives it the view controller to make calls to the
    * front end
@@ -58,6 +63,22 @@ public class GameEngine extends Engine {
     }
     checkForWin();
     turnManager.endTurn(x, y);
+    makeAIMove();
+  }
+
+
+  public void setAI(AI computer){
+    this.computer = computer;
+    isAIPlaying = true;
+  }
+
+
+  private void makeAIMove(){
+    ArrayList<Coordinate> moves = new ArrayList<>();
+    if(isAIPlaying && getCurrentPlayerTurn().equals("opponent") && !isGameOver() && ifTurnRules){
+      computer.determineMove(curBoard);
+      computer.getMove().stream().forEach(coord->runTurn(coord.getX(), coord.getY()));
+    }
   }
 
   public void setClickExecutor(ClickExecutor clickExecutor){
@@ -84,11 +105,15 @@ public class GameEngine extends Engine {
   public void setIfTurnRules(Boolean turnRules) {
     turnManager.setIfTurnRules(turnRules);
     clickExecutor.setIfTurnRules(turnRules);
+    ifTurnRules = turnRules;
   }
 
   @Override
   public void checkForWin() {
-    curRules.checkWinConditions(getCurrentPlayerTurn());
+    if(curRules.checkWinConditions(getCurrentPlayerTurn())){
+      viewController.gameEnd(getCurrentPlayerTurn());
+    }
+
   }
 
   @Override
@@ -107,6 +132,8 @@ public class GameEngine extends Engine {
     curBoard.setViewController(viewController);
     clickExecutor.setBoard(curBoard);
     turnManager.setBoard(curBoard);
+    curRules = new GameRules(curRules.getGameName(), viewController, board);
+    board.setTurnManager(turnManager);
   }
 
   /**
