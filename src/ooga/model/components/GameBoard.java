@@ -323,8 +323,12 @@ public class GameBoard implements Board {
   @Override
   public void removePiece(Coordinate coordinate) {
     addCompletedAction(ActionType.REMOVE, pieceCoordinateMap.get(coordinate), coordinate);
-    pieceCoordinateMap.remove(coordinate);
+    removeBackendPiece(coordinate);
     viewController.removePiece(coordinate.getX(), coordinate.getY());
+  }
+
+  public void removeBackendPiece(Coordinate coordinate){
+    pieceCoordinateMap.remove(coordinate);
   }
 
 
@@ -391,7 +395,7 @@ public class GameBoard implements Board {
       currentElement = history.get(size-1);
     }
     moveNumber--;
-    actionsToRevert.stream().forEach(action -> action.revert(this));
+    actionsToRevert.stream().forEach(action -> action.revert(this, viewController));
   }
 
   public void nextTurn(){
