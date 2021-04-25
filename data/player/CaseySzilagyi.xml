@@ -1,19 +1,19 @@
 <Player>
-  <fullName>dummy person</fullName>
-  <firstName>dummy</firstName>
-  <lastName>person</lastName>
+  <fullName/>
+  <firstName>Casey</firstName>
+  <lastName>Szilagyi</lastName>
   <records>
     <records>
       <gameName>chess</gameName>
-      <wins>1</wins>
-      <losses>3</losses>
-      <draws>4</draws>
+      <wins>0</wins>
+      <losses>0</losses>
+      <draws>1</draws>
     </records>
     <records>
       <gameName>checkers</gameName>
-      <wins>3</wins>
-      <losses>4</losses>
-      <draws>5</draws>
+      <wins>0</wins>
+      <losses>0</losses>
+      <draws>0</draws>
     </records>
     <records>
       <gameName>connectFour</gameName>
