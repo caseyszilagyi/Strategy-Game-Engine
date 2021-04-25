@@ -404,7 +404,6 @@ public class GameBoard implements Board {
   }
 
 
-
   // makes a set of coordinates
   private Coordinate makeCoordinates(int x, int y) {
     return new Coordinate(x, y);

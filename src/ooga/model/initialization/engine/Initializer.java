@@ -32,7 +32,7 @@ public interface Initializer {
    * @param opponent The string associated with the person pplaying on the top of the board
    */
   public void addPlayers(String user, String opponent);
-
+  public void addAI();
   /**
    * Gets the engine that is being used to run the back end
    * @return The engine

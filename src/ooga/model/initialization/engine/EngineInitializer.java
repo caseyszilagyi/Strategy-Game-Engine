@@ -2,8 +2,10 @@ package ooga.model.initialization.engine;
 
 import ooga.controller.FrontEndExternalAPI;
 import ooga.model.engine.running.ClickExecutor;
+import ooga.model.components.computer.AI;
 import ooga.model.engine.running.Engine;
 import ooga.model.engine.running.GameEngine;
+import ooga.model.initialization.AICreator;
 import ooga.model.initialization.BoardCreator;
 import ooga.model.initialization.PlayerCreator;
 import ooga.model.initialization.clickexecutor.ClickExecutorInitializer;
@@ -22,7 +24,7 @@ public class EngineInitializer implements Initializer {
   public Engine gameEngine;
   public BoardCreator boardCreator;
   private PlayerCreator playerCreator = new PlayerCreator();
-
+  private AICreator gameAI = new AICreator();
 
   public EngineInitializer(FrontEndExternalAPI newBoardController){
     boardController = newBoardController;
@@ -62,7 +64,10 @@ public class EngineInitializer implements Initializer {
     gameEngine.addActiveUser(playerCreator.makePlayer(user));
     boardCreator.setTeams(user, opponent);
   }
-
+  @Override
+  public void addAI(){
+    gameEngine.addAI(gameAI.makeAI());
+  }
   @Override
   public Engine getEngine() {
     return gameEngine;
