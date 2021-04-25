@@ -162,8 +162,8 @@ public class GameEngine extends Engine {
   public void addActiveUsers(Player player1, Player player2) {
     turnManager.addActiveUser(player2);
     turnManager.addActiveUser(player1);
-    playerNames.put(player1.getName(), "user");
-    playerNames.put(player2.getName(), "opponent");
+    playerNames.put(player1.getFullName(), "user");
+    playerNames.put(player2.getFullName(), "opponent");
     clickExecutor.setPlayerMap(playerNames);
     curBoard.setPlayerMap(playerNames);
   }

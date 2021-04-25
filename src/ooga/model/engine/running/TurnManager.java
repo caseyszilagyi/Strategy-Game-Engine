@@ -108,7 +108,7 @@ public class TurnManager {
    * @return A string representing the player's name
    */
   protected String getCurrentPlayerTurnName(){
-    return currentPlayerTurn.getName();
+    return currentPlayerTurn.getFullName();
   }
 
 
