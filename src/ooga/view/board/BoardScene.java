@@ -2,7 +2,6 @@ package ooga.view.board;
 
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.scene.Node;
@@ -11,7 +10,6 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import ooga.controller.BoardController;
 import ooga.controller.ModelController;
@@ -68,7 +66,7 @@ public class BoardScene extends GameScene {
     Label welcomeLabel = makeLabel("title-text");
     sceneRoot.add(welcomeLabel, 0, 0);
 
-    Node topBar = makeTopBar();
+    Node topBar = makeButtonBar("topBarButtons");
 
     sceneRoot.add(topBar, 0, 1);
     sceneRoot.add(board, 0, 3);
