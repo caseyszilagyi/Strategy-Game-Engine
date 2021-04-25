@@ -2,14 +2,17 @@ package ooga.view.board;
 
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import ooga.controller.BoardController;
 import ooga.controller.ModelController;
 import ooga.view.GameScene;
@@ -69,5 +72,11 @@ public class BoardScene extends GameScene {
 
     sceneRoot.add(topBar, 0, 1);
     sceneRoot.add(board, 0, 3);
+
+    //https://docs.oracle.com/javafx/2/ui_controls/color-picker.htm
+    ColorPicker colorPicker = new ColorPicker();
+    sceneRoot.add(new Text("Highlight Color:"), 0, 4);
+    sceneRoot.add(colorPicker, 1 , 4);
+    colorPicker.setOnAction((EventHandler) t -> board.setHighlightColor((colorPicker.getValue())));
   }
 }
