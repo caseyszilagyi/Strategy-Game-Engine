@@ -11,6 +11,7 @@ import ooga.model.components.GamePiece;
 public class Gravity extends PieceMovement{
 
   private GameBoard gameBoard;
+  private GamePiece currentPiece;
 
   /**
    * The constructor takes the parameters of the move. This includes the change in position of the
@@ -24,6 +25,7 @@ public class Gravity extends PieceMovement{
       GameBoard gameBoard, GamePiece piece) {
     super(parameters, direction, gameBoard);
     this.gameBoard = gameBoard;
+    currentPiece = piece;
   }
 
   @Override
@@ -32,7 +34,7 @@ public class Gravity extends PieceMovement{
     Coordinate coordinateToCheck;
     for(int y = gameBoard.getHeight() - 1; y >= 0; y--){
       coordinateToCheck = new Coordinate(file, y);
-      if(!gameBoard.isPieceAtCoordinate(coordinateToCheck)){
+      if(!gameBoard.isPieceAtCoordinate(coordinateToCheck) || gameBoard.getPieceAtCoordinate(coordinateToCheck).equals(currentPiece)){
         return Arrays.asList(coordinateToCheck);
       }
     }

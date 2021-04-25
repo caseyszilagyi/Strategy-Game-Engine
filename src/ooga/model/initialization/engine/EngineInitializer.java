@@ -2,8 +2,10 @@ package ooga.model.initialization.engine;
 
 import ooga.controller.FrontEndExternalAPI;
 import ooga.model.engine.running.ClickExecutor;
+import ooga.model.components.computer.AI;
 import ooga.model.engine.running.Engine;
 import ooga.model.engine.running.GameEngine;
+import ooga.model.initialization.AICreator;
 import ooga.model.initialization.BoardCreator;
 import ooga.model.initialization.PlayerCreator;
 import ooga.model.initialization.clickexecutor.ClickExecutorInitializer;
@@ -22,7 +24,8 @@ public class EngineInitializer implements Initializer {
   public Engine gameEngine;
   public BoardCreator boardCreator;
   private PlayerCreator playerCreator = new PlayerCreator();
-
+  private AICreator gameAI = new AICreator();
+  private final String AI_NAME = "AI";
 
   public EngineInitializer(FrontEndExternalAPI newBoardController){
     boardController = newBoardController;
@@ -40,8 +43,9 @@ public class EngineInitializer implements Initializer {
     ClickExecutorInitializer clickExecutorInitializer = new ClickExecutorInitializer();
     gameEngine.setClickExecutor(clickExecutorInitializer.getProperClickExecutor(gameName));
     boardCreator = new BoardCreator(gameName, boardController);
-    gameEngine.setBoard(boardCreator.makeBoard());
     gameEngine.setGameType(gameName);
+    gameEngine.setBoard(boardCreator.makeBoard());
+
 
   }
 
@@ -58,11 +62,16 @@ public class EngineInitializer implements Initializer {
 
   @Override
   public void addPlayers(String user, String opponent) {
-    gameEngine.addActiveUser(playerCreator.makePlayer(opponent));
-    gameEngine.addActiveUser(playerCreator.makePlayer(user));
+    gameEngine.addActiveUsers(playerCreator.makePlayer(user), playerCreator.makePlayer(opponent));
     boardCreator.setTeams(user, opponent);
+    if(opponent.equals(AI_NAME)){
+      addAI();
+    }
   }
-
+  @Override
+  public void addAI(){
+    gameEngine.setAI(gameAI.makeAI());
+  }
   @Override
   public Engine getEngine() {
     return gameEngine;

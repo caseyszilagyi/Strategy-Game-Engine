@@ -26,7 +26,7 @@ public class BasicPlaceGameTest {
     modelController.setGameType("connectfour");
     gameBoard = modelController.getEngine().getBoard();
     gameEngine = modelController.getEngine();
-    gameEngine.setIfTurnRules(true);
+    gameEngine.setIfNoTurnRules(true);
     printBoard();
   }
 
@@ -172,6 +172,15 @@ void testBasicDiagonalLeftWinCondition(){
     gameEngine.runTurn(3,0); // 3,0 U X
     printBoard();
     assertTrue(gameEngine.isGameOver());
+  }
+
+  @Test
+  void fixBottomRowClickBug(){
+    System.out.println("Fixing bottom row click");
+    gameEngine.runTurn(0,5);
+    assertTrue(gameBoard.isPieceAtCoordinate(0,5));
+    assertFalse(gameBoard.isPieceAtCoordinate(0,4));
+
   }
 
 

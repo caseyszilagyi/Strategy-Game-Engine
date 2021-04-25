@@ -161,5 +161,8 @@ public class GameRules {
     return false;
   }
 
+  public void setBoard(GameBoard board){
+    this.board = board;
+  }
 
 }

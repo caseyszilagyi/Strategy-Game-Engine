@@ -53,7 +53,7 @@ public interface FrontEndExternalAPI {
    * Called when the game is done and a player has won
    * @param playerName The name of the winning player
    */
-  public void gameEnd(String playerName);
+  public void gameWin(String playerName);
 
 
   /**

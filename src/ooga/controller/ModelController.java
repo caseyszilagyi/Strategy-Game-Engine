@@ -9,11 +9,12 @@ public class ModelController implements BackEndExternalAPI {
   private Initializer engineInitializer;
   private Engine gameEngine;
   private FrontEndExternalAPI boardController;
+  private String gameType;
 
 
   @Override
   public String toString(){
-    return "Valid Model Controller";
+    return gameType;
   }
 
   /**
@@ -45,9 +46,9 @@ public class ModelController implements BackEndExternalAPI {
    */
   @Override
   public void setGameType(String gameName) {
+    gameType = gameName;
     engineInitializer.initializeGame(gameName);
-    //engineInitializer.initializeGame("checkers");
-    setPlayers("user", "opponent");
+    setPlayers("user", "qewo");
   }
 
   /**
@@ -67,6 +68,11 @@ public class ModelController implements BackEndExternalAPI {
   @Override
   public void setPlayers(String user, String opponent) {
     engineInitializer.addPlayers(user, opponent);
+  }
+
+  @Override
+  public void setAI(String game, String level) {
+    engineInitializer.addAI();
   }
 
   @Override

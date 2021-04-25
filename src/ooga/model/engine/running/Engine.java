@@ -2,6 +2,7 @@ package ooga.model.engine.running;
 
 import ooga.model.components.GameBoard;
 import ooga.model.components.Player;
+import ooga.model.components.computer.AI;
 import ooga.model.engine.actions.Action;
 
 /**
@@ -32,17 +33,17 @@ public abstract class Engine{
 
   /**
    * Adds a player that is playing
-   * @param player The object representing the player
+   * @param player1 The object representing the player
    */
-  public abstract void addActiveUser(Player player);
-
+  public abstract void addActiveUsers(Player player1, Player player2);
+  public abstract void addAI(AI ai);
   /**
    * Gets the player who's turn it is
    * @return The string of the name of the player who's turn it is
    */
   public abstract String getCurrentPlayerTurn();
 
-  public abstract void setIfTurnRules(Boolean rules);
+  public abstract void setIfNoTurnRules(Boolean rules);
 
   public abstract void checkForWin();
 
@@ -67,5 +68,7 @@ public abstract class Engine{
   public abstract void saveCurrentState(String fileName);
 
   public abstract void undoTurn();
+
+  public abstract void setAI(AI computer);
 
 }

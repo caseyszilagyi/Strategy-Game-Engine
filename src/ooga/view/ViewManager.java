@@ -24,9 +24,13 @@ public class ViewManager {
   private final GameWindow primaryWindow;
   private ModelController modelController;
   private BoardController boardController;
+<<<<<<< HEAD
   private static final String CHESS_GAMETYPE = "chess";
   private static final String CHECKERS_GAMETYPE = "checkers";
   private static final String CONNECT4_GAMETYPE = "connectfour";
+=======
+  private String DEFAULT_GAMETYPE = "chess";
+>>>>>>> master
 
   /**
    * Creates a new instance of {@code ViewManager} with a resource bundle with
@@ -109,30 +113,29 @@ public class ViewManager {
 
   /**
    * Starts the game by changing the scene of the current window to a {@link BoardScene}
-   * instance.
+   * instance. This also gives the {@link ModelController} its game type so that it can
+   * initialize the correct game files.
+   * @param gameType a {@code String} for the game type.
    */
-  public void chessButton() {
+
+  public void startGame(String gameType) {
     ((BoardScene) changeScene("boardScene"))
         .attachBoardControllerToBoard(boardController);
-    modelController.setGameType(CHESS_GAMETYPE);
+    modelController.setGameType(gameType);
     ((Stage) primaryWindow).setResizable(true);
     positionWindow((Stage) primaryWindow, 500, 200);
   }
 
-  public void checkersButton() {
-    ((BoardScene) changeScene("boardScene"))
-        .attachBoardControllerToBoard(boardController);
-    modelController.setGameType(CHECKERS_GAMETYPE);
-    ((Stage) primaryWindow).setResizable(true);
-    positionWindow((Stage) primaryWindow, 500, 200);
+  private void chess(){
+    startGame("chess");
   }
 
-  public void connect4Button() {
-    ((BoardScene) changeScene("boardScene"))
-        .attachBoardControllerToBoard(boardController);
-    modelController.setGameType(CONNECT4_GAMETYPE);
-    ((Stage) primaryWindow).setResizable(true);
-    positionWindow((Stage) primaryWindow, 500, 200);
+  private void checkers(){
+    startGame("checkers");
+  }
+
+  private void connectfour(){
+    startGame("connectfour");
   }
 
   public void undoButton() {

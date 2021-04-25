@@ -1,6 +1,8 @@
 package ooga.controller;
 
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import javafx.util.Pair;
 import ooga.view.board.Board;
 
@@ -103,14 +105,9 @@ public class BoardController implements FrontEndExternalAPI {
     }
   }
 
-
-  // Not implemented yet, everything above this has been implemented in back end
-
   @Override
-  public void gameEnd(String playerName) {
+  public void gameWin(String playerName) {
     System.out.println(playerName + "won!");
   }
-
-
 
 }

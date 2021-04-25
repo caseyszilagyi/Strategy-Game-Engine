@@ -48,7 +48,7 @@ public class GameBoardViewController implements FrontEndExternalAPI {
   }
 
   @Override
-  public void gameEnd(String playerName) {
+  public void gameWin(String playerName) {
 
   }
 
