@@ -38,7 +38,7 @@ public class RestrictionAndConditionTest {
     modelController.setGameType("chess");
     gameEngine= modelController.getEngine();
     gameBoard = gameEngine.getBoard();
-    gameEngine.setIfTurnRules(true);
+    gameEngine.setIfNoTurnRules(true);
     pieceCreator = new PieceCreator("chess", gameBoard);
     printBoard();
   }

@@ -32,7 +32,7 @@ public class BasicEngineTest {
     modelController.setGameType("chess");
     gameBoard = modelController.getEngine().getBoard();
     gameEngine = modelController.getEngine();
-    gameEngine.setIfTurnRules(true);
+    gameEngine.setIfNoTurnRules(true);
     printBoard();
   }
 

@@ -33,9 +33,9 @@ public abstract class Engine{
 
   /**
    * Adds a player that is playing
-   * @param player The object representing the player
+   * @param player1 The object representing the player
    */
-  public abstract void addActiveUser(Player player);
+  public abstract void addActiveUsers(Player player1, Player player2);
   public abstract void addAI(AI ai);
   /**
    * Gets the player who's turn it is
@@ -43,7 +43,7 @@ public abstract class Engine{
    */
   public abstract String getCurrentPlayerTurn();
 
-  public abstract void setIfTurnRules(Boolean rules);
+  public abstract void setIfNoTurnRules(Boolean rules);
 
   public abstract void checkForWin();
 
