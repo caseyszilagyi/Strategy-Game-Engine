@@ -11,6 +11,7 @@ import javafx.util.Pair;
 import ooga.controller.FrontEndExternalAPI;
 import ooga.model.components.movehistory.ActionType;
 import ooga.model.components.movehistory.CompletedAction;
+import ooga.model.engine.running.TurnManager;
 
 /**
  * This is the representation of the board. It holds all of the GamePiece objects, and has the
@@ -36,6 +37,7 @@ public class GameBoard implements Board {
   //History logging
   private List<CompletedAction> history = new ArrayList<>();
   int moveNumber = 0;
+  private TurnManager turnManager;
 
 
   /**
@@ -48,6 +50,10 @@ public class GameBoard implements Board {
     this.width = width;
     this.height = height;
 
+  }
+
+  public void setTurnManager(TurnManager turnManager){
+    this.turnManager = turnManager;
   }
 
   /**
@@ -384,7 +390,7 @@ public class GameBoard implements Board {
   }
 
   public void undoTurn(){
-    if(history.size() == 0){ return; }
+    if(history.size() == 0 || moveNumber < 0){ return; }
     List<CompletedAction> actionsToRevert = new ArrayList<>();
     int size = history.size();
     CompletedAction currentElement = history.get(size-1);
@@ -396,6 +402,7 @@ public class GameBoard implements Board {
     }
     moveNumber--;
     actionsToRevert.stream().forEach(action -> action.revert(this, viewController));
+    turnManager.swapTurn();
   }
 
   public void nextTurn(){
