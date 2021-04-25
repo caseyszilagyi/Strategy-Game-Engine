@@ -125,7 +125,7 @@ public class TurnManager {
    *
    * @param turnRules True if there are none, false if there are
    */
-  public void setIfTurnRules(Boolean turnRules) {
+  public void setIfNoTurnRules(Boolean turnRules) {
     noTurnRules = turnRules;
   }
 

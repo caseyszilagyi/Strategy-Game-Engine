@@ -1,7 +1,9 @@
 package ooga.model.engine.running;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import ooga.controller.FrontEndExternalAPI;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
@@ -36,7 +38,10 @@ public class GameEngine extends Engine {
 
   private boolean isAIPlaying = false;
   private AI computer;
-  private boolean ifTurnRules = true;
+  private boolean noTurnRules = false;
+  private final String AI_NAME = "opponent";
+
+  private Map<String, String> playerNames = new HashMap<>();
 
   /**
    * Makes an instance of this game engine, and gives it the view controller to make calls to the
@@ -58,7 +63,7 @@ public class GameEngine extends Engine {
    */
   public void runTurn(int x, int y) {
     turnManager.startIfBeginningTurn();
-    if(!clickExecutor.executeClick(x, y, turnManager.getCurrentPlayerTurnName())){
+    if(!clickExecutor.executeClick(x, y, getCurrentPlayerTurn())){
       return;
     }
     checkForWin();
@@ -75,7 +80,7 @@ public class GameEngine extends Engine {
 
   private void makeAIMove(){
     ArrayList<Coordinate> moves = new ArrayList<>();
-    if(isAIPlaying && getCurrentPlayerTurn().equals("opponent") && !isGameOver() && ifTurnRules){
+    if(isAIPlaying && getCurrentPlayerTurn().equals(AI_NAME) && !isGameOver() && !noTurnRules){
       computer.determineMove(curBoard);
       computer.getMove().stream().forEach(coord->runTurn(coord.getX(), coord.getY()));
     }
@@ -84,6 +89,7 @@ public class GameEngine extends Engine {
   public void setClickExecutor(ClickExecutor clickExecutor){
     this.clickExecutor = clickExecutor;
   }
+
   /**
    * Sets the rules of the game based on the name of the game
    *
@@ -93,7 +99,7 @@ public class GameEngine extends Engine {
     curRules = new GameRules(gameName, viewController, curBoard);
     turnManager.setRules(curRules);
     clickExecutor.setGameRules(curRules);
-    setIfTurnRules(false);
+    setIfNoTurnRules(false);
   }
 
   /**
@@ -102,16 +108,16 @@ public class GameEngine extends Engine {
    * @param turnRules True if there are none, false if there are
    */
   @Override
-  public void setIfTurnRules(Boolean turnRules) {
-    turnManager.setIfTurnRules(turnRules);
-    clickExecutor.setIfTurnRules(turnRules);
-    ifTurnRules = turnRules;
+  public void setIfNoTurnRules(Boolean turnRules) {
+    turnManager.setIfNoTurnRules(turnRules);
+    clickExecutor.setIfNoTurnRules(turnRules);
+    noTurnRules = turnRules;
   }
 
   @Override
   public void checkForWin() {
     if(curRules.checkWinConditions(getCurrentPlayerTurn())){
-      viewController.gameEnd(getCurrentPlayerTurn());
+      viewController.gameWin(getCurrentPlayerTurn());
     }
 
   }
@@ -149,11 +155,15 @@ public class GameEngine extends Engine {
   /**
    * Adds a player to this game
    *
-   * @param player The object representing the player
+   * @param player1 The object representing the player
    */
   @Override
-  public void addActiveUser(Player player) {
-    turnManager.addActiveUser(player);
+  public void addActiveUsers(Player player1, Player player2) {
+    turnManager.addActiveUser(player2);
+    turnManager.addActiveUser(player1);
+    playerNames.put(player1.getName(), "user");
+    playerNames.put(player2.getName(), "opponent");
+    clickExecutor.setPlayerMap(playerNames);
   }
   @Override
   public void addAI(AI ai){
@@ -166,7 +176,7 @@ public class GameEngine extends Engine {
    */
   @Override
   public String getCurrentPlayerTurn() {
-    return turnManager.getCurrentPlayerTurnName();
+    return playerNames.get(turnManager.getCurrentPlayerTurnName());
   }
 
 

@@ -1,7 +1,9 @@
 package ooga.model.engine.running;
 
+import java.util.Map;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GameRules;
+
 
 /**
  * Meant to process clicks from the front end and execute the proper actions on the board
@@ -13,6 +15,7 @@ public abstract class ClickExecutor {
   protected GameBoard curBoard;
   protected GameRules curRules;
   protected Boolean noTurnRules = true;
+  private Map<String, String> playerMap;
 
   /**
    * Executes a click based on the position of the click and the name of the player
@@ -33,8 +36,12 @@ public abstract class ClickExecutor {
     curRules = gameRules;
   }
 
+  protected void setPlayerMap(Map<String, String> playerMap){
+    this.playerMap = playerMap;
+  }
+
   protected boolean checkProperTeamTurn(int x, int y, String currentPlayerTurn) {
-    return noTurnRules || curBoard.getPieceAtCoordinate(x, y).getPieceTeam()
+    return noTurnRules || playerMap.get(curBoard.getPieceAtCoordinate(x, y).getPieceTeam())
         .equals(currentPlayerTurn);
   }
 
@@ -42,7 +49,7 @@ public abstract class ClickExecutor {
    * Sets whether turn rules are currently being followed
    * @param rules False if they are, true if they are not
    */
-  protected void setIfTurnRules(Boolean rules){
+  protected void setIfNoTurnRules(Boolean rules){
     noTurnRules = rules;
   }
 
