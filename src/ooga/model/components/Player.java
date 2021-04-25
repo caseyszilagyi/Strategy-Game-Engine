@@ -1,17 +1,25 @@
 package ooga.model.components;
 
+import ooga.model.components.movehistory.Record;
+
 public class Player{
 
+  private String fullName;
+  private String firstName;
+  private String lastName;
+  private Record[] records;
+
   public Player() {};
+  public Player(String name){
+    this.fullName = name;
+  }
   public Player(String firstName, String lastName, Record[] records) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.records = records;
+    this.fullName = firstName + " " + lastName;
   }
 
-  String firstName;
-  String lastName;
-  Record[] records;
 
   public Record[] getRecords() {
     return records;
@@ -37,41 +45,33 @@ public class Player{
     this.lastName = lastName;
   }
 
+  public String getFullName(){ return fullName; }
 
-  int numWins;
-  int numLosses;
-  int numTies;
-  String name;
-
-  public Player(String name){
-    this(name, 0, 0, 0);
-  }
-  public Player(String name, int numWins, int numLosses, int numTies){
-    this.name = name;
-    this.numWins = numWins;
-    this.numLosses = numLosses;
-    this.numTies = numTies;
+  public void setName(String... name){
+    firstName = name[0];
+    if(name.length > 1){
+      lastName = name[1];
+    }
   }
 
-  public String getWinLoss(){
-    return Integer.toString(numWins) + ":" + Integer.toString(numLosses) + ":" + Integer.toString(numTies);
-  }
-  public String getName(){ return name; }
+
+
+
 
   @Override
   public boolean equals(Object obj){
-    return obj.toString().equals(name);
+    return obj.toString().equals(fullName);
   }
 
   @Override
   public String toString(){
-    return name;
+    return getFullName();
   }
 
   @Override
   public int hashCode(){
     int result = 7;
-    for(char c: name.toCharArray()){
+    for(char c: fullName.toCharArray()){
       result = result *43 + c;
     }
     return result;
