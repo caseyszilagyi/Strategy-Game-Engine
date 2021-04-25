@@ -12,11 +12,13 @@ public class AI {
     private Coordinate startCoordinate;
     private Coordinate endCoordinate;
 
-    private void determineMove(GameBoard board) {
+    public void determineMove(GameBoard board) {
         startCoordinate = chooseRandomPiece(board.getPieceCoordinateMap());
         GamePiece randomPiece = board.getPieceAtCoordinate(startCoordinate);
+
         List<Coordinate> moves = new ArrayList<>(randomPiece.determineAllLegalMoves());
-        endCoordinate = moves.get((int) (Math.random() * moves.size()));
+        if(moves.size() == 0) endCoordinate = moves.get((int) (Math.random() * moves.size()));
+
     }
 
     private Coordinate chooseRandomPiece(Map<Coordinate, GamePiece> pieceCoordinateMap) {
