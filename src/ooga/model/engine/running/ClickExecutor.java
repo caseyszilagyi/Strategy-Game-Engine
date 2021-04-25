@@ -41,7 +41,7 @@ public abstract class ClickExecutor {
   }
 
   protected boolean checkProperTeamTurn(int x, int y, String currentPlayerTurn) {
-    return noTurnRules || playerMap.get(curBoard.getPieceAtCoordinate(x, y).getPieceTeam())
+    return noTurnRules || curBoard.getPieceAtCoordinate(x, y).getPieceTeam()
         .equals(currentPlayerTurn);
   }
 
