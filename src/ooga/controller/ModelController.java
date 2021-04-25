@@ -49,6 +49,8 @@ public class ModelController implements BackEndExternalAPI {
     gameType = gameName;
     engineInitializer.initializeGame(gameName);
     //engineInitializer.initializeGame("checkers");
+    //engineInitializer.initializeGame("connectfour");
+    //setBoardState("88ConnectFour");
     setPlayers("user", "opponent");
   }
 

@@ -174,6 +174,15 @@ void testBasicDiagonalLeftWinCondition(){
     assertTrue(gameEngine.isGameOver());
   }
 
+  @Test
+  void fixBottomRowClickBug(){
+    System.out.println("Fixing bottom row click");
+    gameEngine.runTurn(0,5);
+    assertTrue(gameBoard.isPieceAtCoordinate(0,5));
+    assertFalse(gameBoard.isPieceAtCoordinate(0,4));
+
+  }
+
 
   private void printBoard(){
     int width = gameBoard.getWidth();

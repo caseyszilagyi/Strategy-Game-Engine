@@ -59,7 +59,7 @@ public class TurnManager {
   }
 
   // Swaps the player's turns
-  private void swapTurn() {
+  public void swapTurn() {
     int currentPlayerIndex = activePlayers.indexOf(currentPlayerTurn);
     int nextPlayerIndex = (currentPlayerIndex + 1) % activePlayers.size();
     currentPlayerTurn = activePlayers.get(nextPlayerIndex);

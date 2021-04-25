@@ -42,8 +42,9 @@ public class EngineInitializer implements Initializer {
     ClickExecutorInitializer clickExecutorInitializer = new ClickExecutorInitializer();
     gameEngine.setClickExecutor(clickExecutorInitializer.getProperClickExecutor(gameName));
     boardCreator = new BoardCreator(gameName, boardController);
-    gameEngine.setBoard(boardCreator.makeBoard());
     gameEngine.setGameType(gameName);
+    gameEngine.setBoard(boardCreator.makeBoard());
+
 
   }
 
@@ -63,10 +64,13 @@ public class EngineInitializer implements Initializer {
     gameEngine.addActiveUser(playerCreator.makePlayer(opponent));
     gameEngine.addActiveUser(playerCreator.makePlayer(user));
     boardCreator.setTeams(user, opponent);
+    if(opponent.equals("AI")){
+      addAI();
+    }
   }
   @Override
   public void addAI(){
-    gameEngine.addAI(gameAI.makeAI());
+    gameEngine.setAI(gameAI.makeAI());
   }
   @Override
   public Engine getEngine() {
