@@ -76,6 +76,7 @@ public class BoardScene extends GameScene {
     ColorPicker colorPicker = new ColorPicker();
     colorPicker.getStyleClass().removeAll();
     colorPicker.getStyleClass().add("button");
+    colorPicker.setId("highlightColorPicker");
     Label highlightLabel = makeLabel("highlightColor");
 
     VBox controlPane = new VBox();
