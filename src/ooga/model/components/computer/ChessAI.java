@@ -21,7 +21,7 @@ public class ChessAI{
         this.controller = new BoardController();
     }
     //random movements for now
-    @Override
+
     public void determineMove(GameBoard board) {
         Coordinate randomPieceCoords = chooseRandomPiece(board.getPieceCoordinateMap());
         GamePiece randomPiece = board.getPieceAtCoordinate(randomPieceCoords);
@@ -35,13 +35,8 @@ public class ChessAI{
         return coordinateList.get(randomIndex);
     }
 
-    @Override
+
     public void makeMove(Coordinate startingCoord, Coordinate endingCoord) {
         controller.movePiece(startingCoord.getX(), startingCoord.getY(), endingCoord.getX(), endingCoord.getY());
-    }
-
-    @Override
-    public AI createGameAI() {
-        return null;
     }
 }

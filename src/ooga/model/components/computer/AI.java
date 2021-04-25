@@ -20,7 +20,7 @@ public class AI {
         Coordinate randomPieceCoords = chooseRandomPiece(board.getPieceCoordinateMap());
         GamePiece randomPiece = board.getPieceAtCoordinate(randomPieceCoords);
         List<Coordinate> moves = new ArrayList<>(randomPiece.determineAllLegalMoves());
-        makeMove(randomPieceCoords, moves.get((int) (Math.random() * moves.size())));
+        //makeMove(randomPieceCoords, moves.get((int) (Math.random() * moves.size())));
     }
 
     private Coordinate chooseRandomPiece(Map<Coordinate, GamePiece> pieceCoordinateMap) {
@@ -28,7 +28,7 @@ public class AI {
         int randomIndex = (int) (Math.random() * coordinateList.size());
         return coordinateList.get(randomIndex);
     }
-    public void makeMove(Coordinate startingCoord, Coordinate endingCoord) {
-        controller.movePiece(startingCoord.getX(), startingCoord.getY(), endingCoord.getX(), endingCoord.getY());
-    }
+//    public void makeMove(Coordinate startingCoord, Coordinate endingCoord) {
+//        controller.movePiece(startingCoord.getX(), startingCoord.getY(), endingCoord.getX(), endingCoord.getY());
+//    }
 }
