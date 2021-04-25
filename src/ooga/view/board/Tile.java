@@ -14,13 +14,12 @@ public class Tile extends Parent {
   private ImageView myPieceImage;
   private EventHandler myEventHandler;
   private Rectangle myRectangle;
-  private static final Color HIGHLIGHT_COLOR = Color.LIGHTGREEN;
   private Color myColor;
 
   public Tile(int size, Point position, EventHandler<MouseEvent> e) {
     super();
-    myColor = Color.WHITE;
-    myRectangle = new Rectangle(size, size, myColor);
+    myRectangle = new Rectangle(size, size);
+    setColor(Color.WHITE);
     myEventHandler = e;
     myRectangle.setOnMouseClicked(myEventHandler);
     this.getChildren().add(myRectangle);
@@ -49,8 +48,8 @@ public class Tile extends Parent {
     return new Point(myPosition);
   }
 
-  public void highLight() {
-    myRectangle.setFill(HIGHLIGHT_COLOR);
+  public void changeColor(Color color) {
+    myRectangle.setFill(color);
   }
 
   public void unHighlight() {
@@ -59,7 +58,7 @@ public class Tile extends Parent {
 
   public void setColor(Color color) {
     myColor = color;
-    myRectangle.setFill(color);
+    changeColor(myColor);
   }
 
 }

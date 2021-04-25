@@ -16,6 +16,8 @@ public class Board extends GridPane {
   private static final int SQUARE_SIZE = 50;
   private final ModelController modelController;
   private final ResourceBundle pieceBundle = ResourceBundle.getBundle("ooga.view.resources.chessPieces");
+  //TODO: can the above be better through reflection
+  private static Color highlightColor = Color.LIGHTGREEN;
 
   /**
    * Constructs a {@link Board} of the desired width and height. Also obtains a reference to a
@@ -110,7 +112,7 @@ public class Board extends GridPane {
    * @param y y coordinate of tile
    */
   public void highlightTile(int x, int y) {
-    tiles[x][y].highLight();
+    tiles[x][y].changeColor(highlightColor);
   }
 
   /**
