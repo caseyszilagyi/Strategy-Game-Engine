@@ -40,8 +40,9 @@ public class EngineInitializer implements Initializer {
     ClickExecutorInitializer clickExecutorInitializer = new ClickExecutorInitializer();
     gameEngine.setClickExecutor(clickExecutorInitializer.getProperClickExecutor(gameName));
     boardCreator = new BoardCreator(gameName, boardController);
-    gameEngine.setBoard(boardCreator.makeBoard());
     gameEngine.setGameType(gameName);
+    gameEngine.setBoard(boardCreator.makeBoard());
+
 
   }
 
