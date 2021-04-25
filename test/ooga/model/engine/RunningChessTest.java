@@ -38,36 +38,36 @@ public class RunningChessTest {
   void testBasicTurn(){
     assertTrue(gameBoard.isPieceAtCoordinate(new Coordinate(4, 1)));
     assertFalse(gameBoard.isPieceAtCoordinate(new Coordinate(4, 2)));
-    assertEquals(player1.getName(), gameEngine.getCurrentPlayerTurn());
+    assertEquals(player1.getFullName(), gameEngine.getCurrentPlayerTurn());
     gameEngine.runTurn(4,1);
     assertTrue(gameBoard.isPieceAtCoordinate(new Coordinate(4, 1)));
     assertFalse(gameBoard.isPieceAtCoordinate(new Coordinate(4, 2)));
-    assertEquals(player1.getName(), gameEngine.getCurrentPlayerTurn());
+    assertEquals(player1.getFullName(), gameEngine.getCurrentPlayerTurn());
     gameEngine.runTurn(4,2);
     assertFalse(gameBoard.isPieceAtCoordinate(new Coordinate(4, 1)));
     assertTrue(gameBoard.isPieceAtCoordinate(new Coordinate(4, 2)));
-    assertEquals(player2.getName(), gameEngine.getCurrentPlayerTurn());
+    assertEquals(player2.getFullName(), gameEngine.getCurrentPlayerTurn());
     printBoard();
   }
 
   @Test
   void testEmptyPieceClick(){
     gameEngine.runTurn(4,4);
-    assertEquals(player1.getName(), gameEngine.getCurrentPlayerTurn());
+    assertEquals(player1.getFullName(), gameEngine.getCurrentPlayerTurn());
   }
 
   @Test
   void testIndecisivePlayer(){
     gameEngine.runTurn(3,1);
-    assertEquals(player1.getName(), gameEngine.getCurrentPlayerTurn());
+    assertEquals(player1.getFullName(), gameEngine.getCurrentPlayerTurn());
     gameEngine.runTurn(4,4);
     //printBoard();
-    assertEquals(player1.getName(), gameEngine.getCurrentPlayerTurn());
+    assertEquals(player1.getFullName(), gameEngine.getCurrentPlayerTurn());
     gameEngine.runTurn(4,1);
-    assertEquals(player1.getName(), gameEngine.getCurrentPlayerTurn());
+    assertEquals(player1.getFullName(), gameEngine.getCurrentPlayerTurn());
     gameEngine.runTurn(4,2);
     //printBoard();
-    assertEquals(player2.getName(), gameEngine.getCurrentPlayerTurn());
+    assertEquals(player2.getFullName(), gameEngine.getCurrentPlayerTurn());
 
   }
 
