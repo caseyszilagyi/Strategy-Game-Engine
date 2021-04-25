@@ -65,8 +65,8 @@ public class EngineInitializer implements Initializer {
     boardCreator.setTeams(user, opponent);
   }
   @Override
-  public void addAI(String game, String level){
-    gameEngine.addAI(gameAI.makeAI(game, level));
+  public void addAI(){
+    gameEngine.addAI(gameAI.makeAI());
   }
   @Override
   public Engine getEngine() {

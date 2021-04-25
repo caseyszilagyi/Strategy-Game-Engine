@@ -71,7 +71,7 @@ public class ModelController implements BackEndExternalAPI {
 
   @Override
   public void setAI(String game, String level) {
-
+    engineInitializer.addAI();
   }
 
   @Override

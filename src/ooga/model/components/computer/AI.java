@@ -9,18 +9,14 @@ import java.util.List;
 import java.util.Map;
 
 public class AI {
-    private String game;
-    private String level;
+    private Coordinate startCoordinate;
+    private Coordinate endCoordinate;
 
-    public AI(String game, String level){
-        this.game = game;
-        this.level = level;
-    }
     private void determineMove(GameBoard board) {
-        Coordinate randomPieceCoords = chooseRandomPiece(board.getPieceCoordinateMap());
-        GamePiece randomPiece = board.getPieceAtCoordinate(randomPieceCoords);
+        startCoordinate = chooseRandomPiece(board.getPieceCoordinateMap());
+        GamePiece randomPiece = board.getPieceAtCoordinate(startCoordinate);
         List<Coordinate> moves = new ArrayList<>(randomPiece.determineAllLegalMoves());
-        //makeMove(randomPieceCoords, moves.get((int) (Math.random() * moves.size())));
+        endCoordinate = moves.get((int) (Math.random() * moves.size()));
     }
 
     private Coordinate chooseRandomPiece(Map<Coordinate, GamePiece> pieceCoordinateMap) {
@@ -28,7 +24,8 @@ public class AI {
         int randomIndex = (int) (Math.random() * coordinateList.size());
         return coordinateList.get(randomIndex);
     }
-//    public void makeMove(Coordinate startingCoord, Coordinate endingCoord) {
-//        controller.movePiece(startingCoord.getX(), startingCoord.getY(), endingCoord.getX(), endingCoord.getY());
-//    }
+
+    public List<Coordinate> getMove(){
+        return List.of(startCoordinate, endCoordinate);
+    }
 }
