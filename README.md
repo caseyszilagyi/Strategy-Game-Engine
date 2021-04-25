@@ -4,17 +4,44 @@ ooga
 This project implements a player for multiple related games.
 
 Names:
-
+Kenneth Moore III (km460)
+Shaw Phillips (sp422)
+Yi Chen (yc311)
+Cole Spector (cgs26)
+Casey Szilagyi (crs79)
 
 ### Timeline
 
 Start Date: 
+March 25, 2021
 
 Finish Date: 
+April 25, 2021
 
 Hours Spent:
 
+Kenneth: 
+
+Shaw:
+
+Yi:
+
+Cole: 20+ hours per week
+
+Casey:
+
+
 ### Primary Roles
+
+Kenneth:
+
+Shaw:
+
+Yi:
+
+Cole: GameEngine, and associated classes
+
+Casey:
 
 
 ### Resources Used
@@ -26,11 +53,68 @@ https://www.youtube.com/watch?v=u0I6ob8GQBg
 
 ### Running the Program
 
-Main class:
+###Main class:
+Main.java
 
-Data files needed: 
+###Data files needed: 
+For AI: 
+data/AI/chess.xml
+
+For game rules:
+data/gamelogic/gamerules/
+
+checkers.xml
+
+chess.xml
+
+connectfour.xml
+
+For basic pieces:
+data/gamelogic/pieces/
+
+bishop.xml
+
+finiteSlideBiship.xml
+
+king.xml
+
+kingChecker.xml
+
+knight.xml
+
+normalChecker.xml
+
+normalConnectFour.xml
+
+pawn.xml
+
+queen.xml
+
+rook.xml
+
+For basic starting states:
+data/gamelogic/starting_states/
+
+chess.xml
+
+connectFour.xml
+
+checkers.xml
 
 Features implemented:
+
+Basic:
+
+Load Games
+
+Preferences
+
+Mild:
+
+Artificial Players
+
+Player Profiles
+
 
 
 
@@ -50,13 +134,32 @@ another piece, the potential slide distance is done. Essentially, the piece can 
   is set up to take pieces not in its path). This assumption was made because in the majority
   of strategy games, there is no reason why a piece would be taking another one that
   isn't in its path
+  
+- Each piece is associated with one game, which is defined in the ``piece`` heading in its respective xml file.
+
+- The game made has a ``starting_states`` defined under the same name
 
 Interesting data files:
+
+finiteSlideBiship.xml
+
+88ConnectFour.xml
 
 Known Bugs:
 
 Extra credit:
 
+Our game engine can handle any input game (be it a placement or a movement game) which follows the same movement patterns as either chess, checkers, or connect four so long as it is given correctly formatted xml files, and can run any game if provided with complemntary TurnCondition and WinCondition files as well.
 
 ### Impressions
 
+Kenneth:
+
+Shaw:
+
+Yi:
+
+Cole: 
+  I really liked the vagueness of this project, and how we were allowed to focus on the aspects of game design that mattered to us.  While there were specifications on how to do something, the broad scope of the project allowed us to create a GameEngine which can handle practically any strategy game.  We were allowed to do this because we didn't have to focus on specific design specifications provided to us, and could instead be creative and implement aspects to our game that we found interesting.  On the team front, I thought we worked very well together, as everybody communicated in the Slack whenever we needed something done, or if we had questions about code we were implementing, or code somebody else in the group had implemented.
+
+Casey:
