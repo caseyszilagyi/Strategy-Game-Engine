@@ -63,7 +63,7 @@ public class EngineInitializer implements Initializer {
   @Override
   public void addPlayers(String user, String opponent) {
     gameEngine.addActiveUsers(playerCreator.makePlayer(user), playerCreator.makePlayer(opponent));
-    boardCreator.setTeams(user, opponent);
+    //boardCreator.setTeams(user, opponent);
     if(opponent.equals(AI_NAME)){
       addAI();
     }
