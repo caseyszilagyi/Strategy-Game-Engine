@@ -31,8 +31,8 @@ public class WelcomeScene extends GameScene {
    * loads the CSS stylesheet from the filename given in the properties file.
    * @param root the {@code Parent} object to act as the root of the scene
    * @param resources a {@code ResourceBundle} holding scene data files
-   * @param handler
-   * @param modelController
+   * @param handler the {@link EventHandler} that this scene uses
+   * @param modelController an instance of the {@link ModelController}.
    */
   public WelcomeScene(Parent root, ResourceBundle resources,
       EventHandler<ActionEvent> handler, ModelController modelController) {
@@ -55,8 +55,7 @@ public class WelcomeScene extends GameScene {
     col1.setHalignment(HPos.CENTER);
     sceneRoot.getColumnConstraints().add(col1);
 
-    Label welcomeLabel = makeLabel("title-text");
-    sceneRoot.add(welcomeLabel, 0, 0);
+    //setTitle("title-text");
 
 
     Node buttons = makeButtonBar("buttons");

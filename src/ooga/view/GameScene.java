@@ -85,6 +85,16 @@ public abstract class GameScene extends Scene {
   }
 
   /**
+   * Sets the title text of this scene, based on the given property that can be found in
+   * the resource bundle for this scene.
+   * @param property a {@code String} property key for the scene title.
+   */
+  public void setTitle(String property){
+    Label titleLabel = makeLabel(property);
+    sceneRoot.add(titleLabel, 0, 0);
+  }
+
+  /**
    * Creates a {@link Button} in the scene, with text determined by {@code property}, and
    * {@link EventHandler} specified by the event handler of this scene.
    * @param property a {@code String} matching a key in the scene source file

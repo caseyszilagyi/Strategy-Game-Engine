@@ -18,7 +18,7 @@ public class AI {
     while (moves.size() == 0) {
       startCoordinate = chooseRandomPiece(board.getPieceCoordinateMap());
       GamePiece randomPiece = board.getPieceAtCoordinate(startCoordinate);
-      if(randomPiece.getPieceTeam().equals("AI")) {
+      if(randomPiece.getPieceTeam().equals("opponent")) {
         moves = new ArrayList<>(randomPiece.determineAllLegalMoves());
       }
     }

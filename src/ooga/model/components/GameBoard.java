@@ -38,6 +38,7 @@ public class GameBoard implements Board {
   private List<CompletedAction> history = new ArrayList<>();
   int moveNumber = 0;
   private TurnManager turnManager;
+  private Map<String, String> playerMap;
 
 
   /**
@@ -49,7 +50,13 @@ public class GameBoard implements Board {
   public GameBoard(int width, int height) {
     this.width = width;
     this.height = height;
+    playerMap = new HashMap<>();
+    playerMap.put("user", "user");
+    playerMap.put("opponent", "opponent");
+  }
 
+  public void setPlayerMap(Map<String, String> map){
+    playerMap = map;
   }
 
   public void setTurnManager(TurnManager turnManager){

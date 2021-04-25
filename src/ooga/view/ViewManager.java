@@ -10,18 +10,21 @@ import ooga.controller.ModelController;
 import ooga.view.board.BoardScene;
 import ooga.view.window.GameWindow;
 import ooga.view.window.GameWindowFactory;
+import ooga.view.window.StageWindow;
 
 /**
  * Instantiates and manages all views for a single game instance.
  * This class controls the flow of {@link GameWindow} and {@link GameScene}
  * objects based on user button clicks, switching scenes and showing/closing windows
  * as necessary.
+ *
+ * @author Yi Chen
  */
 public class ViewManager {
   private final ResourceBundle initFile;
   private final GameWindowFactory gameWindowFactory;
   private final GameSceneFactory sceneFactory;
-  private final GameWindow primaryWindow;
+  private final StageWindow primaryWindow;
   private ModelController modelController;
   private BoardController boardController;
 
@@ -39,10 +42,11 @@ public class ViewManager {
     this.initFile = initFile;
     gameWindowFactory = new GameWindowFactory();
     sceneFactory = new GameSceneFactory();
-    primaryWindow = getInitialWindow();
+    primaryWindow = (StageWindow) getInitialWindow();
     ((Stage) primaryWindow).setOnCloseRequest(e -> handleStageClose());
     createControllers();
     changeScene("initialWindowScene");
+    primaryWindow.setCurrentSceneTitle("title-text");
   }
 
   /**
@@ -50,7 +54,7 @@ public class ViewManager {
    * here.
    */
   private void handleStageClose() {
-    String sceneType = ((GameScene)((Stage) primaryWindow).getScene()).getSceneType();
+    String sceneType = ((GameScene) primaryWindow.getScene()).getSceneType();
     if (sceneType.equals("BoardScene")) {
       new ViewManager(initFile);
     }
@@ -101,7 +105,8 @@ public class ViewManager {
     String buttonID = buttonPressed.getId();
     try {
       this.getClass().getDeclaredMethod(buttonID).invoke(this);
-    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException exception) {
+    } catch (NoSuchMethodException | IllegalAccessException |
+        InvocationTargetException exception) {
       exception.printStackTrace();
     }
   }
@@ -117,8 +122,9 @@ public class ViewManager {
     ((BoardScene) changeScene("boardScene"))
         .attachBoardControllerToBoard(boardController);
     modelController.setGameType(gameType);
-    ((Stage) primaryWindow).setResizable(true);
-    positionWindow((Stage) primaryWindow, 500, 200);
+    primaryWindow.setResizable(true);
+    primaryWindow.setCurrentSceneTitle(gameType);
+    positionWindow(primaryWindow, 500, 200);
   }
 
   private void chess(){
