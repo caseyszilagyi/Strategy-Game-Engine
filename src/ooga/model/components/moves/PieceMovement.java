@@ -37,15 +37,16 @@ public abstract class PieceMovement {
    * @param gameBoard  The board that the piece moves on
    */
   public PieceMovement(Map<String, String> parameters, int direction, GameBoard gameBoard) {
-    if (!parameters.get("changeX").equals("null")) {
+    if (parameters.containsKey("changeX") && !parameters.get("changeX").equals("null")) {
       changeX = Integer.parseInt(parameters.get("changeX")) * direction;
       changeY = Integer.parseInt(parameters.get("changeY")) * direction;
       mustTake = Boolean.parseBoolean(parameters.get("mustTake"));
+      if (mustTake) {
+        takeX = Integer.parseInt(parameters.get("takeX")) * direction;
+        takeY = Integer.parseInt(parameters.get("takeY")) * direction;
+      }
     }
-    if (mustTake) {
-      takeX = Integer.parseInt(parameters.get("takeX")) * direction;
-      takeY = Integer.parseInt(parameters.get("takeY")) * direction;
-    }
+
     this.gameBoard = gameBoard;
   }
 
@@ -253,5 +254,6 @@ public abstract class PieceMovement {
   protected void setChangeY(int changeY) {
     this.changeY = changeY;
   }
+
 
 }
