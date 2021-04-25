@@ -62,6 +62,9 @@ public class EngineInitializer implements Initializer {
     gameEngine.addActiveUser(playerCreator.makePlayer(opponent));
     gameEngine.addActiveUser(playerCreator.makePlayer(user));
     boardCreator.setTeams(user, opponent);
+    if(opponent.equals("AI")){
+      //gameEngine.setAI()
+    }
   }
 
   @Override

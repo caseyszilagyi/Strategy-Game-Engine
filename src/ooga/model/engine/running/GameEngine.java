@@ -3,6 +3,7 @@ package ooga.model.engine.running;
 import java.util.ArrayList;
 import java.util.List;
 import ooga.controller.FrontEndExternalAPI;
+import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GameRules;
 import ooga.model.components.Player;
@@ -32,6 +33,8 @@ public class GameEngine extends Engine {
   //Action creator
   private ActionCreator actionCreator;
 
+  private boolean isAIPlaying = false;
+
   /**
    * Makes an instance of this game engine, and gives it the view controller to make calls to the
    * front end
@@ -57,6 +60,17 @@ public class GameEngine extends Engine {
     }
     checkForWin();
     turnManager.endTurn(x, y);
+    makeAIMove();
+  }
+
+
+
+
+  private void makeAIMove(){
+    ArrayList<Coordinate> moves = new ArrayList<>();
+    if(isAIPlaying && getCurrentPlayerTurn().equals("AI")){
+
+    }
   }
 
   public void setClickExecutor(ClickExecutor clickExecutor){
