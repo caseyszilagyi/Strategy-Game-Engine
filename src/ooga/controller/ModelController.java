@@ -72,6 +72,11 @@ public class ModelController implements BackEndExternalAPI {
   }
 
   @Override
+  public void setAI(String game, String level) {
+    engineInitializer.addAI();
+  }
+
+  @Override
   public void undoTurn(){
     gameEngine.undoTurn();
   }
