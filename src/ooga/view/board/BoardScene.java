@@ -48,6 +48,16 @@ public class BoardScene extends GameScene {
   }
 
   /**
+   * Sets the title text of this scene, based on the given property that can be found in
+   * the resource bundle for this scene.
+   * @param property a {@code String} property key for the scene title.
+   */
+  public void setTitle(String property){
+    Label titleLabel = makeLabel(property);
+    sceneRoot.add(titleLabel, 0, 0);
+  }
+
+  /**
    * Attaches a {@link BoardController} object to the {@code Board} object this scene
    * holds.
    * @param boardController a {@code BoardController} instance
@@ -63,8 +73,8 @@ public class BoardScene extends GameScene {
     col1.setHalignment(HPos.CENTER);
     sceneRoot.getColumnConstraints().add(col1);
 
-    Label welcomeLabel = makeLabel("title-text");
-    sceneRoot.add(welcomeLabel, 0, 0);
+    // TODO: Make this flexible
+    setTitle("chess");
 
     Node topBar = makeButtonBar("topBarButtons");
 
