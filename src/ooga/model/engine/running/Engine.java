@@ -45,7 +45,7 @@ public abstract class Engine{
 
   public abstract void setIfNoTurnRules(Boolean rules);
 
-  public abstract void checkForWin();
+  public abstract boolean checkForWin();
 
   /**
    * Checks to see if the winConidition is hit.  This method is mostly used for testing
