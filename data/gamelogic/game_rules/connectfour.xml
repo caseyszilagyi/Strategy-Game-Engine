@@ -5,4 +5,7 @@
   <turnConditions>
     <condition>Force</condition>
   </turnConditions>
+  <winConditions>
+    <condition>FourInARow</condition>
+  </winConditions>
 </rules>
