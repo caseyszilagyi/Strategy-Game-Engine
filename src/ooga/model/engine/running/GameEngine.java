@@ -35,6 +35,8 @@ public class GameEngine extends Engine {
   private ActionCreator actionCreator;
 
   private boolean isAIPlaying = false;
+  private AI computer;
+  private boolean ifTurnRules = true;
 
   /**
    * Makes an instance of this game engine, and gives it the view controller to make calls to the
@@ -65,12 +67,17 @@ public class GameEngine extends Engine {
   }
 
 
+  public void setAI(AI computer){
+    this.computer = computer;
+    isAIPlaying = true;
+  }
 
 
   private void makeAIMove(){
     ArrayList<Coordinate> moves = new ArrayList<>();
-    if(isAIPlaying && getCurrentPlayerTurn().equals("AI")){
-
+    if(isAIPlaying && getCurrentPlayerTurn().equals("opponent") && !isGameOver() && ifTurnRules){
+      computer.determineMove(curBoard);
+      computer.getMove().stream().forEach(coord->runTurn(coord.getX(), coord.getY()));
     }
   }
 
@@ -98,6 +105,7 @@ public class GameEngine extends Engine {
   public void setIfTurnRules(Boolean turnRules) {
     turnManager.setIfTurnRules(turnRules);
     clickExecutor.setIfTurnRules(turnRules);
+    ifTurnRules = turnRules;
   }
 
   @Override

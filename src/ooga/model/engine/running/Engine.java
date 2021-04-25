@@ -69,4 +69,6 @@ public abstract class Engine{
 
   public abstract void undoTurn();
 
+  public abstract void setAI(AI computer);
+
 }
