@@ -48,16 +48,6 @@ public class BoardScene extends GameScene {
   }
 
   /**
-   * Sets the title text of this scene, based on the given property that can be found in
-   * the resource bundle for this scene.
-   * @param property a {@code String} property key for the scene title.
-   */
-  public void setTitle(String property){
-    Label titleLabel = makeLabel(property);
-    sceneRoot.add(titleLabel, 0, 0);
-  }
-
-  /**
    * Attaches a {@link BoardController} object to the {@code Board} object this scene
    * holds.
    * @param boardController a {@code BoardController} instance
@@ -73,8 +63,7 @@ public class BoardScene extends GameScene {
     col1.setHalignment(HPos.CENTER);
     sceneRoot.getColumnConstraints().add(col1);
 
-    // TODO: Make this flexible
-    setTitle("chess");
+    // Note: the title of this scene is set by ViewManger.
 
     Node topBar = makeButtonBar("topBarButtons");
 
@@ -85,6 +74,6 @@ public class BoardScene extends GameScene {
     ColorPicker colorPicker = new ColorPicker();
     sceneRoot.add(new Text("Highlight Color:"), 0, 4);
     sceneRoot.add(colorPicker, 1 , 4);
-    colorPicker.setOnAction((EventHandler) t -> board.setHighlightColor((colorPicker.getValue())));
+    colorPicker.setOnAction(t -> board.setHighlightColor((colorPicker.getValue())));
   }
 }

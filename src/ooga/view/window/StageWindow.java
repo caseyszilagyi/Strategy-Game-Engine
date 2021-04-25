@@ -14,6 +14,7 @@ import ooga.view.GameScene;
  */
 public class StageWindow extends Stage implements GameWindow {
 
+  private GameScene currentScene;
 
   /**
    * Attaches the given {@link GameScene} object to the window and shows it.
@@ -21,10 +22,20 @@ public class StageWindow extends Stage implements GameWindow {
    */
   @Override
   public void showScene(GameScene scene) {
+    currentScene = scene;
     setScene(scene);
     this.sizeToScene();
     this.setResizable(false);
     this.show();
+  }
+
+  /**
+   * Sets the title text of the current scene in the window to the {@code String}
+   * pointed to by the property given.
+   * @param property {@code String} property key for the title.
+   */
+  public void setCurrentSceneTitle(String property){
+    currentScene.setTitle(property);
   }
 
 

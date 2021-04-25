@@ -18,6 +18,7 @@ public class Board extends GridPane {
   private final ResourceBundle pieceBundle = ResourceBundle.getBundle("ooga.view.resources.chessPieces");
   //TODO: ^^^ can the above be better through reflection
   private static Color myHighlightColor;
+  private String gameType;
 
   /**
    * Constructs a {@link Board} of the desired width and height. Also obtains a reference to a
@@ -35,6 +36,14 @@ public class Board extends GridPane {
     tiles = new Tile[width][height];
     makeGrid(width, height);
     colorGrid(Color.TAN, Color.BEIGE);
+  }
+
+  /**
+   * @return a {@code String} type of this board
+   */
+  public String getBoardType(){
+    System.out.println(gameType);
+    return gameType;
   }
 
   /**
