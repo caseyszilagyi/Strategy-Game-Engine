@@ -3,6 +3,7 @@ package ooga.view;
 import java.lang.reflect.Field;
 import java.util.ResourceBundle;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import ooga.view.util.DukeApplicationTest;
@@ -43,6 +44,7 @@ public class ViewTest extends DukeApplicationTest {
     connectfourButton = lookup("#connectfour").query();
     welcomeTitle = lookup("#title-text").query();
     primaryWindow = (GameWindow) getFieldFromObject(viewManager, "primaryWindow");
+
   }
 
   /**
@@ -108,7 +110,14 @@ public class ViewTest extends DukeApplicationTest {
   @Test
   void testGameWindow(){
     assertNotNull(primaryWindow);
+  }
 
+
+  @Test
+  void testHighlightColorPicker(){
+    clickOn(chessButton);
+    ColorPicker highlightColorPicker = highlightColorPicker = lookup("#highlightColorPicker").query();
+    assertNotNull(highlightColorPicker);
   }
 
   /**

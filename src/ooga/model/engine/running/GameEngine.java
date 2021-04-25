@@ -39,7 +39,7 @@ public class GameEngine extends Engine {
   private boolean isAIPlaying = false;
   private AI computer;
   private boolean noTurnRules = false;
-  private final String AI_NAME = "opponent";
+  private final String AI_NAME = "AI";
 
   private Map<String, String> playerNames = new HashMap<>();
 
@@ -80,7 +80,7 @@ public class GameEngine extends Engine {
 
   private void makeAIMove(){
     ArrayList<Coordinate> moves = new ArrayList<>();
-    if(isAIPlaying && getCurrentPlayerTurn().equals(AI_NAME) && !isGameOver() && !noTurnRules){
+    if(isAIPlaying && turnManager.getCurrentPlayerTurnName().equals(AI_NAME) && !isGameOver() && !noTurnRules){
       computer.determineMove(curBoard);
       computer.getMove().stream().forEach(coord->runTurn(coord.getX(), coord.getY()));
     }
@@ -115,11 +115,12 @@ public class GameEngine extends Engine {
   }
 
   @Override
-  public void checkForWin() {
+  public boolean checkForWin() {
     if(curRules.checkWinConditions(getCurrentPlayerTurn())){
       viewController.gameWin(getCurrentPlayerTurn());
+      return true;
     }
-
+    return false;
   }
 
   @Override
@@ -164,6 +165,7 @@ public class GameEngine extends Engine {
     playerNames.put(player1.getName(), "user");
     playerNames.put(player2.getName(), "opponent");
     clickExecutor.setPlayerMap(playerNames);
+    curBoard.setPlayerMap(playerNames);
   }
   @Override
   public void addAI(AI ai){
