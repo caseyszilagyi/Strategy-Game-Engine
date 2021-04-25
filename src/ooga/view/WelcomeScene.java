@@ -62,6 +62,9 @@ public class WelcomeScene extends GameScene {
 
     Button checkersButton = makeButton("checkersButton");
     sceneRoot.add(checkersButton, 1, 1);
+
+    Button connect4Button = makeButton("connect4Button");
+    sceneRoot.add(connect4Button, 0, 2);
   }
 
 

@@ -26,6 +26,7 @@ public class ViewManager {
   private BoardController boardController;
   private static final String CHESS_GAMETYPE = "chess";
   private static final String CHECKERS_GAMETYPE = "checkers";
+  private static final String CONNECT4_GAMETYPE = "connectfour";
 
   /**
    * Creates a new instance of {@code ViewManager} with a resource bundle with
@@ -126,7 +127,13 @@ public class ViewManager {
     positionWindow((Stage) primaryWindow, 500, 200);
   }
 
-
+  public void connect4Button() {
+    ((BoardScene) changeScene("boardScene"))
+        .attachBoardControllerToBoard(boardController);
+    modelController.setGameType(CONNECT4_GAMETYPE);
+    ((Stage) primaryWindow).setResizable(true);
+    positionWindow((Stage) primaryWindow, 500, 200);
+  }
 
   public void undoButton() {
     modelController.undoTurn();
