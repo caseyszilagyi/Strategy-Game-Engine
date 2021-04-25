@@ -36,7 +36,7 @@ public class BoardController implements FrontEndExternalAPI {
    */
   @Override
   public void setBoardDimensions(int width, int height) {
-
+    board.setBoardDimensions(width, height);
   }
 
   /**

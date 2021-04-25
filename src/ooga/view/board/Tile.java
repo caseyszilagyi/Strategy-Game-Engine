@@ -2,12 +2,10 @@ package ooga.view.board;
 
 import java.awt.Point;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public class Tile extends Parent {
@@ -15,17 +13,16 @@ public class Tile extends Parent {
   private boolean hasPiece;
   private ImageView myPieceImage;
   private EventHandler myEventHandler;
-  private Rectangle rec;
-  private static final Color HIGHLIGHT_COLOR = Color.LIGHTGREEN;
-  private final Color DEFAULT_COLOR;
+  private Rectangle myRectangle;
+  private Color myColor;
 
-  public Tile(Color fill, int size, Point position, EventHandler<MouseEvent> e) {
+  public Tile(int size, Point position, EventHandler<MouseEvent> e) {
     super();
-    DEFAULT_COLOR = fill;
-    rec = new Rectangle(size, size, DEFAULT_COLOR);
+    myRectangle = new Rectangle(size, size);
+    setColor(Color.WHITE);
     myEventHandler = e;
-    rec.setOnMouseClicked(myEventHandler);
-    this.getChildren().add(rec);
+    myRectangle.setOnMouseClicked(myEventHandler);
+    this.getChildren().add(myRectangle);
     myPosition = position;
     hasPiece = false;
   }
@@ -51,12 +48,17 @@ public class Tile extends Parent {
     return new Point(myPosition);
   }
 
-  public void highLight() {
-    rec.setFill(HIGHLIGHT_COLOR);
+  public void changeColor(Color color) {
+    myRectangle.setFill(color);
   }
 
   public void unHighlight() {
-    rec.setFill(DEFAULT_COLOR);
+    myRectangle.setFill(myColor);
+  }
+
+  public void setColor(Color color) {
+    myColor = color;
+    changeColor(myColor);
   }
 
 }

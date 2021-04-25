@@ -16,38 +16,53 @@ public class Board extends GridPane {
   private static final int SQUARE_SIZE = 50;
   private final ModelController modelController;
   private final ResourceBundle pieceBundle = ResourceBundle.getBundle("ooga.view.resources.chessPieces");
+  //TODO: can the above be better through reflection
+  private static Color highlightColor = Color.LIGHTGREEN;
 
   /**
    * Constructs a {@link Board} of the desired width and height. Also obtains a reference to a
    * {@link ModelController}
    *
-   * @param width           desired board width
-   * @param height          desired board height
    * @param modelController
    */
-  public Board(int width, int height, ModelController modelController) {
+  public Board(ModelController modelController) {
     super();
-    tiles = new Tile[width][height];
     this.modelController = modelController;
-    makeGrid(); // TODO: Make this flexible
-    //populateBoard();
+  }
+
+  public void setBoardDimensions(int width, int height) {
+    tiles = new Tile[width][height];
+    makeGrid(width, height);
+    colorGrid(Color.TAN, Color.BEIGE);
   }
 
   /**
    * Creates the grid structure of the board, styling with patterns.
    */
-  public void makeGrid() {
-    for (int i = 0; i < 8; i++) {
-      for (int j = 0; j < 8; j++) {
+  private void makeGrid(int width, int height) {
+    for (int i = 0; i < width; i++) {
+      for (int j = 0; j < height; j++) {
         Tile temp;
         if ((i + j) % 2 == 1) {
-          temp = createTile(i, j, Color.TAN);
+          temp = createTile(i, j);
           tiles[i][j] = temp;
           this.add(temp, i, j);
         } else {
-          temp = createTile(i, j, Color.BEIGE);
+          temp = createTile(i, j);
           tiles[i][j] = temp;
           this.add(temp, i, j);
+        }
+      }
+    }
+  }
+
+  public void colorGrid(Color firstColor, Color secondColor) {
+    for (int i = 0; i < tiles.length; i++) {
+      for (int j = 0; j < tiles[i].length; j++) {
+        if ((i + j) % 2 == 1) {
+          tiles[i][j].setColor(firstColor);
+        } else {
+          tiles[i][j].setColor(secondColor);
         }
       }
     }
@@ -98,7 +113,7 @@ public class Board extends GridPane {
    * @param y y coordinate of tile
    */
   public void highlightTile(int x, int y) {
-    tiles[x][y].highLight();
+    tiles[x][y].changeColor(highlightColor);
   }
 
   /**
@@ -125,8 +140,8 @@ public class Board extends GridPane {
   }
 
 
-  private Tile createTile(int i, int j, Color color) {
-    return new Tile(color, SQUARE_SIZE, new Point(i, j), e -> handleTileClick(i, j));
+  private Tile createTile(int i, int j) {
+    return new Tile(SQUARE_SIZE, new Point(i, j), e -> handleTileClick(i, j));
   }
 
   private void addPiece(Point p, String color, String fileName) {
