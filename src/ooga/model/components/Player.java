@@ -49,8 +49,10 @@ public class Player{
 
   public void setName(String... name){
     firstName = name[0];
+    fullName = firstName;
     if(name.length > 1){
       lastName = name[1];
+      fullName = fullName + " " + lastName;
     }
   }
 
