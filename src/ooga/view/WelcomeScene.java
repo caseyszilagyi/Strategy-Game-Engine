@@ -57,6 +57,7 @@ public class WelcomeScene extends GameScene {
 
     //setTitle("title-text");
 
+
     Node buttons = makeButtonBar("buttons");
 
     sceneRoot.add(buttons, 0, 1);
