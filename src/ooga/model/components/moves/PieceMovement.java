@@ -254,4 +254,8 @@ public abstract class PieceMovement {
     this.changeY = changeY;
   }
 
+  protected GameBoard getGameBoard(){
+    return gameBoard;
+  }
+
 }
