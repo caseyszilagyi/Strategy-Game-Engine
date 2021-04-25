@@ -75,27 +75,126 @@ public class BasicPlaceGameTest {
   void testBasicDownWinCondition(){
     System.out.println("testBasicDownWinCondition");
     gameEngine.runTurn(0,0);
+    assertFalse(gameEngine.isGameOver());
     //printBoard();
     gameEngine.runTurn(1,0);
+    assertFalse(gameEngine.isGameOver());
     //printBoard();
     gameEngine.runTurn(0,0);
+    assertFalse(gameEngine.isGameOver());
     //printBoard();
     gameEngine.runTurn(1,0);
+    assertFalse(gameEngine.isGameOver());
     //printBoard();
     gameEngine.runTurn(0,0);
+    assertFalse(gameEngine.isGameOver());
     //printBoard();
     gameEngine.runTurn(1,0);
+    assertFalse(gameEngine.isGameOver());
     //printBoard();
     gameEngine.runTurn(0,0);
     printBoard();
     assertTrue(gameEngine.isGameOver());
   }
 
+@Test
+void testBasicRightWinCondition(){
+  System.out.println("testBasicRightWinCondition");
+  gameEngine.runTurn(0,0);
+  assertFalse(gameEngine.isGameOver());
+  gameEngine.runTurn(0,0);
+  assertFalse(gameEngine.isGameOver());
+  gameEngine.runTurn(1,0);
+  assertFalse(gameEngine.isGameOver());
+  gameEngine.runTurn(1,0);
+  assertFalse(gameEngine.isGameOver());
+  gameEngine.runTurn(2,0);
+  assertFalse(gameEngine.isGameOver());
+  gameEngine.runTurn(2,0);
+  assertFalse(gameEngine.isGameOver());
+  gameEngine.runTurn(3,0);
+  printBoard();
+  assertTrue(gameEngine.isGameOver());
 
+}
+
+@Test
+void testBasicDiagonalLeftWinCondition(){
+  System.out.println("testBasicDiagonalLeftWinCondition");
+  gameEngine.runTurn(0,0); // 0,0 U X
+  assertFalse(gameEngine.isGameOver());
+  gameEngine.runTurn(1,0); // 1,0 O
+  assertFalse(gameEngine.isGameOver());
+  gameEngine.runTurn(1,0); // 1,1 U X
+  assertFalse(gameEngine.isGameOver());
+  gameEngine.runTurn(2,0); // 2,0 O
+  assertFalse(gameEngine.isGameOver());
+  gameEngine.runTurn(2,0); // 2,1 U
+  assertFalse(gameEngine.isGameOver());
+  gameEngine.runTurn(3,0); // 3,0 O
+  assertFalse(gameEngine.isGameOver());
+  gameEngine.runTurn(2,0); // 2,2 U X
+  assertFalse(gameEngine.isGameOver());
+  gameEngine.runTurn(3,0); // 3,1 O
+  assertFalse(gameEngine.isGameOver());
+  gameEngine.runTurn(3,0); // 3,2 U
+  assertFalse(gameEngine.isGameOver());
+  gameEngine.runTurn(5,0); // 5,0 O
+  assertFalse(gameEngine.isGameOver());
+  gameEngine.runTurn(3,0); // 3,3 U X
+  printBoard();
+  assertTrue(gameEngine.isGameOver());
+}
+
+  @Test
+  void testBasicDiagonalRightWinCondition(){
+    System.out.println("testBasicDiagonalRightWinCondition");
+    gameEngine.runTurn(0,0); // 0,0 U
+    assertFalse(gameEngine.isGameOver());
+    gameEngine.runTurn(0,0); // 0,1 O
+    assertFalse(gameEngine.isGameOver());
+    gameEngine.runTurn(0,0); // 0,2 U
+    assertFalse(gameEngine.isGameOver());
+    gameEngine.runTurn(1,0); // 1,0 O
+    assertFalse(gameEngine.isGameOver());
+    gameEngine.runTurn(0,0); // 0,3 U X
+    assertFalse(gameEngine.isGameOver());
+    gameEngine.runTurn(1,0); // 1,1 O
+    assertFalse(gameEngine.isGameOver());
+    gameEngine.runTurn(1,0); // 1,2 U X
+    assertFalse(gameEngine.isGameOver());
+    gameEngine.runTurn(2,0); // 2,0 O
+    assertFalse(gameEngine.isGameOver());
+    gameEngine.runTurn(2,0); // 2,1 U X
+    assertFalse(gameEngine.isGameOver());
+    gameEngine.runTurn(5,0); // 5,0 O
+    assertFalse(gameEngine.isGameOver());
+    gameEngine.runTurn(3,0); // 3,0 U X
+    printBoard();
+    assertTrue(gameEngine.isGameOver());
+  }
 
 
   private void printBoard(){
-    gameBoard.printBoard();
+    int width = gameBoard.getWidth();
+    int height = gameBoard.getHeight();
+    System.out.println("");
+
+    for (int y = 0; y < height; y++){
+      for(int x = 0; x < width; x++){
+        if(!gameBoard.isPieceAtCoordinate(x,y)){
+          System.out.print("_");
+        } else {
+          if(gameBoard.getPieceAtCoordinate(x,y).getPieceTeam().equals("user")){
+            System.out.print("U");
+          } else {
+            System.out.print("O");
+          }
+        }
+      }
+      System.out.println("");
+    }
+
   }
 
 }

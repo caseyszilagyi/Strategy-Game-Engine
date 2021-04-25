@@ -24,7 +24,7 @@ public class FourInARow implements EndGameConditioin{
     for(int x = 0; x < width; x++){
       for(int y = 0; y < height; y++){
         if(board.isPieceAtCoordinate(x,y)){
-          if(checkDown(x, y, teamName) || checkRight(x, y, teamName) || checkDiagonal(x, y, teamName)){
+          if(checkDown(x, y, teamName) || checkRight(x, y, teamName) || checkDiagonalRight(x, y, teamName) || checkDiagonalLeft(x, y, teamName)){
             return true;
           }
         }
@@ -69,14 +69,31 @@ public class FourInARow implements EndGameConditioin{
     return true;
   }
 
-  private boolean checkDiagonal(int x, int y, String teamName){
+  private boolean checkDiagonalRight(int x, int y, String teamName){
     if(FOUR + y > height || FOUR + x > width){
       //System.out.println("failed diagonal bounds check");
       return false;
     }
     for(int counter = 0; counter < FOUR; counter ++){
+      int newX = x + counter;
+      int newY = y + counter;
+      if(!board.isPieceAtCoordinate(newX,  newY) || !board.getPieceAtCoordinate(newX, newY).getPieceTeam().equals(teamName)){
+        //System.out.println("failed diagonal check");
+        return false;
+      }
+    }
+    //System.out.println("passed diagonal check");
+    return true;
+  }
+
+  private boolean checkDiagonalLeft(int x, int y, String teamName){
+    if(FOUR + y > height || FOUR - x < 0){
+      //System.out.println("failed diagonal bounds check");
+      return false;
+    }
+    for(int counter = 0; counter < FOUR; counter ++){
       int newX = x - counter;
-      int newY = y - counter;
+      int newY = y + counter;
       if(!board.isPieceAtCoordinate(newX,  newY) || !board.getPieceAtCoordinate(newX, newY).getPieceTeam().equals(teamName)){
         //System.out.println("failed diagonal check");
         return false;
