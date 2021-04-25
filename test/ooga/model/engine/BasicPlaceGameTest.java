@@ -26,7 +26,7 @@ public class BasicPlaceGameTest {
     modelController.setGameType("connectfour");
     gameBoard = modelController.getEngine().getBoard();
     gameEngine = modelController.getEngine();
-    gameEngine.setIfTurnRules(true);
+    gameEngine.setIfNoTurnRules(true);
     printBoard();
   }
 

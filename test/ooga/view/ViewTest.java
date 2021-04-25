@@ -4,8 +4,6 @@ import java.lang.reflect.Field;
 import java.util.ResourceBundle;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 import ooga.view.util.DukeApplicationTest;
 import ooga.view.window.GameWindow;
@@ -16,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ViewTest extends DukeApplicationTest {
@@ -26,7 +23,9 @@ public class ViewTest extends DukeApplicationTest {
   private GameWindowFactory windowFactory;
   private GameSceneFactory sceneFactory;
   private ResourceBundle resources;
-  private Button startButton;
+  private Button chessButton;
+  private Button checkersButton;
+  private Button connectfourButton;
   private Label welcomeTitle;
   private GameWindow primaryWindow;
 
@@ -39,7 +38,9 @@ public class ViewTest extends DukeApplicationTest {
   public void start(Stage stage){
     resources = ResourceBundle.getBundle(DEFAULT_RESOURCES_PACKAGE + "init");
     viewManager = new ViewManager(resources);
-    startButton = lookup("#startGame").query();
+    chessButton = lookup("#chess").query();
+    checkersButton = lookup("#checkers").query();
+    connectfourButton = lookup("#connectfour").query();
     welcomeTitle = lookup("#title-text").query();
     primaryWindow = (GameWindow) getFieldFromObject(viewManager, "primaryWindow");
   }
@@ -71,8 +72,10 @@ public class ViewTest extends DukeApplicationTest {
   }
 
   @Test
-  void testStartGameButton(){
-    assertEquals("Start", startButton.getText());
+  void testStartGameButtons(){
+    assertEquals("Chess", chessButton.getText());
+    assertEquals("Checkers", checkersButton.getText());
+    assertEquals("Connect Four", connectfourButton.getText());
   }
 
   @Test
@@ -80,11 +83,26 @@ public class ViewTest extends DukeApplicationTest {
     assertEquals("Welcome to BrainMate!", welcomeTitle.getText());
   }
 
+
   @Test
-  void testStartChessGame(){
-    clickOn(startButton);
-    Label gameTitle = lookup("#title-text").query();
+  void testChessStart(){
+    clickOn(chessButton);
+    Label gameTitle = lookup("#chess").query();
     assertEquals("Chess", gameTitle.getText());
+  }
+
+  @Test
+  void testCheckersStart(){
+    clickOn(checkersButton);
+    Label gameTitle = lookup("#checkers").query();
+    assertEquals("Checkers", gameTitle.getText());
+  }
+
+  @Test
+  void testConnectfourStart(){
+    clickOn(connectfourButton);
+    Label gameTitle = lookup("#connectfour").query();
+    assertEquals("Connect Four", gameTitle.getText());
   }
 
   @Test
@@ -99,7 +117,7 @@ public class ViewTest extends DukeApplicationTest {
    */
 
   void testCloseGameWindow(){
-    clickOn(startButton);
+    clickOn(chessButton);
     primaryWindow.close();
     Label title = lookup("#title-text").query();
     assertEquals("Welcome to BrainMate!", title.getText());

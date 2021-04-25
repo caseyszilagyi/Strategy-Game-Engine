@@ -19,9 +19,9 @@ import java.util.Map;
 public class Check extends Restriction {
 
   private Map<Coordinate, GamePiece> pieces;
-  GamePiece piece;
-  GameBoard board;
-  String thisTeamName;
+  private GamePiece piece;
+  private GameBoard board;
+  private String thisTeamName;
 
   /**
    * Constructor used to hold things that many piece movement objects may need
@@ -33,7 +33,6 @@ public class Check extends Restriction {
   public Check(GameBoard gameBoard, Map<String, String> parameters, GamePiece piece) {
     this.piece = piece;
     this.board = gameBoard;
-    thisTeamName = piece.getPieceTeam();
   }
 
   /**
@@ -43,6 +42,7 @@ public class Check extends Restriction {
    */
   @Override
   public boolean checkRestriction(Coordinate endingCoordinates) {
+    thisTeamName = piece.getPieceTeam();
     GamePiece tempRemoval = null;
     if(board.isPieceAtCoordinate(endingCoordinates)){
        tempRemoval = board.getPieceAtCoordinate(endingCoordinates);

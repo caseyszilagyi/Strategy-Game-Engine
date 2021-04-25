@@ -25,6 +25,7 @@ public class EngineInitializer implements Initializer {
   public BoardCreator boardCreator;
   private PlayerCreator playerCreator = new PlayerCreator();
   private AICreator gameAI = new AICreator();
+  private final String AI_NAME = "AI";
 
   public EngineInitializer(FrontEndExternalAPI newBoardController){
     boardController = newBoardController;
@@ -61,10 +62,9 @@ public class EngineInitializer implements Initializer {
 
   @Override
   public void addPlayers(String user, String opponent) {
-    gameEngine.addActiveUser(playerCreator.makePlayer(opponent));
-    gameEngine.addActiveUser(playerCreator.makePlayer(user));
+    gameEngine.addActiveUsers(playerCreator.makePlayer(user), playerCreator.makePlayer(opponent));
     boardCreator.setTeams(user, opponent);
-    if(opponent.equals("opponent")){
+    if(opponent.equals(AI_NAME)){
       addAI();
     }
   }

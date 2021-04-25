@@ -16,7 +16,7 @@ public class NoMoves implements EndGameConditioin {
   @Override
   public boolean checkForWin(String teamName) {
     if(!board.determineIfOppositeTeamHasMove(teamName)) {
-      viewController.gameEnd(teamName);
+      viewController.gameWin(teamName);
       return true;
     }
     return false;

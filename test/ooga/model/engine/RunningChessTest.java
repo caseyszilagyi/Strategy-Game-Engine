@@ -29,7 +29,7 @@ public class RunningChessTest {
     modelController.setGameType("chess");
     gameEngine = modelController.getEngine();
     gameBoard = gameEngine.getBoard();
-    gameEngine.setIfTurnRules(true);
+    gameEngine.setIfNoTurnRules(true);
     modelController.setPlayers("user", "opponent");
     printBoard();
   }
