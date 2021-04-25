@@ -24,7 +24,7 @@ public class ViewManager {
   private final GameWindow primaryWindow;
   private ModelController modelController;
   private BoardController boardController;
-  private static final String DEFAULT_GAMETYPE = "chess";
+  private String DEFAULT_GAMETYPE = "chess";
 
   /**
    * Creates a new instance of {@code ViewManager} with a resource bundle with
@@ -107,14 +107,28 @@ public class ViewManager {
 
   /**
    * Starts the game by changing the scene of the current window to a {@link BoardScene}
-   * instance.
+   * instance. This also gives the {@link ModelController} its game type so that it can
+   * initialize the correct game files.
+   * @param gameType a {@code String} for the game type.
    */
-  public void startGame() {
+  public void startGame(String gameType) {
     ((BoardScene) changeScene("boardScene"))
         .attachBoardControllerToBoard(boardController);
-    modelController.setGameType(DEFAULT_GAMETYPE);
+    modelController.setGameType(gameType);
     ((Stage) primaryWindow).setResizable(true);
     positionWindow((Stage) primaryWindow, 500, 200);
+  }
+
+  private void chess(){
+    startGame("chess");
+  }
+
+  private void checkers(){
+    startGame("checkers");
+  }
+
+  private void connectfour(){
+    startGame("connectfour");
   }
 
   public void undoButton() {

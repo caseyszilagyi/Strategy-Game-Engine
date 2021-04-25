@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -57,9 +58,9 @@ public class WelcomeScene extends GameScene {
     Label welcomeLabel = makeLabel("title-text");
     sceneRoot.add(welcomeLabel, 0, 0);
 
-    Button goButton = makeButton("startGame");
+    Node buttons = makeButtonBar("buttons");
 
-    sceneRoot.add(goButton, 0, 1);
+    sceneRoot.add(buttons, 0, 1);
   }
 
 
