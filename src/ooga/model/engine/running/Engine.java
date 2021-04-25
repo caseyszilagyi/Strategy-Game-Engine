@@ -47,6 +47,12 @@ public abstract class Engine{
   public abstract void checkForWin();
 
   /**
+   * Checks to see if the winConidition is hit.  This method is mostly used for testing
+   * @return whether or not the game is over
+   */
+  public abstract boolean isGameOver();
+
+  /**
    * Alters the board in the way described in the Action parameter
    * @param action is the Action.java to perform
    */

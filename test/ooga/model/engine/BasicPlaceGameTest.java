@@ -71,6 +71,28 @@ public class BasicPlaceGameTest {
     assertEquals(validPiece, gameBoard.getPieceAtCoordinate(0,5));
   }
 
+  @Test
+  void testBasicDownWinCondition(){
+    System.out.println("testBasicDownWinCondition");
+    gameEngine.runTurn(0,0);
+    //printBoard();
+    gameEngine.runTurn(1,0);
+    //printBoard();
+    gameEngine.runTurn(0,0);
+    //printBoard();
+    gameEngine.runTurn(1,0);
+    //printBoard();
+    gameEngine.runTurn(0,0);
+    //printBoard();
+    gameEngine.runTurn(1,0);
+    //printBoard();
+    gameEngine.runTurn(0,0);
+    printBoard();
+    assertTrue(gameEngine.isGameOver());
+  }
+
+
+
 
   private void printBoard(){
     gameBoard.printBoard();

@@ -90,6 +90,11 @@ public class GameEngine extends Engine {
     curRules.checkWinConditions(getCurrentPlayerTurn());
   }
 
+  @Override
+  public boolean isGameOver() {
+    return curRules.checkWinConditions("user") || curRules.checkWinConditions("opponent")  ;
+  }
+
   /**
    * Sets the game board, and gives the game board the proper view controller
    *
