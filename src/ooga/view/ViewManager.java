@@ -143,6 +143,9 @@ public class ViewManager {
     modelController.undoTurn();
   }
 
+  public void resetButton() {
+    boardController.resetColors();
+  }
 
   /**
    * Gets the correct subclass of {@link GameWindow} to show the initial window of the

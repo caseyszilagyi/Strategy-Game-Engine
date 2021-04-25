@@ -29,20 +29,19 @@ public class Board extends GridPane {
   public Board(ModelController modelController) {
     super();
     this.modelController = modelController;
-    setHighlightColor(Color.LIGHTGREEN);
   }
 
-  public void setBoardDimensions(int width, int height) {
+  public void createBoard(int width, int height) {
     tiles = new Tile[width][height];
     makeGrid(width, height);
-    colorGrid(Color.TAN, Color.BEIGE);
+    setColorsDefault();
   }
 
   /**
    * @return a {@code String} type of this board
    */
   public String getBoardType(){
-    System.out.println(gameType);
+    System.out.println(gameType); //TODO: delete
     return gameType;
   }
 
@@ -67,12 +66,25 @@ public class Board extends GridPane {
   }
 
   public void colorGrid(Color firstColor, Color secondColor) {
+    colorDarkSquares(firstColor);
+    colorLightSquares(secondColor);
+  }
+
+  public void colorLightSquares(Color color) {
+    for (int i = 0; i < tiles.length; i++) {
+      for (int j = 0; j < tiles[i].length; j++) {
+        if ((i + j) % 2 == 0) {
+          tiles[i][j].setColor(color);
+        }
+      }
+    }
+  }
+
+  public void colorDarkSquares(Color color){
     for (int i = 0; i < tiles.length; i++) {
       for (int j = 0; j < tiles[i].length; j++) {
         if ((i + j) % 2 == 1) {
-          tiles[i][j].setColor(firstColor);
-        } else {
-          tiles[i][j].setColor(secondColor);
+          tiles[i][j].setColor(color);
         }
       }
     }
@@ -159,10 +171,6 @@ public class Board extends GridPane {
     return new Tile(SQUARE_SIZE, new Point(i, j), e -> handleTileClick(i, j));
   }
 
-  private void addPiece(Point p, String color, String fileName) {
-    addPiece((int) p.getX(), (int) p.getY(), color, fileName);
-  }
-
   public void addPiece(int x, int y, String color, String fileName) {
     ImageView piece = new ImageView(new Image("BasicChessPieces/" + pieceBundle.getString(color+fileName)));
     piece.setFitHeight(SQUARE_SIZE);
@@ -175,4 +183,8 @@ public class Board extends GridPane {
     modelController.actOnCoordinates(i, j);
   }
 
+  public void setColorsDefault() {
+    setHighlightColor(Color.LIGHTGREEN);
+    colorGrid(Color.TAN, Color.BEIGE);
+  }
 }
