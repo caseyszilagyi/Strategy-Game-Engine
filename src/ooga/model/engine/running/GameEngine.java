@@ -6,6 +6,7 @@ import ooga.controller.FrontEndExternalAPI;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GameRules;
 import ooga.model.components.Player;
+import ooga.model.components.computer.AI;
 import ooga.model.engine.actions.Action;
 import ooga.model.engine.actions.ActionCreator;
 
@@ -127,7 +128,10 @@ public class GameEngine extends Engine {
   public void addActiveUser(Player player) {
     turnManager.addActiveUser(player);
   }
+  @Override
+  public void addAI(AI ai){
 
+  }
   /**
    * Gets the name of the player who's turn it is
    *
