@@ -24,7 +24,8 @@ public class ViewManager {
   private final GameWindow primaryWindow;
   private ModelController modelController;
   private BoardController boardController;
-  private static final String DEFAULT_GAMETYPE = "chess";
+  private static final String CHESS_GAMETYPE = "chess";
+  private static final String CHECKERS_GAMETYPE = "checkers";
 
   /**
    * Creates a new instance of {@code ViewManager} with a resource bundle with
@@ -109,13 +110,23 @@ public class ViewManager {
    * Starts the game by changing the scene of the current window to a {@link BoardScene}
    * instance.
    */
-  public void startGame() {
+  public void chessButton() {
     ((BoardScene) changeScene("boardScene"))
         .attachBoardControllerToBoard(boardController);
-    modelController.setGameType(DEFAULT_GAMETYPE);
+    modelController.setGameType(CHESS_GAMETYPE);
     ((Stage) primaryWindow).setResizable(true);
     positionWindow((Stage) primaryWindow, 500, 200);
   }
+
+  public void checkersButton() {
+    ((BoardScene) changeScene("boardScene"))
+        .attachBoardControllerToBoard(boardController);
+    modelController.setGameType(CHECKERS_GAMETYPE);
+    ((Stage) primaryWindow).setResizable(true);
+    positionWindow((Stage) primaryWindow, 500, 200);
+  }
+
+
 
   public void undoButton() {
     modelController.undoTurn();
