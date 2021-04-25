@@ -93,7 +93,7 @@ public class DummyViewController implements FrontEndExternalAPI {
   }
 
   @Override
-  public void gameEnd(String playerName) {
+  public void gameWin(String playerName) {
 
   }
 
@@ -101,9 +101,6 @@ public class DummyViewController implements FrontEndExternalAPI {
   public void givePieceChangeOptions(Iterable<String> pieceChangeOptions) {
     this.pieceChangeOptions = pieceChangeOptions.iterator();
   }
-
-
-
 
   // getters for testing
 
