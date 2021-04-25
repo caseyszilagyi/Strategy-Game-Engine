@@ -2,6 +2,7 @@ package ooga.model.engine.running;
 
 import ooga.model.components.GameBoard;
 import ooga.model.components.Player;
+import ooga.model.components.computer.AI;
 import ooga.model.engine.actions.Action;
 
 /**
@@ -33,7 +34,7 @@ public abstract class Engine{
    * @param player The object representing the player
    */
   public abstract void addActiveUser(Player player);
-
+  public abstract void addAI(AI ai);
   /**
    * Gets the player who's turn it is
    * @return The string of the name of the player who's turn it is
