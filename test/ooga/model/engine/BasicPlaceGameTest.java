@@ -34,8 +34,9 @@ public class BasicPlaceGameTest {
     System.out.println("testBasicPlace");
     assertFalse(gameBoard.isPieceAtCoordinate(0,0));
     gameEngine.runTurn(0,0);
-    assertTrue(gameBoard.isPieceAtCoordinate(0,0));
     printBoard();
+    assertTrue(gameBoard.isPieceAtCoordinate(0,5));
+
   }
 
 

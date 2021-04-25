@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.Map;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
+import ooga.model.components.GamePiece;
 
 public class Gravity extends PieceMovement{
+
+  private GameBoard gameBoard;
 
   /**
    * The constructor takes the parameters of the move. This includes the change in position of the
@@ -18,16 +21,16 @@ public class Gravity extends PieceMovement{
    * @param gameBoard  The board that the piece moves on
    */
   public Gravity(Map<String, String> parameters, int direction,
-      GameBoard gameBoard) {
+      GameBoard gameBoard, GamePiece piece) {
     super(parameters, direction, gameBoard);
+    this.gameBoard = gameBoard;
   }
 
   @Override
   public List<Coordinate> getAllPossibleMoves(Coordinate coordinates, String pieceTeam) {
     int file = coordinates.getX();
-    GameBoard gameBoard = getGameBoard();
     Coordinate coordinateToCheck;
-    for(int y = 0; y < gameBoard.getHeight(); y++){
+    for(int y = gameBoard.getHeight() - 1; y >= 0; y--){
       coordinateToCheck = new Coordinate(file, y);
       if(!gameBoard.isPieceAtCoordinate(coordinateToCheck)){
         return Arrays.asList(coordinateToCheck);

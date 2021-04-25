@@ -13,6 +13,11 @@ public class PlaceClickExecutor extends ClickExecutor{
     } else {
       GamePiece newPiece = getPieceToAdd(xClickPosition,yClickPosition,currentPlayerTurn);
       curBoard.addPiece(newPiece);
+      if(newPiece.determineAllLegalMoves().size() == 1){
+        Coordinate startingCoordinate = new Coordinate(xClickPosition, yClickPosition);
+        Coordinate endingCoordinate = (Coordinate) newPiece.determineAllLegalMoves().toArray()[0];
+        curBoard.movePiece(startingCoordinate,endingCoordinate);
+      }
       return true;
     }
   }
