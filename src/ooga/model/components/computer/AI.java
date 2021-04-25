@@ -9,23 +9,29 @@ import java.util.List;
 import java.util.Map;
 
 public class AI {
-    private Coordinate startCoordinate;
-    private Coordinate endCoordinate;
 
-    private void determineMove(GameBoard board) {
-        startCoordinate = chooseRandomPiece(board.getPieceCoordinateMap());
-        GamePiece randomPiece = board.getPieceAtCoordinate(startCoordinate);
-        List<Coordinate> moves = new ArrayList<>(randomPiece.determineAllLegalMoves());
-        endCoordinate = moves.get((int) (Math.random() * moves.size()));
-    }
+  private Coordinate startCoordinate;
+  private Coordinate endCoordinate;
 
-    private Coordinate chooseRandomPiece(Map<Coordinate, GamePiece> pieceCoordinateMap) {
-        List<Coordinate> coordinateList = new ArrayList<>(pieceCoordinateMap.keySet());
-        int randomIndex = (int) (Math.random() * coordinateList.size());
-        return coordinateList.get(randomIndex);
+  public void determineMove(GameBoard board) {
+    List<Coordinate> moves = new ArrayList<>();
+    while (moves.size() == 0) {
+      startCoordinate = chooseRandomPiece(board.getPieceCoordinateMap());
+      GamePiece randomPiece = board.getPieceAtCoordinate(startCoordinate);
+      if(randomPiece.getPieceTeam().equals("opponent")) {
+        moves = new ArrayList<>(randomPiece.determineAllLegalMoves());
+      }
     }
+    endCoordinate = moves.get((int) (Math.random() * moves.size()));
+  }
 
-    public List<Coordinate> getMove(){
-        return List.of(startCoordinate, endCoordinate);
-    }
+  private Coordinate chooseRandomPiece(Map<Coordinate, GamePiece> pieceCoordinateMap) {
+    List<Coordinate> coordinateList = new ArrayList<>(pieceCoordinateMap.keySet());
+    int randomIndex = (int) (Math.random() * coordinateList.size());
+    return coordinateList.get(randomIndex);
+  }
+
+  public List<Coordinate> getMove() {
+    return List.of(startCoordinate, endCoordinate);
+  }
 }
