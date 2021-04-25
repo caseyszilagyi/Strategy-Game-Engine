@@ -38,7 +38,7 @@ public class BoardScene extends GameScene {
     super(root, handler, resources);
     this.modelController = modelController;
     this.resources = resources;
-    board = new Board(8, 8, modelController);
+    board = new Board(modelController);
     sceneRoot = (GridPane) root;
     sceneRoot.getStyleClass().add("boardScene");
     sceneRoot.setVgap(30);

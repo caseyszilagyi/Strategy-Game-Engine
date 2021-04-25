@@ -23,14 +23,15 @@ public class Board extends GridPane {
    * Constructs a {@link Board} of the desired width and height. Also obtains a reference to a
    * {@link ModelController}
    *
-   * @param width           desired board width
-   * @param height          desired board height
    * @param modelController
    */
-  public Board(int width, int height, ModelController modelController) {
+  public Board(ModelController modelController) {
     super();
-    tiles = new Tile[width][height];
     this.modelController = modelController;
+  }
+
+  public void setBoardDimensions(int width, int height) {
+    tiles = new Tile[width][height];
     makeGrid(width, height);
     colorGrid(Color.TAN, Color.BEIGE);
   }
