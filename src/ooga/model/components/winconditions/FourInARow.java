@@ -3,6 +3,25 @@ package ooga.model.components.winconditions;
 import ooga.controller.FrontEndExternalAPI;
 import ooga.model.components.GameBoard;
 
+/**
+ * This class is used to determine if someone has won the current game, by checking if the opponent
+ * team ahs any possible moves
+ *
+ * This class assumes a defined FrontEndExternalAPI is passed in, as well as the current GameBoard
+ *
+ * This class depends upon FrontEndExternalAPI.java and GameBoard.java
+ *
+ * Code Example:
+ * //assumes GameBoard gameBoard and FrontEndExternalAPI frontEndExternalAPI have been previously defined
+ *  EndGameCondition endGameCondition = new FourInARow(frontEndExternalAPI, gameBoard);
+ *  gameBoard.movePiece(0,0);
+ *  if(endGameCondition.checkForWin){
+ *    exit(0);
+ *  }
+ *  //continue the game
+ *
+ * @author Cole Spector
+ */
 public class FourInARow implements EndGameConditioin{
 
   private static final int FOUR = 4;
