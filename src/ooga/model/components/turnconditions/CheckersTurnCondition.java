@@ -25,6 +25,12 @@ import ooga.model.components.GamePiece;
  */
 public class CheckersTurnCondition implements TurnCondition{
 
+  /**
+   * This method is called to determine if the turn is over
+   * @param gameBoard the GameBoard used in the current game
+   * @param gamePiece the GamePiece which made the last move
+   * @return the TurnConditionResult, either SWITCH, STAY, or PROMPT depending on the game scenario
+   */
   @Override
   public TurnConditionResult isTurnOver(GameBoard gameBoard, GamePiece gamePiece) {
     CompletedAction lastMove = gameBoard.getMostRecentAction();
