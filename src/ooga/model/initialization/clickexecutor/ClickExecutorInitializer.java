@@ -4,6 +4,8 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
+import ooga.exceptions.ClassLoaderException;
+import ooga.exceptions.XMLParseException;
 import ooga.model.components.turnconditions.TurnCondition;
 import ooga.model.engine.running.ClickExecutor;
 import ooga.model.initialization.fileparsing.XMLParser;
@@ -47,21 +49,28 @@ public class ClickExecutorInitializer {
     File ruleFile = new File(RULE_FILE_PATH + gameName + FILE_EXTENSION);
     final Map<String, List<Node>> gameFileContents = xmlParser
         .makeRootNodeMap(ruleFile, FILE_TYPE, gameName);
-    String gameType = gameFileContents.get(GAME_TYPE).get(0).getTextContent();
-    //System.out.printf("gameType = %s", gameType);
+    String gameType = null;
+    try{
+      gameType = gameFileContents.get(GAME_TYPE).get(0).getTextContent();
+    } catch(NullPointerException e){
+      throw new XMLParseException("NoClickExecutor");
+    }
+    System.out.printf("gameType = %s", gameType);
     try {
       Class<?> clazz = Class
           .forName(CLICK_EXECUTOR_FILE_PATH + gameType + CLICK_EXECUTOR_NAME_EXTENSION);
       ClickExecutor clickExecutorClass = (ClickExecutor) clazz.getConstructor().newInstance();
       return clickExecutorClass;
-    } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
-      System.err.println("No Condition found for condition type: " + gameType);
-      e.printStackTrace();
-      return null;
+    } catch (InstantiationException e) {
+      throw new ClassLoaderException("ClickExecutorInstantiation");
+    } catch (InvocationTargetException e) {
+      throw new ClassLoaderException("ClickExecutorInvocation");
+    } catch (NoSuchMethodException e) {
+      throw new ClassLoaderException("ClickExecutorNoSuchMethod");
+    } catch (IllegalAccessException e) {
+      throw new ClassLoaderException("ClickExecutorIllegalAccess");
     } catch (ClassNotFoundException e) {
-      System.err.println("No Class found for condition type: " + gameType);
-      e.printStackTrace();
-      return null;
+      throw new ClassLoaderException("ClickExecutorClassNotFound");
     }
   }
 }

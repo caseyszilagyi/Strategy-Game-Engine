@@ -1,8 +1,10 @@
 package ooga.model.initialization;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 import ooga.controller.FrontEndExternalAPI;
+import ooga.exceptions.XMLParseException;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;
@@ -12,9 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * This class creates a 2D GamePiece array that represents the game board, adjustable by the
- * starting state XML files which describe each occupied square in the board in addition to board
- * dimensions
+ * This class creates the gameboard object that holds all of the game pieces
  *
  * @author Shaw Phillips
  */
@@ -30,6 +30,7 @@ public class BoardCreator extends Creator {
   public static final String OPPONENT = "opponent";
   public static final String USER = "user";
   private static final String FILE_TYPE = "piece";
+  private final String EXTENSION = ".xml";
 
   // Maps and sets used for storage of information
   private Map<String, List<Node>> boardNodes;
@@ -47,6 +48,13 @@ public class BoardCreator extends Creator {
   private PieceCreator pieceCreator;
   private GameBoard board;
 
+  /**
+   * The constructor that is used to get components relevant to the type of game
+   * that will be initialized on the board
+   * @param game The name of the game
+   * @param viewController The view controller that the board calls methods on
+   *                       to update the front end
+   */
   public BoardCreator(String game, FrontEndExternalAPI viewController) {
     this.viewController = viewController;
     super.setComponents(PATH, FILE_TYPE, game);
@@ -54,15 +62,41 @@ public class BoardCreator extends Creator {
     initializeMaps(gameName);
   }
 
-  public void initializeMaps(String fileName) {
-    boardNodes = super.makeRootNodeMap(fileName);
-    pieceSubNodes = super.makeSubNodeMap(boardNodes.get(BOARD).get(0));
-    numRows = Integer.parseInt(super.makeAttributeMap(boardNodes.get(PARAMS).get(0)).get(NUMROWS));
-    numCols = Integer.parseInt(super.makeAttributeMap(boardNodes.get(PARAMS).get(0)).get(NUMCOLS));
-    opponentPieces = super.makeAttributeMap(pieceSubNodes.get(OPPONENT).get(0));
-    userPieces = super.makeAttributeMap(pieceSubNodes.get(USER).get(0));
+  /**
+   * Initializes the maps needed given a file
+   * @param file The file with the initial board state
+   */
+  public void initializeMaps(File file){
+    try {
+      boardNodes = makeRootNodeMap(file);
+      pieceSubNodes = super.makeSubNodeMap(boardNodes.get(BOARD).get(0));
+      numRows = Integer
+          .parseInt(super.makeAttributeMap(boardNodes.get(PARAMS).get(0)).get(NUMROWS));
+      numCols = Integer
+          .parseInt(super.makeAttributeMap(boardNodes.get(PARAMS).get(0)).get(NUMCOLS));
+      opponentPieces = super.makeAttributeMap(pieceSubNodes.get(OPPONENT).get(0));
+      userPieces = super.makeAttributeMap(pieceSubNodes.get(USER).get(0));
+    }
+    catch (NullPointerException e){
+      throw new XMLParseException("InvalidBoardFile");
+    } catch(NumberFormatException e){
+      throw new XMLParseException("MissingRowColumnTag");
+    }
+
   }
 
+  /**
+   * Initializes the maps to read in from the board file
+   * @param fileName The name of the board file
+   */
+  public void initializeMaps(String fileName) {
+    initializeMaps(makeFile(fileName));
+  }
+
+  /**
+   * Makes the game board object based on the maps that were read in
+   * @return The game board object
+   */
   public GameBoard makeBoard() {
     board = new GameBoard(numCols, numRows);
     board.setViewController(viewController);
@@ -79,6 +113,7 @@ public class BoardCreator extends Creator {
     return board;
   }
 
+  // Makes a game piece and adds it
   private void buildPiece(int numRows, Map.Entry<String, String> entry, int direction,
       String team, Set<GamePiece> setToAdd) {
     int pieceX = translateX(entry.getKey());
@@ -91,20 +126,12 @@ public class BoardCreator extends Creator {
     board.addPiece(newPiece);
   }
 
-
-  public void setTeams(String userTeamName, String opponentTeamName){
-    for(GamePiece piece: userPieceSet){
-      piece.setPieceTeam(userTeamName);
-    }
-    for(GamePiece piece: opponentPieceSet){
-      piece.setPieceTeam(opponentTeamName);
-    }
-  }
-
+  // Translates the X
   private int translateX(String coordinate) {
     return DICTIONARY.indexOf(coordinate.charAt(0));
   }
 
+  // Translates the Y
   private int translateY(String coordinate, int numRows) {
     return -(Integer.parseInt(coordinate.substring(1)) - numRows);
   }

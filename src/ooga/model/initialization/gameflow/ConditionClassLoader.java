@@ -6,6 +6,11 @@ import ooga.exceptions.ClassLoaderException;
 import ooga.model.components.GameBoard;
 import ooga.model.components.winconditions.EndGameConditioin;
 
+/**
+ * Used for making win conditions
+ *
+ * @author Casey Szilagyi
+ */
 public class ConditionClassLoader {
 
   private final String WIN_CONDITION_CLASSES_PACKAGE = EndGameConditioin.class.getPackageName() + ".";

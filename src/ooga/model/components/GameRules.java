@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import ooga.controller.FrontEndExternalAPI;
+import ooga.exceptions.ClassLoaderException;
+import ooga.exceptions.XMLParseException;
 import ooga.model.components.turnconditions.TurnCondition;
 import ooga.model.components.turnconditions.TurnConditionResult;
 import ooga.model.components.winconditions.EndGameConditioin;
@@ -75,7 +77,9 @@ public class GameRules {
    */
   public void makeWinConditions(){
     winConditions = new ArrayList<>();
-    if(gameFileContents.get(WIN_CONDITION) == null){ return;}
+    if(!gameFileContents.containsKey(WIN_CONDITION)){
+      throw new XMLParseException("NoWinConditions");
+    }
     for (Node n : gameFileContents.get(WIN_CONDITION)){
       for(String condition : n.getTextContent().split(ALL_WHITE_SPACE)){
         if(condition != EMPTY_STRING){
@@ -91,6 +95,9 @@ public class GameRules {
    */
   public List<String> getTurnConditionsAsStringList(){
     List<String> listOfTurnConditions = new ArrayList<>();
+    if(!gameFileContents.containsKey(TURN_CONDITION)){
+      throw new XMLParseException("NoTurnConditions");
+    }
     for (Node n : gameFileContents.get(TURN_CONDITION)){
       for(String condition : n.getTextContent().split(ALL_WHITE_SPACE)){
         if(condition != EMPTY_STRING){
@@ -151,12 +158,16 @@ public class GameRules {
         if(!turnConditionResultToBoolean(turnConditionClass.isTurnOver(gameBoard, gamePiece))){
           return false;
         }
-      } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
-        System.err.println("No Condition found for condition type: " + condition);
-        e.printStackTrace();
-      } catch (ClassNotFoundException e){
-        System.err.println("No Class found for condition type: " + condition);
-        e.printStackTrace();
+      } catch (InstantiationException e) {
+        throw new ClassLoaderException("NextTurnInstantiation");
+      } catch (InvocationTargetException e) {
+        throw new ClassLoaderException("NextTurnInvocation");
+      } catch (NoSuchMethodException e) {
+        throw new ClassLoaderException("NextTurnNoSuchMethod");
+      } catch (IllegalAccessException e) {
+        throw new ClassLoaderException("NextTurnIllegalAccess");
+      } catch (ClassNotFoundException e) {
+        throw new ClassLoaderException("NextTurnClassNotFound");
       }
     }
     return true;

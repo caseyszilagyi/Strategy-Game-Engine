@@ -1,18 +1,18 @@
 package ooga.exceptions;
 
 /**
- * Make exceptions related to XML parsing
+ * Used to throw exceptions related to the game board
  *
  * @author Casey Szilagyi
  */
-public class XMLParseException extends RuntimeException{
+public class GameRunningException extends RuntimeException {
 
   /**
    * Sets the message that the error corresponds to
    *
    * @param errorMessage The message corresponding to the error
    */
-  public XMLParseException(String errorMessage) {
+  public GameRunningException(String errorMessage) {
     super(errorMessage);
   }
 
@@ -20,9 +20,9 @@ public class XMLParseException extends RuntimeException{
    * Pass a custom message and the exception itself
    *
    * @param errorMessage The message corresponding to the error
-   * @param exception The actual exception
+   * @param exception    The actual exception
    */
-  public XMLParseException(String errorMessage, Exception exception) {
+  public GameRunningException(String errorMessage, Exception exception) {
     super(errorMessage, exception);
   }
 
@@ -31,6 +31,8 @@ public class XMLParseException extends RuntimeException{
    *
    * @param error The type of error
    */
-  public XMLParseException(Exception error){ super(error.getMessage()); }
+  public GameRunningException(Exception error) {
+    super(error.getMessage());
+  }
 
 }

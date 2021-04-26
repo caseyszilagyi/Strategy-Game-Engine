@@ -4,4 +4,7 @@
     <condition>Force</condition>
     <condition>Force</condition>
   </turnConditions>
+  <winConditions>
+    <condition>NoMoves</condition>
+  </winConditions>
 </rules>

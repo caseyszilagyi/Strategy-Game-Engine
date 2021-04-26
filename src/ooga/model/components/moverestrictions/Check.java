@@ -1,12 +1,9 @@
 package ooga.model.components.moverestrictions;
 
-import java.util.List;
 import java.util.Set;
-import ooga.controller.FrontEndExternalAPI;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -18,7 +15,6 @@ import java.util.Map;
  */
 public class Check extends Restriction {
 
-  private Map<Coordinate, GamePiece> pieces;
   private GamePiece piece;
   private GameBoard board;
   private String thisTeamName;
@@ -26,9 +22,9 @@ public class Check extends Restriction {
   /**
    * Constructor used to hold things that many piece movement objects may need
    *
-   * @param gameBoard      The board that the pieces are on.
-   * @param parameters     The map with parameters, if there are any
-   * @param piece          The piece that the restriction corresponds to
+   * @param gameBoard  The board that the pieces are on.
+   * @param parameters Empty in this case
+   * @param piece      The piece that the restriction corresponds to
    */
   public Check(GameBoard gameBoard, Map<String, String> parameters, GamePiece piece) {
     this.piece = piece;
@@ -37,6 +33,7 @@ public class Check extends Restriction {
 
   /**
    * Checks if any of the opponent's pieces can take the user's king after it is moved
+   *
    * @param endingCoordinates The ending coordinates of the move
    * @return True if the move is not violated by check, false otherwise
    */
@@ -44,11 +41,11 @@ public class Check extends Restriction {
   public boolean checkRestriction(Coordinate endingCoordinates) {
     thisTeamName = piece.getPieceTeam();
     GamePiece tempRemoval = null;
-    if(board.isPieceAtCoordinate(endingCoordinates)){
-       tempRemoval = board.getPieceAtCoordinate(endingCoordinates);
+    if (board.isPieceAtCoordinate(endingCoordinates)) {
+      tempRemoval = board.getPieceAtCoordinate(endingCoordinates);
     }
     Boolean result = determineIfInCheck(endingCoordinates);
-    if(tempRemoval != null){
+    if (tempRemoval != null) {
       board.addBackendPiece(tempRemoval);
     }
 
@@ -56,11 +53,12 @@ public class Check extends Restriction {
   }
 
   // Returns true if not in check after move, false otherwise
-  private boolean determineIfInCheck(Coordinate endingCoordinates){
+  private boolean determineIfInCheck(Coordinate endingCoordinates) {
     Coordinate startingCoordinates = piece.getPieceCoordinates();
     board.moveBackendPiece(startingCoordinates, endingCoordinates);
     Coordinate friendlyKingLocation = board.findPieceCoordinates(thisTeamName, "king");
-    Set<Coordinate> opponentTakeMoves = board.determineOppositeTeamTakeMovesWithoutRestrictions(thisTeamName);
+    Set<Coordinate> opponentTakeMoves = board
+        .determineOppositeTeamTakeMovesWithoutRestrictions(thisTeamName);
     board.moveBackendPiece(endingCoordinates, startingCoordinates);
     return !opponentTakeMoves.contains(friendlyKingLocation);
   }

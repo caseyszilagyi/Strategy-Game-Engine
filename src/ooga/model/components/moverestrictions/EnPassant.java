@@ -10,7 +10,7 @@ import ooga.model.components.GamePiece;
 
 /**
  * The en passant movement in chess. Allows a pawn to take another pawn in passing, only
- * right after the other pawn moves and if it's first move is two spaces forward
+ * right after the other pawn moves and if its first move is two spaces forward
  *
  * @author Casey Szilagyi
  */

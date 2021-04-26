@@ -52,11 +52,6 @@ public abstract class Engine{
   public abstract void addActiveUsers(Player player1, Player player2);
 
   /**
-   * Adds an AI to the game
-   * @param ai the AI to be added to the game
-   */
-  public abstract void addAI(AI ai);
-  /**
    * Gets the player who's turn it is
    * @return The string of the name of the player who's turn it is
    */
@@ -79,14 +74,6 @@ public abstract class Engine{
    * @return whether or not the game is over
    */
   public abstract boolean isGameOver();
-
-
-
-  /**
-   * Saves the current state of the game in a file
-   * @param fileName The name of the file to save the game in
-   */
-  public abstract void saveCurrentState(String fileName);
 
   /**
    * Undoes the previous turn

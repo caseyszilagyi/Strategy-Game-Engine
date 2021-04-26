@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import javafx.util.Pair;
 import ooga.controller.FrontEndExternalAPI;
+import ooga.exceptions.GameRunningException;
 import ooga.model.components.movehistory.ActionType;
 import ooga.model.components.movehistory.CompletedAction;
 import ooga.model.engine.running.TurnManager;
@@ -305,7 +306,10 @@ public class GameBoard implements Board {
   @Override
   public boolean movePiece(Coordinate start, Coordinate end) {
     if (pieceCoordinateMap.get(start) == null || !isCoordinateOnBoard(end)) {
-      return false;
+      throw new GameRunningException("NoPieceToMove");
+    }
+    if(isAnyCoordinateConflicts(end)){
+      throw new GameRunningException("PieceMoveConflict");
     }
     addCompletedAction(ActionType.MOVE, pieceCoordinateMap.get(start), start, end);
     moveBackendPiece(start, end);
@@ -404,6 +408,9 @@ public class GameBoard implements Board {
   public boolean addPiece(GamePiece newPiece) {
     addCompletedAction(ActionType.ADD, newPiece, newPiece.getPieceCoordinates());
     Coordinate coords = newPiece.getPieceCoordinates();
+    if(isAnyCoordinateConflicts(coords)){
+      throw new GameRunningException("PieceAddConflict");
+    }
     viewController.setBoardSpace(coords.getX(), coords.getY(), newPiece.getPieceName(),
         newPiece.getPieceTeam());
     return addBackendPiece(newPiece);

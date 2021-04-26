@@ -1,5 +1,6 @@
 package ooga.model.initialization.engine;
 
+import java.io.File;
 import ooga.model.engine.running.Engine;
 
 /**
@@ -21,6 +22,12 @@ public interface Initializer {
   public void setBoardState(String boardFileName);
 
   /**
+   * Sets the initial state of the board
+   * @param boardFile The file that has the board
+   */
+  public void setBoardState(File boardFile);
+
+  /**
    * Sets the rules that the user will play with
    * @param rulesFileName The file name that contains the rules of the game
    */
@@ -32,7 +39,7 @@ public interface Initializer {
    * @param opponent The string associated with the person pplaying on the top of the board
    */
   public void addPlayers(String user, String opponent);
-  public void addAI();
+
   /**
    * Gets the engine that is being used to run the back end
    * @return The engine
