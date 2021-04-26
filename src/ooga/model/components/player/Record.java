@@ -1,4 +1,4 @@
-package ooga.model.components.movehistory;
+package ooga.model.components.player;
 
 public class Record {
 
@@ -43,6 +43,12 @@ public class Record {
   public void setDraws(int draws) {
     this.draws = draws;
   }
+
+  public void addWin(){ wins++; }
+
+  public void addLoss(){ losses++; }
+
+  public void addDraw(){ draws++; }
 
   int wins;
   int losses;

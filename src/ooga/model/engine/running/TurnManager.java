@@ -5,7 +5,8 @@ import java.util.List;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GameRules;
-import ooga.model.components.Player;
+import ooga.model.components.player.Player;
+import ooga.model.storage.PlayerFileSaver;
 
 /**
  * Designed to manage the changing of turns in a game. This is done based on the turn rules
@@ -21,8 +22,9 @@ public class TurnManager {
   private List<Player> activePlayers = new ArrayList<>();
   private List<Long> playerTimes = new ArrayList<>();
   private Long playerStartTime;
-  boolean isStartOfTurn = true;
-  boolean noTurnRules = true;
+  private boolean isStartOfTurn = true;
+  private boolean noTurnRules = true;
+  private PlayerFileSaver playerFileSaver = new PlayerFileSaver();
 
 
   /**
@@ -139,5 +141,15 @@ public class TurnManager {
     gameRules = rules;
   }
 
+  public void winGame(String gameName){
+    currentPlayerTurn.getRecord(gameName).addWin();
+    playerFileSaver.storePlayerFile(currentPlayerTurn);
+    for(Player loser: activePlayers){
+      if(!loser.equals(currentPlayerTurn)){
+        loser.getRecord(gameName).addLoss();
+        playerFileSaver.storePlayerFile(loser);
+      }
+    }
+  }
 
 }

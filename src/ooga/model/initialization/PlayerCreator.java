@@ -1,7 +1,7 @@
 package ooga.model.initialization;
 
 import java.io.File;
-import ooga.model.components.Player;
+import ooga.model.components.player.Player;
 import ooga.model.storage.PlayerFileSaver;
 
 public class PlayerCreator extends Creator{
@@ -12,7 +12,7 @@ public class PlayerCreator extends Creator{
   private final String DEFAULT_PLAYER_FILE_NAME = "DefaultPlayer";
 
   public PlayerCreator(){
-     playerFileReader = new PlayerFileSaver(PLAYER_FILE_PATH);
+     playerFileReader = new PlayerFileSaver();
   }
 
   public Player makePlayer(String playerName){

@@ -1,6 +1,6 @@
-package ooga.model.components;
+package ooga.model.components.player;
 
-import ooga.model.components.movehistory.Record;
+import ooga.exceptions.PlayerFileException;
 
 public class Player{
 
@@ -20,6 +20,14 @@ public class Player{
     this.fullName = firstName + " " + lastName;
   }
 
+  public Record getRecord(String gameName){
+    for(Record record: records){
+      if(record.getGameName().equals(gameName)){
+        return record;
+      }
+    }
+    throw new PlayerFileException("noSuchGame");
+  }
 
   public Record[] getRecords() {
     return records;
@@ -55,8 +63,6 @@ public class Player{
       fullName = fullName + " " + lastName;
     }
   }
-
-
 
 
 
