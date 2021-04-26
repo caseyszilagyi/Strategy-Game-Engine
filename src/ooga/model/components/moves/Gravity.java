@@ -8,6 +8,18 @@ import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;
 
+/**
+ * This class represents a piece that falls to the lowest possible y-coordinate vacant on the GameBoard, while maintaining its x-coordinate.
+ *
+ * This class should be used via reflection, and should be defined in the GamePiece's .xml file in the
+ * nested parameters:
+ * <moves>
+ *     <Gravity>
+ *     </Gravity>
+ * </moves>
+ *
+ * @author Cole Spector
+ */
 public class Gravity extends PieceMovement{
 
   private GameBoard gameBoard;
@@ -28,6 +40,14 @@ public class Gravity extends PieceMovement{
     currentPiece = piece;
   }
 
+  /**
+   * Gets the single move associated with this Gravity movement object. Will be a single
+   * set of a single coordinate or no coordinates.
+   *
+   * @param coordinates The coordinates of the piece that this move is acting on
+   * @param pieceTeam    The name of the team of this piece
+   * @return A list of the coordinates of possible moves
+   */
   @Override
   public List<Coordinate> getAllPossibleMoves(Coordinate coordinates, String pieceTeam) {
     int file = coordinates.getX();

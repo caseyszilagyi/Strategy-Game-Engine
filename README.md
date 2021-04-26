@@ -147,6 +147,8 @@ finiteSlideBiship.xml
 
 Known Bugs:
 
+In checkers, if a double jump is available, the user can unselect the piece and move a different piece.
+
 Extra credit:
 
 Our game engine can handle any input game (be it a placement or a movement game) which follows the same movement patterns as either chess, checkers, or connect four so long as it is given correctly formatted xml files, and can run any game if provided with complemntary TurnCondition and WinCondition files as well.
