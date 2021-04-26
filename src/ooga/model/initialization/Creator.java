@@ -1,8 +1,10 @@
 package ooga.model.initialization;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
+import ooga.exceptions.XMLParseException;
 import ooga.model.initialization.fileparsing.XMLParser;
 import org.w3c.dom.Node;
 
@@ -79,7 +81,11 @@ public abstract class Creator {
 
   // Makes a file, using the path and the name of the file (without the .xml)
   private File makeFile(String fileName) {
-    return new File(filePath + fileName + FILE_EXTENSION);
+    File file = new File(filePath + fileName + FILE_EXTENSION);
+    if(!file.exists()){
+      throw new XMLParseException("NoSuchFile");
+    }
+    return file;
   }
 
 }

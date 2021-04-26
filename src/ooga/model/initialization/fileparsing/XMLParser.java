@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import ooga.exceptions.ClassLoaderException;
+import ooga.exceptions.XMLParseException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -57,7 +58,7 @@ public class XMLParser {
     this.gameName = gameName;
     Element root = getRootElement(dataFile);
     if (!isValidFile(root)) {
-      throw new ClassLoaderException("InvalidFileType");
+      throw new XMLParseException("InvalidFileType");
     }
     return makeNodeMap(root);
   }
@@ -104,7 +105,7 @@ public class XMLParser {
       return xmlDocument.getDocumentElement();
     } catch (SAXException | IOException e) {
       e.printStackTrace();
-      throw new ClassLoaderException("NoRootElement");
+      throw new XMLParseException("NoRootElement");
     }
   }
 
@@ -129,7 +130,7 @@ public class XMLParser {
     try {
       return DocumentBuilderFactory.newInstance().newDocumentBuilder();
     } catch (ParserConfigurationException e) {
-      throw new ClassLoaderException("DocumentBuilderFailure");
+      throw new XMLParseException("DocumentBuilderFailure");
     }
   }
 }
