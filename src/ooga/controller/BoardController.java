@@ -112,7 +112,6 @@ public class BoardController implements FrontEndExternalAPI {
   @Override
   public void gameWin(String playerName) {
     new GameAlert(AlertType.CONFIRMATION, playerName + " won!");
-    System.out.println(playerName + "won!");
   }
 
   /**
