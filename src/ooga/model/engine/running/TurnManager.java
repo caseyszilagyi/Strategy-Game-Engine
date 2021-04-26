@@ -142,6 +142,10 @@ public class TurnManager {
     gameRules = rules;
   }
 
+  /**
+   * This method updates the player files for the Player that won based on the gameName passed
+   * @param gameName the gameName to update the Player file for
+   */
   public void winGame(String gameName){
     currentPlayerTurn.getRecord(gameName).addWin();
     playerFileSaver.storePlayerFile(currentPlayerTurn);

@@ -11,6 +11,20 @@ import ooga.model.engine.running.ClickExecutor;
 import ooga.model.initialization.fileparsing.XMLParser;
 import org.w3c.dom.Node;
 
+/**
+ * This class gets the proper ClickExecutor for a specific game
+ *
+ * This class assumes that within the game_rules .xml file
+ * there is a <gameType>Move</gameType> or <gameType>Place</gameType> parameter.
+ *
+ * Example Code:
+ *
+ * ClickExecutorInitializer clickExecutorInitializer = new ClickExecutorInitializer();
+ * ClickExecutor placeClickExecutor = clickExecutorInitializer.getProperClickExecutor("connectfour")
+ * ClickExecutor moveClickExecutor = clickExecutorInitializer.getProperClickExecutor("chess")
+ *
+ * @author Cole Spector
+ */
 public class ClickExecutorInitializer {
 
   XMLParser xmlParser = new XMLParser();
@@ -23,6 +37,14 @@ public class ClickExecutorInitializer {
   private static final String CLICK_EXECUTOR_NAME_EXTENSION = "ClickExecutor";
 
 
+  /**
+   * This method returns a ClickExecutor associated with the given gameName
+   * This method assumes that within the game_rules  gameName.xml file
+   * there is a <gameType>Move</gameType> or <gameType>Place</gameType> parameter.
+   *
+   * @param gameName is the name of the game to get the proper ClickExecutor for
+   * @return the proper ClickExecutor for the specified game
+   */
   public ClickExecutor getProperClickExecutor(String gameName) {
     File ruleFile = new File(RULE_FILE_PATH + gameName + FILE_EXTENSION);
     final Map<String, List<Node>> gameFileContents = xmlParser
