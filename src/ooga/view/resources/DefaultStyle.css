@@ -42,6 +42,19 @@
   -fx-text-alignment: center;
 }
 
+.configMenu {
+  -fx-border-color: #000000;
+  -fx-background-color: #606060;
+  -fx-background-radius: 5.0;
+  -fx-padding: 8;
+  -fx-background-repeat: no-repeat;
+  -fx-font-size: 15pt;
+  -fx-font-family: "Silom";
+  -fx-font-weight: bold;
+  -fx-text-fill: #000000;
+  -fx-text-alignment: center;
+}
+
 .vbox {
   -fx-background-radius: 5.0;
   -fx-padding: 8;

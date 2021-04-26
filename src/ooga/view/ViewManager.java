@@ -59,7 +59,7 @@ public class ViewManager {
     primaryWindow = (StageWindow) getInitialWindow();
     ((Stage) primaryWindow).setOnCloseRequest(e -> handleStageClose());
     createControllers();
-    changeScene(HOME_SCENE);
+    primaryWindow.showScene(makeScene("initialWindowScene"));
     primaryWindow.setCurrentSceneTitle("title-text");
   }
 
@@ -73,6 +73,8 @@ public class ViewManager {
       new ViewManager(initFile);
     }
   }
+
+
 
   /**
    * Creates the necessary {@link BoardController} and {@link ModelController} objects.
@@ -100,11 +102,10 @@ public class ViewManager {
    *                          {@code GameScene} class.
    * @return a {@link GameScene} subclass of the desired type.
    */
-  private GameScene changeScene(String sceneNameProperty) {
-    String initSceneName = initFile.getString(sceneNameProperty);
-    GameScene newScene = sceneFactory.makeScene(initSceneName, this::onButtonClicked,
+  private GameScene makeScene(String sceneNameProperty) {
+    String sceneName = initFile.getString(sceneNameProperty);
+    GameScene newScene = sceneFactory.makeScene(sceneName, this::onButtonClicked,
         modelController);
-    primaryWindow.showScene(newScene);
     return newScene;
   }
 
@@ -133,12 +134,28 @@ public class ViewManager {
    */
 
   public void startGame(String gameType) {
-    ((BoardScene) changeScene("boardScene"))
-        .attachBoardControllerToBoard(boardController);
+    BoardScene newScene = (BoardScene) makeScene("boardScene");
+    newScene.attachBoardControllerToBoard(boardController);
     modelController.setGameType(gameType);
-    primaryWindow.setResizable(true);
-    primaryWindow.setCurrentSceneTitle(gameType);
-    positionWindow(primaryWindow, 500, 200);
+
+    showConfigMenu();
+
+    if (primaryWindow.isShowing()) {
+      primaryWindow.showScene(newScene);
+      primaryWindow.setResizable(true);
+      primaryWindow.setCurrentSceneTitle(gameType);
+      positionWindow(primaryWindow, 500, 200);
+    }
+  }
+
+  /**
+   * Shows a {@link FloatingWindow} with the configuration menu for the game.
+   */
+  private void showConfigMenu() {
+    GameScene configScene = sceneFactory.makeScene("GameConfigScene",
+        this::onButtonClicked, modelController);
+    GameWindow configWindow = makeFloatingWindow(configScene);
+    configWindow.showScene(configScene);
   }
 
   private void chess() {
@@ -155,7 +172,8 @@ public class ViewManager {
 
   private void exitButton() {
     //code to save
-    changeScene(HOME_SCENE);
+    primaryWindow.close();
+    new ViewManager(initFile);
   }
 
   private void undoButton() {
@@ -197,17 +215,20 @@ public class ViewManager {
     ((GameScene) scene).setBackground(new Background(backgroundImage));
   }
 
+  private void cancelButton(){
+    primaryWindow.close();
+    new ViewManager(initFile);
+  }
+
   /**
    * Creates a new empty {@link FloatingWindow} instance and preset its owner window
    * to the primary window of this game instance. This also sets the scene for the window
    * to display.
    * @return a {@code FloatingWindow} with no scene specified
    */
-  private FloatingWindow showFloatingWindow(GameScene scene) {
+  private FloatingWindow makeFloatingWindow(GameScene scene) {
     FloatingWindow popup = (FloatingWindow) gameWindowFactory
         .makeWindow(initFile.getString("popupWindowType"));
-    popup.setOwnerWindow(primaryWindow);
-    popup.showScene(scene);
     return popup;
   }
 

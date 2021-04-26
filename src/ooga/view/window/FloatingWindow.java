@@ -1,6 +1,7 @@
 package ooga.view.window;
 
 import javafx.scene.Node;
+import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
@@ -13,23 +14,15 @@ import ooga.view.GameScene;
  * {@code setOwnerWindow()} before calling {@code showScene}, otherwise it will
  * throw an error.
  */
-public class FloatingWindow extends Popup implements GameWindow{
-  private Window ownerWindow;
+public class FloatingWindow extends Stage implements GameWindow{
 
   @Override
   public void showScene(GameScene scene) {
-    Node sceneObjects = scene.getRoot();
-    getContent().add(sceneObjects);
-    show(ownerWindow);
+    initModality(Modality.APPLICATION_MODAL);
+    setScene(scene);
+    showAndWait();
   }
 
-  /**
-   * Sets the owner window of this object floating window.
-   * @param ownerWindow a {@link Window} reference to use as the owner
-   */
-  public void setOwnerWindow(Window ownerWindow){
-    this.ownerWindow = ownerWindow;
-  }
 
   @Override
   public void close() {
