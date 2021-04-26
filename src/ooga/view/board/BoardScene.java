@@ -22,6 +22,8 @@ import ooga.view.GameScene;
  * This scene holds the view representation of the main game board. The scene has a top
  * control bar with buttons and extends {@link GameScene}. The scene also holds a reference
  * to {@link ModelController} and {@link BoardController}.
+ *
+ * @author Kenneth Moore III
  */
 public class BoardScene extends GameScene {
 
