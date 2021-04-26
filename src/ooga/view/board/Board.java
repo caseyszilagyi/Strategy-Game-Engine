@@ -29,6 +29,7 @@ public class Board extends GridPane {
   private static final Color DEFAULT_DARK_COLOR = Color.TAN;
   private static final Color DEFAULT_LIGHT_COLOR = Color.BEIGE;
   private Color myHighlightColor;
+  private String chessPieceFolder = "BasicChessPieces";
 
   /**
    * Constructs a {@link Board} and obtains a reference to {@link ModelController}
@@ -203,7 +204,7 @@ public class Board extends GridPane {
    * @param fileName: the type of piece it is
    */
   public void addPiece(int x, int y, String color, String fileName) {
-    ImageView piece = new ImageView(new Image("BasicChessPieces/" + pieceBundle.getString(color + fileName)));
+    ImageView piece = new ImageView(new Image(chessPieceFolder+"/" + pieceBundle.getString(color + fileName)));
     piece.setFitHeight(SQUARE_SIZE);
     piece.setFitWidth(SQUARE_SIZE);
     tiles[x][y].addPiece(piece);
