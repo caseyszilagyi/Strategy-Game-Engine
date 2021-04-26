@@ -223,7 +223,7 @@ public class ViewManager {
   private void changeBackground(String url) {
     Scene scene = primaryWindow.getScene();
     BackgroundImage backgroundImage=  new BackgroundImage(new Image(url),
-        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+        BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
         BackgroundSize.DEFAULT);
     ((GameScene) scene).setBackground(new Background(backgroundImage));
   }
