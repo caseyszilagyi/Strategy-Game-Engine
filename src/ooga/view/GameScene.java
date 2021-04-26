@@ -136,6 +136,7 @@ public abstract class GameScene extends Scene {
   public TextField makeTextField(String property){
     TextField textField = new TextField();
     textField.setPromptText(resources.getString(property));
+    textField.setId(property);
     textField.setFocusTraversable(false);
     return textField;
   }
