@@ -77,7 +77,10 @@ public class GameEngine extends Engine {
     makeAIMove();
   }
 
-
+  /**
+   * Sets the active AI
+   * @param computer the AI to set as the active AI
+   */
   public void setAI(AI computer){
     this.computer = computer;
     isAIPlaying = true;
@@ -92,6 +95,10 @@ public class GameEngine extends Engine {
     }
   }
 
+  /**
+   *
+   * @param clickExecutor the ClickExecutor to be used
+   */
   public void setClickExecutor(ClickExecutor clickExecutor){
     this.clickExecutor = clickExecutor;
   }
@@ -120,6 +127,10 @@ public class GameEngine extends Engine {
     noTurnRules = turnRules;
   }
 
+  /**
+   * Checks if someone has won the game
+   * @return a boolean value representing whether or not someone has won the game
+   */
   @Override
   public boolean checkForWin() {
     if(curRules.checkWinConditions(getCurrentPlayerTurn())){
@@ -130,6 +141,10 @@ public class GameEngine extends Engine {
     return false;
   }
 
+  /**
+   * Checks to see if the win Conidition is hit.  This method is mostly used for testing
+   * @return whether or not the game is over
+   */
   @Override
   public boolean isGameOver() {
     return curRules.checkWinConditions("user") || curRules.checkWinConditions("opponent")  ;
@@ -174,6 +189,11 @@ public class GameEngine extends Engine {
     clickExecutor.setPlayerMap(playerNames);
     curBoard.setPlayerMap(playerNames);
   }
+
+  /**
+   * Adds an AI to the game
+   * @param ai the AI to be added to the game
+   */
   @Override
   public void addAI(AI ai){
 
@@ -188,11 +208,16 @@ public class GameEngine extends Engine {
     return playerNames.get(turnManager.getCurrentPlayerTurnName());
   }
 
-
+  /**
+   * Undoes the previous turn
+   */
   public void undoTurn(){
     curBoard.undoTurn();
   }
-
+  /**
+   * Saves the current state of the game in a file
+   * @param fileName The name of the file to save the game in
+   */
   @Override
   public void saveCurrentState(String fileName) {
     //TODO: add saving capabilities for the board and moves

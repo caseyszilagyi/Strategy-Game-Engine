@@ -75,7 +75,7 @@ public abstract class Engine{
   public abstract boolean checkForWin();
 
   /**
-   * Checks to see if the winConidition is hit.  This method is mostly used for testing
+   * Checks to see if the win Conidition is hit.  This method is mostly used for testing
    * @return whether or not the game is over
    */
   public abstract boolean isGameOver();
