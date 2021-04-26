@@ -14,6 +14,7 @@ import ooga.model.components.GamePiece;
  *
  * This class should be used via reflection, and should be defined in the GamePiece's .xml file in the
  * nested parameters:
+ * <pre> {@code
  * <moves>
  *  <InfiniteJump>
  *    <changeX>1</changeX> //the integer is variable
@@ -25,6 +26,8 @@ import ooga.model.components.GamePiece;
  *       </restrictions>
  *  </InfiniteJump>
  * </moves>
+ * }
+ * </pre>
  *
  *
  * @author Casey Szilagyi

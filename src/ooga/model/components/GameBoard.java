@@ -68,7 +68,7 @@ public class GameBoard implements Board {
 
   /**
    * This method defines the active players
-   * @param map a Map<String, String> of the active players
+   * @param map a {@code Map<String, String>} of the active players
    */
   public void setPlayerMap(Map<String, String> map){
     playerMap = map;
@@ -438,14 +438,14 @@ public class GameBoard implements Board {
 
   /**
    * This methods returns the Map which maps Coordinates to GamePieces
-   * @return the Map<Coordinate, GamePiece> of all the GamePieces currently active
+   * @return the {@code Map<Coordinate, GamePiece>} of all the GamePieces currently active
    */
   public Map<Coordinate, GamePiece> getPieceCoordinateMap() {
     return pieceCoordinateMap;
   }
 
   /**
-   * This method provides to the FrontEndExternalAPI an Iterable<String> of all the possible pieces which can be
+   * This method provides to the FrontEndExternalAPI an {@code Iterable<String>} of all the possible pieces which can be
    * used in a piece swap
    * @param pieceList the list of all the possible pieces to be used in a piece swap
    */

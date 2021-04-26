@@ -186,7 +186,11 @@ public class ViewManager {
   }
 
   private void undoButton() {
-    modelController.undoTurn();
+    try {
+      modelController.undoTurn();
+    } catch (Exception e) {
+      new GameAlert(AlertType.ERROR, "No moves to undo!");
+    }
   }
 
   private void resetButton() {
@@ -195,13 +199,18 @@ public class ViewManager {
   }
 
   private void helpButton() {
-    System.out.println("https://en.wikipedia.org/wiki/Chess"
+    new GameAlert(AlertType.INFORMATION, "https://en.wikipedia.org/wiki/Chess"
         + "\nhttps://en.wikipedia.org/wiki/Draughts\nhttps://en.wikipedia.org/wiki/Connect_Four");
-    //TODO: change so only use relevant link and use pop up window
+
   }
 
   private void newWindow(){
     new ViewManager(initFile);
+  }
+
+  private void settingsButton(){
+    new GameAlert(AlertType.INFORMATION, "This button hasn't been implemented yet, "
+        + "thank you for your patience!");
   }
 
   private void changeBackgroundButton() {

@@ -15,14 +15,15 @@ import org.w3c.dom.Node;
  * This class gets the proper ClickExecutor for a specific game
  *
  * This class assumes that within the game_rules .xml file
- * there is a <gameType>Move</gameType> or <gameType>Place</gameType> parameter.
+ * there is a {@code <gameType>Move</gameType>} or {@code <gameType>Place</gameType>} parameter.
  *
  * Example Code:
- *
+ * <pre> {@code
  * ClickExecutorInitializer clickExecutorInitializer = new ClickExecutorInitializer();
- * ClickExecutor placeClickExecutor = clickExecutorInitializer.getProperClickExecutor("connectfour")
- * ClickExecutor moveClickExecutor = clickExecutorInitializer.getProperClickExecutor("chess")
- *
+ * ClickExecutor placeClickExecutor = clickExecutorInitializer.getProperClickExecutor("connectfour");
+ * ClickExecutor moveClickExecutor = clickExecutorInitializer.getProperClickExecutor("chess");
+ * }
+ * </pre>
  * @author Cole Spector
  */
 public class ClickExecutorInitializer {
@@ -40,7 +41,7 @@ public class ClickExecutorInitializer {
   /**
    * This method returns a ClickExecutor associated with the given gameName
    * This method assumes that within the game_rules  gameName.xml file
-   * there is a <gameType>Move</gameType> or <gameType>Place</gameType> parameter.
+   * there is a {@code <gameType>Move</gameType>} or {@code <gameType>Place</gameType>} parameter.
    *
    * @param gameName is the name of the game to get the proper ClickExecutor for
    * @return the proper ClickExecutor for the specified game

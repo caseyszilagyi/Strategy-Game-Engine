@@ -191,4 +191,43 @@ public class ViewTest extends DukeApplicationTest {
     assertEquals("Welcome to BrainMate!", title.getText());
   }
 
+  @Test
+  void testResetButton(){
+    clickOn(chessButton);
+    TextField player1 = lookup("#player1").query();
+    writeTo(player1, "asdlfkj");
+    TextField player2 = lookup("#player2").query();
+    writeTo(player2, "alsdkfj");
+    Button playButton = lookup("#startButton").query();
+    clickOn(playButton);
+    Button resetButton = lookup("#resetButton").query();
+    clickOn(resetButton);
+  }
+
+  @Test
+  void testUndoButton(){
+    clickOn(chessButton);
+    TextField player1 = lookup("#player1").query();
+    writeTo(player1, "asdlfkj");
+    TextField player2 = lookup("#player2").query();
+    writeTo(player2, "alsdkfj");
+    Button playButton = lookup("#startButton").query();
+    clickOn(playButton);
+    Button undoButton = lookup("#undoButton").query();
+    assertDoesNotThrow(() -> clickOn(undoButton));
+  }
+
+  @Test
+  void testSettingsButton(){
+    clickOn(chessButton);
+    TextField player1 = lookup("#player1").query();
+    writeTo(player1, "asdlfkj");
+    TextField player2 = lookup("#player2").query();
+    writeTo(player2, "alsdkfj");
+    Button playButton = lookup("#startButton").query();
+    clickOn(playButton);
+    Button settingsButton = lookup("#settingsButton").query();
+    assertDoesNotThrow(() -> clickOn(settingsButton));
+  }
+
 }

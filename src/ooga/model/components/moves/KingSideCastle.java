@@ -15,11 +15,13 @@ import org.jetbrains.annotations.NotNull;
  *
  * This class should be used via reflection, and should be defined in the GamePiece's .xml file in the
  * nested parameters:
+ * <pre> {@code
  * <moves>
  *  <KingSideCastle>
  *  </KingSideCastle>
  * </moves>
- *
+ * }
+ * </pre>
  *
  * @author Casey Szilagyi
  */
