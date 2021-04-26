@@ -78,9 +78,7 @@ public class GameConfigScene extends GameScene{
           new ExtensionFilter("XML files", "*.xml"));
       File boardFile = fileChooser.showOpenDialog(null);
       if (boardFile != null) {
-        String path = boardFile.getAbsolutePath();
-        path = path.substring(0, path.length()-4);
-        modelController.setBoardState(path);
+        modelController.setBoardState(boardFile);
       }
     });
 
