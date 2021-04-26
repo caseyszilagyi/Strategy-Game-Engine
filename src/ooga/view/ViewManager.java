@@ -32,6 +32,7 @@ import ooga.view.window.StageWindow;
  * as necessary.
  *
  * @author Yi Chen
+ * @author kenneth Moore III
  */
 public class ViewManager {
   private final ResourceBundle initFile;

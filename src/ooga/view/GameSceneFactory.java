@@ -71,7 +71,7 @@ public class GameSceneFactory {
    * @return a {@code GameScene} object
    */
   private GameScene makeWelcomeScene(Parent root, ResourceBundle resources,
-      ModelController modelController){
+      ModelController modelController) {
     GameScene newScene = new WelcomeScene(root, resources, handler, modelController);
 
     return newScene;
