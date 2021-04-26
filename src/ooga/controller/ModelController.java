@@ -4,6 +4,26 @@ import ooga.model.engine.running.Engine;
 import ooga.model.initialization.engine.Initializer;
 import ooga.model.initialization.engine.EngineInitializer;
 
+/**
+ * This class is used to interact with the modules in the backend.
+ * This class implements the BackEndExternalAPI, and is dependant on the Engine.java class, and the Initializer.java class
+ *
+ * Example Code:
+ *
+ * BackEndExternalAPI modelController = new ModelController();
+ * DummyViewController viewController = new DummyViewController();
+ * modelController.setBoardController(viewController);
+ * modelController.setGameType("connectfour");
+ * GameBoard gameBoard = modelController.getEngine().getBoard();
+ * Engine gameEngine = modelController.getEngine();
+ *
+ * modelController.actOnCoordinates(0,0);
+ *
+ * It is not necessary to link a view controller in order to run a game through the ModelController,
+ * that is simply necessary if you want to view the board separately.
+ *
+ */
+
 public class ModelController implements BackEndExternalAPI {
 
   private Initializer engineInitializer;

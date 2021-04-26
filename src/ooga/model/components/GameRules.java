@@ -25,6 +25,8 @@ public class GameRules {
   private static final String WIN_CONDITION = "winConditions";
   private static final String WIN_CONDITION_FILE_PATH = EndGameConditioin.class.getPackageName() + ".";
   private static final String ADD_PIECE_TYPE = "addPieceType";
+  private static final String ALL_WHITE_SPACE = "\\s";
+  private static final String EMPTY_STRING = "";
 
   private final Map<String, List<Node>> gameFileContents;
   private final File ruleFile;
@@ -51,12 +53,29 @@ public class GameRules {
     winConditions = new ArrayList<>();
     if(gameFileContents.get(WIN_CONDITION) == null){ return;}
     for (Node n : gameFileContents.get(WIN_CONDITION)){
-      for(String condition : n.getTextContent().split("\\s")){
-        if(condition != ""){
+      for(String condition : n.getTextContent().split(ALL_WHITE_SPACE)){
+        if(condition != EMPTY_STRING){
           winConditions.add(makeCondition(condition));
         }
       }
     }
+  }
+
+  /**
+   * Gets a List of the turn conditions for the current game as a List of Strings
+   * @return a {@code List<String>} of the current game's turn conditions
+   */
+  public List<String> getTurnConditionsAsStringList(){
+    List<String> listOfTurnConditions = new ArrayList<>();
+    for (Node n : gameFileContents.get(TURN_CONDITION)){
+      for(String condition : n.getTextContent().split(ALL_WHITE_SPACE)){
+        if(condition != EMPTY_STRING){
+          //System.out.printf("Condition = %s;\n", condition);
+          listOfTurnConditions.add(condition);
+        }
+      }
+    }
+    return listOfTurnConditions;
   }
 
   private EndGameConditioin makeCondition(String condition){
@@ -67,22 +86,7 @@ public class GameRules {
     return winConditions.stream().allMatch(winCondition -> winCondition.checkForWin(teamName));
   }
 
-  /**
-   * Gets a List of the turn conditions for the current game as a List of Strings
-    * @return a {@code List<String>} of the current game's turn conditions
-   */
-  public List<String> getTurnConditionsAsStringList(){
-    List<String> listOfTurnConditions = new ArrayList<>();
-    for (Node n : gameFileContents.get(TURN_CONDITION)){
-      for(String condition : n.getTextContent().split("\\s")){
-        if(condition != ""){
-          //System.out.printf("Condition = %s;\n", condition);
-          listOfTurnConditions.add(condition);
-        }
-      }
-    }
-    return listOfTurnConditions;
-  }
+
 
   /**
    * gets the piece type which can be added to the board for a game
