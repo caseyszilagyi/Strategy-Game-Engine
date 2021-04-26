@@ -14,6 +14,16 @@ import ooga.model.initialization.fileparsing.XMLParser;
 import ooga.model.initialization.gameflow.ConditionClassLoader;
 import org.w3c.dom.Node;
 
+/**
+ * This class defines the set of rules to be followed by a game, such as the win conditions and the turn conditions
+ *
+ * Example Code:
+ *
+ * GameBoard board = new GameBoard(8, 8);
+ * DummyViewController viewController = new DummyViewController();
+ * GameRules gameRules = new GameRules("testConstant", viewController, board);
+ * assertFalse(gameRules.checkForNextTurn(board, basicTestPiece)); //this test should always return False, for if you check the testConstant.txt file you will see that the TurnCondition is set to
+ */
 public class GameRules {
 
   private static final String RULE_FILE_PATH = "data/gamelogic/game_rules/";
