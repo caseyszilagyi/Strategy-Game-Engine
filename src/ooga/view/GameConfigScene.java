@@ -70,14 +70,18 @@ public class GameConfigScene extends GameScene{
     Button startButton = makeButton("startButton");
     Button openButton = makeButton("customStart");
 
-    AtomicReference<File> boardFile = null;
 
     openButton.setOnAction(e -> {
       FileChooser fileChooser = new FileChooser();
       fileChooser.setTitle("Choose a board configuration file to open");
       fileChooser.getExtensionFilters().add(
           new ExtensionFilter("XML files", "*.xml"));
-      boardFile.set(fileChooser.showOpenDialog(null));
+      File boardFile = fileChooser.showOpenDialog(null);
+      if (boardFile != null) {
+        String path = boardFile.getAbsolutePath();
+        path = path.substring(0, path.length()-4);
+        modelController.setBoardState(path);
+      }
     });
 
     sceneRoot.add(openButton, 0, 3);
@@ -98,11 +102,7 @@ public class GameConfigScene extends GameScene{
       } else {
         opponent = player2.getText();
       }
-      modelController.setPlayers(user, opponent);
 
-      if (boardFile != null) {
-        modelController.setBoardState(boardFile.toString());
-      }
       getWindow().hide();
     });
 
