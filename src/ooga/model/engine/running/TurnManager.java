@@ -11,6 +11,7 @@ import ooga.model.components.Player;
  * Designed to manage the changing of turns in a game. This is done based on the turn rules
  *
  * @author Casey Szilagyi
+ * @author Cole Spector
  */
 public class TurnManager {
 
