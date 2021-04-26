@@ -1,18 +1,18 @@
 <Player>
-  <fullName></fullName>
-  <firstName>Casey</firstName>
-  <lastName>Szilagyi</lastName>
+  <fullName>Robert Duvall</fullName>
+  <firstName>Robert</firstName>
+  <lastName>Duvall</lastName>
   <records>
     <records>
       <gameName>chess</gameName>
       <wins>0</wins>
       <losses>0</losses>
-      <draws>1</draws>
+      <draws>0</draws>
     </records>
     <records>
       <gameName>checkers</gameName>
-      <wins>1</wins>
-      <losses>0</losses>
+      <wins>0</wins>
+      <losses>1</losses>
       <draws>0</draws>
     </records>
     <records>
