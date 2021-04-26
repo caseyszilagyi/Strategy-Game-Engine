@@ -1,7 +1,10 @@
 package ooga.controller;
 
 import java.util.Iterator;
+import javafx.scene.control.Label;
+import javafx.stage.Popup;
 import javafx.util.Pair;
+
 import ooga.view.board.Board;
 
 /**
@@ -110,6 +113,9 @@ public class BoardController implements FrontEndExternalAPI {
    */
   @Override
   public void gameWin(String playerName) {
+    /*Popup popup = new Popup();
+    popup.getContent().add(new Label(playerName + "won!"));
+    popup.show();*/
     System.out.println(playerName + "won!");
     //TODO: implement with pop up window
   }
