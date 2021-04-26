@@ -22,7 +22,10 @@ import org.w3c.dom.Node;
  * GameBoard board = new GameBoard(8, 8);
  * DummyViewController viewController = new DummyViewController();
  * GameRules gameRules = new GameRules("testConstant", viewController, board);
- * assertFalse(gameRules.checkForNextTurn(board, basicTestPiece)); //this test should always return False, for if you check the testConstant.txt file you will see that the TurnCondition is set to
+ * assertFalse(gameRules.checkForNextTurn(board, basicTestPiece)); //this test should always return False, for if you check the testConstant.txt file you will see that the TurnCondition is set to Constant
+ *
+ * @author Cole Spector
+ * @author Casey Szilagyi
  */
 public class GameRules {
 
@@ -48,6 +51,14 @@ public class GameRules {
   private GameBoard board;
   private FrontEndExternalAPI viewController;
 
+  /**
+   * This is the initializer for the GameRules class
+   *
+   * This method assumes that the String gameName passed in is associated with a .xml file in the game_rules folder
+   * @param gameName A string, set to the name of the game to be played
+   * @param viewController the FrontEndExternalAPI being used for the game being played
+   * @param board the GameBoard object being used for the game being played
+   */
   public GameRules(String gameName, FrontEndExternalAPI viewController, GameBoard board){
     this.gameName = gameName;
     xmlParser = new XMLParser();
@@ -59,6 +70,9 @@ public class GameRules {
     makeWinConditions();
   }
 
+  /**
+   * This method makes all of the win conditions for the current game
+   */
   public void makeWinConditions(){
     winConditions = new ArrayList<>();
     if(gameFileContents.get(WIN_CONDITION) == null){ return;}
@@ -92,6 +106,11 @@ public class GameRules {
     return classLoader.makeWinCondition(condition);
   }
 
+  /**
+   * This method checks the win conditions and returns whether or not the given team has won the game
+   * @param teamName the team to check for if they have won the game
+   * @return a boolean representing whether or not the given team has won the game
+   */
   public boolean checkWinConditions(String teamName){
     return winConditions.stream().allMatch(winCondition -> winCondition.checkForWin(teamName));
   }
@@ -168,6 +187,10 @@ public class GameRules {
     }
   }
 
+  /**
+   * Sets the GameBoard to be used with this rule set
+   * @param board the GameBoard object to be used.
+   */
   public void setBoard(GameBoard board){
     this.board = board;
   }
