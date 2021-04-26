@@ -106,11 +106,9 @@ public class ModelController implements BackEndExternalAPI {
     engineInitializer.addPlayers(user, opponent);
   }
 
-  /**
-   * Undoes a turn
-   */
+
   @Override
-  public void undoTurn() {
+  public void undoTurn(){
     gameEngine.undoTurn();
   }
 

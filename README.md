@@ -22,7 +22,7 @@ Hours Spent:
 
 Kenneth: 
 
-Shaw:
+Shaw: 15 hours per week
 
 Yi:
 
@@ -34,7 +34,7 @@ Casey: ~25 hours per week
 
 Kenneth:
 
-Shaw:
+Shaw: BoardCreator, AI, miscellaneous backend classes
 
 Yi:
 
@@ -185,6 +185,9 @@ Our game engine can handle any input game (be it a placement or a movement game)
 Kenneth:
 
 Shaw:
+- This was definitely a challenging project and very difficult to grasp at the start. Although 
+it proved to be quite a difficult task, I learned a lot about data-driven design and I enjoyed seeing 
+   the end product.
 
 Yi:
 

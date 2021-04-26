@@ -1,9 +1,21 @@
 package ooga.view;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import ooga.controller.BoardController;
 import ooga.controller.ModelController;
@@ -28,6 +40,7 @@ public class ViewManager {
   private final StageWindow primaryWindow;
   private ModelController modelController;
   private BoardController boardController;
+  private final String HOME_SCENE = "initialWindowScene";
 
   private String DEFAULT_GAMETYPE = "chess";
 
@@ -46,7 +59,7 @@ public class ViewManager {
     primaryWindow = (StageWindow) getInitialWindow();
     ((Stage) primaryWindow).setOnCloseRequest(e -> handleStageClose());
     createControllers();
-    changeScene("initialWindowScene");
+    changeScene(HOME_SCENE);
     primaryWindow.setCurrentSceneTitle("title-text");
   }
 
@@ -128,25 +141,60 @@ public class ViewManager {
     positionWindow(primaryWindow, 500, 200);
   }
 
-  private void chess(){
+  private void chess() {
     startGame("chess");
   }
 
-  private void checkers(){
+  private void checkers() {
     startGame("checkers");
   }
 
-  private void connectfour(){
+  private void connectfour() {
     startGame("connectfour");
   }
 
-  public void undoButton() {
+  private void exitButton() {
+    //code to save
+    changeScene(HOME_SCENE);
+  }
+
+  private void undoButton() {
     modelController.undoTurn();
   }
 
-
-  public void resetButton() {
+  private void resetButton() {
     boardController.resetColors();
+    changeBackground("ooga/view/resources/boardSceneBackground.jpg");
+  }
+
+  private void helpButton() {
+    System.out.println("https://en.wikipedia.org/wiki/Chess"
+        + "\nhttps://en.wikipedia.org/wiki/Draughts\nhttps://en.wikipedia.org/wiki/Connect_Four");
+    //TODO: change so only use relevant link and use pop up window
+  }
+
+  private void changeBackgroundButton() {
+    FileChooser fc = new FileChooser();
+    File selectedFile = fc.showOpenDialog(primaryWindow);
+    if(selectedFile == null) {
+      return;
+    }
+    try {
+      changeBackground(selectedFile.toURI().toURL().toString());
+    } catch (MalformedURLException e) {
+      String errorMessage = e.getMessage();
+      Alert error = new Alert(AlertType.ERROR);
+      error.setContentText(errorMessage);
+      error.showAndWait();
+    }
+  }
+
+  private void changeBackground(String url) {
+    Scene scene = primaryWindow.getScene();
+    BackgroundImage backgroundImage=  new BackgroundImage(new Image(url),
+        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+        BackgroundSize.DEFAULT);
+    ((GameScene) scene).setBackground(new Background(backgroundImage));
   }
 
   /**
