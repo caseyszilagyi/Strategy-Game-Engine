@@ -17,6 +17,22 @@ import ooga.model.components.GamePiece;
  * it unclear what path the piece takes, making it unworkable with the current information that the
  * class gets
  *
+ * This class should be used via reflection, and should be defined in the GamePiece's .xml file
+ * nested in a moves parameters, with the changeX, changeY, mustTake, takeX, takeY, and restrictions parameters
+ * all defined as follows:
+ *
+ * <moves>
+ *  <FiniteSlide>
+ *    <changeX>1</changeX> //the integer is variable
+ *       <changeY>2</changeY> //the integer is variable
+ *       <mustTake>False</mustTake> //the boolean is variable
+ *       <takeX>null</takeX> // the null value can be set to an integer
+ *       <takeY>null</takeY> // the null value can be set to an integer
+ *       <restrictions>
+ *       </restrictions>
+ *  </FiniteSlide>
+ * </moves>
+ *
  * @author Casey Szilagyi
  */
 public class FiniteSlide extends PieceMovement {
@@ -32,6 +48,8 @@ public class FiniteSlide extends PieceMovement {
   /**
    * Initializes with the parameters of the move, as well as the direction that the piece should be
    * going
+   *
+   *
    *
    * @param parameters The parameters of the move
    * @param direction  1 if going up, -1 if going down. Used to adjust parameters for different

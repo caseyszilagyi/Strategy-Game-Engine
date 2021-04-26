@@ -27,6 +27,10 @@ public class EngineInitializer implements Initializer {
   private AICreator gameAI = new AICreator();
   private final String AI_NAME = "AI";
 
+  /**
+   * This is the initializer for the EngineInitializer
+   * @param newBoardController the FrontEndExternalAPI to link the Engine to
+   */
   public EngineInitializer(FrontEndExternalAPI newBoardController){
     boardController = newBoardController;
     gameEngine = new GameEngine(boardController);
@@ -50,7 +54,7 @@ public class EngineInitializer implements Initializer {
   }
 
   /**
-   * Sets the board state from a file
+   * This method initilizes the board based off of the boardFileName passed in
    * @param boardFileName The file name that contains the board
    */
   @Override
@@ -59,15 +63,19 @@ public class EngineInitializer implements Initializer {
     gameEngine.setBoard(boardCreator.makeBoard());
   }
 
+  /**
+   * This method initializes the rules based off of the rulesFileName passed in
+   * @param rulesFileName The file name that contains the rules of the game
+   */
   @Override
   public void setGameRules(String rulesFileName) {
 
   }
 
   /**
-   * Adds the players, if there's only one player and an AI, adds the AI as well
+   *
    * @param user The string associated with the person playing on the bottom of the board
-   * @param opponent The string associated with the person playing on the top of the board
+   * @param opponent The string associated with the person pplaying on the top of the board
    */
   @Override
   public void addPlayers(String user, String opponent) {
@@ -79,12 +87,17 @@ public class EngineInitializer implements Initializer {
   }
 
   /**
-   * Makes the AI
+   * This method adds an AI to the gameEngine
    */
   @Override
   public void addAI(){
     gameEngine.setAI(gameAI.makeAI());
   }
+
+  /**
+   * This method returns the gameEngine being used
+   * @return the GameEngine being used.
+   */
   @Override
   public Engine getEngine() {
     return gameEngine;

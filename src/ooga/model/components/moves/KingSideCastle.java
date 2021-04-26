@@ -13,6 +13,14 @@ import org.jetbrains.annotations.NotNull;
  * The piece movement that corresponds to the king side castle. Has to check that the king and rook
  * haven't moved, and that there are no pieces between them
  *
+ * This class should be used via reflection, and should be defined in the GamePiece's .xml file in the
+ * nested parameters:
+ * <moves>
+ *  <KingSideCastle>
+ *  </KingSideCastle>
+ * </moves>
+ *
+ *
  * @author Casey Szilagyi
  */
 public class KingSideCastle extends FiniteSlide {

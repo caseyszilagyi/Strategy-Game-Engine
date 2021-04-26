@@ -1,13 +1,26 @@
 package ooga.view;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import ooga.controller.BoardController;
 import ooga.controller.ModelController;
 import ooga.view.board.BoardScene;
+import ooga.view.window.FloatingWindow;
 import ooga.view.window.GameWindow;
 import ooga.view.window.GameWindowFactory;
 import ooga.view.window.StageWindow;
@@ -139,13 +152,53 @@ public class ViewManager {
     startGame("connectfour");
   }
 
-  public void undoButton() {
+  private void undoButton() {
     modelController.undoTurn();
   }
 
-  public void resetButton() {
+  private void resetButton() {
     boardController.resetColors();
+    changeBackground("ooga/view/resources/boardSceneBackground.jpg");
   }
+
+  private void changeBackgroundButton() {
+    FileChooser fc = new FileChooser();
+    File selectedFile = fc.showOpenDialog(primaryWindow);
+    if(selectedFile == null) {
+      return;
+    }
+    try {
+      changeBackground(selectedFile.toURI().toURL().toString());
+    } catch (MalformedURLException e) {
+      String errorMessage = e.getMessage();
+      Alert error = new Alert(AlertType.ERROR);
+      error.setContentText(errorMessage);
+      error.showAndWait();
+    }
+  }
+
+  private void changeBackground(String url) {
+    Scene scene = primaryWindow.getScene();
+    BackgroundImage backgroundImage=  new BackgroundImage(new Image(url),
+        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+        BackgroundSize.DEFAULT);
+    ((GameScene) scene).setBackground(new Background(backgroundImage));
+  }
+
+  /**
+   * Creates a new empty {@link FloatingWindow} instance and preset its owner window
+   * to the primary window of this game instance. This also sets the scene for the window
+   * to display.
+   * @return a {@code FloatingWindow} with no scene specified
+   */
+  private FloatingWindow showFloatingWindow(GameScene scene) {
+    FloatingWindow popup = (FloatingWindow) gameWindowFactory
+        .makeWindow(initFile.getString("popupWindowType"));
+    popup.setOwnerWindow(primaryWindow);
+    popup.showScene(scene);
+    return popup;
+  }
+
 
   /**
    * Gets the correct subclass of {@link GameWindow} to show the initial window of the
