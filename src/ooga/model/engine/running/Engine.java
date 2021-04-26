@@ -3,7 +3,6 @@ package ooga.model.engine.running;
 import ooga.model.components.GameBoard;
 import ooga.model.components.player.Player;
 import ooga.model.components.computer.AI;
-import ooga.model.engine.actions.Action;
 
 /**
  * Implemented by any type of game engine that is designed to run a specific type of program. The
@@ -53,13 +52,7 @@ public abstract class Engine{
    */
   public abstract boolean isGameOver();
 
-  /**
-   * Alters the board in the way described in the Action parameter
-   * @param action is the Action.java to perform
-   */
-  public abstract void executeAction(Action action);
 
-  public abstract void executeAction(String action);
 
   /**
    * Saves the current state of the game in a file
