@@ -5,12 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashSet;
 import java.util.Set;
+import javafx.scene.control.Alert.AlertType;
 import ooga.controller.BackEndExternalAPI;
 import ooga.controller.ModelController;
 import ooga.controller.DummyViewController;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.engine.running.Engine;
+import ooga.view.GameAlert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

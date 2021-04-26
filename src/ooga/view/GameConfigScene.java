@@ -110,7 +110,11 @@ public class GameConfigScene extends GameScene{
       if (user.equals("") || opponent.equals("")) {
         new GameAlert(AlertType.ERROR, "Please input a name for both players");
       } else {
-        modelController.setPlayers(user, opponent);
+        try {
+          modelController.setPlayers(user, opponent);
+        } catch (Exception exception){
+          new GameAlert(AlertType.ERROR, exception.getMessage());
+        }
         getWindow().hide();
       }
     });
@@ -132,11 +136,16 @@ public class GameConfigScene extends GameScene{
     fileChooser.getExtensionFilters().add(
         new ExtensionFilter("XML files", "*.xml"));
     File boardFile = fileChooser.showOpenDialog(null);
-    if (boardFile != null) {
-      modelController.setBoardState(boardFile);
-    } else {
-      modelController.setBoardState("chess.xml");
+    try{
+      if (boardFile != null) {
+        modelController.setBoardState(boardFile);
+      } else {
+        modelController.setBoardState("chess");
+      }
+    } catch (Exception e){
+      new GameAlert(AlertType.ERROR, e.getMessage());
     }
+
   }
 
 //  private void pieceType() {

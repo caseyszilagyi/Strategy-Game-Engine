@@ -144,8 +144,11 @@ public class ViewManager {
   public void startGame(String gameType) {
     BoardScene newScene = (BoardScene) makeScene("boardScene");
     newScene.attachBoardControllerToBoard(boardController);
-    modelController.setGameType(gameType);
-
+    try {
+      modelController.setGameType(gameType);
+    } catch (Exception e) {
+      new GameAlert(AlertType.ERROR, "No moves to undo!");
+    }
     showConfigMenu();
 
     if (primaryWindow.isShowing()) {

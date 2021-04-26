@@ -4,12 +4,15 @@ import java.awt.Point;
 import java.io.File;
 import java.util.Iterator;
 import java.util.ResourceBundle;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.util.Pair;
 import ooga.controller.ModelController;
+import ooga.view.GameAlert;
 
 /**
  * Purpose: a visual representation of the board.
@@ -213,7 +216,12 @@ public class Board extends GridPane {
 
   private void handleTileClick(int i, int j) {
     unhighlightAll();
-    modelController.actOnCoordinates(i, j);
+    try {
+      modelController.actOnCoordinates(i, j);
+    }
+    catch (Exception e){
+      new GameAlert(AlertType.ERROR, e.getMessage());
+    }
   }
 
   /**
