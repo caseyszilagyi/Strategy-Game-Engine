@@ -24,11 +24,12 @@ public class CheckerPromotion extends Condition {
   private int direction;
 
   /**
+   * Gets the information needed in order to alter the board and promote the checker
    *
-   * @param gameBoard The board that the checker is on
+   * @param gameBoard  The board that the checker is on
    * @param parameters None, for this condition
-   * @param piece The checker in question
-   * @param direction The direction that corresponds to whether this player is on top/bottom
+   * @param piece      The checker in question
+   * @param direction  The direction that corresponds to whether this player is on top/bottom
    */
   public CheckerPromotion(GameBoard gameBoard, Map<String, String> parameters, GamePiece piece,
       int direction) {
@@ -38,12 +39,18 @@ public class CheckerPromotion extends Condition {
     normalChecker = piece;
   }
 
+  /**
+   * Promotes the checker to a king checker
+   *
+   * @param endingCoordinates The ending coordinates of the move
+   */
   @Override
   public void executeCondition(Coordinate endingCoordinates) {
     int yPos = endingCoordinates.getY();
-    if (yPos == gameBoard.getHeight()-1 || yPos == 0) {
+    if (yPos == gameBoard.getHeight() - 1 || yPos == 0) {
       gameBoard.removePiece(endingCoordinates);
-      gameBoard.addPiece(pieceCreator.makePiece("kingChecker", endingCoordinates, direction, normalChecker.getPieceTeam()));
+      gameBoard.addPiece(pieceCreator
+          .makePiece("kingChecker", endingCoordinates, direction, normalChecker.getPieceTeam()));
     }
   }
 }

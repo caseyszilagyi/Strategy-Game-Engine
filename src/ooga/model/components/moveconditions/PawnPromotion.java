@@ -11,7 +11,8 @@ import ooga.model.components.GamePiece;
 import ooga.model.initialization.pieces.PieceCreator;
 
 /**
- * Sends a list of possible pieces to the front end when the pawn reaches the last rank
+ * Sends a list of possible pieces to the front end when the pawn reaches the last rank. In the
+ * current implementation, a queen is put in place of the pawn
  *
  * @author Casey Szilagyi
  */
@@ -31,6 +32,7 @@ public class PawnPromotion extends Condition {
    * @param gameBoard  The board that the pieces are on.
    * @param parameters The map with parameters, if there are any
    * @param piece      The piece that the restriction corresponds to
+   * @param direction  The direction multiplier used for the piece movement
    */
   public PawnPromotion(GameBoard gameBoard, Map<String, String> parameters, GamePiece piece,
       int direction) {
@@ -40,10 +42,16 @@ public class PawnPromotion extends Condition {
     pieceTeam = piece.getPieceTeam();
   }
 
+
+  /**
+   * Changes the pawn to a queen, and sends a list of possible changes to the front end
+   *
+   * @param endingCoordinates The ending coordinates of the move
+   */
   @Override
   public void executeCondition(Coordinate endingCoordinates) {
     int yPos = endingCoordinates.getY();
-    if (yPos == gameBoard.getHeight()-1 || yPos == 0) {
+    if (yPos == gameBoard.getHeight() - 1 || yPos == 0) {
       gameBoard.passPieceChangeOptions(chessPieceList);
       gameBoard.removePiece(endingCoordinates);
       gameBoard.addPiece(pieceCreator.makePiece("queen", endingCoordinates, direction, pieceTeam));
