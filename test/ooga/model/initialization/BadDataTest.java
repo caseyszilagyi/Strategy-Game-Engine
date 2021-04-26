@@ -1,8 +1,9 @@
-package ooga.model.engine;
+package ooga.model.initialization;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashSet;
@@ -11,6 +12,9 @@ import java.util.Set;
 import ooga.controller.BackEndExternalAPI;
 import ooga.controller.ModelController;
 import ooga.controller.DummyViewController;
+import ooga.exceptions.ClassLoaderException;
+import ooga.exceptions.GameRunningException;
+import ooga.exceptions.XMLParseException;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;
@@ -29,6 +33,7 @@ public class BadDataTest {
   Engine gameEngine;
   GameBoard gameBoard;
   PieceCreator pieceCreator;
+  BoardCreator boardCreator;
 
   @BeforeEach
   private void SetUp() {
@@ -40,12 +45,37 @@ public class BadDataTest {
     gameBoard = gameEngine.getBoard();
     gameEngine.setIfNoTurnRules(true);
     pieceCreator = new PieceCreator("chess", gameBoard);
+    boardCreator = new BoardCreator("chess", viewController);
     printBoard();
   }
 
   @Test
-  void blank(){
+  void BadPiece(){
+    assertThrows(ClassLoaderException.class, () -> makePiece("badDataNonExistentPieceMovement"), "PieceMovementClassNotFound");
+    assertThrows(ClassLoaderException.class, () -> makePiece("badDataNonExistentPieceMovement"), "PieceMovementInvocation");
+    assertThrows(ClassLoaderException.class, () -> makePiece("badDataAbstract"), "PieceMovementInstantiation");
+  }
 
+  @Test
+  void BadRestrictionAndCondition(){
+    assertThrows(ClassLoaderException.class, () -> makePiece("badDataWrongCondition"), "ConditionClassNotFound");
+    assertThrows(ClassLoaderException.class, () -> makePiece("badDataWrongRestriction"), "RestrictionClassNotFound");
+  }
+
+  @Test
+  void BadBoard(){
+    assertThrows(XMLParseException.class, () -> makeBoard("badDataNoRowTag"), "MissingRowColumnTag");
+    assertThrows(XMLParseException.class, () -> makeBoard("badDataNoOpponent"), "InvalidBoardFile");
+    assertThrows(XMLParseException.class, () -> makeBoard("badDataNonExistentPiece"), "NoSuchPieceFile");
+  }
+
+
+  private void makeBoard(String fileName){
+    boardCreator.initializeMaps(fileName);
+    boardCreator.makeBoard();
+  }
+  private void makePiece(String pieceFile){
+    makePiece(pieceFile, 0, 0);
   }
 
   private void isCoordinateEmpty(int x, int y){
