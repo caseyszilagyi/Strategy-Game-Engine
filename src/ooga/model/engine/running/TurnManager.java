@@ -24,7 +24,6 @@ public class TurnManager {
   private List<Long> playerTimes = new ArrayList<>();
   private Long playerStartTime;
   private boolean isStartOfTurn = true;
-  private boolean noTurnRules = true;
   private PlayerFileSaver playerFileSaver = new PlayerFileSaver();
 
 
@@ -124,15 +123,6 @@ public class TurnManager {
    */
   protected void setBoard(GameBoard board) {
     gameBoard = board;
-  }
-
-  /**
-   * Sets whether there are turn rules
-   *
-   * @param turnRules True if there are none, false if there are
-   */
-  public void setIfNoTurnRules(Boolean turnRules) {
-    noTurnRules = turnRules;
   }
 
 

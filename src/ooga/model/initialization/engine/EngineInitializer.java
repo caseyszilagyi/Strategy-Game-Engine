@@ -2,8 +2,6 @@ package ooga.model.initialization.engine;
 
 import java.io.File;
 import ooga.controller.FrontEndExternalAPI;
-import ooga.model.engine.running.ClickExecutor;
-import ooga.model.components.computer.AI;
 import ooga.model.engine.running.Engine;
 import ooga.model.engine.running.GameEngine;
 import ooga.model.initialization.AICreator;
@@ -22,8 +20,8 @@ public class EngineInitializer implements Initializer {
 
   public FrontEndExternalAPI boardController;
 
-  public Engine gameEngine;
-  public BoardCreator boardCreator;
+  private Engine gameEngine;
+  private BoardCreator boardCreator;
   private PlayerCreator playerCreator = new PlayerCreator();
   private AICreator gameAI = new AICreator();
   private final String AI_NAME = "AI";
@@ -45,14 +43,11 @@ public class EngineInitializer implements Initializer {
    */
   @Override
   public void initializeGame(String gameName) {
-
     ClickExecutorInitializer clickExecutorInitializer = new ClickExecutorInitializer();
     gameEngine.setClickExecutor(clickExecutorInitializer.getProperClickExecutor(gameName));
     boardCreator = new BoardCreator(gameName, boardController);
     gameEngine.setGameType(gameName);
     gameEngine.setBoard(boardCreator.makeBoard());
-
-
   }
 
   /**
@@ -77,15 +72,6 @@ public class EngineInitializer implements Initializer {
     gameEngine.setBoard(boardCreator.makeBoard());
   }
 
-  /**
-   * This method initializes the rules based off of the rulesFileName passed in
-   *
-   * @param rulesFileName The file name that contains the rules of the game
-   */
-  @Override
-  public void setGameRules(String rulesFileName) {
-
-  }
 
   /**
    * @param user     The string associated with the person playing on the bottom of the board

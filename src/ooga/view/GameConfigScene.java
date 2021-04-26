@@ -9,6 +9,8 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -49,7 +51,9 @@ public class GameConfigScene extends GameScene{
     this.handler = handler;
     this.modelController = modelController;
     this.getStylesheets().add(DEFAULT_RESOURCES_PATH + resources.getString("CSS"));
+
     populateScene();
+
   }
 
   @Override
@@ -96,11 +100,13 @@ public class GameConfigScene extends GameScene{
       }
 
       if (user.equals("") || opponent.equals("")) {
-        throw new GameRunningException("Please input a name for both players");
+        new GameAlert(AlertType.ERROR, "Please input a name for both players");
+      } else {
+        modelController.setPlayers(user, opponent);
+        getWindow().hide();
       }
-      modelController.setPlayers(user, opponent);
-      getWindow().hide();
     });
+
 
     sceneRoot.add(buttons, 0, 4);
   }
@@ -109,9 +115,12 @@ public class GameConfigScene extends GameScene{
     this.boardController = boardController;
   }
 
-  private void openBoard() {
+  /**
+   * Shows a {@link FileChooser} that prompts the user to enter an XML board configuration
+   * file.
+   */
+  private void openBoard(){
     FileChooser fileChooser = new FileChooser();
-    fileChooser.setTitle("Choose a board configuration file to open");
     fileChooser.getExtensionFilters().add(
         new ExtensionFilter("XML files", "*.xml"));
     File boardFile = fileChooser.showOpenDialog(null);

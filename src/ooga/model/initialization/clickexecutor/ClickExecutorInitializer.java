@@ -55,7 +55,6 @@ public class ClickExecutorInitializer {
     } catch(NullPointerException e){
       throw new XMLParseException("NoClickExecutor");
     }
-    System.out.printf("gameType = %s", gameType);
     try {
       Class<?> clazz = Class
           .forName(CLICK_EXECUTOR_FILE_PATH + gameType + CLICK_EXECUTOR_NAME_EXTENSION);
