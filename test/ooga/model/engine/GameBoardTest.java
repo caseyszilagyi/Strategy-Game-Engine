@@ -3,6 +3,7 @@ package ooga.model.engine;
 import static org.junit.jupiter.api.Assertions.*;
 
 import ooga.controller.DummyViewController;
+import ooga.exceptions.GameRunningException;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;
@@ -43,8 +44,7 @@ public class GameBoardTest {
     assertTrue(board.isPieceAtCoordinate(testCoordinate));
 
     GamePiece knight = makePiece("knight", testCoordinate);
-    assertFalse(board.addPiece(knight));
-
+    assertThrows(GameRunningException.class, () -> board.addPiece(knight), "PieceAddConflict");
   }
 
   @Test
@@ -66,22 +66,22 @@ public class GameBoardTest {
     Coordinate testCoordinate = makeCoordinates(8, 4);
     assertFalse(board.isPieceAtCoordinate(testCoordinate));
     GamePiece knight = makePiece("knight", testCoordinate);
-    assertFalse(board.addPiece(knight));
+    assertThrows(GameRunningException.class, () -> board.addPiece(knight), "PieceAddConflict");
 
     Coordinate testCoordinate2 = makeCoordinates(4, 8);
     assertFalse(board.isPieceAtCoordinate(testCoordinate2));
     GamePiece knight2 = makePiece("knight", testCoordinate2);
-    assertFalse(board.addPiece(knight2));
+    assertThrows(GameRunningException.class, () -> board.addPiece(knight2), "PieceAddConflict");
 
     Coordinate testCoordinate3 = makeCoordinates(-1, 4);
     assertFalse(board.isPieceAtCoordinate(testCoordinate3));
     GamePiece knight3 = makePiece("knight", testCoordinate3);
-    assertFalse(board.addPiece(knight3));
+    assertThrows(GameRunningException.class, () -> board.addPiece(knight3), "PieceAddConflict");
 
     Coordinate testCoordinate4 = makeCoordinates(4, -1);
     assertFalse(board.isPieceAtCoordinate(testCoordinate4));
     GamePiece knight4 = makePiece("knight", testCoordinate4);
-    assertFalse(board.addPiece(knight4));
+    assertThrows(GameRunningException.class, () -> board.addPiece(knight4), "PieceAddConflict");
   }
 
   @Test
@@ -109,7 +109,7 @@ public class GameBoardTest {
     assertFalse(board.isPieceAtCoordinate(startingCoordinate));
     Coordinate endingCoordinate = makeCoordinates(0,0);
     assertFalse(board.isPieceAtCoordinate(endingCoordinate));
-    assertFalse(board.movePiece(startingCoordinate, endingCoordinate));
+    assertThrows(GameRunningException.class, () -> board.movePiece(startingCoordinate, endingCoordinate), "NoPieceToMove");
   }
 
   @Test
@@ -124,11 +124,11 @@ public class GameBoardTest {
     GamePiece queen = makePiece("queen", endingCoordinate);
     assertTrue(board.addPiece(queen));
     assertTrue(board.isPieceAtCoordinate(endingCoordinate));
-    assertTrue(board.movePiece(startingCoordinate, endingCoordinate));
+    assertThrows(GameRunningException.class, () -> board.movePiece(startingCoordinate, endingCoordinate), "PieceMoveConflict");
 
-    assertFalse(board.isPieceAtCoordinate(startingCoordinate));
+    assertTrue(board.isPieceAtCoordinate(startingCoordinate));
     assertTrue(board.isPieceAtCoordinate(endingCoordinate));
-    assertEquals(knight, board.getPieceAtCoordinate(endingCoordinate));
+    assertEquals(queen, board.getPieceAtCoordinate(endingCoordinate));
   }
 
   @Test
@@ -141,7 +141,8 @@ public class GameBoardTest {
 
     Coordinate endingCoordinate = makeCoordinates(-1,0);
     assertFalse(board.isPieceAtCoordinate(endingCoordinate));
-    assertFalse(board.movePiece(startingCoordinate, endingCoordinate));
+
+    assertThrows(GameRunningException.class, () -> board.movePiece(startingCoordinate, endingCoordinate), "PieceMoveConflict");
 
     assertTrue(board.isPieceAtCoordinate(startingCoordinate));
     assertFalse(board.isPieceAtCoordinate(endingCoordinate));

@@ -1,10 +1,12 @@
 package ooga.model.initialization.pieces;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import ooga.controller.FrontEndExternalAPI;
+import ooga.exceptions.XMLParseException;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;
@@ -59,14 +61,24 @@ public class PieceCreator extends Creator {
    */
   public GamePiece makePiece(String pieceName, Coordinate coordinates, int direction, String team) {
     GamePiece gamePiece = new GamePiece(coordinates, pieceName, team);
-    pieceFileNodes = super.makeRootNodeMap(pieceName);
+    try{
+      pieceFileNodes = super.makeRootNodeMap(pieceName);
+    } catch(XMLParseException e){
+      throw new XMLParseException("NoSuchPieceFile");
+    }
     gamePiece.setPossibleMoves(makePieceMovements(direction, gamePiece));
     return gamePiece;
   }
 
+  // Makes all of the piece movement objects
   private List<PieceMovement> makePieceMovements(int direction, GamePiece correspondingPiece) {
     List<PieceMovement> pieceMovements = new ArrayList<>();
-    pieceMoves = super.makeSubNodeMap(getFirstNode(pieceFileNodes, PIECE_MOVE_TAG));
+    try{
+      pieceMoves = super.makeSubNodeMap(getFirstNode(pieceFileNodes, PIECE_MOVE_TAG));
+    } catch(NullPointerException e){
+      throw new XMLParseException("NoMovesTag");
+    }
+
     for (String moveName : pieceMoves.keySet()) {
       for (Node moveDetails : pieceMoves.get(moveName)) {
         moveSubNodeMap = makeSubNodeMap(moveDetails);
@@ -81,9 +93,8 @@ public class PieceCreator extends Creator {
   }
 
 
-  // could refactor this to use generic types & lambdas, just pass the specific class loader
-  // call and return a generic list? maybe?
 
+  // Adds conditions to the piece movement
   private List<Condition> addConditions(Node moveDetails, GamePiece correspondingPiece, int direction){
     List<Condition> currentConditions = new ArrayList<>();
     if (moveSubNodeMap.containsKey(CONDITION_TAG)) {
@@ -93,6 +104,7 @@ public class PieceCreator extends Creator {
     return currentConditions;
   }
 
+  // Makes conditions that are executed after a piece movement
   private List<Condition> makeConditions(GamePiece correspondingPiece, int direction) {
     List<Condition> currentConditions = new ArrayList<>();
     for (String conditionName : specificMoveComponent.keySet()) {
@@ -108,7 +120,7 @@ public class PieceCreator extends Creator {
     return currentConditions;
   }
 
-
+  // Adds restrictions to the piece movement
   private List<Restriction> addRestrictions(Node moveDetails, GamePiece correspondingPiece) {
     List<Restriction> currentRestrictions = new ArrayList<>();
     if (moveSubNodeMap.containsKey(RESTRICTION_TAG)) {
@@ -118,6 +130,7 @@ public class PieceCreator extends Creator {
     return currentRestrictions;
   }
 
+  // Makes restrictions to add to the piece movement
   private List<Restriction> makeRestrictions(GamePiece correspondingPiece) {
     List<Restriction> currentRestrictions = new ArrayList<>();
     for (String restrictionName : specificMoveComponent.keySet()) {

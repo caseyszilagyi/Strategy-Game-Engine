@@ -54,12 +54,19 @@ public abstract class PieceMovement {
    * Can be called on subclasses to determine the possible moves using the methods in this class.
    * This must be implemented differently for each subclass so therefore it is abstract
    *
-   * @param coordinates The coordinates of  the piece that this move is acting on
+   * @param coordinates The coordinates of the piece that this move is acting on
    * @param pieceTeam   The team that the piece is on
    * @return A list of all the coordinates of the possible move locations
    */
   public abstract List<Coordinate> getAllPossibleMoves(Coordinate coordinates, String pieceTeam);
 
+  /**
+   * Gets all of the take moves without checking {@link Restriction} objects
+   *
+   * @param coordinate The coordinates of the piece that this move is acting on
+   * @param pieceTeam The team that the piece is on
+   * @return The list of all the coordinates of the take moves, without restrictions being checked
+   */
   public List<Coordinate> getAllPossibleRestrictionlessTakeMoves(Coordinate coordinate,
       String pieceTeam) {
     List<Restriction> tempHolder = new ArrayList<>();
@@ -128,6 +135,12 @@ public abstract class PieceMovement {
     conditions.stream().forEach(condition -> condition.executeCondition(endingCoordinates));
   }
 
+  /**
+   * Checks the restrictions of the moves
+   *
+   * @param endingCoordinates The ending coordinates of the move
+   * @return True if all the restrictions are met, false otherwise
+   */
   public boolean checkRestrictions(Coordinate endingCoordinates) {
     ArrayList<Restriction> copy = new ArrayList<>(restrictions);
     return copy.stream().allMatch(restriction -> restriction

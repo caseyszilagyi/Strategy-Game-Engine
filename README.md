@@ -22,7 +22,7 @@ Hours Spent:
 
 Kenneth: 
 
-Shaw:
+Shaw: 15 hours per week
 
 Yi:
 
@@ -34,7 +34,7 @@ Casey: ~25 hours per week
 
 Kenneth:
 
-Shaw:
+Shaw: BoardCreator, AI, miscellaneous backend classes
 
 Yi:
 
@@ -126,7 +126,19 @@ Artificial Players
 
 Player Profiles
 
+### Error Checking Done
 
+- Data
+    - Bad data files with missing tags for
+        - Piece files
+        - Board files
+        - Rules files
+    - Incorrect names within data files for the above as well
+    
+- Board
+    - Moving checks that there is a piece and that there is no piece at the ending location
+    - Placing checks that there is no piece in the location where the piece is placed
+    
 
 
 ### Notes/Assumptions
@@ -162,6 +174,8 @@ on what piece is moved the second time
 no pieces can be moved and yet the game is not over
 
 
+In checkers, if a double jump is available, the user can unselect the piece and move a different piece.
+
 Extra credit:
 
 Our game engine can handle any input game (be it a placement or a movement game) which follows the same movement patterns as either chess, checkers, or connect four so long as it is given correctly formatted xml files, and can run any game if provided with complemntary TurnCondition and WinCondition files as well.
@@ -171,6 +185,9 @@ Our game engine can handle any input game (be it a placement or a movement game)
 Kenneth:
 
 Shaw:
+- This was definitely a challenging project and very difficult to grasp at the start. Although 
+it proved to be quite a difficult task, I learned a lot about data-driven design and I enjoyed seeing 
+   the end product.
 
 Yi:
 

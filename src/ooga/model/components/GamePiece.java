@@ -65,6 +65,10 @@ public class GamePiece {
     return possibleMoveLocations;
   }
 
+  /**
+   * This method determines all the legal moves which take a GamePiece
+   * @return a Set<Coordinate> of all the legal moves which take a GamePiece
+   */
   public Set<Coordinate> determineAllLegalTakeMoves(){
     Set<Coordinate> possibleMoveLocations = new HashSet<>();
     for (PieceMovement move : allPossibleMoves) {
@@ -82,14 +86,20 @@ public class GamePiece {
   }
 
 
-
-
+  /**
+   * This method returns a Set<Coordinate> of all the possible take moves which don't have an associated restriction.
+   * @return a Set<Coordinate> of all the possible take moves which don't have an associated Restriction
+   */
   public Set<Coordinate> determineAllPossibleRestrictionlessTakeMoves() {
     return allPossibleMoves.stream().filter(move-> move.isMustTake())
         .flatMap(move -> move.getAllPossibleRestrictionlessTakeMoves(pieceCoordinates,pieceTeam).stream())
         .collect(Collectors.toSet());
   }
 
+  /**
+   * Returns whether or not the specific GamePiece can take other GamePieces
+   * @return a boolean value representing whether or not this GamePiece has possible moves which can take another GamePiece
+   */
   public boolean hasTakeMove(){
     return allPossibleMoves.stream().filter(move-> move.isMustTake())
         .flatMap(move-> move.getAllPossibleMoves(pieceCoordinates, pieceTeam).stream())

@@ -1,10 +1,9 @@
 package ooga.model.engine.running;
 
-import ooga.model.components.GameBoard;
-
 /**
  * Meant to process clicks from the front end and execute the proper actions on the board
  *
+ * @author Cole Spector
  * @author Casey Szilagyi
  */
 public class MoveClickExecutor extends ClickExecutor {
@@ -43,10 +42,8 @@ public class MoveClickExecutor extends ClickExecutor {
         xClickPosition, yClickPosition, currentPlayerTurn)) {
       curBoard.determineAllLegalMoves(xClickPosition, yClickPosition);
       curBoard.setIsHeldPiece(true);
-      return false;
-    } else {
-      return false;
     }
+    return false;
   }
 
 

@@ -10,14 +10,25 @@ import ooga.model.components.GameBoard;
 import ooga.model.components.GameRules;
 import ooga.model.components.player.Player;
 import ooga.model.components.computer.AI;
-import ooga.model.engine.actions.Action;
-import ooga.model.engine.actions.ActionCreator;
 
 /**
  * This is the engine used for running a game. It extends the regular engine. The engine takes care
  * of the logic of switching turns and making appropriate method calls to the board
  *
+ * This class  is dependant on the FrontEndExternalAPI, Coordinate, GameBoard, GameRules, Player, and AI classes
+ *
+ * Example Code:
+ *
+ *  DummyViewController viewController = new DummyViewController();
+ *  Engine gameEngine = new GameEngine(viewController)
+ *  gameEngine.setGameType("chess");
+ *  gameEngine.setBoard(new GameBoard(8,8));
+ *  gameEngine.runTurn(1,0);
+ *  gameEngine.runTurn(2,2);
+ *
+ *
  * @author Casey Szilagyi
+ * @author Cole Spector
  */
 public class GameEngine extends Engine {
 
@@ -31,10 +42,6 @@ public class GameEngine extends Engine {
   //Game variables
   private GameBoard curBoard;
   private GameRules curRules;
-  private List<Action> priorActions = new ArrayList<>();
-
-  //Action creator
-  private ActionCreator actionCreator;
 
   private boolean isAIPlaying = false;
   private AI computer;
@@ -51,19 +58,18 @@ public class GameEngine extends Engine {
    */
   public GameEngine(FrontEndExternalAPI viewController) {
     this.viewController = viewController;
-    actionCreator = new ActionCreator(viewController, curBoard);
   }
 
   /**
-   * Called to process any click from the front end. Method calls to make are
-   * determined in the clickExecutor class and turnManager class
+   * Called to process any click from the front end. Method calls to make are determined in the
+   * clickExecutor class and turnManager class
    *
    * @param x The x position of the click
    * @param y The y position of the click
    */
   public void runTurn(int x, int y) {
     turnManager.startIfBeginningTurn();
-    if(!clickExecutor.executeClick(x, y, getCurrentPlayerTurn())){
+    if (!clickExecutor.executeClick(x, y, getCurrentPlayerTurn())) {
       return;
     }
     checkForWin();
@@ -71,22 +77,30 @@ public class GameEngine extends Engine {
     makeAIMove();
   }
 
-
-  public void setAI(AI computer){
+  /**
+   * Sets the active AI
+   *
+   * @param computer the AI to set as the active AI
+   */
+  public void setAI(AI computer) {
     this.computer = computer;
     isAIPlaying = true;
   }
 
 
-  private void makeAIMove(){
+  private void makeAIMove() {
     ArrayList<Coordinate> moves = new ArrayList<>();
-    if(isAIPlaying && turnManager.getCurrentPlayerTurnName().equals(AI_NAME) && !isGameOver() && !noTurnRules){
+    if (isAIPlaying && turnManager.getCurrentPlayerTurnName().equals(AI_NAME) && !isGameOver()
+        && !noTurnRules) {
       computer.determineMove(curBoard);
-      computer.getMove().stream().forEach(coord->runTurn(coord.getX(), coord.getY()));
+      computer.getMove().stream().forEach(coord -> runTurn(coord.getX(), coord.getY()));
     }
   }
 
-  public void setClickExecutor(ClickExecutor clickExecutor){
+  /**
+   * @param clickExecutor the ClickExecutor to be used
+   */
+  public void setClickExecutor(ClickExecutor clickExecutor) {
     this.clickExecutor = clickExecutor;
   }
 
@@ -114,9 +128,14 @@ public class GameEngine extends Engine {
     noTurnRules = turnRules;
   }
 
+  /**
+   * Checks if someone has won the game
+   *
+   * @return a boolean value representing whether or not someone has won the game
+   */
   @Override
   public boolean checkForWin() {
-    if(curRules.checkWinConditions(getCurrentPlayerTurn())){
+    if (curRules.checkWinConditions(getCurrentPlayerTurn())) {
       viewController.gameWin(getCurrentPlayerTurn());
       turnManager.winGame(curRules.getGameName());
       return true;
@@ -124,9 +143,14 @@ public class GameEngine extends Engine {
     return false;
   }
 
+  /**
+   * Checks to see if the win Conidition is hit.  This method is mostly used for testing
+   *
+   * @return whether or not the game is over
+   */
   @Override
   public boolean isGameOver() {
-    return curRules.checkWinConditions("user") || curRules.checkWinConditions("opponent")  ;
+    return curRules.checkWinConditions("user") || curRules.checkWinConditions("opponent");
   }
 
   /**
@@ -168,10 +192,7 @@ public class GameEngine extends Engine {
     clickExecutor.setPlayerMap(playerNames);
     curBoard.setPlayerMap(playerNames);
   }
-  @Override
-  public void addAI(AI ai){
 
-  }
   /**
    * Gets the name of the player who's turn it is
    *
@@ -182,36 +203,11 @@ public class GameEngine extends Engine {
     return playerNames.get(turnManager.getCurrentPlayerTurnName());
   }
 
-
-  public void undoTurn(){
+  /**
+   * Undoes the previous turn
+   */
+  public void undoTurn() {
     curBoard.undoTurn();
   }
-
-  @Override
-  public void saveCurrentState(String fileName) {
-    //TODO: add saving capabilities for the board and moves
-  }
-
-  /**
-   * Executes an action. An action can be something that has to do with a piece
-   *
-   * @param action is the Action.java to perform
-   */
-  @Override
-  public void executeAction(Action action) {
-    if (action.executeAction(curBoard, curRules)) {
-      priorActions.add(action);
-    }
-  }
-
-  /**
-   * Executes an action, given in string form
-   *
-   * @param action the string representation of the action
-   */
-  public void executeAction(String action) {
-    executeAction(actionCreator.createAction(action));
-  }
-
 
 }

@@ -12,6 +12,20 @@ import ooga.model.components.GamePiece;
  * This movement class represents a piece that can travel over other pieces, but only for a
  * specified number of spaces
  *
+ * This class should be used via reflection, and should be defined in the GamePiece's .xml file in the
+ * nested parameters:
+ * <moves>
+ *  <FiniteJump>
+ *    <changeX>1</changeX> //the integer is variable
+ *       <changeY>2</changeY> //the integer is variable
+ *       <mustTake>False</mustTake> //the boolean is variable
+ *       <takeX>null</takeX> // the null value can be set to an integer
+ *       <takeY>null</takeY> // the null value can be set to an integer
+ *       <restrictions>
+ *       </restrictions>
+ *  </FiniteJump>
+ * </moves>
+ *
  * @author Casey Szilagyi
  */
 public class FiniteJump extends PieceMovement {

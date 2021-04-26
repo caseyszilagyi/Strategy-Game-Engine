@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import javafx.util.Pair;
 import ooga.controller.FrontEndExternalAPI;
+import ooga.exceptions.GameRunningException;
 import ooga.model.components.movehistory.ActionType;
 import ooga.model.components.movehistory.CompletedAction;
 import ooga.model.engine.running.TurnManager;
@@ -19,7 +20,17 @@ import ooga.model.engine.running.TurnManager;
  * of the game, such as which piece is currently considered active and the coordinates of that
  * piece.
  *
+ * Example Code:
+ *
+ * Board board = new GameBoard(8, 8);
+ * DummyViewController viewController = new DummyViewController();
+ * board.setViewController(new DummyViewController());
+ * PieceCreator pieceCreator = new PieceCreator("chess", board);
+ * GamePiece king = pieceCreator.makePiece("king", new Coordinate(0,0), 1, "noTeam");
+ * board.addPiece(king);
+ *
  * @author Casey Szilagyi
+ * @author Cole Spector
  */
 public class GameBoard implements Board {
 
@@ -55,10 +66,18 @@ public class GameBoard implements Board {
     playerMap.put("opponent", "opponent");
   }
 
+  /**
+   * This method defines the active players
+   * @param map a Map<String, String> of the active players
+   */
   public void setPlayerMap(Map<String, String> map){
     playerMap = map;
   }
 
+  /**
+   * This method defines the TurnManager to be used
+   * @param turnManager the TurnManager to be used
+   */
   public void setTurnManager(TurnManager turnManager){
     this.turnManager = turnManager;
   }
@@ -122,6 +141,13 @@ public class GameBoard implements Board {
     passLegalMoves(currentLegalMoveCoordinates);
   }
 
+  /**
+   * Determines all legal take moves for a piece at a given coordinate. Automatically sets this piece as
+   * the active piece when this is done.
+   *
+   * @param x The x coordinate
+   * @param y The y coordinate
+   */
   public void determineAllLegalTakeMoves(int x, int y){
     activeCoordinates = makeCoordinates(x, y);
     currentLegalMoveCoordinates = pieceCoordinateMap.get(activeCoordinates).determineAllLegalTakeMoves();
@@ -154,6 +180,11 @@ public class GameBoard implements Board {
     return opponentTeamLegalMoves;
   }
 
+  /**
+   * This method determines if the opposing team has a possible move
+   * @param teamName is the current team name, for which the opposing team will be calculated using
+   * @return a boolean for whether or not the opposing team has a valid move
+   */
   public boolean determineIfOppositeTeamHasMove(String teamName){
     List<GamePiece> piecesCopy = new ArrayList<>(pieceCoordinateMap.values());
     return !piecesCopy.stream()
@@ -275,7 +306,10 @@ public class GameBoard implements Board {
   @Override
   public boolean movePiece(Coordinate start, Coordinate end) {
     if (pieceCoordinateMap.get(start) == null || !isCoordinateOnBoard(end)) {
-      return false;
+      throw new GameRunningException("NoPieceToMove");
+    }
+    if(isAnyCoordinateConflicts(end)){
+      throw new GameRunningException("PieceMoveConflict");
     }
     addCompletedAction(ActionType.MOVE, pieceCoordinateMap.get(start), start, end);
     moveBackendPiece(start, end);
@@ -340,11 +374,21 @@ public class GameBoard implements Board {
     viewController.removePiece(coordinate.getX(), coordinate.getY());
   }
 
+  /**
+   * This class removes the piece at the given Coordinate from the pieceCoordinateMap, thereby removing it
+   * from the GameBoard's memory
+   * @param coordinate the Coordinate of the Piece to remove
+   */
   public void removeBackendPiece(Coordinate coordinate){
     pieceCoordinateMap.remove(coordinate);
   }
 
-
+  /**
+   * This class adds the given GamePiece to the pieceCoordinateMap, thereby adding it
+   * to the GameBoard's memory
+   * @param newPiece the GamePiece to add
+   * @return a boolean representing whether or not this method was successful
+   */
   public boolean addBackendPiece(GamePiece newPiece){
     Coordinate newPieceCoordinates = newPiece.getPieceCoordinates();
     if (isAnyCoordinateConflicts(newPieceCoordinates)) {
@@ -364,6 +408,9 @@ public class GameBoard implements Board {
   public boolean addPiece(GamePiece newPiece) {
     addCompletedAction(ActionType.ADD, newPiece, newPiece.getPieceCoordinates());
     Coordinate coords = newPiece.getPieceCoordinates();
+    if(isAnyCoordinateConflicts(coords)){
+      throw new GameRunningException("PieceAddConflict");
+    }
     viewController.setBoardSpace(coords.getX(), coords.getY(), newPiece.getPieceName(),
         newPiece.getPieceTeam());
     return addBackendPiece(newPiece);
@@ -374,7 +421,12 @@ public class GameBoard implements Board {
     return (!isCoordinateOnBoard(coordinates) || isPieceAtCoordinate(coordinates));
   }
 
-
+  /**
+   * This method finds the first instance of a specific GamePiece type for a specific team
+   * @param teamName the team to search for the specific GamePiece type
+   * @param pieceName the GamePiece type to search for
+   * @return the Coordinate of the first instance of the GamePiece type found for the provided team
+   */
   public Coordinate findPieceCoordinates(String teamName, String pieceName) {
     for (GamePiece piece : pieceCoordinateMap.values()) {
       if (piece.getPieceName().equals(pieceName) && piece.getPieceTeam().equals(teamName)) {
@@ -384,18 +436,34 @@ public class GameBoard implements Board {
     return null;
   }
 
+  /**
+   * This methods returns the Map which maps Coordinates to GamePieces
+   * @return the Map<Coordinate, GamePiece> of all the GamePieces currently active
+   */
   public Map<Coordinate, GamePiece> getPieceCoordinateMap() {
     return pieceCoordinateMap;
   }
 
+  /**
+   * This method provides to the FrontEndExternalAPI an Iterable<String> of all the possible pieces which can be
+   * used in a piece swap
+   * @param pieceList the list of all the possible pieces to be used in a piece swap
+   */
   public void passPieceChangeOptions(Iterable<String> pieceList) {
     viewController.givePieceChangeOptions(pieceList);
   }
 
+  /**
+   * This method returns the most recent CompletedAction performed
+   * @return the most recent CompletedAction
+   */
   public CompletedAction getMostRecentAction(){
     return history.get(history.size()-1);
   }
 
+  /**
+   * This method undoes the last CompletedAction
+   */
   public void undoTurn(){
     if(history.size() == 0 || moveNumber < 0){ return; }
     List<CompletedAction> actionsToRevert = new ArrayList<>();
@@ -412,6 +480,9 @@ public class GameBoard implements Board {
     turnManager.swapTurn();
   }
 
+  /**
+   * This method increases the moveNumber, thereby simulating a CompletedAction
+   */
   public void nextTurn(){
     moveNumber++;
   }
@@ -427,7 +498,9 @@ public class GameBoard implements Board {
     return new Coordinate(x, y);
   }
 
-  // for testing
+  /**
+   * This method is primarily for testing, and prints an abstract representation of the GameBoard in the command line.
+   */
   public void printBoard() {
     System.out.println();
     for (int y = 0; y < height; y++) {

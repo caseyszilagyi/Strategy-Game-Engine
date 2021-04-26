@@ -30,7 +30,6 @@ public class Coordinate {
    */
   public Coordinate(Coordinate oldCoordinate, int changeX, int changeY){
     this(oldCoordinate.getX() + changeX, oldCoordinate.getY() + changeY);
-    int zpi = 139;
   }
 
   /**
@@ -88,6 +87,10 @@ public class Coordinate {
     return x * 100 + y;
   }
 
+  /**
+   * Turns the coordinate to a string
+   * @return The string representation of the coordinate
+   */
   @Override
   public String toString(){
     return Integer.toString(x) + ":" + Integer.toString(y);

@@ -3,6 +3,25 @@ package ooga.model.components.winconditions;
 import ooga.controller.FrontEndExternalAPI;
 import ooga.model.components.GameBoard;
 
+/**
+ * This class is used to determine if someone has won the current game, by checking if the opponent
+ * team ahs any possible moves
+ *
+ * This class assumes a defined FrontEndExternalAPI is passed in, as well as the current GameBoard
+ *
+ * This class depends upon FrontEndExternalAPI.java and GameBoard.java
+ *
+ * Code Example:
+ * //assumes GameBoard gameBoard and FrontEndExternalAPI frontEndExternalAPI have been previously defined
+ *  EndGameCondition endGameCondition = new FourInARow(frontEndExternalAPI, gameBoard);
+ *  gameBoard.movePiece(0,0);
+ *  if(endGameCondition.checkForWin){
+ *    exit(0);
+ *  }
+ *  //continue the game
+ *
+ * @author Cole Spector
+ */
 public class FourInARow implements EndGameConditioin{
 
   private static final int FOUR = 4;
@@ -12,11 +31,21 @@ public class FourInARow implements EndGameConditioin{
   private int width;
   private int height;
 
+  /**
+   * Initializer for the FourInARow EndGameCondition
+   * @param viewController a valid FrontEndExternalAPI which the game is linked to.
+   * @param board the current GameBoard to be used
+   */
   public FourInARow(FrontEndExternalAPI viewController, GameBoard board){
     this.viewController = viewController;
     this.board = board;
   }
 
+  /**
+   * This method is called to determine if someone has won the current game
+   * @param teamName the team name to check to see if they won
+   * @return a boolean for whether or not the teamName given has won the game
+   */
   @Override
   public boolean checkForWin(String teamName) {
     width = board.getWidth();
@@ -25,6 +54,7 @@ public class FourInARow implements EndGameConditioin{
       for(int y = 0; y < height; y++){
         if(board.isPieceAtCoordinate(x,y)){
           if(checkDown(x, y, teamName) || checkRight(x, y, teamName) || checkDiagonalRight(x, y, teamName) || checkDiagonalLeft(x, y, teamName)){
+            viewController.gameWin(teamName);
             return true;
           }
         }

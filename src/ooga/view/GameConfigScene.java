@@ -1,6 +1,7 @@
 package ooga.view;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 import javafx.event.ActionEvent;
@@ -18,6 +19,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import ooga.controller.ModelController;
+import ooga.exceptions.GameRunningException;
 
 public class GameConfigScene extends GameScene{
   private final ResourceBundle resources;
@@ -71,26 +73,14 @@ public class GameConfigScene extends GameScene{
     Button openButton = makeButton("customStart");
 
 
-    openButton.setOnAction(e -> {
-      FileChooser fileChooser = new FileChooser();
-      fileChooser.setTitle("Choose a board configuration file to open");
-      fileChooser.getExtensionFilters().add(
-          new ExtensionFilter("XML files", "*.xml"));
-      File boardFile = fileChooser.showOpenDialog(null);
-      if (boardFile != null) {
-        modelController.setBoardState(boardFile);
-      }
-    });
+    openButton.setOnAction(e -> openBoard());
 
     sceneRoot.add(openButton, 0, 3);
 
 
     Node buttons = makeButtonBar(new Button[]{cancelButton, startButton});
 
-    cancelButton.setOnAction(e -> {
-      ((Stage) getWindow()).close();
-      handler.handle(e);
-    });
+    cancelButton.setOnAction(this::cancelButton);
 
     startButton.setOnAction(e -> {
       String user = player1.getText();
@@ -101,9 +91,29 @@ public class GameConfigScene extends GameScene{
         opponent = player2.getText();
       }
 
+      if (user.equals("") || opponent.equals("")) {
+        throw new GameRunningException("Please input a name for both players");
+      }
+      modelController.setPlayers(user, opponent);
       getWindow().hide();
     });
 
     sceneRoot.add(buttons, 0, 4);
+  }
+
+  private void openBoard(){
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Choose a board configuration file to open");
+    fileChooser.getExtensionFilters().add(
+        new ExtensionFilter("XML files", "*.xml"));
+    File boardFile = fileChooser.showOpenDialog(null);
+    if (boardFile != null) {
+      modelController.setBoardState(boardFile);
+    }
+  }
+
+  private void cancelButton(ActionEvent e){
+    ((Stage) getWindow()).close();
+    handler.handle(e);
   }
 }

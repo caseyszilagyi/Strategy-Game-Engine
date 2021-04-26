@@ -1,5 +1,6 @@
 package ooga.model.initialization.engine;
 
+import java.io.File;
 import ooga.controller.FrontEndExternalAPI;
 import ooga.model.engine.running.ClickExecutor;
 import ooga.model.components.computer.AI;
@@ -27,7 +28,12 @@ public class EngineInitializer implements Initializer {
   private AICreator gameAI = new AICreator();
   private final String AI_NAME = "AI";
 
-  public EngineInitializer(FrontEndExternalAPI newBoardController){
+  /**
+   * This is the initializer for the EngineInitializer
+   *
+   * @param newBoardController the FrontEndExternalAPI to link the Engine to
+   */
+  public EngineInitializer(FrontEndExternalAPI newBoardController) {
     boardController = newBoardController;
     gameEngine = new GameEngine(boardController);
   }
@@ -38,7 +44,7 @@ public class EngineInitializer implements Initializer {
    * @param gameName The name of the game
    */
   @Override
-  public void initializeGame (String gameName) {
+  public void initializeGame(String gameName) {
 
     ClickExecutorInitializer clickExecutorInitializer = new ClickExecutorInitializer();
     gameEngine.setClickExecutor(clickExecutorInitializer.getProperClickExecutor(gameName));
@@ -49,29 +55,60 @@ public class EngineInitializer implements Initializer {
 
   }
 
+  /**
+   * This method initilizes the board based off of the boardFileName passed in
+   *
+   * @param boardFileName The file name that contains the board
+   */
   @Override
   public void setBoardState(String boardFileName) {
     boardCreator.initializeMaps(boardFileName);
     gameEngine.setBoard(boardCreator.makeBoard());
   }
 
+  /**
+   * Sets the board that the game is being played on
+   *
+   * @param boardFile The file that the board is in
+   */
+  @Override
+  public void setBoardState(File boardFile) {
+    boardCreator.initializeMaps(boardFile);
+    gameEngine.setBoard(boardCreator.makeBoard());
+  }
+
+  /**
+   * This method initializes the rules based off of the rulesFileName passed in
+   *
+   * @param rulesFileName The file name that contains the rules of the game
+   */
   @Override
   public void setGameRules(String rulesFileName) {
 
   }
 
+  /**
+   * @param user     The string associated with the person playing on the bottom of the board
+   * @param opponent The string associated with the person pplaying on the top of the board
+   */
   @Override
   public void addPlayers(String user, String opponent) {
     gameEngine.addActiveUsers(playerCreator.makePlayer(user), playerCreator.makePlayer(opponent));
-    //boardCreator.setTeams(user, opponent);
-    if(opponent.equals(AI_NAME)){
+    if (opponent.equals(AI_NAME)) {
       addAI();
     }
   }
-  @Override
-  public void addAI(){
+
+  // Adds the AI to the game
+  private void addAI() {
     gameEngine.setAI(gameAI.makeAI());
   }
+
+  /**
+   * This method returns the gameEngine being used
+   *
+   * @return the GameEngine being used.
+   */
   @Override
   public Engine getEngine() {
     return gameEngine;
