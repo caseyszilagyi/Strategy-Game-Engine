@@ -27,6 +27,7 @@ public class ViewManager {
   private final StageWindow primaryWindow;
   private ModelController modelController;
   private BoardController boardController;
+
   private String DEFAULT_GAMETYPE = "chess";
 
   /**
@@ -116,6 +117,7 @@ public class ViewManager {
    * initialize the correct game files.
    * @param gameType a {@code String} for the game type.
    */
+
   public void startGame(String gameType) {
     ((BoardScene) changeScene("boardScene"))
         .attachBoardControllerToBoard(boardController);
@@ -141,6 +143,9 @@ public class ViewManager {
     modelController.undoTurn();
   }
 
+  public void resetButton() {
+    boardController.resetColors();
+  }
 
   /**
    * Gets the correct subclass of {@link GameWindow} to show the initial window of the

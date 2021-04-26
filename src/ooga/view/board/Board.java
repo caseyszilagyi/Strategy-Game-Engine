@@ -12,12 +12,16 @@ import ooga.controller.ModelController;
 
 public class Board extends GridPane {
 
+
   Tile tiles[][];
   private static final int SQUARE_SIZE = 50;
   private final ModelController modelController;
   private final ResourceBundle pieceBundle = ResourceBundle.getBundle("ooga.view.resources.chessPieces");
   //TODO: ^^^ can the above be better through reflection
-  private static Color myHighlightColor;
+  private static final Color DEFAULT_HIGHLIGHT_COLOR = Color.LIGHTGREEN;
+  private static final Color DEFAULT_DARK_COLOR = Color.TAN;
+  private static final Color DEFAULT_LIGHT_COLOR = Color.BEIGE;
+  private Color myHighlightColor;
   private String gameType;
 
   /**
@@ -29,20 +33,19 @@ public class Board extends GridPane {
   public Board(ModelController modelController) {
     super();
     this.modelController = modelController;
-    setHighlightColor(Color.LIGHTGREEN);
   }
 
-  public void setBoardDimensions(int width, int height) {
+  public void createBoard(int width, int height) {
     tiles = new Tile[width][height];
     makeGrid(width, height);
-    colorGrid(Color.TAN, Color.BEIGE);
+    setColorsDefault();
   }
 
   /**
    * @return a {@code String} type of this board
    */
-  public String getBoardType(){
-    System.out.println(gameType);
+  public String getBoardType() {
+    System.out.println(gameType); //TODO: delete
     return gameType;
   }
 
@@ -67,12 +70,25 @@ public class Board extends GridPane {
   }
 
   public void colorGrid(Color firstColor, Color secondColor) {
+    colorDarkSquares(firstColor);
+    colorLightSquares(secondColor);
+  }
+
+  public void colorLightSquares(Color color) {
+    for (int i = 0; i < tiles.length; i++) {
+      for (int j = 0; j < tiles[i].length; j++) {
+        if ((i + j) % 2 == 0) {
+          tiles[i][j].setColor(color);
+        }
+      }
+    }
+  }
+
+  public void colorDarkSquares(Color color){
     for (int i = 0; i < tiles.length; i++) {
       for (int j = 0; j < tiles[i].length; j++) {
         if ((i + j) % 2 == 1) {
-          tiles[i][j].setColor(firstColor);
-        } else {
-          tiles[i][j].setColor(secondColor);
+          tiles[i][j].setColor(color);
         }
       }
     }
@@ -109,8 +125,8 @@ public class Board extends GridPane {
    * Unhighlights all {@link Tile} on the board
    */
   public void unhighlightAll() {
-    for (int i = 0; i < 8; i++) {
-      for (int j = 0; j < 8; j++) {
+    for (int i = 0; i < tiles.length; i++) {
+      for (int j = 0; j < tiles[i].length; j++) {
         tiles[i][j].unHighlight();
       }
     }
@@ -159,10 +175,6 @@ public class Board extends GridPane {
     return new Tile(SQUARE_SIZE, new Point(i, j), e -> handleTileClick(i, j));
   }
 
-  private void addPiece(Point p, String color, String fileName) {
-    addPiece((int) p.getX(), (int) p.getY(), color, fileName);
-  }
-
   public void addPiece(int x, int y, String color, String fileName) {
     ImageView piece = new ImageView(new Image("BasicChessPieces/" + pieceBundle.getString(color+fileName)));
     piece.setFitHeight(SQUARE_SIZE);
@@ -175,4 +187,8 @@ public class Board extends GridPane {
     modelController.actOnCoordinates(i, j);
   }
 
+  public void setColorsDefault() {
+    setHighlightColor(DEFAULT_HIGHLIGHT_COLOR);
+    colorGrid(DEFAULT_DARK_COLOR, DEFAULT_LIGHT_COLOR);
+  }
 }

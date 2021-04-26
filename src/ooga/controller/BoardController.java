@@ -38,7 +38,7 @@ public class BoardController implements FrontEndExternalAPI {
    */
   @Override
   public void setBoardDimensions(int width, int height) {
-    board.setBoardDimensions(width, height);
+    board.createBoard(width, height);
   }
 
   /**
@@ -110,4 +110,7 @@ public class BoardController implements FrontEndExternalAPI {
     System.out.println(playerName + "won!");
   }
 
+  public void resetColors(){
+    board.setColorsDefault();
+  }
 }
