@@ -141,12 +141,7 @@ public class BasicEngineTest {
   }
 
   private void actOnCoordinates(int x, int y){
-
-    try {
-      modelController.actOnCoordinates(x, y);
-    } catch (Exception e){
-      new GameAlert(AlertType.ERROR, e.getMessage());
-    }
+    modelController.actOnCoordinates(x, y);
   }
 
   // Compares a string of expected coordinates to a list of actual coordinates

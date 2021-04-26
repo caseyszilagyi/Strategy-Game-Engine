@@ -102,8 +102,6 @@ public class ViewTest extends DukeApplicationTest {
     TextField player1 = lookup("#player1").query();
     writeTo(player1, "asdlfkj");
     Button playButton = lookup("#startButton").query();
-    clickOn(playButton);
-    type(KeyCode.ESCAPE);
     TextField player2 = lookup("#player2").query();
     writeTo(player2, "flkasjdf");
     clickOn(playButton);
