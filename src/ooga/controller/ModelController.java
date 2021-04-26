@@ -70,8 +70,11 @@ public class ModelController implements BackEndExternalAPI {
     engineInitializer.addPlayers(user, opponent);
   }
 
+  /**
+   * Sets the AI
+   */
   @Override
-  public void setAI(String game, String level) {
+  public void setAI() {
     engineInitializer.addAI();
   }
 

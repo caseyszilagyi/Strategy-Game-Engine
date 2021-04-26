@@ -71,7 +71,10 @@ public class GameEngine extends Engine {
     makeAIMove();
   }
 
-
+  /**
+   * Sets the AI
+   * @param computer The AI that has been initialized
+   */
   public void setAI(AI computer){
     this.computer = computer;
     isAIPlaying = true;
@@ -114,6 +117,10 @@ public class GameEngine extends Engine {
     noTurnRules = turnRules;
   }
 
+  /**
+   * Checks if game has been won
+   * @return Boolean to determine game status
+   */
   @Override
   public boolean checkForWin() {
     if(curRules.checkWinConditions(getCurrentPlayerTurn())){

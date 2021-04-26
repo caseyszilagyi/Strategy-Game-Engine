@@ -49,6 +49,10 @@ public class EngineInitializer implements Initializer {
 
   }
 
+  /**
+   * Sets the board state from a file
+   * @param boardFileName The file name that contains the board
+   */
   @Override
   public void setBoardState(String boardFileName) {
     boardCreator.initializeMaps(boardFileName);
@@ -60,6 +64,11 @@ public class EngineInitializer implements Initializer {
 
   }
 
+  /**
+   * Adds the players, if there's only one player and an AI, adds the AI as well
+   * @param user The string associated with the person playing on the bottom of the board
+   * @param opponent The string associated with the person playing on the top of the board
+   */
   @Override
   public void addPlayers(String user, String opponent) {
     gameEngine.addActiveUsers(playerCreator.makePlayer(user), playerCreator.makePlayer(opponent));
@@ -68,6 +77,10 @@ public class EngineInitializer implements Initializer {
       addAI();
     }
   }
+
+  /**
+   * Makes the AI
+   */
   @Override
   public void addAI(){
     gameEngine.setAI(gameAI.makeAI());

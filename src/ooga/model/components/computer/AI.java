@@ -7,11 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class determines moves for the AI and also sends the move in the form of coordinates to the
+ * GameEngine to execute the move
+ *
+ * @author Shaw Phillips
+ */
 public class AI {
 
   private Coordinate startCoordinate;
   private Coordinate endCoordinate;
 
+  /**
+   * Determines the move for the AI to make
+   * @param board Takes in the GameBoard as a parameter to get all of the possible movements
+   */
   public void determineMove(GameBoard board) {
     List<Coordinate> allMoves = new ArrayList<>();
     while (allMoves.size() == 0) {
@@ -56,6 +66,10 @@ public class AI {
     return coordinateList.get(randomIndex);
   }
 
+  /**
+   * Sends starting and ending coordinates for the selected move
+   * @return List of coordinates: (starting, ending);
+   */
   public List<Coordinate> getMove() {
     return List.of(startCoordinate, endCoordinate);
   }
