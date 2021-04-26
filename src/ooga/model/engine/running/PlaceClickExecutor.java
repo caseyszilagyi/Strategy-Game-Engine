@@ -4,8 +4,21 @@ import ooga.model.components.Coordinate;
 import ooga.model.components.GamePiece;
 import ooga.model.initialization.pieces.PieceCreator;
 
+/**
+ * Meant to process clicks from the front end and execute the proper actions on the board
+ *
+ * @author Cole Spector
+ */
 public class PlaceClickExecutor extends ClickExecutor{
 
+  /**
+   * Executes a click based on the position of the click and the name of the player
+   * who's turn it is
+   * @param xClickPosition The x coordinate of the click
+   * @param yClickPosition The y coordinate of the click
+   * @param currentPlayerTurn The string representing the current player's turn
+   * @return True if a move was executed, false otherwise
+   */
   @Override
   protected boolean executeClick(int xClickPosition, int yClickPosition, String currentPlayerTurn) {
     if(curBoard.isPieceAtCoordinate(xClickPosition,yClickPosition)){

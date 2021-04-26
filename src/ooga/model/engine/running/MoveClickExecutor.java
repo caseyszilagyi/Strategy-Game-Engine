@@ -5,6 +5,7 @@ import ooga.model.components.GameBoard;
 /**
  * Meant to process clicks from the front end and execute the proper actions on the board
  *
+ * @author Cole Spector
  * @author Casey Szilagyi
  */
 public class MoveClickExecutor extends ClickExecutor {
