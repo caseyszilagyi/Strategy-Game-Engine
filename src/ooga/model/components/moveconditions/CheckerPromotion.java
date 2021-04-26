@@ -1,10 +1,6 @@
 package ooga.model.components.moveconditions;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
-import ooga.controller.FrontEndExternalAPI;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;

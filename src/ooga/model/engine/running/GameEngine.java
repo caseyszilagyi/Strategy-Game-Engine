@@ -1,11 +1,8 @@
 package ooga.model.engine.running;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import ooga.controller.FrontEndExternalAPI;
-import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GameRules;
 import ooga.model.components.player.Player;
@@ -91,7 +88,6 @@ public class GameEngine extends Engine {
 
   // Makes an AI move, if the ai is playing
   private void makeAIMove() {
-    ArrayList<Coordinate> moves = new ArrayList<>();
     if (isAIPlaying && turnManager.getCurrentPlayerTurnName().equals(AI_NAME) && !isGameOver()
         && !noTurnRules) {
       computer.determineMove(curBoard);
@@ -125,7 +121,6 @@ public class GameEngine extends Engine {
    */
   @Override
   public void setIfNoTurnRules(Boolean turnRules) {
-    turnManager.setIfNoTurnRules(turnRules);
     clickExecutor.setIfNoTurnRules(turnRules);
     noTurnRules = turnRules;
   }
@@ -191,7 +186,6 @@ public class GameEngine extends Engine {
     turnManager.addActiveUser(player1);
     playerNames.put(player1.getFullName(), "user");
     playerNames.put(player2.getFullName(), "opponent");
-    clickExecutor.setPlayerMap(playerNames);
     curBoard.setPlayerMap(playerNames);
   }
 

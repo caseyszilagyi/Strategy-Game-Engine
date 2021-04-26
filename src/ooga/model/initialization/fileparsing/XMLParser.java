@@ -119,12 +119,6 @@ public class XMLParser {
     return e.getAttribute(attributeName);
   }
 
-  // get value of Element's text
-  private String getTextValue(Element e, String tagName) {
-    NodeList nodeList = e.getElementsByTagName(tagName);
-    return nodeList.item(0).getTextContent();
-  }
-
   // boilerplate code needed to make a documentBuilder
   private DocumentBuilder getDocumentBuilder() throws ClassLoaderException {
     try {
