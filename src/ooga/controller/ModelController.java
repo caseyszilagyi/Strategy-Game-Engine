@@ -48,7 +48,7 @@ public class ModelController implements BackEndExternalAPI {
   public void setGameType(String gameName) {
     gameType = gameName;
     engineInitializer.initializeGame(gameName);
-    setPlayers("Casey Szilagyi", "Robert Duvall");
+    setPlayers("user", "opponent");
   }
 
   /**
