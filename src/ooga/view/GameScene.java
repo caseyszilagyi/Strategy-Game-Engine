@@ -3,14 +3,17 @@ package ooga.view;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -126,6 +129,18 @@ public abstract class GameScene extends Scene {
   }
 
   /**
+   * Creates a {@link TextField} with prompt text set as the string for the given property.
+   * @param property property key for the prompt text
+   * @return a {@code TextField} object
+   */
+  public TextField makeTextField(String property){
+    TextField textField = new TextField();
+    textField.setPromptText(resources.getString(property));
+    textField.setFocusTraversable(false);
+    return textField;
+  }
+
+  /**
    * Makes a {@link java.util.List} of {@link Button} objects using the button list
    * property name specified. {@code buttonProperties} correspond to a list of
    * individual button keys in this scene's {@link ResourceBundle}. Eventually, the
@@ -156,12 +171,28 @@ public abstract class GameScene extends Scene {
    * @return a {@code Node} instance.
    */
   public Node makeButtonBar(String property) {
+    Button[] buttons = makeButtons(property);
+    return makeButtonBar(buttons);
+  }
+
+  public Node makeButtonBar(Button[] buttons){
     HBox topBar = new HBox();
     topBar.setAlignment(Pos.CENTER);
     topBar.getStyleClass().add("hbox");
-    Button[] buttons = makeButtons(property);
     topBar.getChildren().addAll(buttons);
     return topBar;
+  }
+
+  /**
+   * Creates a {@link ColumnConstraints} object that aligns a column of a {@link GridPane}
+   * to the desired {@link HPos}.
+   * @param position Desired position for the constraint
+   * @return a {@code ColumnConstraints} object
+   */
+  public ColumnConstraints makeColumnConstraint(HPos position) {
+    ColumnConstraints col1 = new ColumnConstraints();
+    col1.setHalignment(position);
+    return col1;
   }
 
   /**

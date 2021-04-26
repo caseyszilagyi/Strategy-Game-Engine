@@ -77,6 +77,12 @@ public class GameSceneFactory {
     return newScene;
   }
 
+  private GameScene makeGameConfigScene(Parent root, ResourceBundle resources,
+      ModelController modelController) {
+    GameScene newScene = new GameConfigScene(root, resources, handler, modelController);
+    return newScene;
+  }
+
   /**
    * Creates a {@link GameScene} of type {@link BoardScene}.
    * @param root the {@code Parent} object to act as the root of the scene
