@@ -128,10 +128,12 @@ public class ViewManager {
 
     showConfigMenu();
 
-    primaryWindow.showScene(newScene);
-    primaryWindow.setResizable(true);
-    primaryWindow.setCurrentSceneTitle(gameType);
-    positionWindow(primaryWindow, 500, 200);
+    if (primaryWindow.isShowing()) {
+      primaryWindow.showScene(newScene);
+      primaryWindow.setResizable(true);
+      primaryWindow.setCurrentSceneTitle(gameType);
+      positionWindow(primaryWindow, 500, 200);
+    }
   }
 
   /**
@@ -167,6 +169,7 @@ public class ViewManager {
 
   private void cancelButton(){
     primaryWindow.close();
+
     new ViewManager(initFile);
   }
 
