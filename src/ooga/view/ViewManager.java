@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -116,8 +117,14 @@ public class ViewManager {
    * @param e
    */
   private void onButtonClicked(ActionEvent e) {
-    Button buttonPressed = (Button) e.getSource();
-    String buttonID = buttonPressed.getId();
+    String buttonID = null;
+    if (e.getSource().getClass() == Button.class) {
+      Button buttonPressed = (Button) e.getSource();
+      buttonID = buttonPressed.getId();
+    } else if (e.getSource().getClass() == MenuItem.class) {
+      MenuItem menuItem = (MenuItem) e.getSource();
+      buttonID = menuItem.getId();
+    }
     try {
       this.getClass().getDeclaredMethod(buttonID).invoke(this);
     } catch (NoSuchMethodException | IllegalAccessException |
@@ -191,6 +198,10 @@ public class ViewManager {
     //TODO: change so only use relevant link and use pop up window
   }
 
+  private void newWindow(){
+    new ViewManager(initFile);
+  }
+
   private void changeBackgroundButton() {
     FileChooser fc = new FileChooser();
     File selectedFile = fc.showOpenDialog(primaryWindow);
@@ -218,6 +229,10 @@ public class ViewManager {
   private void cancelButton(){
     primaryWindow.close();
     new ViewManager(initFile);
+  }
+
+  private void quit(){
+    primaryWindow.close();
   }
 
   /**
