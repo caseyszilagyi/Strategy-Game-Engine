@@ -33,6 +33,7 @@ public class BasicEngineTest {
     gameBoard = modelController.getEngine().getBoard();
     gameEngine = modelController.getEngine();
     gameEngine.setIfNoTurnRules(true);
+    modelController.setPlayers("user", "opponent");
     printBoard();
   }
 

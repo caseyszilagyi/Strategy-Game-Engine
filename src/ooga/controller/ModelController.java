@@ -47,7 +47,6 @@ public class ModelController implements BackEndExternalAPI {
     boardController = newViewController;
     engineInitializer = new EngineInitializer(boardController);
     gameEngine = engineInitializer.getEngine();
-    //gameEngine.setIfTurnRules(false);
   }
 
   /**
@@ -71,7 +70,6 @@ public class ModelController implements BackEndExternalAPI {
   public void setGameType(String gameName) {
     gameType = gameName;
     engineInitializer.initializeGame(gameName);
-    //setPlayers("user", "opponent");
   }
 
   /**
@@ -107,12 +105,18 @@ public class ModelController implements BackEndExternalAPI {
   }
 
 
+  /**
+   * Undoes a turn
+   */
   @Override
   public void undoTurn(){
     gameEngine.undoTurn();
   }
 
-
+  /**
+   * Changes a piece
+   * @param pieceName The name of the new piece
+   */
   @Override
   public void changePiece(String pieceName) {
 

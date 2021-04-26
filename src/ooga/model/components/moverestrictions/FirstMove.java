@@ -1,7 +1,6 @@
 package ooga.model.components.moverestrictions;
 
 import java.util.Map;
-import ooga.controller.FrontEndExternalAPI;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;

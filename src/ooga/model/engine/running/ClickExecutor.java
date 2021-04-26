@@ -15,7 +15,6 @@ public abstract class ClickExecutor {
   protected GameBoard curBoard;
   protected GameRules curRules;
   protected Boolean noTurnRules = true;
-  private Map<String, String> playerMap;
 
   /**
    * Executes a click based on the position of the click and the name of the player
@@ -36,10 +35,13 @@ public abstract class ClickExecutor {
     curRules = gameRules;
   }
 
-  protected void setPlayerMap(Map<String, String> playerMap){
-    this.playerMap = playerMap;
-  }
-
+  /**
+   * Checks to see if it is the proper team's turn
+   * @param x The x coordinate of the click
+   * @param y The y coordinate of the click
+   * @param currentPlayerTurn The string of the current player's turn
+   * @return True if it is the right team's turn, false otherwise
+   */
   protected boolean checkProperTeamTurn(int x, int y, String currentPlayerTurn) {
     return noTurnRules || curBoard.getPieceAtCoordinate(x, y).getPieceTeam()
         .equals(currentPlayerTurn);

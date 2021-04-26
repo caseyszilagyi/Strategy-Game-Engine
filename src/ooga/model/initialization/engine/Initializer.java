@@ -28,12 +28,6 @@ public interface Initializer {
   public void setBoardState(File boardFile);
 
   /**
-   * Sets the rules that the user will play with
-   * @param rulesFileName The file name that contains the rules of the game
-   */
-  public void setGameRules(String rulesFileName);
-
-  /**
    * Sets a player that is playing the game
    * @param user The string associated with the person playing on the bottom of the board
    * @param opponent The string associated with the person pplaying on the top of the board
