@@ -8,7 +8,7 @@ import ooga.controller.FrontEndExternalAPI;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GameRules;
-import ooga.model.components.Player;
+import ooga.model.components.player.Player;
 import ooga.model.components.computer.AI;
 import ooga.model.engine.actions.Action;
 import ooga.model.engine.actions.ActionCreator;
@@ -118,6 +118,7 @@ public class GameEngine extends Engine {
   public boolean checkForWin() {
     if(curRules.checkWinConditions(getCurrentPlayerTurn())){
       viewController.gameWin(getCurrentPlayerTurn());
+      turnManager.winGame(curRules.getGameName());
       return true;
     }
     return false;
@@ -162,8 +163,8 @@ public class GameEngine extends Engine {
   public void addActiveUsers(Player player1, Player player2) {
     turnManager.addActiveUser(player2);
     turnManager.addActiveUser(player1);
-    playerNames.put(player1.getName(), "user");
-    playerNames.put(player2.getName(), "opponent");
+    playerNames.put(player1.getFullName(), "user");
+    playerNames.put(player2.getFullName(), "opponent");
     clickExecutor.setPlayerMap(playerNames);
     curBoard.setPlayerMap(playerNames);
   }

@@ -1,7 +1,7 @@
 <Player>
-  <fullName>dummy person</fullName>
-  <firstName>dummy</firstName>
-  <lastName>person</lastName>
+  <fullName>Dummy Dummy</fullName>
+  <firstName>Dummy</firstName>
+  <lastName>Dummy</lastName>
   <records>
     <records>
       <gameName>chess</gameName>
@@ -17,9 +17,9 @@
     </records>
     <records>
       <gameName>connectfour</gameName>
-      <wins>0</wins>
-      <losses>0</losses>
-      <draws>0</draws>
+      <wins>3</wins>
+      <losses>4</losses>
+      <draws>5</draws>
     </records>
   </records>
 </Player>

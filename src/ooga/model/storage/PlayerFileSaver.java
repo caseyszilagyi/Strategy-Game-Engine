@@ -10,12 +10,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import ooga.model.components.Player;
+import ooga.model.components.player.Player;
 
 public class PlayerFileSaver {
+  private final String EXTENSION = ".xml";
+  private final String PLAYER_FILE_PATH = "data/player/";
+  private final String DEFAULT_PLAYER_FILE_NAME = "DefaultPlayer";
 
-  private String PLAYER_FILE_PATH = "data/player/";
-  private String EXTENSION = ".xml";
   ObjectMapper mapper = new XmlMapper();
 
   public Player makePlayerObject(String playerName){

@@ -28,8 +28,7 @@ Yi:
 
 Cole: 20+ hours per week
 
-Casey:
-
+Casey: ~25 hours per week
 
 ### Primary Roles
 
@@ -42,6 +41,18 @@ Yi:
 Cole: GameEngine, and associated classes
 
 Casey:
+  - Pieces
+    - Data files
+    - Initialization of classes
+    - Movements/restrictions/conditions
+      - Determining possible moves
+      - Executing moves
+  - Special chess moves (castle, en passant, etc)
+  - Check/checkmate
+  - Checkers
+  - Player files reading in/storage
+  - Move history/undo move
+  - Front/back end integration (controller)
 
 
 ### Resources Used
@@ -143,9 +154,13 @@ Interesting data files:
 
 finiteSlideBiship.xml
 
-88ConnectFour.xml
-
 Known Bugs:
+ - When the user goes to double jump in checkers, there is no restriction
+on what piece is moved the second time
+   
+- Stalemate is not detected in chess, which can lead to a board where
+no pieces can be moved and yet the game is not over
+
 
 In checkers, if a double jump is available, the user can unselect the piece and move a different piece.
 
@@ -165,3 +180,5 @@ Cole:
   I really liked the vagueness of this project, and how we were allowed to focus on the aspects of game design that mattered to us.  While there were specifications on how to do something, the broad scope of the project allowed us to create a GameEngine which can handle practically any strategy game.  We were allowed to do this because we didn't have to focus on specific design specifications provided to us, and could instead be creative and implement aspects to our game that we found interesting.  On the team front, I thought we worked very well together, as everybody communicated in the Slack whenever we needed something done, or if we had questions about code we were implementing, or code somebody else in the group had implemented.
 
 Casey:
+  - I liked that we were able to choose what type of game we wanted to work on,
+as it allowed us to choose a game based on what we wanted to focus on
