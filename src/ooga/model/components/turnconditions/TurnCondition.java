@@ -5,6 +5,9 @@ import ooga.model.components.GamePiece;
 
 /**
  * This class is used to determine if the turn is over for a specific game type, and is defined in the games .xml file
+ *
+ * This class is dependant on the TurnConditionResult enum.
+ *
  * @author Cole Spector
  */
 public interface TurnCondition {
