@@ -1,6 +1,7 @@
 package ooga.view.board;
 
 import java.awt.Point;
+import java.io.File;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 import javafx.scene.image.Image;
@@ -29,7 +30,7 @@ public class Board extends GridPane {
   private static final Color DEFAULT_DARK_COLOR = Color.TAN;
   private static final Color DEFAULT_LIGHT_COLOR = Color.BEIGE;
   private Color myHighlightColor;
-  private String chessPieceFolder = "BasicChessPieces";
+  private String pieceFolder = pieceBundle.getString("directory");
 
   /**
    * Constructs a {@link Board} and obtains a reference to {@link ModelController}
@@ -204,7 +205,7 @@ public class Board extends GridPane {
    * @param fileName: the type of piece it is
    */
   public void addPiece(int x, int y, String color, String fileName) {
-    ImageView piece = new ImageView(new Image(chessPieceFolder+"/" + pieceBundle.getString(color + fileName)));
+    ImageView piece = new ImageView(new Image(pieceFolder+"/" + pieceBundle.getString(color + fileName)));
     piece.setFitHeight(SQUARE_SIZE);
     piece.setFitWidth(SQUARE_SIZE);
     tiles[x][y].addPiece(piece);
@@ -221,5 +222,13 @@ public class Board extends GridPane {
   public void setColorsDefault() {
     setHighlightColor(DEFAULT_HIGHLIGHT_COLOR);
     colorGrid(DEFAULT_DARK_COLOR, DEFAULT_LIGHT_COLOR);
+  }
+
+  public void updatePieceFolder(String directory) {
+    pieceFolder = directory;
+  }
+
+  public void setPieceFolder(String directory) {
+    updatePieceFolder(directory);
   }
 }

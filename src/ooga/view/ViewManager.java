@@ -155,6 +155,7 @@ public class ViewManager {
   private void showConfigMenu() {
     GameScene configScene = sceneFactory.makeScene("GameConfigScene",
         this::onButtonClicked, modelController);
+    ((GameConfigScene)configScene).giveBoardController(boardController);
     GameWindow configWindow = makeFloatingWindow(configScene);
     configWindow.showScene(configScene);
   }

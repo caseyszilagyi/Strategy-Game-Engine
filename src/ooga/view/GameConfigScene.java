@@ -15,9 +15,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import ooga.controller.BoardController;
 import ooga.controller.ModelController;
 import ooga.exceptions.GameRunningException;
 
@@ -25,6 +27,7 @@ public class GameConfigScene extends GameScene{
   private final ResourceBundle resources;
   private final GridPane sceneRoot;
   private final ModelController modelController;
+  private BoardController boardController;
   private final EventHandler<ActionEvent> handler;
 
   /**
@@ -71,12 +74,13 @@ public class GameConfigScene extends GameScene{
     Button cancelButton = makeButton("cancelButton");
     Button startButton = makeButton("startButton");
     Button openButton = makeButton("customStart");
+    //Button pieceTypeButton = makeButton("PieceButton");
 
-
+    //pieceTypeButton.setOnAction(e -> pieceType());
     openButton.setOnAction(e -> openBoard());
 
     sceneRoot.add(openButton, 0, 3);
-
+    //sceneRoot.add(pieceTypeButton, 1, 3);
 
     Node buttons = makeButtonBar(new Button[]{cancelButton, startButton});
 
@@ -101,7 +105,11 @@ public class GameConfigScene extends GameScene{
     sceneRoot.add(buttons, 0, 4);
   }
 
-  private void openBoard(){
+  public void giveBoardController(BoardController boardController) {
+    this.boardController = boardController;
+  }
+
+  private void openBoard() {
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Choose a board configuration file to open");
     fileChooser.getExtensionFilters().add(
@@ -109,10 +117,22 @@ public class GameConfigScene extends GameScene{
     File boardFile = fileChooser.showOpenDialog(null);
     if (boardFile != null) {
       modelController.setBoardState(boardFile);
+    } else {
+      modelController.setBoardState("chess.xml");
     }
   }
 
-  private void cancelButton(ActionEvent e){
+//  private void pieceType() {
+//    DirectoryChooser directoryChooser = new DirectoryChooser();
+//    directoryChooser.setTitle("Choose a directory in data for piece images");
+//    File boardFile = directoryChooser.showDialog(null);
+//    if (boardFile != null) {
+//      String[] directories = boardFile.toString().split("/");
+//      boardController.setPieceFolder(directories[directories.length-1]);
+//    }
+//  }
+
+  private void cancelButton(ActionEvent e) {
     ((Stage) getWindow()).close();
     handler.handle(e);
   }

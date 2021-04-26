@@ -1,5 +1,6 @@
 package ooga.controller;
 
+import java.io.File;
 import java.util.Iterator;
 import javafx.scene.control.Label;
 import javafx.stage.Popup;
@@ -124,5 +125,9 @@ public class BoardController implements FrontEndExternalAPI {
    */
   public void resetColors(){
     board.setColorsDefault();
+  }
+
+  public void setPieceFolder(String directory) {
+    board.setPieceFolder(directory);
   }
 }
