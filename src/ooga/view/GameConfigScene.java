@@ -110,7 +110,11 @@ public class GameConfigScene extends GameScene{
       if (user.equals("") || opponent.equals("")) {
         new GameAlert(AlertType.ERROR, "Please input a name for both players");
       } else {
-        modelController.setPlayers(user, opponent);
+        try {
+          modelController.setPlayers(user, opponent);
+        } catch (Exception exception){
+          new GameAlert(AlertType.ERROR, exception.getMessage());
+        }
         getWindow().hide();
       }
     });
