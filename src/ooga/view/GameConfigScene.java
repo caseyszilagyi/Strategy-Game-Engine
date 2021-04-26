@@ -68,6 +68,7 @@ public class GameConfigScene extends GameScene{
     TextField player2 = makeTextField("player2");
 
     CheckBox playAI = new CheckBox(resources.getString("AI"));
+    playAI.setId("AI");
     playAI.setOnAction(e -> player2.setDisable(playAI.isArmed()));
 
     playerNames.getChildren().addAll(player1, player2);
