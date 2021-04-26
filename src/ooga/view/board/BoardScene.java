@@ -76,12 +76,11 @@ public class BoardScene extends GameScene {
     VBox controlPane = new VBox();
     controlPane.getStyleClass().add("vbox");
     List<Node> Nodes = makeColorPickersAndLabels();
+    Nodes.add(makeButton("changeBackgroundButton"));
     Nodes.add(makeButton("resetButton"));
-
     for (int i =0; i < Nodes.size(); i++) {
       controlPane.getChildren().add(i, Nodes.get(i));
     }
-
     sceneRoot.add(controlPane, 2 ,3);
   }
 
