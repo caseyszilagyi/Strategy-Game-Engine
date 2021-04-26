@@ -153,7 +153,7 @@ public class ViewManager {
    * Creates a new empty {@link FloatingWindow} instance and preset its owner window
    * to the primary window of this game instance. This also sets the scene for the window
    * to display.
-   * @return a {@code FloatingWindow} with no scene specified.
+   * @return a {@code FloatingWindow} with no scene specified
    */
   private FloatingWindow showFloatingWindow(GameScene scene) {
     FloatingWindow popup = (FloatingWindow) gameWindowFactory
