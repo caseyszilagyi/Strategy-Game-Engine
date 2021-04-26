@@ -126,7 +126,19 @@ Artificial Players
 
 Player Profiles
 
+### Error Checking Done
 
+- Data
+    - Bad data files with missing tags for
+        - Piece files
+        - Board files
+        - Rules files
+    - Incorrect names within data files for the above as well
+    
+- Board
+    - Moving checks that there is a piece and that there is no piece at the ending location
+    - Placing checks that there is no piece in the location where the piece is placed
+    
 
 
 ### Notes/Assumptions
