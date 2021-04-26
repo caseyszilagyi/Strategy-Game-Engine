@@ -31,11 +31,21 @@ public class FourInARow implements EndGameConditioin{
   private int width;
   private int height;
 
+  /**
+   * Initializer for the FourInARow EndGameCondition
+   * @param viewController a valid FrontEndExternalAPI which the game is linked to.
+   * @param board the current GameBoard to be used
+   */
   public FourInARow(FrontEndExternalAPI viewController, GameBoard board){
     this.viewController = viewController;
     this.board = board;
   }
 
+  /**
+   * This method is called to determine if someone has won the current game
+   * @param teamName the team name to check to see if they won
+   * @return a boolean for whether or not the teamName given has won the game
+   */
   @Override
   public boolean checkForWin(String teamName) {
     width = board.getWidth();

@@ -28,11 +28,21 @@ public class NoMoves implements EndGameConditioin {
   private FrontEndExternalAPI viewController;
   private GameBoard board;
 
+  /**
+   * Initializer for the FourInARow EndGameCondition
+   * @param viewController a valid FrontEndExternalAPI which the game is linked to.
+   * @param board the current GameBoard to be used
+   */
   public NoMoves(FrontEndExternalAPI viewController, GameBoard board){
     this.viewController = viewController;
     this.board = board;
   }
 
+  /**
+   * This method is called to determine if someone has won the current game
+   * @param teamName the team name to check to see if they won
+   * @return a boolean for whether or not the teamName given has won the game
+   */
   @Override
   public boolean checkForWin(String teamName) {
     if(!board.determineIfOppositeTeamHasMove(teamName)) {
