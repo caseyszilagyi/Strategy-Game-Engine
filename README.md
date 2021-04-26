@@ -38,7 +38,7 @@ Kenneth: View
 
 Shaw: BoardCreator, AI, miscellaneous backend classes
 
-Yi:
+Yi: View 
 
 Cole: GameEngine, and associated classes
 
@@ -186,7 +186,8 @@ Our game engine can handle any input game (be it a placement or a movement game)
 
 ### Impressions
 
-Kenneth:
+Kenneth: I think the openness of the project allowed for us to take more control and feel more 
+ownership and pride about our project.  I like making games and was happy to learn the front end.  
 
 Shaw:
 - This was definitely a challenging project and very difficult to grasp at the start. Although 
