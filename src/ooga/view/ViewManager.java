@@ -141,22 +141,21 @@ public class ViewManager {
     positionWindow(primaryWindow, 500, 200);
   }
 
-  private void chess(){
+  private void chess() {
     startGame("chess");
   }
 
-  private void checkers(){
+  private void checkers() {
     startGame("checkers");
   }
 
-  private void connectfour(){
+  private void connectfour() {
     startGame("connectfour");
   }
 
-  private void exitButton(){
+  private void exitButton() {
     //code to save
     changeScene(HOME_SCENE);
-
   }
 
   private void undoButton() {
@@ -166,6 +165,12 @@ public class ViewManager {
   private void resetButton() {
     boardController.resetColors();
     changeBackground("ooga/view/resources/boardSceneBackground.jpg");
+  }
+
+  private void helpButton() {
+    System.out.println("https://en.wikipedia.org/wiki/Chess"
+        + "\nhttps://en.wikipedia.org/wiki/Draughts\nhttps://en.wikipedia.org/wiki/Connect_Four");
+    //TODO: change so only use relevant link and use pop up window
   }
 
   private void changeBackgroundButton() {
