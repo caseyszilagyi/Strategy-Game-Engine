@@ -1,7 +1,7 @@
 package ooga.model.engine.running;
 
 import ooga.model.components.GameBoard;
-import ooga.model.components.Player;
+import ooga.model.components.player.Player;
 import ooga.model.components.computer.AI;
 import ooga.model.engine.actions.Action;
 
