@@ -26,7 +26,7 @@ public class ClickExecutorInitializer {
     final Map<String, List<Node>> gameFileContents = xmlParser
         .makeRootNodeMap(ruleFile, FILE_TYPE, gameName);
     String gameType = gameFileContents.get(GAME_TYPE).get(0).getTextContent();
-    System.out.printf("gameType = %s", gameType);
+    //System.out.printf("gameType = %s", gameType);
     try {
       Class<?> clazz = Class
           .forName(CLICK_EXECUTOR_FILE_PATH + gameType + CLICK_EXECUTOR_NAME_EXTENSION);

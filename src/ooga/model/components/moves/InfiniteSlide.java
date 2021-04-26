@@ -12,6 +12,21 @@ import ooga.model.components.GamePiece;
  * This movement class represents a move that can travel an infinite number of spaces in a certain
  * direction. However, it cannot travel through other pieces because it slides
  *
+ * This class should be used via reflection, and should be defined in the GamePiece's .xml file in the
+ * nested parameters:
+ * <moves>
+ *  <InfiniteJump>
+ *    <changeX>1</changeX> //the integer is variable
+ *       <changeY>2</changeY> //the integer is variable
+ *       <mustTake>False</mustTake> //the boolean is variable
+ *       <takeX>null</takeX> // the null value can be set to an integer
+ *       <takeY>null</takeY> // the null value can be set to an integer
+ *       <restrictions>
+ *       </restrictions>
+ *  </InfiniteJump>
+ * </moves>
+ *
+ *
  * @author Casey Szilagyi
  */
 public class InfiniteSlide extends PieceMovement {
