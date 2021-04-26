@@ -220,6 +220,10 @@ public class ViewManager {
     }
   }
 
+  /**
+   * Changes the background of the {@link BoardScene}.
+   * @param url the url of the image desired
+   */
   private void changeBackground(String url) {
     Scene scene = primaryWindow.getScene();
     BackgroundImage backgroundImage=  new BackgroundImage(new Image(url),
@@ -228,11 +232,17 @@ public class ViewManager {
     ((GameScene) scene).setBackground(new Background(backgroundImage));
   }
 
+  /**
+   * Dismisses the {@link GameConfigScene} and restarts the {@link ViewManager}.
+   */
   private void cancelButton(){
     primaryWindow.close();
     new ViewManager(initFile);
   }
 
+  /**
+   * Closes the primary {@link GameWindow} and exits the game.
+   */
   private void quit(){
     primaryWindow.close();
   }

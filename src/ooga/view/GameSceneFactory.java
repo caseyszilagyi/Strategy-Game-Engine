@@ -12,6 +12,8 @@ import ooga.view.board.BoardScene;
 /**
  * Creates {@link GameScene} subclasses, however returns the general {@code GameScene}
  * object rather than the concrete subclass.
+ *
+ * @author Yi Chen
  */
 public class GameSceneFactory {
   private final int DEFAULT_WIDTH = 500;

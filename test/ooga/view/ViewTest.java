@@ -23,6 +23,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * JavaFX tests for the game.
+ *
+ * @author Yi Chen
+ */
 public class ViewTest extends DukeApplicationTest {
 
   private ViewManager viewManager;

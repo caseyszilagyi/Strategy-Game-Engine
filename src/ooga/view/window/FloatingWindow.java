@@ -9,10 +9,10 @@ import javafx.stage.Window;
 import ooga.view.GameScene;
 
 /**
- * A window that floats above a parent window. This window can be dismissed by
- * pressing the escape key. Note: a {@code FloatingWindow} must have an owner window set by
- * {@code setOwnerWindow()} before calling {@code showScene}, otherwise it will
- * throw an error.
+ * A window that floats above a parent window. This window will block the user from
+ * clicking anywhere else until the window is dismissed. The window is also not resizable.
+ *
+ * @author Yi Chen
  */
 public class FloatingWindow extends Stage implements GameWindow{
 
@@ -20,6 +20,7 @@ public class FloatingWindow extends Stage implements GameWindow{
   public void showScene(GameScene scene) {
     initModality(Modality.APPLICATION_MODAL);
     setScene(scene);
+    setResizable(false);
     showAndWait();
   }
 

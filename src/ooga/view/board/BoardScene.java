@@ -62,7 +62,7 @@ public class BoardScene extends GameScene {
   }
 
   /**
-   * Purpose: puts all of the buttons and nodes on the screen.
+   * Adds all of the buttons and nodes on the screen.
    */
   @Override
   public void populateScene() {

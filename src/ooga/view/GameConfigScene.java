@@ -25,6 +25,13 @@ import ooga.controller.BoardController;
 import ooga.controller.ModelController;
 import ooga.exceptions.GameRunningException;
 
+/**
+ * This scene holds configuration settings and controls for a new game. This window
+ * will float above all other windows until dismissed. The options in this window
+ * all have their own specialized event handlers and interact with the {@link ModelController}.
+ *
+ * @author Yi Chen
+ */
 public class GameConfigScene extends GameScene{
   private final ResourceBundle resources;
   private final GridPane sceneRoot;
