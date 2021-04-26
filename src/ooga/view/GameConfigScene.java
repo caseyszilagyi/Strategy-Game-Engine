@@ -136,7 +136,7 @@ public class GameConfigScene extends GameScene{
       if (boardFile != null) {
         modelController.setBoardState(boardFile);
       } else {
-        modelController.setBoardState("chess.xml");
+        modelController.setBoardState("chess");
       }
     } catch (Exception e){
       new GameAlert(AlertType.ERROR, e.getMessage());
