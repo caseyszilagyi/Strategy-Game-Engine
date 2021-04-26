@@ -16,7 +16,9 @@ public class PlaceClickExecutor extends ClickExecutor{
       if(newPiece.determineAllLegalMoves().size() == 1){
         Coordinate startingCoordinate = new Coordinate(xClickPosition, yClickPosition);
         Coordinate endingCoordinate = (Coordinate) newPiece.determineAllLegalMoves().toArray()[0];
-        curBoard.movePiece(startingCoordinate,endingCoordinate);
+        if(!startingCoordinate.equals(endingCoordinate)){
+          curBoard.movePiece(startingCoordinate,endingCoordinate);
+        }
       }
       return true;
     }
