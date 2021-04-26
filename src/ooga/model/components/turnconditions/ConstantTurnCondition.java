@@ -15,7 +15,7 @@ import ooga.model.components.GamePiece;
  *   //this will never happen
  * }
  *
- * @author Casey Szilagyi
+ * @author Cole Spector
  */
 public class ConstantTurnCondition implements TurnCondition{
 
