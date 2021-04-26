@@ -19,6 +19,15 @@ import ooga.model.engine.running.TurnManager;
  * of the game, such as which piece is currently considered active and the coordinates of that
  * piece.
  *
+ * Example Code:
+ *
+ * Board board = new GameBoard(8, 8);
+ * DummyViewController viewController = new DummyViewController();
+ * board.setViewController(new DummyViewController());
+ * PieceCreator pieceCreator = new PieceCreator("chess", board);
+ * GamePiece king = pieceCreator.makePiece("king", new Coordinate(0,0), 1, "noTeam");
+ * board.addPiece(king);
+ *
  * @author Casey Szilagyi
  * @author Cole Spector
  */
