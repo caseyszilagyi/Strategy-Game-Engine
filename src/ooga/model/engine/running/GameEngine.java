@@ -10,8 +10,6 @@ import ooga.model.components.GameBoard;
 import ooga.model.components.GameRules;
 import ooga.model.components.player.Player;
 import ooga.model.components.computer.AI;
-import ooga.model.engine.actions.Action;
-import ooga.model.engine.actions.ActionCreator;
 
 /**
  * This is the engine used for running a game. It extends the regular engine. The engine takes care
@@ -31,10 +29,6 @@ public class GameEngine extends Engine {
   //Game variables
   private GameBoard curBoard;
   private GameRules curRules;
-  private List<Action> priorActions = new ArrayList<>();
-
-  //Action creator
-  private ActionCreator actionCreator;
 
   private boolean isAIPlaying = false;
   private AI computer;
@@ -51,7 +45,6 @@ public class GameEngine extends Engine {
    */
   public GameEngine(FrontEndExternalAPI viewController) {
     this.viewController = viewController;
-    actionCreator = new ActionCreator(viewController, curBoard);
   }
 
   /**
@@ -192,26 +185,7 @@ public class GameEngine extends Engine {
     //TODO: add saving capabilities for the board and moves
   }
 
-  /**
-   * Executes an action. An action can be something that has to do with a piece
-   *
-   * @param action is the Action.java to perform
-   */
-  @Override
-  public void executeAction(Action action) {
-    if (action.executeAction(curBoard, curRules)) {
-      priorActions.add(action);
-    }
-  }
 
-  /**
-   * Executes an action, given in string form
-   *
-   * @param action the string representation of the action
-   */
-  public void executeAction(String action) {
-    executeAction(actionCreator.createAction(action));
-  }
 
 
 }
