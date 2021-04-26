@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import ooga.exceptions.PlayerFileException;
 import ooga.model.components.player.Player;
 
 public class PlayerFileSaver {
@@ -27,13 +28,13 @@ public class PlayerFileSaver {
       player = mapper.readValue(inputStream, typeReference);
       inputStream.close();
     } catch (FileNotFoundException e) {
-      e.printStackTrace();
+      throw new PlayerFileException("NonExistentPlayerFile");
     } catch (JsonParseException e) {
-      e.printStackTrace();
+      throw new PlayerFileException("InvalidPlayerFile");
     } catch (JsonMappingException e) {
-      e.printStackTrace();
+      throw new PlayerFileException("InvalidPlayerFile");
     } catch (IOException e) {
-      e.printStackTrace();
+      throw new PlayerFileException("BadIOPlayer");
     }
     return player;
   }
