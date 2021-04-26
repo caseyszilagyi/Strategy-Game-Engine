@@ -69,6 +69,7 @@ public class GameMenuBar extends MenuBar {
     Menu menu = null;
     LinkedList<String> menuItems = new LinkedList<String>(Arrays.asList(fileMenu.split(",")));
     menu = new Menu(menuName);
+    menu.setId(menuName);
     while (menuItems.size() != 0) {
       MenuItem newMenuItem = makeMenuButton(menuItems.remove());
       menu.getItems().add(newMenuItem);

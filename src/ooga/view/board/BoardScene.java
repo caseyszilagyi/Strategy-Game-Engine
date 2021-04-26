@@ -65,7 +65,7 @@ public class BoardScene extends GameScene {
     ColumnConstraints col1 = makeColumnConstraint(HPos.CENTER);
     sceneRoot.getColumnConstraints().add(col1);
 
-    // Note: the title of this scene is set by ViewManger.
+    // Note: the title of this scene is set by ViewManager.
 
     Node topBar = makeButtonBar("topBarButtons");
     sceneRoot.add(topBar, 0, 1);
