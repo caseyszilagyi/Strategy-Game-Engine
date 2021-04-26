@@ -60,7 +60,9 @@ public class BoardScene extends GameScene {
     boardController.giveBoard(board);
   }
 
-
+  /**
+   * Purpose: puts all of the buttons and nodes on the screen.
+   */
   @Override
   public void populateScene() {
     ColumnConstraints col1 = new ColumnConstraints();
