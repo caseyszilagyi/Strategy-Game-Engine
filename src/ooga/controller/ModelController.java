@@ -1,24 +1,23 @@
 package ooga.controller;
 
+import java.io.File;
 import ooga.model.engine.running.Engine;
 import ooga.model.initialization.engine.Initializer;
 import ooga.model.initialization.engine.EngineInitializer;
 
 /**
- * This class is used to interact with the modules in the backend.
- * This class implements the BackEndExternalAPI, and is dependant on the Engine.java class, and the Initializer.java class
- *
+ * This class is used to interact with the modules in the backend. This class implements the
+ * BackEndExternalAPI, and is dependant on the Engine.java class, and the Initializer.java class
+ * <p>
  * Example Code:
- *
- * BackEndExternalAPI modelController = new ModelController();
- * DummyViewController viewController = new DummyViewController();
- * modelController.setBoardController(viewController);
- * modelController.setGameType("connectfour");
- * GameBoard gameBoard = modelController.getEngine().getBoard();
- * Engine gameEngine = modelController.getEngine();
- *
+ * <p>
+ * BackEndExternalAPI modelController = new ModelController(); DummyViewController viewController =
+ * new DummyViewController(); modelController.setBoardController(viewController);
+ * modelController.setGameType("connectfour"); GameBoard gameBoard =
+ * modelController.getEngine().getBoard(); Engine gameEngine = modelController.getEngine();
+ * <p>
  * modelController.actOnCoordinates(0,0);
- *
+ * <p>
  * It is not necessary to link a view controller in order to run a game through the ModelController,
  * that is simply necessary if you want to view the board separately.
  *
@@ -34,12 +33,13 @@ public class ModelController implements BackEndExternalAPI {
   private String gameType;
 
   @Override
-  public String toString(){
+  public String toString() {
     return gameType;
   }
 
   /**
    * Sets the view controller that this modelController is linked to
+   *
    * @param newViewController The view controller
    */
   @Override
@@ -52,6 +52,7 @@ public class ModelController implements BackEndExternalAPI {
 
   /**
    * The method that the front end calls whenever a square is clicked on the board
+   *
    * @param x The x coordinate
    * @param y The y coordinate
    */
@@ -61,8 +62,9 @@ public class ModelController implements BackEndExternalAPI {
   }
 
   /**
-   * Sets the game that the engine initializer will start. By default, this initializes
-   * the normal version of the game
+   * Sets the game that the engine initializer will start. By default, this initializes the normal
+   * version of the game
+   *
    * @param gameName The name of the game
    */
   @Override
@@ -74,6 +76,7 @@ public class ModelController implements BackEndExternalAPI {
 
   /**
    * Sets the board state to a different one than the default
+   *
    * @param boardFileName The file name that contains the board
    */
   @Override
@@ -81,9 +84,21 @@ public class ModelController implements BackEndExternalAPI {
     engineInitializer.setBoardState(boardFileName);
   }
 
+
+  /**
+   * Sets the board state to a different one than the default
+   *
+   * @param boardFile The file that the board is contained in
+   */
+  @Override
+  public void setBoardState(File boardFile) {
+    engineInitializer.setBoardState(boardFile);
+  }
+
   /**
    * Sets the players that will be playing the game
-   * @param user The first player, who has the bottom of the board
+   *
+   * @param user     The first player, who has the bottom of the board
    * @param opponent The second player, who has the top of the board
    */
   @Override
@@ -91,61 +106,26 @@ public class ModelController implements BackEndExternalAPI {
     engineInitializer.addPlayers(user, opponent);
   }
 
+  /**
+   * Undoes a turn
+   */
   @Override
-  public void setAI(String game, String level) {
-    engineInitializer.addAI();
-  }
-
-  @Override
-  public void undoTurn(){
+  public void undoTurn() {
     gameEngine.undoTurn();
   }
 
 
-  //Everything below has not yet been implemented
-
   @Override
-  public void forfeitGame(){
-
-  }
-
-  @Override
-  public void offerDraw(){
-
-  }
-
-
-  @Override
-  public void changePiece(String pieceName){
-
-  }
-
-
-  @Override
-  public void pauseGame() {
-
-  }
-
-  @Override
-  public void resumeGame() {
+  public void changePiece(String pieceName) {
 
   }
 
   /**
-   * Save the current state of the board in a file
-   * @param fileName The name of the file to store the game information
+   * Primarily used for testing, this method gets the game engine that the game is being run on
+   *
+   * @return The game engine
    */
-  @Override
-  public void saveGame(String fileName) {
-
-  }
-
-
-
-  //for testing
-  public Engine getEngine(){
+  public Engine getEngine() {
     return gameEngine;
   }
-
-
 }

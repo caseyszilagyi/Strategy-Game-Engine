@@ -1,5 +1,6 @@
 package ooga.controller;
 
+import java.io.File;
 import ooga.model.engine.running.Engine;
 
 /**
@@ -31,23 +32,12 @@ public interface BackEndExternalAPI {
   public void setPlayers(String user, String opponent);
 
   /**
-   * Sets the AI given a single player
-   * @param game Game being played
-   * @param level Level of the AI
-   */
-  public void setAI(String game, String level);
-  /**
    * Sets the initial state of the board
    * @param boardFileName The file name that contains the board
    */
   public void setBoardState(String boardFileName);
 
-  /**
-   * Saves the current state of the game in a file
-   * @param fileName The name of the file to store the game information
-   */
-  public void saveGame(String fileName);
-
+  public void setBoardState(File boardFile);
 
   /**
    * Acts on this set of coordinates. May include showing all possible moves, placing
@@ -60,21 +50,6 @@ public interface BackEndExternalAPI {
   public void undoTurn();
 
   public void changePiece(String pieceName);
-
-  public void forfeitGame();
-
-  public void offerDraw();
-
-  /**
-   * Used to pause the game
-   */
-  public void pauseGame();
-
-  /**
-   * Used to resume the game
-   */
-  public void resumeGame();
-
 
   // for testing
   public Engine getEngine();
