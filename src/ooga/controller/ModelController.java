@@ -22,6 +22,8 @@ import ooga.model.initialization.engine.EngineInitializer;
  * It is not necessary to link a view controller in order to run a game through the ModelController,
  * that is simply necessary if you want to view the board separately.
  *
+ * @author Casey Szilagyi
+ * @author Cole Spector
  */
 
 public class ModelController implements BackEndExternalAPI {
@@ -30,7 +32,6 @@ public class ModelController implements BackEndExternalAPI {
   private Engine gameEngine;
   private FrontEndExternalAPI boardController;
   private String gameType;
-
 
   @Override
   public String toString(){
