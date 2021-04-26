@@ -40,6 +40,7 @@ public class ViewManager {
   private final StageWindow primaryWindow;
   private ModelController modelController;
   private BoardController boardController;
+  private final String HOME_SCENE = "initialWindowScene";
 
   private String DEFAULT_GAMETYPE = "chess";
 
@@ -58,7 +59,7 @@ public class ViewManager {
     primaryWindow = (StageWindow) getInitialWindow();
     ((Stage) primaryWindow).setOnCloseRequest(e -> handleStageClose());
     createControllers();
-    changeScene("initialWindowScene");
+    changeScene(HOME_SCENE);
     primaryWindow.setCurrentSceneTitle("title-text");
   }
 
@@ -150,6 +151,12 @@ public class ViewManager {
 
   private void connectfour(){
     startGame("connectfour");
+  }
+
+  private void exitButton(){
+    //code to save
+    changeScene(HOME_SCENE);
+
   }
 
   private void undoButton() {
