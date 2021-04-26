@@ -13,10 +13,13 @@ import ooga.model.components.GamePiece;
  *
  * This class should be used via reflection, and should be defined in the GamePiece's .xml file in the
  * nested parameters:
+ * <pre> {@code
  * <moves>
  *     <Gravity>
  *     </Gravity>
  * </moves>
+ * }
+ * </pre>
  *
  * @author Cole Spector
  */

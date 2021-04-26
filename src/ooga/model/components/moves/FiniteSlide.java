@@ -20,18 +20,20 @@ import ooga.model.components.GamePiece;
  * This class should be used via reflection, and should be defined in the GamePiece's .xml file
  * nested in a moves parameters, with the changeX, changeY, mustTake, takeX, takeY, and restrictions parameters
  * all defined as follows:
- *
- * <moves>
- *  <FiniteSlide>
- *    <changeX>1</changeX> //the integer is variable
- *       <changeY>2</changeY> //the integer is variable
- *       <mustTake>False</mustTake> //the boolean is variable
- *       <takeX>null</takeX> // the null value can be set to an integer
- *       <takeY>null</takeY> // the null value can be set to an integer
- *       <restrictions>
- *       </restrictions>
- *  </FiniteSlide>
- * </moves>
+ * <pre> {@code
+   * <moves>
+   *  <FiniteSlide>
+   *    <changeX>1</changeX> //the integer is variable
+   *       <changeY>2</changeY> //the integer is variable
+   *       <mustTake>False</mustTake> //the boolean is variable
+   *       <takeX>null</takeX> // the null value can be set to an integer
+   *       <takeY>null</takeY> // the null value can be set to an integer
+   *       <restrictions>
+   *       </restrictions>
+   *  </FiniteSlide>
+   * </moves>
+ * }
+ * </pre>
  *
  * @author Casey Szilagyi
  */

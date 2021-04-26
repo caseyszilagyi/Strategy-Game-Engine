@@ -44,6 +44,7 @@ public class WelcomeScene extends GameScene {
     sceneRoot.setHgap(10);
     sceneRoot.setVgap(300);
     sceneRoot.getStyleClass().add("title");
+    sceneRoot.getChildren().add(new GameMenuBar(handler));
     this.getStylesheets().add(DEFAULT_RESOURCES_PATH + resources.getString("CSS"));
     populateScene();
   }

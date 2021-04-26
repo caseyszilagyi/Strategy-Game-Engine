@@ -22,7 +22,7 @@ import ooga.view.window.GameWindow;
 
 /**
  * A {@code GameScene} object extends {@link Scene} and is given to a {@link GameWindow}
- * to show.
+ * to show. This scene also contains helpful methods for populating scenes.
  *
  * @author Yi Chen
  */
@@ -136,6 +136,7 @@ public abstract class GameScene extends Scene {
   public TextField makeTextField(String property){
     TextField textField = new TextField();
     textField.setPromptText(resources.getString(property));
+    textField.setId(property);
     textField.setFocusTraversable(false);
     return textField;
   }

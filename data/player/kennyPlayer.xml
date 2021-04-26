@@ -1,0 +1,25 @@
+<Player>
+  <fullName>kenny Player</fullName>
+  <firstName>kenny</firstName>
+  <lastName>Player</lastName>
+  <records>
+    <records>
+      <gameName>chess</gameName>
+      <wins>0</wins>
+      <losses>0</losses>
+      <draws>0</draws>
+    </records>
+    <records>
+      <gameName>checkers</gameName>
+      <wins>0</wins>
+      <losses>0</losses>
+      <draws>0</draws>
+    </records>
+    <records>
+      <gameName>connectfour</gameName>
+      <wins>2</wins>
+      <losses>1</losses>
+      <draws>0</draws>
+    </records>
+  </records>
+</Player>

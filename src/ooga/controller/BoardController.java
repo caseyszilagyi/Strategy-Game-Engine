@@ -1,9 +1,9 @@
 package ooga.controller;
 
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
+import javafx.scene.control.Alert.AlertType;
 import javafx.util.Pair;
+import ooga.view.GameAlert;
 import ooga.view.board.Board;
 
 /**
@@ -11,6 +11,7 @@ import ooga.view.board.Board;
  * make method calls to the front end.
  *
  * @author Casey Szilagyi
+ * @author Kenneth Moore III
  */
 public class BoardController implements FrontEndExternalAPI {
 
@@ -50,7 +51,6 @@ public class BoardController implements FrontEndExternalAPI {
    * @param identifier The identifier of the piece
    * @param teamName The name of the team that the piece is playing on
    */
-  // TODO: Rename files so that this method works
   @Override
   public void setBoardSpace(int x, int y, String identifier, String teamName) {
     if (!board.spaceIsEmpty(x, y)) {
@@ -100,17 +100,28 @@ public class BoardController implements FrontEndExternalAPI {
   @Override
   public void givePieceChangeOptions(Iterable<String> pieceChangeOptions) {
     Iterator iterator = pieceChangeOptions.iterator();
-    while(iterator.hasNext()){
+    while(iterator.hasNext()) {
       System.out.println(iterator.next());
     }
   }
 
+  /**
+   * purpose: for the board (view) to indicate that a player has won
+   * @param playerName The name of the winning player
+   */
   @Override
   public void gameWin(String playerName) {
-    System.out.println(playerName + "won!");
+    new GameAlert(AlertType.CONFIRMATION, playerName + " won!");
   }
 
-  public void resetColors(){
+  /**
+   * purpose: calls board.setColorsDefault() to set the colors to the defaults
+   */
+  public void resetColors() {
     board.setColorsDefault();
+  }
+
+  public void setPieceFolder(String directory) {
+    board.setPieceFolder(directory);
   }
 }

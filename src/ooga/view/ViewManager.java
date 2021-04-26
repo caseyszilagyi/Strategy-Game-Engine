@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -32,6 +33,7 @@ import ooga.view.window.StageWindow;
  * as necessary.
  *
  * @author Yi Chen
+ * @author kenneth Moore III
  */
 public class ViewManager {
   private final ResourceBundle initFile;
@@ -116,8 +118,14 @@ public class ViewManager {
    * @param e
    */
   private void onButtonClicked(ActionEvent e) {
-    Button buttonPressed = (Button) e.getSource();
-    String buttonID = buttonPressed.getId();
+    String buttonID = null;
+    if (e.getSource().getClass() == Button.class) {
+      Button buttonPressed = (Button) e.getSource();
+      buttonID = buttonPressed.getId();
+    } else if (e.getSource().getClass() == MenuItem.class) {
+      MenuItem menuItem = (MenuItem) e.getSource();
+      buttonID = menuItem.getId();
+    }
     try {
       this.getClass().getDeclaredMethod(buttonID).invoke(this);
     } catch (NoSuchMethodException | IllegalAccessException |
@@ -136,8 +144,11 @@ public class ViewManager {
   public void startGame(String gameType) {
     BoardScene newScene = (BoardScene) makeScene("boardScene");
     newScene.attachBoardControllerToBoard(boardController);
-    modelController.setGameType(gameType);
-
+    try {
+      modelController.setGameType(gameType);
+    } catch (Exception e) {
+      new GameAlert(AlertType.ERROR, "No moves to undo!");
+    }
     showConfigMenu();
 
     if (primaryWindow.isShowing()) {
@@ -154,6 +165,7 @@ public class ViewManager {
   private void showConfigMenu() {
     GameScene configScene = sceneFactory.makeScene("GameConfigScene",
         this::onButtonClicked, modelController);
+    ((GameConfigScene)configScene).giveBoardController(boardController);
     GameWindow configWindow = makeFloatingWindow(configScene);
     configWindow.showScene(configScene);
   }
@@ -177,7 +189,11 @@ public class ViewManager {
   }
 
   private void undoButton() {
-    modelController.undoTurn();
+    try {
+      modelController.undoTurn();
+    } catch (Exception e) {
+      new GameAlert(AlertType.ERROR, "No moves to undo!");
+    }
   }
 
   private void resetButton() {
@@ -186,9 +202,18 @@ public class ViewManager {
   }
 
   private void helpButton() {
-    System.out.println("https://en.wikipedia.org/wiki/Chess"
+    new GameAlert(AlertType.INFORMATION, "https://en.wikipedia.org/wiki/Chess"
         + "\nhttps://en.wikipedia.org/wiki/Draughts\nhttps://en.wikipedia.org/wiki/Connect_Four");
-    //TODO: change so only use relevant link and use pop up window
+
+  }
+
+  private void newWindow(){
+    new ViewManager(initFile);
+  }
+
+  private void settingsButton(){
+    new GameAlert(AlertType.INFORMATION, "This button hasn't been implemented yet, "
+        + "thank you for your patience!");
   }
 
   private void changeBackgroundButton() {
@@ -207,17 +232,31 @@ public class ViewManager {
     }
   }
 
+  /**
+   * Changes the background of the {@link BoardScene}.
+   * @param url the url of the image desired
+   */
   private void changeBackground(String url) {
     Scene scene = primaryWindow.getScene();
     BackgroundImage backgroundImage=  new BackgroundImage(new Image(url),
-        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+        BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
         BackgroundSize.DEFAULT);
     ((GameScene) scene).setBackground(new Background(backgroundImage));
   }
 
+  /**
+   * Dismisses the {@link GameConfigScene} and restarts the {@link ViewManager}.
+   */
   private void cancelButton(){
     primaryWindow.close();
     new ViewManager(initFile);
+  }
+
+  /**
+   * Closes the primary {@link GameWindow} and exits the game.
+   */
+  private void quit(){
+    primaryWindow.close();
   }
 
   /**

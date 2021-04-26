@@ -20,7 +20,7 @@ April 25, 2021
 
 Hours Spent:
 
-Kenneth: 
+Kenneth: ~15 hours per week (+ for final week)
 
 Shaw: 15 hours per week
 
@@ -32,11 +32,13 @@ Casey: ~25 hours per week
 
 ### Primary Roles
 
-Kenneth:
+Kenneth: View 
+    - Tile, Board and many other methods in other classes.  
+        - ViewManager, BoardScene and others
 
 Shaw: BoardCreator, AI, miscellaneous backend classes
 
-Yi:
+Yi: View 
 
 Cole: GameEngine, and associated classes
 
@@ -172,6 +174,8 @@ on what piece is moved the second time
    
 - Stalemate is not detected in chess, which can lead to a board where
 no pieces can be moved and yet the game is not over
+  
+- Settings button not implemented
 
 
 In checkers, if a double jump is available, the user can unselect the piece and move a different piece.
@@ -182,7 +186,8 @@ Our game engine can handle any input game (be it a placement or a movement game)
 
 ### Impressions
 
-Kenneth:
+Kenneth: I think the openness of the project allowed for us to take more control and feel more 
+ownership and pride about our project.  I like making games and was happy to learn the front end.  
 
 Shaw:
 - This was definitely a challenging project and very difficult to grasp at the start. Although 

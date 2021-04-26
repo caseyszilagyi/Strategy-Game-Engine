@@ -3,8 +3,13 @@ package ooga.view;
 import java.lang.reflect.Field;
 import java.util.ResourceBundle;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 import ooga.view.util.DukeApplicationTest;
 import ooga.view.window.GameWindow;
@@ -12,11 +17,17 @@ import ooga.view.window.GameWindowFactory;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * JavaFX tests for the game.
+ *
+ * @author Yi Chen
+ */
 public class ViewTest extends DukeApplicationTest {
 
   private ViewManager viewManager;
@@ -85,17 +96,45 @@ public class ViewTest extends DukeApplicationTest {
     assertEquals("Welcome to BrainMate!", welcomeTitle.getText());
   }
 
-
   @Test
-  void testChessStart(){
+  void testChessConfigMenu(){
     clickOn(chessButton);
+    TextField player1 = lookup("#player1").query();
+    writeTo(player1, "asdlfkj");
+    Button playButton = lookup("#startButton").query();
+    clickOn(playButton);
+    type(KeyCode.ESCAPE);
+    TextField player2 = lookup("#player2").query();
+    writeTo(player2, "flkasjdf");
+    clickOn(playButton);
     Label gameTitle = lookup("#chess").query();
     assertEquals("Chess", gameTitle.getText());
   }
 
   @Test
+  void testChessAICheckbox(){
+    clickOn(chessButton);
+    TextField player1 = lookup("#player1").query();
+    writeTo(player1, "asdlfkj");
+    TextField player2 = lookup("#player2").query();
+    assertFalse(player2.isDisabled());
+
+    CheckBox playAI = lookup("#AI").query();
+    clickOn(playAI);
+
+    Button playButton = lookup("#startButton").query();
+    clickOn(playButton);
+  }
+
+  @Test
   void testCheckersStart(){
     clickOn(checkersButton);
+    TextField player1 = lookup("#player1").query();
+    writeTo(player1, "asdlfkj");
+    TextField player2 = lookup("#player2").query();
+    writeTo(player2, "alsdkfj");
+    Button playButton = lookup("#startButton").query();
+    clickOn(playButton);
     Label gameTitle = lookup("#checkers").query();
     assertEquals("Checkers", gameTitle.getText());
   }
@@ -103,6 +142,12 @@ public class ViewTest extends DukeApplicationTest {
   @Test
   void testConnectfourStart(){
     clickOn(connectfourButton);
+    TextField player1 = lookup("#player1").query();
+    writeTo(player1, "asdlfkj");
+    TextField player2 = lookup("#player2").query();
+    writeTo(player2, "alsdkfj");
+    Button playButton = lookup("#startButton").query();
+    clickOn(playButton);
     Label gameTitle = lookup("#connectfour").query();
     assertEquals("Connect Four", gameTitle.getText());
   }
@@ -116,6 +161,13 @@ public class ViewTest extends DukeApplicationTest {
   @Test
   void testHighlightColorPicker(){
     clickOn(chessButton);
+    TextField player1 = lookup("#player1").query();
+    writeTo(player1, "asdlfkj");
+    TextField player2 = lookup("#player2").query();
+    writeTo(player2, "alsdkfj");
+    Button playButton = lookup("#startButton").query();
+    clickOn(playButton);
+
     ColorPicker highlightColorPicker = highlightColorPicker = lookup("#highlightColorPicker").query();
     assertNotNull(highlightColorPicker);
   }
@@ -124,12 +176,58 @@ public class ViewTest extends DukeApplicationTest {
    * On closing the game window, the title screen should show again. The key combination
    * in this test only works for MacOS.
    */
-
+  @Test
   void testCloseGameWindow(){
     clickOn(chessButton);
-    primaryWindow.close();
+    TextField player1 = lookup("#player1").query();
+    writeTo(player1, "asdlfkj");
+    TextField player2 = lookup("#player2").query();
+    writeTo(player2, "alsdkfj");
+    Button playButton = lookup("#startButton").query();
+    clickOn(playButton);
+    Button exitButton = lookup("#exitButton").query();
+    clickOn(exitButton);
     Label title = lookup("#title-text").query();
     assertEquals("Welcome to BrainMate!", title.getText());
+  }
+
+  @Test
+  void testResetButton(){
+    clickOn(chessButton);
+    TextField player1 = lookup("#player1").query();
+    writeTo(player1, "asdlfkj");
+    TextField player2 = lookup("#player2").query();
+    writeTo(player2, "alsdkfj");
+    Button playButton = lookup("#startButton").query();
+    clickOn(playButton);
+    Button resetButton = lookup("#resetButton").query();
+    clickOn(resetButton);
+  }
+
+  @Test
+  void testUndoButton(){
+    clickOn(chessButton);
+    TextField player1 = lookup("#player1").query();
+    writeTo(player1, "asdlfkj");
+    TextField player2 = lookup("#player2").query();
+    writeTo(player2, "alsdkfj");
+    Button playButton = lookup("#startButton").query();
+    clickOn(playButton);
+    Button undoButton = lookup("#undoButton").query();
+    assertDoesNotThrow(() -> clickOn(undoButton));
+  }
+
+  @Test
+  void testSettingsButton(){
+    clickOn(chessButton);
+    TextField player1 = lookup("#player1").query();
+    writeTo(player1, "asdlfkj");
+    TextField player2 = lookup("#player2").query();
+    writeTo(player2, "alsdkfj");
+    Button playButton = lookup("#startButton").query();
+    clickOn(playButton);
+    Button settingsButton = lookup("#settingsButton").query();
+    assertDoesNotThrow(() -> clickOn(settingsButton));
   }
 
 }

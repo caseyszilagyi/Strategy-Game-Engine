@@ -21,6 +21,8 @@ import ooga.view.GameScene;
  * This scene holds the view representation of the main game board. The scene has a top
  * control bar with buttons and extends {@link GameScene}. The scene also holds a reference
  * to {@link ModelController} and {@link BoardController}.
+ *
+ * @author Kenneth Moore III
  */
 public class BoardScene extends GameScene {
 
@@ -59,13 +61,15 @@ public class BoardScene extends GameScene {
     boardController.giveBoard(board);
   }
 
-
+  /**
+   * Adds all of the buttons and nodes on the screen.
+   */
   @Override
   public void populateScene() {
     ColumnConstraints col1 = makeColumnConstraint(HPos.CENTER);
     sceneRoot.getColumnConstraints().add(col1);
 
-    // Note: the title of this scene is set by ViewManger.
+    // Note: the title of this scene is set by ViewManager.
 
     Node topBar = makeButtonBar("topBarButtons");
     sceneRoot.add(topBar, 0, 1);

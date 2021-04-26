@@ -6,13 +6,15 @@ package ooga.exceptions;
  * This class assumes that the user provides a String error message or an Error upon declaration
  *
  * Code Example:
- *
+ * <pre>{@code
  * String fileLocation = ~/Documents/foo.java
  * try {
  *     Class<?> clazz = Class.forName(fileLocation);
  * } catch (Exception e) {
  *     throw new ClassLoaderException("unable to load class);
  * }
+ * }
+ * </pre>
  *
  * @author Casey Szilagyi
  */

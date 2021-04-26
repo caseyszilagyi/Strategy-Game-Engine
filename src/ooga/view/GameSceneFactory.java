@@ -12,6 +12,8 @@ import ooga.view.board.BoardScene;
 /**
  * Creates {@link GameScene} subclasses, however returns the general {@code GameScene}
  * object rather than the concrete subclass.
+ *
+ * @author Yi Chen
  */
 public class GameSceneFactory {
   private final int DEFAULT_WIDTH = 500;
@@ -71,7 +73,7 @@ public class GameSceneFactory {
    * @return a {@code GameScene} object
    */
   private GameScene makeWelcomeScene(Parent root, ResourceBundle resources,
-      ModelController modelController){
+      ModelController modelController) {
     GameScene newScene = new WelcomeScene(root, resources, handler, modelController);
 
     return newScene;

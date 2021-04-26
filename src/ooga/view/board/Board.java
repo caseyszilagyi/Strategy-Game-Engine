@@ -1,6 +1,7 @@
 package ooga.view.board;
 
 import java.awt.Point;
+import java.io.File;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 import javafx.scene.image.Image;
@@ -10,10 +11,17 @@ import javafx.scene.paint.Color;
 import javafx.util.Pair;
 import ooga.controller.ModelController;
 
+/**
+ * Purpose: a visual representation of the board.
+ * Assumptions: that one calls createBoard shortly after it is made, or other methods will fail.
+ * Dependencies: extends GridPane and uses Tiles.
+ * An Example: Board board = new Board; createBoard(8,8);
+ *
+ * @author Kenneth Moore III
+ */
 public class Board extends GridPane {
 
-
-  Tile tiles[][];
+  Tile[][] tiles;
   private static final int SQUARE_SIZE = 50;
   private final ModelController modelController;
   private final ResourceBundle pieceBundle = ResourceBundle.getBundle("ooga.view.resources.chessPieces");
@@ -22,11 +30,10 @@ public class Board extends GridPane {
   private static final Color DEFAULT_DARK_COLOR = Color.TAN;
   private static final Color DEFAULT_LIGHT_COLOR = Color.BEIGE;
   private Color myHighlightColor;
-  private String gameType;
+  private String pieceFolder = pieceBundle.getString("directory");
 
   /**
-   * Constructs a {@link Board} of the desired width and height. Also obtains a reference to a
-   * {@link ModelController}
+   * Constructs a {@link Board} and obtains a reference to {@link ModelController}
    *
    * @param modelController
    */
@@ -35,18 +42,16 @@ public class Board extends GridPane {
     this.modelController = modelController;
   }
 
+  /**
+   * Purpose: to create a board of a specific width and height.
+   * Assumptions: must be called shortly after construction, assumes width and height are 1-26.
+   * @param width: the width of the board
+   * @param height: the height of the board
+   */
   public void createBoard(int width, int height) {
     tiles = new Tile[width][height];
     makeGrid(width, height);
     setColorsDefault();
-  }
-
-  /**
-   * @return a {@code String} type of this board
-   */
-  public String getBoardType() {
-    System.out.println(gameType); //TODO: delete
-    return gameType;
   }
 
   /**
@@ -69,11 +74,17 @@ public class Board extends GridPane {
     }
   }
 
-  public void colorGrid(Color firstColor, Color secondColor) {
+  private void colorGrid(Color firstColor, Color secondColor) {
     colorDarkSquares(firstColor);
     colorLightSquares(secondColor);
   }
 
+  /**
+   * Purpose: to color all the light colored squares a specific color.
+   * Assumptions: assumes valid color
+   * Parameters (purpose beyond their name if necessary)
+   * @param color the new color of the light tiled squares.
+   */
   public void colorLightSquares(Color color) {
     for (int i = 0; i < tiles.length; i++) {
       for (int j = 0; j < tiles[i].length; j++) {
@@ -84,7 +95,12 @@ public class Board extends GridPane {
     }
   }
 
-  public void colorDarkSquares(Color color){
+  /**
+   * Purpose: to color all the dark colored squares a specific color.
+   * Assumptions: assumes valid color
+   * @param color the new color of the dark tiled squares.
+   */
+  public void colorDarkSquares(Color color) {
     for (int i = 0; i < tiles.length; i++) {
       for (int j = 0; j < tiles[i].length; j++) {
         if ((i + j) % 2 == 1) {
@@ -125,9 +141,9 @@ public class Board extends GridPane {
    * Unhighlights all {@link Tile} on the board
    */
   public void unhighlightAll() {
-    for (int i = 0; i < tiles.length; i++) {
-      for (int j = 0; j < tiles[i].length; j++) {
-        tiles[i][j].unHighlight();
+    for (Tile[] tile : tiles) {
+      for (Tile value : tile) {
+        value.unHighlight();
       }
     }
   }
@@ -142,7 +158,12 @@ public class Board extends GridPane {
     tiles[x][y].changeColor(myHighlightColor);
   }
 
-  public void setHighlightColor(Color color){
+  /**
+   * Purpose: to set the highlight color of the squares.
+   * Assumptions: assumes valid color
+   * @param color: the value that instance variable myHighlightColor is being set to
+   */
+  public void setHighlightColor(Color color) {
     myHighlightColor = color;
   }
 
@@ -166,17 +187,25 @@ public class Board extends GridPane {
    * @param y y coordinate
    * @return a boolean
    */
-  public boolean spaceIsEmpty(int x, int y){
+  public boolean spaceIsEmpty(int x, int y) {
     return tiles[x][y].getPiece() == null;
   }
 
 
   private Tile createTile(int i, int j) {
-    return new Tile(SQUARE_SIZE, new Point(i, j), e -> handleTileClick(i, j));
+    return new Tile(SQUARE_SIZE, e -> handleTileClick(i, j));
   }
 
+  /**
+   * Purpose: to add a piece at a certain location
+   * Assumptions: valid paramaters
+   * @param x: the x position of the piece
+   * @param y: the y position of the piece
+   * @param color: the team/color of the piece
+   * @param fileName: the type of piece it is
+   */
   public void addPiece(int x, int y, String color, String fileName) {
-    ImageView piece = new ImageView(new Image("BasicChessPieces/" + pieceBundle.getString(color+fileName)));
+    ImageView piece = new ImageView(new Image(pieceFolder+"/" + pieceBundle.getString(color + fileName)));
     piece.setFitHeight(SQUARE_SIZE);
     piece.setFitWidth(SQUARE_SIZE);
     tiles[x][y].addPiece(piece);
@@ -187,8 +216,19 @@ public class Board extends GridPane {
     modelController.actOnCoordinates(i, j);
   }
 
+  /**
+   * Purpose: to set the board and highlight colors to the defaults
+   */
   public void setColorsDefault() {
     setHighlightColor(DEFAULT_HIGHLIGHT_COLOR);
     colorGrid(DEFAULT_DARK_COLOR, DEFAULT_LIGHT_COLOR);
+  }
+
+  public void updatePieceFolder(String directory) {
+    pieceFolder = directory;
+  }
+
+  public void setPieceFolder(String directory) {
+    updatePieceFolder(directory);
   }
 }
