@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
-import ooga.model.components.Player;
-import ooga.model.components.movehistory.Record;
+import ooga.model.components.player.Player;
+import ooga.model.components.player.Record;
 import ooga.model.initialization.PlayerCreator;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ public class FileSaverTest {
   private final String PLAYER_FILE_PATH = "data/player/";
   private final String EXTENSION = ".xml";
 
-  private PlayerFileSaver playerFileSaver = new PlayerFileSaver(PLAYER_FILE_PATH);
+  private PlayerFileSaver playerFileSaver = new PlayerFileSaver();
   private PlayerCreator creator = new PlayerCreator();
 
   @Test
