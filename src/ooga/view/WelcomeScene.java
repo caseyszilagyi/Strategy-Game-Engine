@@ -55,8 +55,7 @@ public class WelcomeScene extends GameScene {
     col1.setHalignment(HPos.CENTER);
     sceneRoot.getColumnConstraints().add(col1);
 
-    //setTitle("title-text");
-
+    setTitle("title-text");
 
     Node buttons = makeButtonBar("buttons");
 
