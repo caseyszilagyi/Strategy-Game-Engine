@@ -1,8 +1,6 @@
 package ooga.controller;
 
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import javafx.util.Pair;
 import ooga.view.board.Board;
 
@@ -11,6 +9,7 @@ import ooga.view.board.Board;
  * make method calls to the front end.
  *
  * @author Casey Szilagyi
+ * @author Kenneth Moore III
  */
 public class BoardController implements FrontEndExternalAPI {
 
@@ -105,11 +104,19 @@ public class BoardController implements FrontEndExternalAPI {
     }
   }
 
+  /**
+   * purpose: for the board (view) to indicate that a player has won
+   * @param playerName The name of the winning player
+   */
   @Override
   public void gameWin(String playerName) {
     System.out.println(playerName + "won!");
+    //TODO: implement with pop up window
   }
 
+  /**
+   * purpose: calls board.setColorsDefault() to set the colors to the defaults
+   */
   public void resetColors(){
     board.setColorsDefault();
   }
