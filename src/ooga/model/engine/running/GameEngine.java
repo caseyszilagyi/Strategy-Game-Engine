@@ -61,15 +61,15 @@ public class GameEngine extends Engine {
   }
 
   /**
-   * Called to process any click from the front end. Method calls to make are
-   * determined in the clickExecutor class and turnManager class
+   * Called to process any click from the front end. Method calls to make are determined in the
+   * clickExecutor class and turnManager class
    *
    * @param x The x position of the click
    * @param y The y position of the click
    */
   public void runTurn(int x, int y) {
     turnManager.startIfBeginningTurn();
-    if(!clickExecutor.executeClick(x, y, getCurrentPlayerTurn())){
+    if (!clickExecutor.executeClick(x, y, getCurrentPlayerTurn())) {
       return;
     }
     checkForWin();
@@ -79,27 +79,28 @@ public class GameEngine extends Engine {
 
   /**
    * Sets the active AI
+   *
    * @param computer the AI to set as the active AI
    */
-  public void setAI(AI computer){
+  public void setAI(AI computer) {
     this.computer = computer;
     isAIPlaying = true;
   }
 
 
-  private void makeAIMove(){
+  private void makeAIMove() {
     ArrayList<Coordinate> moves = new ArrayList<>();
-    if(isAIPlaying && turnManager.getCurrentPlayerTurnName().equals(AI_NAME) && !isGameOver() && !noTurnRules){
+    if (isAIPlaying && turnManager.getCurrentPlayerTurnName().equals(AI_NAME) && !isGameOver()
+        && !noTurnRules) {
       computer.determineMove(curBoard);
-      computer.getMove().stream().forEach(coord->runTurn(coord.getX(), coord.getY()));
+      computer.getMove().stream().forEach(coord -> runTurn(coord.getX(), coord.getY()));
     }
   }
 
   /**
-   *
    * @param clickExecutor the ClickExecutor to be used
    */
-  public void setClickExecutor(ClickExecutor clickExecutor){
+  public void setClickExecutor(ClickExecutor clickExecutor) {
     this.clickExecutor = clickExecutor;
   }
 
@@ -129,11 +130,12 @@ public class GameEngine extends Engine {
 
   /**
    * Checks if someone has won the game
+   *
    * @return a boolean value representing whether or not someone has won the game
    */
   @Override
   public boolean checkForWin() {
-    if(curRules.checkWinConditions(getCurrentPlayerTurn())){
+    if (curRules.checkWinConditions(getCurrentPlayerTurn())) {
       viewController.gameWin(getCurrentPlayerTurn());
       turnManager.winGame(curRules.getGameName());
       return true;
@@ -143,11 +145,12 @@ public class GameEngine extends Engine {
 
   /**
    * Checks to see if the win Conidition is hit.  This method is mostly used for testing
+   *
    * @return whether or not the game is over
    */
   @Override
   public boolean isGameOver() {
-    return curRules.checkWinConditions("user") || curRules.checkWinConditions("opponent")  ;
+    return curRules.checkWinConditions("user") || curRules.checkWinConditions("opponent");
   }
 
   /**
@@ -191,14 +194,6 @@ public class GameEngine extends Engine {
   }
 
   /**
-   * Adds an AI to the game
-   * @param ai the AI to be added to the game
-   */
-  @Override
-  public void addAI(AI ai){
-
-  }
-  /**
    * Gets the name of the player who's turn it is
    *
    * @return The string representing the player who's turn it is
@@ -211,19 +206,8 @@ public class GameEngine extends Engine {
   /**
    * Undoes the previous turn
    */
-  public void undoTurn(){
+  public void undoTurn() {
     curBoard.undoTurn();
   }
-  /**
-   * Saves the current state of the game in a file
-   * @param fileName The name of the file to save the game in
-   */
-  @Override
-  public void saveCurrentState(String fileName) {
-    //TODO: add saving capabilities for the board and moves
-  }
-
-
-
 
 }

@@ -70,6 +70,7 @@ public class PieceCreator extends Creator {
     return gamePiece;
   }
 
+  // Makes all of the piece movement objects
   private List<PieceMovement> makePieceMovements(int direction, GamePiece correspondingPiece) {
     List<PieceMovement> pieceMovements = new ArrayList<>();
     try{
@@ -92,9 +93,8 @@ public class PieceCreator extends Creator {
   }
 
 
-  // could refactor this to use generic types & lambdas, just pass the specific class loader
-  // call and return a generic list? maybe?
 
+  // Adds conditions to the piece movement
   private List<Condition> addConditions(Node moveDetails, GamePiece correspondingPiece, int direction){
     List<Condition> currentConditions = new ArrayList<>();
     if (moveSubNodeMap.containsKey(CONDITION_TAG)) {
@@ -104,6 +104,7 @@ public class PieceCreator extends Creator {
     return currentConditions;
   }
 
+  // Makes conditions that are executed after a piece movement
   private List<Condition> makeConditions(GamePiece correspondingPiece, int direction) {
     List<Condition> currentConditions = new ArrayList<>();
     for (String conditionName : specificMoveComponent.keySet()) {
@@ -119,7 +120,7 @@ public class PieceCreator extends Creator {
     return currentConditions;
   }
 
-
+  // Adds restrictions to the piece movement
   private List<Restriction> addRestrictions(Node moveDetails, GamePiece correspondingPiece) {
     List<Restriction> currentRestrictions = new ArrayList<>();
     if (moveSubNodeMap.containsKey(RESTRICTION_TAG)) {
@@ -129,6 +130,7 @@ public class PieceCreator extends Creator {
     return currentRestrictions;
   }
 
+  // Makes restrictions to add to the piece movement
   private List<Restriction> makeRestrictions(GamePiece correspondingPiece) {
     List<Restriction> currentRestrictions = new ArrayList<>();
     for (String restrictionName : specificMoveComponent.keySet()) {

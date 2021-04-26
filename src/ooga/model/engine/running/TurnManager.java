@@ -31,19 +31,20 @@ public class TurnManager {
   /**
    * If it is the start of the turn, the player's timer is started
    */
-  protected void startIfBeginningTurn(){
+  protected void startIfBeginningTurn() {
     if (isStartOfTurn) {
       startPlayerTimer(currentPlayerTurn);
     }
   }
 
   /**
-   * Ends the turn if it is over, and then calls a method to swap the active player
-   * and stop the timer
+   * Ends the turn if it is over, and then calls a method to swap the active player and stop the
+   * timer
+   *
    * @param x The x coordinate of the turn click
    * @param y The y coordinate of the turn click
    */
-  protected void endTurn(int x, int y){
+  protected void endTurn(int x, int y) {
     //Fix end turn to not get called when a move hasn't even been made
     boolean isTurnOver = gameRules
         .checkForNextTurn(gameBoard, gameBoard.getPieceAtCoordinate(new Coordinate(x, y)));
@@ -108,18 +109,20 @@ public class TurnManager {
 
   /**
    * Gets the name of the player who's turn it is
+   *
    * @return A string representing the player's name
    */
-  protected String getCurrentPlayerTurnName(){
+  protected String getCurrentPlayerTurnName() {
     return currentPlayerTurn.getFullName();
   }
 
 
   /**
    * Sets the board being used to determine who's turn it is
+   *
    * @param board The board
    */
-  protected void setBoard(GameBoard board){
+  protected void setBoard(GameBoard board) {
     gameBoard = board;
   }
 
@@ -133,9 +136,9 @@ public class TurnManager {
   }
 
 
-
   /**
    * Sets the rules that the game follows
+   *
    * @param rules The GameRules class representing the rules
    */
   public void setRules(GameRules rules) {
@@ -144,13 +147,14 @@ public class TurnManager {
 
   /**
    * This method updates the player files for the Player that won based on the gameName passed
+   *
    * @param gameName the gameName to update the Player file for
    */
-  public void winGame(String gameName){
+  public void winGame(String gameName) {
     currentPlayerTurn.getRecord(gameName).addWin();
     playerFileSaver.storePlayerFile(currentPlayerTurn);
-    for(Player loser: activePlayers){
-      if(!loser.equals(currentPlayerTurn)){
+    for (Player loser : activePlayers) {
+      if (!loser.equals(currentPlayerTurn)) {
         loser.getRecord(gameName).addLoss();
         playerFileSaver.storePlayerFile(loser);
       }

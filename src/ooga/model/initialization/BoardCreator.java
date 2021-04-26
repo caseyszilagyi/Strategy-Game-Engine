@@ -13,9 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * This class creates a 2D GamePiece array that represents the game board, adjustable by the
- * starting state XML files which describe each occupied square in the board in addition to board
- * dimensions
+ * This class creates the gameboard object that holds all of the game pieces
  *
  * @author Shaw Phillips
  */
@@ -48,6 +46,13 @@ public class BoardCreator extends Creator {
   private PieceCreator pieceCreator;
   private GameBoard board;
 
+  /**
+   * The constructor that is used to get components relevant to the type of game
+   * that will be initialized on the board
+   * @param game The name of the game
+   * @param viewController The view controller that the board calls methods on
+   *                       to update the front end
+   */
   public BoardCreator(String game, FrontEndExternalAPI viewController) {
     this.viewController = viewController;
     super.setComponents(PATH, FILE_TYPE, game);
@@ -55,6 +60,10 @@ public class BoardCreator extends Creator {
     initializeMaps(gameName);
   }
 
+  /**
+   * Initializes the maps to read in from the board file
+   * @param fileName The name of the baord file
+   */
   public void initializeMaps(String fileName) {
     try {
       boardNodes = super.makeRootNodeMap(fileName);
@@ -73,6 +82,10 @@ public class BoardCreator extends Creator {
     }
   }
 
+  /**
+   * Makes the game board object based on the maps that were read in
+   * @return The game board object
+   */
   public GameBoard makeBoard() {
     board = new GameBoard(numCols, numRows);
     board.setViewController(viewController);
@@ -89,6 +102,7 @@ public class BoardCreator extends Creator {
     return board;
   }
 
+  // Makes a game piece and adds it
   private void buildPiece(int numRows, Map.Entry<String, String> entry, int direction,
       String team, Set<GamePiece> setToAdd) {
     int pieceX = translateX(entry.getKey());
@@ -101,20 +115,12 @@ public class BoardCreator extends Creator {
     board.addPiece(newPiece);
   }
 
-
-  public void setTeams(String userTeamName, String opponentTeamName){
-    for(GamePiece piece: userPieceSet){
-      piece.setPieceTeam(userTeamName);
-    }
-    for(GamePiece piece: opponentPieceSet){
-      piece.setPieceTeam(opponentTeamName);
-    }
-  }
-
+  // Translates the X
   private int translateX(String coordinate) {
     return DICTIONARY.indexOf(coordinate.charAt(0));
   }
 
+  // Translates the Y
   private int translateY(String coordinate, int numRows) {
     return -(Integer.parseInt(coordinate.substring(1)) - numRows);
   }

@@ -87,6 +87,10 @@ public class Coordinate {
     return x * 100 + y;
   }
 
+  /**
+   * Turns the coordinate to a string
+   * @return The string representation of the coordinate
+   */
   @Override
   public String toString(){
     return Integer.toString(x) + ":" + Integer.toString(y);
