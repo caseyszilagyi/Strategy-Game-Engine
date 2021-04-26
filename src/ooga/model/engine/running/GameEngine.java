@@ -47,6 +47,8 @@ public class GameEngine extends Engine {
   private AI computer;
   private boolean noTurnRules = false;
   private final String AI_NAME = "AI";
+  private final String USER_NAME = "user";
+  private final String OPPONENT_NAME = "opponent";
 
   private Map<String, String> playerNames = new HashMap<>();
 
@@ -87,7 +89,7 @@ public class GameEngine extends Engine {
     isAIPlaying = true;
   }
 
-
+  // Makes an AI move, if the ai is playing
   private void makeAIMove() {
     ArrayList<Coordinate> moves = new ArrayList<>();
     if (isAIPlaying && turnManager.getCurrentPlayerTurnName().equals(AI_NAME) && !isGameOver()
@@ -150,7 +152,7 @@ public class GameEngine extends Engine {
    */
   @Override
   public boolean isGameOver() {
-    return curRules.checkWinConditions("user") || curRules.checkWinConditions("opponent");
+    return curRules.checkWinConditions(USER_NAME) || curRules.checkWinConditions(OPPONENT_NAME);
   }
 
   /**

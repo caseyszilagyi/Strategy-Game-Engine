@@ -52,11 +52,21 @@ public interface BackEndExternalAPI {
    */
   public void actOnCoordinates(int x, int y);
 
+  /**
+   * Undoes a turn
+   */
   public void undoTurn();
 
+  /**
+   * Changes the active piece to the new piece based on this name
+   * @param pieceName The name of the new piece
+   */
   public void changePiece(String pieceName);
 
-  // for testing
+  /**
+   * Primarily for testing, this method gets the engine that the game is running on
+   * @return The engine
+   */
   public Engine getEngine();
 
 
