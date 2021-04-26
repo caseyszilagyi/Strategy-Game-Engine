@@ -3,4 +3,7 @@
   <turnConditions>
     <condition>Constant</condition>
   </turnConditions>
+  <winConditions>
+    <condition>NoMoves</condition>
+  </winConditions>
 </rules>

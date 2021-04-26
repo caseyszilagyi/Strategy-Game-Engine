@@ -12,12 +12,16 @@ import ooga.controller.ModelController;
 
 public class Board extends GridPane {
 
+
   Tile tiles[][];
   private static final int SQUARE_SIZE = 50;
   private final ModelController modelController;
   private final ResourceBundle pieceBundle = ResourceBundle.getBundle("ooga.view.resources.chessPieces");
   //TODO: ^^^ can the above be better through reflection
-  private static Color myHighlightColor;
+  private static final Color DEFAULT_HIGHLIGHT_COLOR = Color.LIGHTGREEN;
+  private static final Color DEFAULT_DARK_COLOR = Color.TAN;
+  private static final Color DEFAULT_LIGHT_COLOR = Color.BEIGE;
+  private Color myHighlightColor;
   private String gameType;
 
   /**
@@ -40,7 +44,7 @@ public class Board extends GridPane {
   /**
    * @return a {@code String} type of this board
    */
-  public String getBoardType(){
+  public String getBoardType() {
     System.out.println(gameType); //TODO: delete
     return gameType;
   }
@@ -184,7 +188,7 @@ public class Board extends GridPane {
   }
 
   public void setColorsDefault() {
-    setHighlightColor(Color.LIGHTGREEN);
-    colorGrid(Color.TAN, Color.BEIGE);
+    setHighlightColor(DEFAULT_HIGHLIGHT_COLOR);
+    colorGrid(DEFAULT_DARK_COLOR, DEFAULT_LIGHT_COLOR);
   }
 }

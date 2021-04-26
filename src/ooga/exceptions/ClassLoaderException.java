@@ -3,6 +3,17 @@ package ooga.exceptions;
 /**
  * Used to make exceptions relating to reflection and class loading
  *
+ * This class assumes that the user provides a String error message or an Error upon declaration
+ *
+ * Code Example:
+ *
+ * String fileLocation = ~/Documents/foo.java
+ * try {
+ *     Class<?> clazz = Class.forName(fileLocation);
+ * } catch (Exception e) {
+ *     throw new ClassLoaderException("unable to load class);
+ * }
+ *
  * @author Casey Szilagyi
  */
 public class ClassLoaderException extends RuntimeException {

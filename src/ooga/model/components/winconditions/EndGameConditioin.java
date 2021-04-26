@@ -10,5 +10,10 @@ import ooga.model.components.GameBoard;
  */
 public interface EndGameConditioin {
 
+  /**
+   * This method is called to determine if someone has won the current game
+   * @param teamName the team name to check to see if they won
+   * @return a boolean for whether or not the teamName given has won the game
+   */
   public abstract boolean checkForWin(String teamName);
 }

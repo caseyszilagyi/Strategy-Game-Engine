@@ -16,6 +16,16 @@ import ooga.model.initialization.fileparsing.XMLParser;
 import ooga.model.initialization.gameflow.ConditionClassLoader;
 import org.w3c.dom.Node;
 
+/**
+ * This class defines the set of rules to be followed by a game, such as the win conditions and the turn conditions
+ *
+ * Example Code:
+ *
+ * GameBoard board = new GameBoard(8, 8);
+ * DummyViewController viewController = new DummyViewController();
+ * GameRules gameRules = new GameRules("testConstant", viewController, board);
+ * assertFalse(gameRules.checkForNextTurn(board, basicTestPiece)); //this test should always return False, for if you check the testConstant.txt file you will see that the TurnCondition is set to
+ */
 public class GameRules {
 
   private static final String RULE_FILE_PATH = "data/gamelogic/game_rules/";
@@ -27,6 +37,8 @@ public class GameRules {
   private static final String WIN_CONDITION = "winConditions";
   private static final String WIN_CONDITION_FILE_PATH = EndGameConditioin.class.getPackageName() + ".";
   private static final String ADD_PIECE_TYPE = "addPieceType";
+  private static final String ALL_WHITE_SPACE = "\\s";
+  private static final String EMPTY_STRING = "";
 
   private final Map<String, List<Node>> gameFileContents;
   private final File ruleFile;
@@ -55,12 +67,32 @@ public class GameRules {
       throw new XMLParseException("NoWinConditions");
     }
     for (Node n : gameFileContents.get(WIN_CONDITION)){
-      for(String condition : n.getTextContent().split("\\s")){
-        if(condition != ""){
+      for(String condition : n.getTextContent().split(ALL_WHITE_SPACE)){
+        if(condition != EMPTY_STRING){
           winConditions.add(makeCondition(condition));
         }
       }
     }
+  }
+
+  /**
+   * Gets a List of the turn conditions for the current game as a List of Strings
+   * @return a {@code List<String>} of the current game's turn conditions
+   */
+  public List<String> getTurnConditionsAsStringList(){
+    List<String> listOfTurnConditions = new ArrayList<>();
+    if(!gameFileContents.containsKey(TURN_CONDITION)){
+      throw new XMLParseException("NoTurnConditions");
+    }
+    for (Node n : gameFileContents.get(TURN_CONDITION)){
+      for(String condition : n.getTextContent().split(ALL_WHITE_SPACE)){
+        if(condition != EMPTY_STRING){
+          //System.out.printf("Condition = %s;\n", condition);
+          listOfTurnConditions.add(condition);
+        }
+      }
+    }
+    return listOfTurnConditions;
   }
 
   private EndGameConditioin makeCondition(String condition){
@@ -71,24 +103,7 @@ public class GameRules {
     return winConditions.stream().allMatch(winCondition -> winCondition.checkForWin(teamName));
   }
 
-  /**
-   * Gets a List of the turn conditions for the current game as a List of Strings
-    * @return a {@code List<String>} of the current game's turn conditions
-   */
-  public List<String> getTurnConditionsAsStringList(){
-    List<String> listOfTurnConditions = new ArrayList<>();
-    if(!gameFileContents.containsKey(TURN_CONDITION)){
-      throw new XMLParseException("NoTurnConditions");
-    }
-    for (Node n : gameFileContents.get(TURN_CONDITION)){
-      for(String condition : n.getTextContent().split("\\s")){
-        if(condition != ""){
-          listOfTurnConditions.add(condition);
-        }
-      }
-    }
-    return listOfTurnConditions;
-  }
+
 
   /**
    * gets the piece type which can be added to the board for a game
@@ -162,13 +177,6 @@ public class GameRules {
         }
       }
     }
-  }
-
-  /**
-   * Checks if a player has won
-   */
-  public boolean checkForFinish() {
-    return false;
   }
 
   public void setBoard(GameBoard board){
