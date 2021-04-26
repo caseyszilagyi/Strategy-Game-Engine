@@ -1,11 +1,9 @@
 package ooga.controller;
 
-import java.io.File;
 import java.util.Iterator;
-import javafx.scene.control.Label;
-import javafx.stage.Popup;
+import javafx.scene.control.Alert.AlertType;
 import javafx.util.Pair;
-
+import ooga.view.GameAlert;
 import ooga.view.board.Board;
 
 /**
@@ -102,7 +100,7 @@ public class BoardController implements FrontEndExternalAPI {
   @Override
   public void givePieceChangeOptions(Iterable<String> pieceChangeOptions) {
     Iterator iterator = pieceChangeOptions.iterator();
-    while(iterator.hasNext()){
+    while(iterator.hasNext()) {
       System.out.println(iterator.next());
     }
   }
@@ -113,17 +111,14 @@ public class BoardController implements FrontEndExternalAPI {
    */
   @Override
   public void gameWin(String playerName) {
-    /*Popup popup = new Popup();
-    popup.getContent().add(new Label(playerName + "won!"));
-    popup.show();*/
+    new GameAlert(AlertType.CONFIRMATION, playerName + " won!");
     System.out.println(playerName + "won!");
-    //TODO: implement with pop up window
   }
 
   /**
    * purpose: calls board.setColorsDefault() to set the colors to the defaults
    */
-  public void resetColors(){
+  public void resetColors() {
     board.setColorsDefault();
   }
 
