@@ -25,6 +25,7 @@ public class FourInARow implements EndGameConditioin{
       for(int y = 0; y < height; y++){
         if(board.isPieceAtCoordinate(x,y)){
           if(checkDown(x, y, teamName) || checkRight(x, y, teamName) || checkDiagonalRight(x, y, teamName) || checkDiagonalLeft(x, y, teamName)){
+            viewController.gameWin(teamName);
             return true;
           }
         }
