@@ -10,6 +10,7 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import ooga.controller.BoardController;
 import ooga.controller.ModelController;
@@ -43,6 +44,7 @@ public class BoardScene extends GameScene {
     sceneRoot = (GridPane) root;
     sceneRoot.getStyleClass().add("boardScene");
     sceneRoot.setVgap(30);
+    sceneRoot.setHgap(10);
     this.getStylesheets().add(DEFAULT_RESOURCES_PATH + resources.getString("CSS"));
     populateScene();
   }
@@ -71,9 +73,37 @@ public class BoardScene extends GameScene {
     sceneRoot.add(board, 0, 3);
 
     //https://docs.oracle.com/javafx/2/ui_controls/color-picker.htm
+    ColorPicker highlightColorPicker = makeColorPicker("highlightColorPicker");
+    highlightColorPicker.setOnAction(t -> board.setHighlightColor((highlightColorPicker.getValue())));
+    Label highlightLabel = makeLabel("highlightColor");
+    ColorPicker lightColorPicker = makeColorPicker("lightColorPicker");
+    lightColorPicker.setOnAction(t -> board.colorLightSquares((lightColorPicker.getValue())));
+    Label lightLabel = makeLabel("lightSquareColor");
+    ColorPicker darkColorPicker = makeColorPicker("darkColorPicker");
+    darkColorPicker.setOnAction(t -> board.colorDarkSquares((darkColorPicker.getValue())));
+    Label darkLabel = makeLabel("darkSquareColor");
+
+    VBox controlPane = new VBox();
+    controlPane.getStyleClass().add("vbox");
+    controlPane.getChildren().add(0, highlightLabel);
+    controlPane.getChildren().add(1, highlightColorPicker);
+    controlPane.getChildren().add(2, lightLabel);
+    controlPane.getChildren().add(3, lightColorPicker);
+    controlPane.getChildren().add(4, darkLabel);
+    controlPane.getChildren().add(5, darkColorPicker);
+
+    Node resetButton = makeButton("resetButton");
+    controlPane.getChildren().add(6, resetButton);
+
+    sceneRoot.add(controlPane, 2 , 3);
+
+  }
+
+  private ColorPicker makeColorPicker(String id) {
     ColorPicker colorPicker = new ColorPicker();
-    sceneRoot.add(new Text("Highlight Color:"), 0, 4);
-    sceneRoot.add(colorPicker, 1 , 4);
-    colorPicker.setOnAction(t -> board.setHighlightColor((colorPicker.getValue())));
+    colorPicker.getStyleClass().removeAll();
+    colorPicker.getStyleClass().add("button");
+    colorPicker.setId(id);
+    return colorPicker;
   }
 }

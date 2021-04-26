@@ -80,8 +80,17 @@ public abstract class GameScene extends Scene {
     Label label = new Label();
     label.setId(property);
     label.setText(resources.getString(label.getId()));
-
     return label;
+  }
+
+
+  public Label[] makeLabels(String labelProperties) {
+    String[] labelNames = resources.getString(labelProperties).split(",");
+    Label[] labels = new Label[labelNames.length];
+    for (int i = 0; i < labelNames.length; i++) {
+      labels[i] = (makeLabel(labelNames[i]));
+    }
+    return labels;
   }
 
   /**
