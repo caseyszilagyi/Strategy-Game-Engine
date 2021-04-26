@@ -5,14 +5,14 @@ package ooga.exceptions;
  *
  * @author Casey Szilagyi
  */
-public class GameBoardException extends RuntimeException {
+public class GameRunningException extends RuntimeException {
 
   /**
    * Sets the message that the error corresponds to
    *
    * @param errorMessage The message corresponding to the error
    */
-  public GameBoardException(String errorMessage) {
+  public GameRunningException(String errorMessage) {
     super(errorMessage);
   }
 
@@ -22,7 +22,7 @@ public class GameBoardException extends RuntimeException {
    * @param errorMessage The message corresponding to the error
    * @param exception    The actual exception
    */
-  public GameBoardException(String errorMessage, Exception exception) {
+  public GameRunningException(String errorMessage, Exception exception) {
     super(errorMessage, exception);
   }
 
@@ -31,7 +31,7 @@ public class GameBoardException extends RuntimeException {
    *
    * @param error The type of error
    */
-  public GameBoardException(Exception error) {
+  public GameRunningException(Exception error) {
     super(error.getMessage());
   }
 
