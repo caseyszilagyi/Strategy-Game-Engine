@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import ooga.controller.BoardController;
 import ooga.controller.ModelController;
 import ooga.view.board.BoardScene;
+import ooga.view.window.FloatingWindow;
 import ooga.view.window.GameWindow;
 import ooga.view.window.GameWindowFactory;
 import ooga.view.window.StageWindow;
@@ -139,6 +140,20 @@ public class ViewManager {
 
   public void undoButton() {
     modelController.undoTurn();
+  }
+
+  /**
+   * Creates a new empty {@link FloatingWindow} instance and preset its owner window
+   * to the primary window of this game instance. This also sets the scene for the window
+   * to display.
+   * @return a {@code FloatingWindow} with no scene specified.
+   */
+  private FloatingWindow showFloatingWindow(GameScene scene) {
+    FloatingWindow popup = (FloatingWindow) gameWindowFactory
+        .makeWindow(initFile.getString("popupWindowType"));
+    popup.setOwnerWindow(primaryWindow);
+    popup.showScene(scene);
+    return popup;
   }
 
 
