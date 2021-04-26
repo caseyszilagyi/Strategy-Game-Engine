@@ -3,6 +3,7 @@ package ooga.model.initialization;
 import java.util.HashSet;
 import java.util.Set;
 import ooga.controller.FrontEndExternalAPI;
+import ooga.exceptions.XMLParseException;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;
@@ -55,12 +56,21 @@ public class BoardCreator extends Creator {
   }
 
   public void initializeMaps(String fileName) {
-    boardNodes = super.makeRootNodeMap(fileName);
-    pieceSubNodes = super.makeSubNodeMap(boardNodes.get(BOARD).get(0));
-    numRows = Integer.parseInt(super.makeAttributeMap(boardNodes.get(PARAMS).get(0)).get(NUMROWS));
-    numCols = Integer.parseInt(super.makeAttributeMap(boardNodes.get(PARAMS).get(0)).get(NUMCOLS));
-    opponentPieces = super.makeAttributeMap(pieceSubNodes.get(OPPONENT).get(0));
-    userPieces = super.makeAttributeMap(pieceSubNodes.get(USER).get(0));
+    try {
+      boardNodes = super.makeRootNodeMap(fileName);
+      pieceSubNodes = super.makeSubNodeMap(boardNodes.get(BOARD).get(0));
+      numRows = Integer
+          .parseInt(super.makeAttributeMap(boardNodes.get(PARAMS).get(0)).get(NUMROWS));
+      numCols = Integer
+          .parseInt(super.makeAttributeMap(boardNodes.get(PARAMS).get(0)).get(NUMCOLS));
+      opponentPieces = super.makeAttributeMap(pieceSubNodes.get(OPPONENT).get(0));
+      userPieces = super.makeAttributeMap(pieceSubNodes.get(USER).get(0));
+    }
+    catch (NullPointerException e){
+      throw new XMLParseException("InvalidBoardFile");
+    } catch(NumberFormatException e){
+      throw new XMLParseException("MissingRowColumnTag");
+    }
   }
 
   public GameBoard makeBoard() {

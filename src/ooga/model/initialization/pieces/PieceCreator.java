@@ -1,10 +1,12 @@
 package ooga.model.initialization.pieces;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import ooga.controller.FrontEndExternalAPI;
+import ooga.exceptions.XMLParseException;
 import ooga.model.components.Coordinate;
 import ooga.model.components.GameBoard;
 import ooga.model.components.GamePiece;
@@ -59,14 +61,23 @@ public class PieceCreator extends Creator {
    */
   public GamePiece makePiece(String pieceName, Coordinate coordinates, int direction, String team) {
     GamePiece gamePiece = new GamePiece(coordinates, pieceName, team);
-    pieceFileNodes = super.makeRootNodeMap(pieceName);
+    try{
+      pieceFileNodes = super.makeRootNodeMap(pieceName);
+    } catch(XMLParseException e){
+      throw new XMLParseException("NoSuchPieceFile");
+    }
     gamePiece.setPossibleMoves(makePieceMovements(direction, gamePiece));
     return gamePiece;
   }
 
   private List<PieceMovement> makePieceMovements(int direction, GamePiece correspondingPiece) {
     List<PieceMovement> pieceMovements = new ArrayList<>();
-    pieceMoves = super.makeSubNodeMap(getFirstNode(pieceFileNodes, PIECE_MOVE_TAG));
+    try{
+      pieceMoves = super.makeSubNodeMap(getFirstNode(pieceFileNodes, PIECE_MOVE_TAG));
+    } catch(NullPointerException e){
+      throw new XMLParseException("NoMovesTag");
+    }
+
     for (String moveName : pieceMoves.keySet()) {
       for (Node moveDetails : pieceMoves.get(moveName)) {
         moveSubNodeMap = makeSubNodeMap(moveDetails);

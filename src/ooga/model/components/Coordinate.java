@@ -30,7 +30,6 @@ public class Coordinate {
    */
   public Coordinate(Coordinate oldCoordinate, int changeX, int changeY){
     this(oldCoordinate.getX() + changeX, oldCoordinate.getY() + changeY);
-    int zpi = 139;
   }
 
   /**
