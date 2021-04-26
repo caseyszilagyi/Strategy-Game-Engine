@@ -15,7 +15,20 @@ import ooga.model.components.computer.AI;
  * This is the engine used for running a game. It extends the regular engine. The engine takes care
  * of the logic of switching turns and making appropriate method calls to the board
  *
+ * This class  is dependant on the FrontEndExternalAPI, Coordinate, GameBoard, GameRules, Player, and AI classes
+ *
+ * Example Code:
+ *
+ *  DummyViewController viewController = new DummyViewController();
+ *  Engine gameEngine = new GameEngine(viewController)
+ *  gameEngine.setGameType("chess");
+ *  gameEngine.setBoard(new GameBoard(8,8));
+ *  gameEngine.runTurn(1,0);
+ *  gameEngine.runTurn(2,2);
+ *
+ *
  * @author Casey Szilagyi
+ * @author Cole Spector
  */
 public class GameEngine extends Engine {
 

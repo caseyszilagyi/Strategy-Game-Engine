@@ -8,6 +8,9 @@ import ooga.model.components.computer.AI;
  * Implemented by any type of game engine that is designed to run a specific type of program. The
  * engine is the core class that contains all of the references to other classes
  * that are meant to be used in order to give the engine its functionality
+ *
+ * @author Cole Spector
+ * @author Casey Szilagyi
  */
 public abstract class Engine{
 
