@@ -191,7 +191,7 @@ public class Board extends GridPane {
 
 
   private Tile createTile(int i, int j) {
-    return new Tile(SQUARE_SIZE, new Point(i, j), e -> handleTileClick(i, j));
+    return new Tile(SQUARE_SIZE, e -> handleTileClick(i, j));
   }
 
   /**
