@@ -20,6 +20,7 @@ import ooga.model.engine.running.TurnManager;
  * piece.
  *
  * @author Casey Szilagyi
+ * @author Cole Spector
  */
 public class GameBoard implements Board {
 

@@ -158,13 +158,6 @@ public class GameRules {
     }
   }
 
-  /**
-   * Checks if a player has won
-   */
-  public boolean checkForFinish() {
-    return false;
-  }
-
   public void setBoard(GameBoard board){
     this.board = board;
   }
