@@ -40,6 +40,7 @@ public class RestrictionAndConditionTest {
     gameBoard = gameEngine.getBoard();
     gameEngine.setIfNoTurnRules(true);
     pieceCreator = new PieceCreator("chess", gameBoard);
+    modelController.setPlayers("user", "opponent");
     printBoard();
   }
 
