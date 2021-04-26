@@ -1,5 +1,6 @@
 package ooga.model.initialization;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 import ooga.controller.FrontEndExternalAPI;
@@ -29,6 +30,7 @@ public class BoardCreator extends Creator {
   public static final String OPPONENT = "opponent";
   public static final String USER = "user";
   private static final String FILE_TYPE = "piece";
+  private final String EXTENSION = ".xml";
 
   // Maps and sets used for storage of information
   private Map<String, List<Node>> boardNodes;
@@ -61,12 +63,12 @@ public class BoardCreator extends Creator {
   }
 
   /**
-   * Initializes the maps to read in from the board file
-   * @param fileName The name of the baord file
+   * Initializes the maps needed given a file
+   * @param file The file with the initial board state
    */
-  public void initializeMaps(String fileName) {
+  public void initializeMaps(File file){
     try {
-      boardNodes = super.makeRootNodeMap(fileName);
+      boardNodes = makeRootNodeMap(file);
       pieceSubNodes = super.makeSubNodeMap(boardNodes.get(BOARD).get(0));
       numRows = Integer
           .parseInt(super.makeAttributeMap(boardNodes.get(PARAMS).get(0)).get(NUMROWS));
@@ -80,6 +82,15 @@ public class BoardCreator extends Creator {
     } catch(NumberFormatException e){
       throw new XMLParseException("MissingRowColumnTag");
     }
+
+  }
+
+  /**
+   * Initializes the maps to read in from the board file
+   * @param fileName The name of the board file
+   */
+  public void initializeMaps(String fileName) {
+    initializeMaps(makeFile(fileName));
   }
 
   /**

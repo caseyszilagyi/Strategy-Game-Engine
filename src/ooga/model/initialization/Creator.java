@@ -68,6 +68,15 @@ public abstract class Creator {
   }
 
   /**
+   * Makes the root node map, given a name of the file
+   *
+   * @param file The name of the file.
+   */
+  protected Map<String, List<Node>> makeRootNodeMap(File file) {
+    return xmlParser.makeRootNodeMap(file, fileType, gameType);
+  }
+
+  /**
    * Gets the first node corresponding to a string value in a map, useful for when only 1 node is
    * expected
    *
@@ -79,8 +88,12 @@ public abstract class Creator {
     return nodeMap.get(key).get(0);
   }
 
-  // Makes a file, using the path and the name of the file (without the .xml)
-  private File makeFile(String fileName) {
+  /**
+   * Makes a file with the given string name
+   * @param fileName The name of the file
+   * @return The file
+   */
+  public File makeFile(String fileName) {
     File file = new File(filePath + fileName + FILE_EXTENSION);
     if(!file.exists()){
       throw new XMLParseException("NoSuchFile");

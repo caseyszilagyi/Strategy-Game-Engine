@@ -5,19 +5,19 @@
   <records>
     <records>
       <gameName>chess</gameName>
-      <wins>0</wins>
+      <wins>308</wins>
       <losses>0</losses>
       <draws>0</draws>
     </records>
     <records>
       <gameName>checkers</gameName>
-      <wins>0</wins>
-      <losses>2</losses>
+      <wins>308</wins>
+      <losses>0</losses>
       <draws>0</draws>
     </records>
     <records>
       <gameName>connectfour</gameName>
-      <wins>0</wins>
+      <wins>308</wins>
       <losses>0</losses>
       <draws>0</draws>
     </records>
