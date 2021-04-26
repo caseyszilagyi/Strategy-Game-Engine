@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import ooga.controller.BoardController;
 import ooga.controller.ModelController;
 import ooga.view.GameScene;
@@ -63,8 +62,7 @@ public class BoardScene extends GameScene {
 
   @Override
   public void populateScene() {
-    ColumnConstraints col1 = new ColumnConstraints();
-    col1.setHalignment(HPos.CENTER);
+    ColumnConstraints col1 = makeColumnConstraint(HPos.CENTER);
     sceneRoot.getColumnConstraints().add(col1);
 
     // Note: the title of this scene is set by ViewManger.
