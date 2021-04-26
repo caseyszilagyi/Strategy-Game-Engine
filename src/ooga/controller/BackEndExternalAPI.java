@@ -32,10 +32,8 @@ public interface BackEndExternalAPI {
 
   /**
    * Sets the AI given a single player
-   * @param game Game being played
-   * @param level Level of the AI
    */
-  public void setAI(String game, String level);
+  public void setAI();
   /**
    * Sets the initial state of the board
    * @param boardFileName The file name that contains the board

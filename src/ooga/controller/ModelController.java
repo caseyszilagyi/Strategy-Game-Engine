@@ -69,7 +69,7 @@ public class ModelController implements BackEndExternalAPI {
   public void setGameType(String gameName) {
     gameType = gameName;
     engineInitializer.initializeGame(gameName);
-    setPlayers("user", "opponent");
+    setPlayers("user", "AI");
   }
 
   /**
@@ -91,8 +91,11 @@ public class ModelController implements BackEndExternalAPI {
     engineInitializer.addPlayers(user, opponent);
   }
 
+  /**
+   * Sets the AI
+   */
   @Override
-  public void setAI(String game, String level) {
+  public void setAI() {
     engineInitializer.addAI();
   }
 
