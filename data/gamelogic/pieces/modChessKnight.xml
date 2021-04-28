@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <piece piece = "chess">
   <moves>
-    <KingSideCastle>
-      <changeX>null</changeX>
-      <changeY>null</changeY>
-      <mustTake>False</mustTake>
-      <takeX>null</takeX>
-      <takeY>null</takeY>
-      <restrictions>
-        <Check></Check>
-      </restrictions>
-    </KingSideCastle>
-    <QueenSideCastle>
-      <changeX>null</changeX>
-      <changeY>null</changeY>
-      <mustTake>False</mustTake>
-      <takeX>null</takeX>
-      <takeY>null</takeY>
-      <restrictions>
-        <Check></Check>
-      </restrictions>
-    </QueenSideCastle>
-    <FiniteSlide>
+    <FiniteJump>
       <changeX>1</changeX>
+      <changeY>3</changeY>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
+    </FiniteJump>
+    <FiniteJump>
+      <changeX>1</changeX>
+      <changeY>-3</changeY>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
+    </FiniteJump>
+    <FiniteJump>
+      <changeX>3</changeX>
       <changeY>1</changeY>
       <mustTake>False</mustTake>
       <takeX>null</takeX>
@@ -30,9 +30,39 @@
       <restrictions>
         <Check></Check>
       </restrictions>
-    </FiniteSlide>
-    <FiniteSlide>
+    </FiniteJump>
+    <FiniteJump>
+      <changeX>3</changeX>
+      <changeY>-1</changeY>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
+    </FiniteJump>
+    <FiniteJump>
       <changeX>-1</changeX>
+      <changeY>3</changeY>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
+    </FiniteJump>
+    <FiniteJump>
+      <changeX>-1</changeX>
+      <changeY>-3</changeY>
+      <mustTake>False</mustTake>
+      <takeX>null</takeX>
+      <takeY>null</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
+    </FiniteJump>
+    <FiniteJump>
+      <changeX>-3</changeX>
       <changeY>1</changeY>
       <mustTake>False</mustTake>
       <takeX>null</takeX>
@@ -40,9 +70,9 @@
       <restrictions>
         <Check></Check>
       </restrictions>
-    </FiniteSlide>
-    <FiniteSlide>
-      <changeX>1</changeX>
+    </FiniteJump>
+    <FiniteJump>
+      <changeX>-3</changeX>
       <changeY>-1</changeY>
       <mustTake>False</mustTake>
       <takeX>null</takeX>
@@ -50,59 +80,29 @@
       <restrictions>
         <Check></Check>
       </restrictions>
-    </FiniteSlide>
-    <FiniteSlide>
-      <changeX>-1</changeX>
-      <changeY>-1</changeY>
-      <mustTake>False</mustTake>
-      <takeX>null</takeX>
-      <takeY>null</takeY>
-      <restrictions>
-        <Check></Check>
-      </restrictions>
-    </FiniteSlide>
-    <FiniteSlide>
+    </FiniteJump>
+    <FiniteJump>
       <changeX>1</changeX>
-      <changeY>0</changeY>
-      <mustTake>False</mustTake>
-      <takeX>null</takeX>
-      <takeY>null</takeY>
+      <changeY>3</changeY>
+      <mustTake>True</mustTake>
+      <takeX>0</takeX>
+      <takeY>0</takeY>
       <restrictions>
         <Check></Check>
       </restrictions>
-    </FiniteSlide>
-    <FiniteSlide>
-      <changeX>0</changeX>
-      <changeY>1</changeY>
-      <mustTake>False</mustTake>
-      <takeX>null</takeX>
-      <takeY>null</takeY>
-      <restrictions>
-        <Check></Check>
-      </restrictions>
-    </FiniteSlide>
-    <FiniteSlide>
-      <changeX>-1</changeX>
-      <changeY>0</changeY>
-      <mustTake>False</mustTake>
-      <takeX>null</takeX>
-      <takeY>null</takeY>
-      <restrictions>
-        <Check></Check>
-      </restrictions>
-    </FiniteSlide>
-    <FiniteSlide>
-      <changeX>0</changeX>
-      <changeY>-1</changeY>
-      <mustTake>False</mustTake>
-      <takeX>null</takeX>
-      <takeY>null</takeY>
-      <restrictions>
-        <Check></Check>
-      </restrictions>
-    </FiniteSlide>
-    <FiniteSlide>
+    </FiniteJump>
+    <FiniteJump>
       <changeX>1</changeX>
+      <changeY>-3</changeY>
+      <mustTake>True</mustTake>
+      <takeX>0</takeX>
+      <takeY>0</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
+    </FiniteJump>
+    <FiniteJump>
+      <changeX>3</changeX>
       <changeY>1</changeY>
       <mustTake>True</mustTake>
       <takeX>0</takeX>
@@ -110,9 +110,9 @@
       <restrictions>
         <Check></Check>
       </restrictions>
-    </FiniteSlide>
-    <FiniteSlide>
-      <changeX>1</changeX>
+    </FiniteJump>
+    <FiniteJump>
+      <changeX>3</changeX>
       <changeY>-1</changeY>
       <mustTake>True</mustTake>
       <takeX>0</takeX>
@@ -120,9 +120,29 @@
       <restrictions>
         <Check></Check>
       </restrictions>
-    </FiniteSlide>
-    <FiniteSlide>
+    </FiniteJump>
+    <FiniteJump>
       <changeX>-1</changeX>
+      <changeY>3</changeY>
+      <mustTake>True</mustTake>
+      <takeX>0</takeX>
+      <takeY>0</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
+    </FiniteJump>
+    <FiniteJump>
+      <changeX>-1</changeX>
+      <changeY>-3</changeY>
+      <mustTake>True</mustTake>
+      <takeX>0</takeX>
+      <takeY>0</takeY>
+      <restrictions>
+        <Check></Check>
+      </restrictions>
+    </FiniteJump>
+    <FiniteJump>
+      <changeX>-3</changeX>
       <changeY>1</changeY>
       <mustTake>True</mustTake>
       <takeX>0</takeX>
@@ -130,9 +150,9 @@
       <restrictions>
         <Check></Check>
       </restrictions>
-    </FiniteSlide>
-    <FiniteSlide>
-      <changeX>-1</changeX>
+    </FiniteJump>
+    <FiniteJump>
+      <changeX>-3</changeX>
       <changeY>-1</changeY>
       <mustTake>True</mustTake>
       <takeX>0</takeX>
@@ -140,46 +160,6 @@
       <restrictions>
         <Check></Check>
       </restrictions>
-    </FiniteSlide>
-    <FiniteSlide>
-      <changeX>1</changeX>
-      <changeY>0</changeY>
-      <mustTake>True</mustTake>
-      <takeX>0</takeX>
-      <takeY>0</takeY>
-      <restrictions>
-        <Check></Check>
-      </restrictions>
-    </FiniteSlide>
-    <FiniteSlide>
-      <changeX>0</changeX>
-      <changeY>1</changeY>
-      <mustTake>True</mustTake>
-      <takeX>0</takeX>
-      <takeY>0</takeY>
-      <restrictions>
-        <Check></Check>
-      </restrictions>
-    </FiniteSlide>
-    <FiniteSlide>
-      <changeX>-1</changeX>
-      <changeY>0</changeY>
-      <mustTake>True</mustTake>
-      <takeX>0</takeX>
-      <takeY>0</takeY>
-      <restrictions>
-        <Check></Check>
-      </restrictions>
-    </FiniteSlide>
-    <FiniteSlide>
-      <changeX>0</changeX>
-      <changeY>-1</changeY>
-      <mustTake>True</mustTake>
-      <takeX>0</takeX>
-      <takeY>0</takeY>
-      <restrictions>
-        <Check></Check>
-      </restrictions>
-    </FiniteSlide>
+    </FiniteJump>
   </moves>
 </piece>
