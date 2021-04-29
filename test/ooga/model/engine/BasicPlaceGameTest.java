@@ -184,6 +184,26 @@ void testBasicDiagonalLeftWinCondition(){
 
   }
 
+  @Test
+  void testRightWinConditionNotOnWall(){
+    System.out.println("testRightWinConditionNotOnWall");
+    gameEngine.runTurn(2,0);
+    assertFalse(gameEngine.isGameOver());
+    gameEngine.runTurn(2,0);
+    assertFalse(gameEngine.isGameOver());
+    gameEngine.runTurn(3,0);
+    assertFalse(gameEngine.isGameOver());
+    gameEngine.runTurn(3,0);
+    assertFalse(gameEngine.isGameOver());
+    gameEngine.runTurn(4,0);
+    assertFalse(gameEngine.isGameOver());
+    gameEngine.runTurn(4,0);
+    assertFalse(gameEngine.isGameOver());
+    gameEngine.runTurn(5,0);
+    assertTrue(gameEngine.isGameOver());
+
+  }
+
 
   private void printBoard(){
     int width = gameBoard.getWidth();
