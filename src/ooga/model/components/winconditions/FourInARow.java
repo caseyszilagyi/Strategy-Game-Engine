@@ -89,7 +89,7 @@ public class FourInARow implements EndGameConditioin{
       return false;
     }
     for(int counter = 0; counter < FOUR; counter ++){
-      int newX = x - counter;
+      int newX = x + counter;
       if(!board.isPieceAtCoordinate(newX,  y) || !board.getPieceAtCoordinate(newX, y).getPieceTeam().equals(teamName)){
         //System.out.println("failed right check");
         return false;
