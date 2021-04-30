@@ -15,7 +15,7 @@ public class GameWindowFactory {
    * @param windowType {@code String} name of the {@code GameWindow} subclass
    * @return a {@code GameWindow} object
    */
-  public static GameWindow makeWindow (String windowType){
+  public GameWindow makeWindow (String windowType){
     GameWindow newWindow;
     try {
       Class c = Class.forName("ooga.view.window." + windowType + "Window");
