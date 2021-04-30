@@ -37,14 +37,10 @@ import ooga.view.window.StageWindow;
  */
 public class ViewManager {
   private final ResourceBundle initFile;
-  private final GameWindowFactory gameWindowFactory;
   private final GameSceneFactory sceneFactory;
   private final StageWindow primaryWindow;
   private ModelController modelController;
   private BoardController boardController;
-  private final String HOME_SCENE = "initialWindowScene";
-
-  private String DEFAULT_GAMETYPE = "chess";
 
   /**
    * Creates a new instance of {@code ViewManager} with a resource bundle with
@@ -56,12 +52,12 @@ public class ViewManager {
    */
   public ViewManager(ResourceBundle initFile) {
     this.initFile = initFile;
-    gameWindowFactory = new GameWindowFactory();
     sceneFactory = new GameSceneFactory();
     primaryWindow = (StageWindow) getInitialWindow();
-    ((Stage) primaryWindow).setOnCloseRequest(e -> handleStageClose());
+    primaryWindow.setOnCloseRequest(e -> handleStageClose());
     createControllers();
-    primaryWindow.showScene(makeScene("initialWindowScene"));
+    primaryWindow.showScene(sceneFactory.makeScene(initFile.getString("initialWindowScene"),
+        this::onButtonClicked, modelController));
     primaryWindow.setCurrentSceneTitle("title-text");
   }
 
@@ -75,8 +71,6 @@ public class ViewManager {
       new ViewManager(initFile);
     }
   }
-
-
 
   /**
    * Creates the necessary {@link BoardController} and {@link ModelController} objects.
@@ -92,23 +86,6 @@ public class ViewManager {
   private void positionWindow(Stage window, int x, int y) {
     window.setX(x);
     window.setY(y);
-  }
-
-  /**
-   * Changes the scene of the primary {@link GameWindow} to the desired scene. The
-   * scene name is specified by an input {@code String} that corresponds to a property
-   * in the {@code init.properties} file that points to the name of an existing
-   * {@code GameScene} class.
-   *
-   * @param sceneNameProperty the property key corresponding to the name of an existing
-   *                          {@code GameScene} class.
-   * @return a {@link GameScene} subclass of the desired type.
-   */
-  private GameScene makeScene(String sceneNameProperty) {
-    String sceneName = initFile.getString(sceneNameProperty);
-    GameScene newScene = sceneFactory.makeScene(sceneName, this::onButtonClicked,
-        modelController);
-    return newScene;
   }
 
   /**
@@ -142,7 +119,9 @@ public class ViewManager {
    */
 
   public void startGame(String gameType) {
-    BoardScene newScene = (BoardScene) makeScene("boardScene");
+    BoardScene newScene = (BoardScene) sceneFactory.makeScene("boardScene",
+        this::onButtonClicked, modelController);
+
     newScene.attachBoardControllerToBoard(boardController);
     try {
       modelController.setGameType(gameType);
@@ -166,7 +145,7 @@ public class ViewManager {
     GameScene configScene = sceneFactory.makeScene("GameConfigScene",
         this::onButtonClicked, modelController);
     ((GameConfigScene)configScene).giveBoardController(boardController);
-    GameWindow configWindow = makeFloatingWindow(configScene);
+    GameWindow configWindow = GameWindowFactory.makeWindow("Floating");
     configWindow.showScene(configScene);
   }
 
@@ -259,18 +238,6 @@ public class ViewManager {
     primaryWindow.close();
   }
 
-  /**
-   * Creates a new empty {@link FloatingWindow} instance and preset its owner window
-   * to the primary window of this game instance. This also sets the scene for the window
-   * to display.
-   * @return a {@code FloatingWindow} with no scene specified
-   */
-  private FloatingWindow makeFloatingWindow(GameScene scene) {
-    FloatingWindow popup = (FloatingWindow) gameWindowFactory
-        .makeWindow(initFile.getString("popupWindowType"));
-    return popup;
-  }
-
 
   /**
    * Gets the correct subclass of {@link GameWindow} to show the initial window of the
@@ -281,7 +248,7 @@ public class ViewManager {
    */
   private GameWindow getInitialWindow() {
     String windowType = initFile.getString("initialWindowType");
-    return gameWindowFactory.makeWindow(windowType);
+    return GameWindowFactory.makeWindow(windowType);
   }
 
 }
